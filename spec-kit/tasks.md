@@ -24,15 +24,20 @@ Status: DERIVED READY — subordinate to living PRD v0.1.
 - [x] T0.7 Prove source-unavailable failure => ESCALATE/BLOCK.
 - [x] T0.8 Persist Attempts 001–004 and canonical updates.
 - [x] T0.9 Reach paid-call stage with valid local EVM key. *(Attempt 005.)*
-- [x] T0.10 Classify Attempt 005 to x402 settlement layer: final HTTP 402, `PAYMENT-RESPONSE` present, body null; exact settlement reason was not decoded by old harness.
+- [x] T0.10 Classify Attempt 005 to x402 settlement layer.
 - [x] T0.11 Add unsigned x402 quote preflight and decoded `PAYMENT-REQUIRED` evidence.
-- [x] T0.12 Enforce exact Base Sepolia + <=100000 atomic USDC safety boundary before paid retry.
-- [x] T0.13 Align paid client construction with Telegraph official MCP (`x402Client.fromConfig` + `wrapFetchWithPayment`).
+- [x] T0.12 Enforce exact Base Sepolia + <=100000 atomic USDC safety boundary.
+- [x] T0.13 Align paid client construction with Telegraph official MCP.
 - [x] T0.14 Decode/persist final `PAYMENT-RESPONSE` settlement result/error reason.
-- [ ] T0.15 Run retry 006 and classify decoded quote/settlement result.
-- [ ] T0.16 If and only if decoded settlement proves insufficient funds, minimally fund the burner with the exact testnet asset/network in the quote.
-- [ ] T0.17 Obtain one successful genuine x402-paid Telegraph inference.
-- [ ] T0.18 Persist successful T0 evidence + normalized EvidenceItem + CURRENT/HANDOVER update.
+- [x] T0.15 Run retry 006 and classify decoded result: `10000` atomic USDC on `eip155:84532`; settlement `invalid_exact_evm_insufficient_balance`.
+- [x] T0.16 Prove the payment blocker is insufficient Base Sepolia USDC balance, not route/key-format/product failure.
+- [x] T0.17 Record burner credential exposure incident and require rotation. *(Do not reuse or fund the exposed burner.)*
+- [x] T0.18 Harden Windows launcher so no terminal input is requested; valid clipboard key is auto-detected and clipboard is cleared.
+- [ ] T0.19 Create a fresh dedicated burner EVM account/wallet with a new private key.
+- [ ] T0.20 Fund only the fresh PUBLIC address with Base Sepolia test USDC from the Circle faucet.
+- [ ] T0.21 Run retry 007 with hardened clipboard-only launcher and fresh burner.
+- [ ] T0.22 Obtain one successful genuine x402-paid Telegraph inference.
+- [ ] T0.23 Persist successful T0 evidence + normalized EvidenceItem + CURRENT/HANDOVER update.
 
 ## T1 — Deterministic policy core
 
@@ -112,4 +117,4 @@ After every passed/failed major gate:
 
 ## Reconciliation record
 
-Attempt 005 reached the genuine x402 payment transport and ended with HTTP 402 plus a `PAYMENT-RESPONSE` header. The prior harness did not decode the settlement envelope, so the exact failure reason remained unknown. The runner now performs a free unsigned quote preflight, enforces the bounded Base Sepolia payment contract, uses Telegraph's official MCP client construction, and decodes both `PAYMENT-REQUIRED` and `PAYMENT-RESPONSE`. Exact next gate: `SKEPTARA_T0_X402_SETTLEMENT_DIAGNOSTIC_RETRY_006`.
+Attempt 006 proved the live x402 requirement is `10000` atomic USDC (`0.01 USDC`) on Base Sepolia (`eip155:84532`) and decoded the settlement failure as `invalid_exact_evm_insufficient_balance`. During that retry, the burner private key was entered into visible terminal text and later shared in chat, so that burner must be treated as compromised and must not be funded or reused. The PowerShell launcher is now hardened to require no terminal input and auto-detect the clipboard key. Exact next gate: `SKEPTARA_T0_ROTATE_EXPOSED_BURNER_AND_FUND_TEST_USDC_RETRY_007`.
