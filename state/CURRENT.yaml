@@ -1,13 +1,13 @@
 canonical_state:
   protocol_version: 1
   system: SKEPTARA_TELEGRAPH_TRACK3
-  version: 0.3.0-t0-runtime-success-evidence-review-pending
+  version: 0.4.0-t0-closed-t1-pass-t2-next
   date: 2026-09-06
   source_of_truth: GITHUB
   repository: Faadil1/Faadil1-skeptara-telegraph
   branch: main
 
-  lifecycle_status: PRD_V0_1_LOCKED__SPEC_KIT_RECONCILED__T0_REAL_X402_RUNTIME_SUCCESS__EVIDENCE_REVIEW_PENDING
+  lifecycle_status: PRD_V0_1_LOCKED__SPEC_KIT_RECONCILED__T0_CLOSED_PASS__T1_DETERMINISTIC_POLICY_PASS__T2_OPEN_NEXT
 
   authority:
     product_intent_source: product/PRD.md
@@ -55,17 +55,31 @@ canonical_state:
       result: FRESH_BURNER__ARC_TESTNET_FUNDED_BY_MISTAKE__BASE_SEPOLIA_STILL_UNFUNDED
       evidence: evidence/t0-real-telegraph/ATTEMPT-007-WRONG-TESTNET-FUNDING.md
     - id: SKEPTARA_T0_ATTEMPT_008
-      status: RUNTIME_PASS_EVIDENCE_REVIEW_PENDING
+      status: PASS
       date: 2026-09-06
       result: LIVE_DISCOVERY_PASS__X402_QUOTE_10000_ATOMIC_USDC_BASE_SEPOLIA__REAL_PAID_CHALLENGE_PASS__MINER_20260828__INTENT_CVE_LOOKUP__COST_0_01__SIGNAL_HASH_PRESENT__SETTLEMENT_SUCCESS_TRUE__NEGATIVE_PATH_PASS
       discovery_class: execution_detail
       product_change_required: false
-      local_runtime_evidence_location: evidence/t0-real-telegraph/runtime/2026-09-06T21-42-53-570Z/
-      durable_summary_evidence: evidence/t0-real-telegraph/ATTEMPT-008-RUNTIME-SUCCESS-PENDING-REVIEW.md
+      evidence: evidence/t0-real-telegraph/attempt-008/README.md
+    - id: SKEPTARA_T0_EVIDENCE_REVIEW_008
+      status: PASS
+      date: 2026-09-06
+      result: LODASH_4_17_20_MATCHES_CVE_2020_28500_AFFECTED_RANGE_LT_4_17_21__HERO_RELEVANCE_DIRECT__MATERIALITY_BLOCKING
+      independent_primary_verification: NVD
+      evidence: evidence/t0-real-telegraph/attempt-008/04-normalized-evidence-item.sanitized.json
+    - id: SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE
+      status: CLOSED_PASS
+      date: 2026-09-06
+    - id: SKEPTARA_T1_DETERMINISTIC_POLICY_PASS
+      status: PASS
+      date: 2026-09-06
+      result: ACTION_CANONICALIZATION__SHA256_FINGERPRINT__LOW_MEDIUM_HIGH_RISK__T0_DERIVED_SPEND_CAPS__FAIL_CLOSED_EVALUATOR__10_OF_10_TESTS_PASS
+      implementation: src/policy.mjs
+      tests: tests/policy.test.mjs
 
   t0_contract:
     gate: SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE
-    status: RUNTIME_PASS_EVIDENCE_REVIEW_REQUIRED
+    status: CLOSED_PASS
     route:
       base_url: https://devnode.telegraphprotocol.com
       free_discovery: GET_https://devnode.telegraphprotocol.com/api/miners
@@ -76,48 +90,79 @@ canonical_state:
       proven_asset_family: USDC
       proven_amount_atomic: 10000
       proven_amount_usdc: 0.01
-      settlement_success_attempt_008: true
-    attempt_008:
-      runtime: HUMAN_PERSONAL_WINDOWS_MACHINE
-      free_discovery: PASS
-      paid_inference: PASS
+      settlement_success: true
+    real_runtime_evidence:
       miner_id: "20260828"
+      miner_name: PREFLIGHT_Infrastructure_Signals
+      endpoint: /cve
       intent: CVE_LOOKUP
       cost_usd: 0.01
       signal_hash: 0x060d6688d94acfa0728417eefe947c15de495103024a9df83f8433f0e78a5917
-      negative_source_unavailable_semantics: PASS_ESCALATE
-      secret_boundary: PASS_NO_KEY_PRINTED_IN_REPORTED_OUTPUT
-      local_runtime_evidence_location: evidence/t0-real-telegraph/runtime/2026-09-06T21-42-53-570Z/
+      cve_id: CVE-2020-28500
+      target_dependency: lodash@4.17.20
+      affected_range: <4.17.21
+      normalized_materiality: BLOCKING
+      reason_code: KNOWN_VULNERABILITY_AFFECTS_TARGET_DEPENDENCY_VERSION
+      durable_evidence: evidence/t0-real-telegraph/attempt-008/
     proven:
       live_discovery_on_user_machine: true
       x402_quote_decoded: true
-      fresh_burner_base_sepolia_funded: true
       genuine_x402_paid_call_success: true
       real_miner_routing_observed: true
       real_intent_routing_observed: CVE_LOOKUP
       settlement_success: true
       signal_hash_exposed: true
+      hero_vertical_relevance: DIRECT
       fail_closed_negative_path: PASS
-    remaining_proof:
-      - review sanitized 03-paid-challenge.json from Attempt 008
-      - review sanitized 04-normalized-evidence-item.json from Attempt 008
-      - qualify actual returned CVE evidence for hero-vertical relevance and materiality
-      - persist sanitized runtime result/evidence item durably in repository
-      - only then promote T0 to CLOSED_PASS and release T1 / frontend data contract
+
+  t1_contract:
+    gate: SKEPTARA_T1_DETERMINISTIC_POLICY_PASS
+    status: PASS
+    implementation: src/policy.mjs
+    tests: tests/policy.test.mjs
+    policy_version: skeptara-risk-v0.1
+    fingerprint: SHA256_CANONICAL_ACTION_FACTS
+    risk_contracts:
+      LOW:
+        required_evidence_paths: 1
+        spend_cap_atomic: 10000
+        cross_intent_policy: NOT_REQUIRED
+      MEDIUM:
+        required_evidence_paths: 2
+        spend_cap_atomic: 20000
+        cross_intent_policy: PREFERRED
+      HIGH:
+        required_evidence_paths: 3
+        spend_cap_atomic: 30000
+        cross_intent_policy: REQUIRED_IF_SUPPORTED
+    deterministic_invariants:
+      - BLOCKING_EVIDENCE_ALWAYS_BLOCKS
+      - INCOMPLETE_REQUIRED_COVERAGE_ESCALATES
+      - BUDGET_EXHAUSTION_BEFORE_COVERAGE_ESCALATES
+      - REQUIRED_SOURCE_UNAVAILABLE_ESCALATES
+      - CRITICAL_AMBIGUITY_ESCALATES_FOR_MEDIUM_HIGH
+      - HIGH_CROSS_INTENT_REQUIREMENT_ENFORCED_WHEN_SUPPORTED
+      - CLEAN_COMPLETE_CHALLENGE_MAY_PASS
+    validation: 10_OF_10_NODE_TESTS_PASS
 
   security_boundary:
     prior_exposed_burner_status: COMPROMISED_DO_NOT_REUSE_OR_FUND
-    fresh_burner_status: ACTIVE_FOR_T0
+    fresh_burner_status: ACTIVE_FOR_T0_T2_ONLY_AS_NEEDED
     fresh_private_key_printed_or_shared: false
     private_key_in_repo: false
     hardened_clipboard_launcher: PASS
 
+  spec_kit:
+    status: DERIVED_RECONCILED_TO_PRD_V0_1_AND_T0_T1_EVIDENCE
+    convergence: PRODUCT_CONTRACT_CONVERGED__T0_PASS__T1_PASS__BUILD_NOT_COMPLETE
+    authority: NONE_OVER_PRODUCT_INTENT
+
   build_gates:
     prd_v0_1_human_lock: PASS
     spec_plan_tasks_ready: PASS_RECONCILED
-    t0_real_telegraph_challenge: RUNTIME_PASS_EVIDENCE_REVIEW_REQUIRED
-    t1_deterministic_risk_scorer: BLOCKED_UNTIL_T0_EVIDENCE_REVIEW
-    t2_independent_auditor: NOT_STARTED
+    t0_real_telegraph_challenge: CLOSED_PASS
+    t1_deterministic_risk_scorer: PASS
+    t2_independent_auditor: OPEN_NEXT
     t3_fail_closed_merge_gate: NOT_STARTED
     t4_two_case_real_demo: NOT_STARTED
     trace_design_review: NOT_STARTED
@@ -126,14 +171,17 @@ canonical_state:
 
   collaborator:
     benita_message_sent: false
-    release_condition: FRONTEND_DATA_CONTRACT_READY_AFTER_T0_METADATA_DISCOVERY_AND_EVIDENCE_REVIEW
+    frontend_data_contract: FROZEN_V0_1
+    frontend_data_contract_path: docs/FRONTEND_DATA_CONTRACT.md
+    release_condition: SATISFIED
+    branch_status: READY_TO_CREATE
 
   state_persistence_rule:
     after_every_major_gate: UPDATE_CURRENT_AND_HANDOVER
     evidence_before_pass_claim: REQUIRED
     repository_truth_outranks_chat_memory: true
 
-  exact_next_gate: SKEPTARA_T0_ATTEMPT_008_EVIDENCE_REVIEW_AND_DURABLE_PERSISTENCE
-  exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_REVIEW
+  exact_next_gate: SKEPTARA_T2_INDEPENDENT_AUDITOR_PASS
+  exact_next_owner: CHATGPT_ORCHESTRATED_IMPLEMENTATION_WITH_HUMAN_LOCAL_PAID_RUNTIME_WHEN_REQUIRED
   exact_next_action: >-
-    Read and return the sanitized local files evidence/t0-real-telegraph/runtime/2026-09-06T21-42-53-570Z/03-paid-challenge.json and 04-normalized-evidence-item.json. Do not share any private key. ChatGPT reviews the actual returned CVE result/provenance, classifies hero-vertical relevance/materiality, persists sanitized evidence, and only then promotes T0 to CLOSED_PASS and starts T1.
+    Build the independent auditor from the proven T0 Telegraph path: canonical action facts only, no constructor persuasive rationale; deterministic evidence-path plan from T1 risk contract; bounded spend/coverage accounting; real Telegraph adapter; finding normalization; replayable challenge record. Reuse the fresh burner only through the hardened local secret boundary for any required paid verification. In parallel, create the Benita frontend branch from the frozen v0.1 data contract and release only UI/UX scope.
