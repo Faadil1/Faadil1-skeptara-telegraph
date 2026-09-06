@@ -1,13 +1,13 @@
 canonical_state:
   protocol_version: 1
   system: SKEPTARA_TELEGRAPH_TRACK3
-  version: 0.2.5-t0-attempt-004-public-address-block
+  version: 0.2.6-t0-attempt-005-paid-call-diagnostic-pending
   date: 2026-09-06
   source_of_truth: GITHUB
   repository: Faadil1/Faadil1-skeptara-telegraph
   branch: main
 
-  lifecycle_status: PRD_V0_1_LOCKED__SPEC_KIT_RECONCILED__T0_ACTIVE__LIVE_DISCOVERY_CONFIRMED__ATTEMPT_004_PUBLIC_ADDRESS_BLOCK__RETRY_005_REQUIRED
+  lifecycle_status: PRD_V0_1_LOCKED__SPEC_KIT_RECONCILED__T0_ACTIVE__LIVE_DISCOVERY_CONFIRMED__PAID_CALL_REACHED__FAIL_CLOSED__DIAGNOSTIC_PENDING
 
   authority:
     project_go: HUMAN_GO_RECEIVED
@@ -35,67 +35,37 @@ canonical_state:
     self_risk_scoring_by_reviewed_agent: forbidden
     self_audit_by_reviewed_agent: forbidden
 
-  locked_decisions:
-    - LIVING_PRD_IS_CANONICAL_PRODUCT_INTENT_SOURCE
-    - SPEC_KIT_IS_DERIVED_EXECUTION_LAYER_ONLY
-    - MATERIAL_PRODUCT_CHANGE_REQUIRES_PRD_REVISION_BEFORE_DERIVED_RECONCILIATION
-    - CODE_MUST_NOT_BECOME_DE_FACTO_PRODUCT_SOURCE
-    - CONSTRUCTOR_AND_AUDITOR_ARE_SEPARATE
-    - RISK_TIER_IS_EXTERNAL_AND_DETERMINISTIC_FOR_MVP
-    - INCOMPLETE_REQUIRED_CHALLENGE_COVERAGE_CANNOT_PASS
-    - BUDGET_EXHAUSTION_BEFORE_REQUIRED_COVERAGE_CANNOT_PASS
-    - SUBMISSION_PATH_REQUIRES_REAL_TELEGRAPH_INTELLIGENCE
-    - TELEGRAPH_WALLET_SECRET_NEVER_ENTERS_CHAT_GIT_OR_BROWSER
-    - REAL_GITHUB_WRITES_ARE_EXPLICITLY_ALLOW_LISTED_ONLY
-
   milestone_history:
     - id: HUMAN_PROJECT_GO
-      status: PASS
-      date: 2026-09-06
-    - id: MULTI_LLM_COLLISION_RED_TEAM
-      status: PASS_WITH_PIVOTS
-      date: 2026-09-06
-    - id: PRODUCT_NAME_SCREEN
-      status: PROVISIONAL_PASS
-      date: 2026-09-06
-      result: SKEPTARA_SELECTED
-    - id: REPOSITORY_BOOTSTRAP
       status: PASS
       date: 2026-09-06
     - id: SKEPTARA_PRD_V0_1_HUMAN_LOCK
       status: PASS
       date: 2026-09-06
       authority: HUMAN_PROJECT_OWNER
-      evidence: evidence/prd-v0.1-human-lock/README.md
-    - id: SPEC_KIT_RECONCILIATION_AFTER_PRD_V0_1_LOCK
-      status: PASS
-      date: 2026-09-06
     - id: SKEPTARA_T0_ATTEMPT_001
       status: FAIL_CLOSED_REMEDIATED
-      date: 2026-09-06
-      result: STALE_ROUTE__NO_PAID_CALL__NEGATIVE_PATH_PASS
-      evidence: evidence/t0-real-telegraph/ATTEMPT-001-STALE-ROUTE.md
+      result: STALE_ROUTE__NO_PAID_CALL
     - id: SKEPTARA_T0_ATTEMPT_002
       status: FAIL_CLOSED_REMEDIATED
-      date: 2026-09-06
-      result: LIVE_FREE_DISCOVERY_PASS__PRIVATE_KEY_FORMAT_INVALID__NO_PAID_CALL
-      evidence: evidence/t0-real-telegraph/ATTEMPT-002-DISCOVERY-PASS-KEY-FORMAT-BLOCK.md
+      result: LIVE_DISCOVERY_PASS__LOCAL_CREDENTIAL_FORMAT_INVALID__NO_PAID_CALL
     - id: SKEPTARA_T0_ATTEMPT_003
       status: FAIL_CLOSED_REMEDIATED
-      date: 2026-09-06
-      result: LIVE_FREE_DISCOVERY_PASS__CLIPBOARD_VALUE_LENGTH_794__NO_PAID_CALL
-      evidence: evidence/t0-real-telegraph/ATTEMPT-003-CLIPBOARD-INJECTION-BLOCK.md
+      result: LIVE_DISCOVERY_PASS__CLIPBOARD_VALUE_INVALID__NO_PAID_CALL
     - id: SKEPTARA_T0_ATTEMPT_004
       status: FAIL_CLOSED_RETRY_REQUIRED
+      result: PUBLIC_EVM_ADDRESS_COPIED__NO_PAID_CALL
+    - id: SKEPTARA_T0_ATTEMPT_005
+      status: FAIL_CLOSED_DIAGNOSTIC_PENDING
       date: 2026-09-06
-      result: CLIPBOARD_LAUNCHER_WORKED__TRIMMED_LENGTH_42__PUBLIC_EVM_ADDRESS_COPIED_NOT_PRIVATE_KEY__NO_PAID_CALL
-      discovery_class: execution_detail
-      product_change_required: false
-      evidence: evidence/t0-real-telegraph/ATTEMPT-004-PUBLIC-ADDRESS-COPIED.md
+      result: VALID_LOCAL_EVM_KEY_FORMAT__LIVE_DISCOVERY_PASS__PAID_CHALLENGE_ATTEMPTED__PAID_CHALLENGE_FAILED__NEGATIVE_PATH_ESCALATE_PASS
+      discovery_class: execution_detail_pending_diagnostic
+      product_change_required: false_currently
+      runtime_evidence_location: evidence/t0-real-telegraph/runtime/2026-09-06T21-15-17-533Z/
 
   t0_contract:
     gate: SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE
-    status: OPEN_RETRY_REQUIRED
+    status: OPEN_DIAGNOSTIC_REQUIRED
     route:
       base_url: https://devnode.telegraphprotocol.com
       free_discovery: GET_https://devnode.telegraphprotocol.com/api/miners
@@ -105,26 +75,27 @@ canonical_state:
       payment_asset: USDC
     proven:
       live_discovery_on_user_machine: true
+      local_evm_key_format_validation: PASS
+      paid_call_stage_reached: true
+      paid_call_success: false
       negative_source_unavailable_semantics: PASS_ESCALATE
-      local_secret_value_never_recorded: true
-      clipboard_launcher_validation: PASS
-    attempt_004:
+      no_secret_value_recorded: true
+    attempt_005:
       runtime: HUMAN_PERSONAL_WINDOWS_MACHINE
-      clipboard_value_trimmed_length: 42
-      interpretation: PUBLIC_EVM_ADDRESS_NOT_PRIVATE_KEY
-      paid_inference_attempted: false
-      classification: execution_detail
-      evidence: evidence/t0-real-telegraph/ATTEMPT-004-PUBLIC-ADDRESS-COPIED.md
+      free_discovery: PASS
+      paid_inference_attempted: true
+      paid_inference_success: false
+      fail_closed: PASS
+      diagnostic: PENDING_LOCAL_FAILURE_JSON
+      runtime_evidence_location: evidence/t0-real-telegraph/runtime/2026-09-06T21-15-17-533Z/
     required_proof_remaining:
-      - export the actual private key of the burner EVM account locally
-      - private-key format passes launcher validation
-      - at least one genuine x402-paid Telegraph challenge succeeds
+      - inspect sanitized paid-call failure JSON
+      - classify blocker before remediation
+      - genuine x402-paid Telegraph challenge succeeds
       - actual exposed response metadata is captured without fabrication
       - one normalized real EvidenceItem is produced
       - sanitized evidence is reviewed and persisted
       - hero vertical relevance of live evidence is qualified after paid result
-    stop_rule: >-
-      If live Telegraph capability cannot support the dependency-security hero vertical quickly, classify the discovery. A material hero-vertical or mechanism change requires living-PRD approval before continuing. Never substitute mocks on the submission path.
 
   spec_kit:
     status: DERIVED_READY_RECONCILED_TO_PRD_V0_1
@@ -134,7 +105,7 @@ canonical_state:
   build_gates:
     prd_v0_1_human_lock: PASS
     spec_plan_tasks_ready: PASS_RECONCILED
-    t0_real_telegraph_challenge: OPEN_RETRY_REQUIRED
+    t0_real_telegraph_challenge: OPEN_DIAGNOSTIC_REQUIRED
     t1_deterministic_risk_scorer: NOT_STARTED
     t2_independent_auditor: NOT_STARTED
     t3_fail_closed_merge_gate: NOT_STARTED
@@ -161,7 +132,7 @@ canonical_state:
       - spec-kit/tasks.md
       - docs/ARCHITECTURE.md
 
-  exact_next_gate: SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE_RETRY_005
+  exact_next_gate: SKEPTARA_T0_PAID_CALL_FAILURE_DIAGNOSTIC_005
   exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_REVIEW
   exact_next_action: >-
-    In MetaMask Extension open the burner account selector, use the three-dot menu beside the burner account, open Account details, choose Private key, authenticate, hold to reveal, and copy the private key itself. Do not copy the 42-character public account address from the wallet home screen. Then run scripts/t0-from-clipboard.ps1 first; only when it pauses, copy the private key, return to PowerShell and press Enter without pasting it. Share only sanitized output/evidence.
+    Inspect the sanitized local failure JSON produced by the 2026-09-06T21-15-17-533Z run and return only its non-secret contents. Do not rerun or fund anything until the blocker is classified. ChatGPT will then choose the bounded remediation and update CURRENT + HANDOVER before another paid-call attempt.
