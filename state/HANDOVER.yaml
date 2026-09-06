@@ -9,8 +9,8 @@ handover:
   resume_rule: >-
     Read state/CURRENT.yaml first, then this HANDOVER, then product/PRD.md. The living PRD is canonical product intent; Spec Kit files are derived execution contracts. Repository truth outranks chat/runtime memory. After every major gate persist evidence and update BOTH CURRENT and HANDOVER.
 
-  current_milestone: T0_ATTEMPT_007_FRESH_BURNER__ARC_TESTNET_USDC_FUNDED__BASE_SEPOLIA_BALANCE_STILL_INSUFFICIENT__RETRY_008_PENDING
-  lifecycle_status: PRODUCT_CONTRACT_LOCKED__T0_ACTIVE__CORRECT_NETWORK_FUNDING_REQUIRED
+  current_milestone: T0_ATTEMPT_008_REAL_X402_RUNTIME_PASS__CVE_LOOKUP_ROUTED__EVIDENCE_REVIEW_PENDING
+  lifecycle_status: PRODUCT_CONTRACT_LOCKED__T0_RUNTIME_SUCCESS__DURABLE_EVIDENCE_REVIEW_REQUIRED_BEFORE_PROMOTION
 
   project:
     public_name: Skeptara
@@ -26,10 +26,10 @@ handover:
 
   active_gate:
     id: SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE
-    status: OPEN_CORRECT_NETWORK_FUNDING_REQUIRED
-    attempt_007:
+    status: RUNTIME_PASS_EVIDENCE_REVIEW_REQUIRED
+    attempt_008:
       environment: HUMAN_PERSONAL_WINDOWS_MACHINE
-      fresh_burner_created: true
+      fresh_burner: ACTIVE_UNCOMPROMISED_FOR_T0
       hardened_clipboard_launcher: PASS
       free_discovery: PASS
       x402_quote:
@@ -38,47 +38,49 @@ handover:
         asset: USDC
         amount_atomic: 10000
         amount_usdc: 0.01
-      faucet_transfer:
-        amount_test_usdc: 20
-        observed_network: Arc_Testnet
-        transaction_status: SUCCESS
-        relevance_to_telegraph_balance: NONE_CROSS_CHAIN
-      paid_success: false
-      settlement_reason: invalid_exact_evm_insufficient_balance
-      fail_closed: PASS
+      paid_challenge: PASS
+      miner_id: "20260828"
+      intent: CVE_LOOKUP
+      cost_usd: 0.01
+      signal_hash: 0x060d6688d94acfa0728417eefe947c15de495103024a9df83f8433f0e78a5917
+      settlement_success: true
       negative_path_SOURCE_UNAVAILABLE: PASS_ESCALATE
+      local_runtime_evidence_location: evidence/t0-real-telegraph/runtime/2026-09-06T21-42-53-570Z/
+      durable_summary_evidence: evidence/t0-real-telegraph/ATTEMPT-008-RUNTIME-SUCCESS-PENDING-REVIEW.md
       classification: execution_detail
       product_intent_changed: false
-      evidence: evidence/t0-real-telegraph/ATTEMPT-007-WRONG-TESTNET-FUNDING.md
+
+  proof_status:
+    proven:
+      - live Telegraph discovery from user machine
+      - bounded Base Sepolia x402 quote
+      - fresh funded burner successfully settles payment
+      - real paid Telegraph challenge returns success
+      - real miner id returned
+      - real CVE_LOOKUP intent returned
+      - cost metadata returned
+      - signal hash returned
+      - settlement success true
+      - source unavailable negative path remains fail-closed
+    still_required_before_closed_pass:
+      - review sanitized 03-paid-challenge.json
+      - review sanitized 04-normalized-evidence-item.json
+      - inspect actual CVE result/provenance for lodash 4.17.20
+      - classify materiality and hero-vertical relevance without fabrication
+      - persist sanitized evidence durably in repository
 
   security_incident:
     id: SKEPTARA_BURNER_CREDENTIAL_INCIDENT_001
     status: ROTATED
     prior_burner: COMPROMISED_DO_NOT_REUSE_OR_FUND
-    fresh_burner: ACTIVE_FOR_T0
-    fresh_private_key_printed_or_shared: false
+    fresh_burner_private_key_printed_or_shared: false
     repository_secret_recorded: false
-
-  funding_rule:
-    proven_requirement: 0.01_USDC_ON_BASE_SEPOLIA
-    current_wrong_chain_balance: Arc_Testnet_USDC
-    remediation: >-
-      Reuse the same fresh burner public address. In Circle's public faucet select USDC and explicitly choose Base Sepolia in the Network dropdown before sending. Arc Testnet USDC is valid test funding but is on a different chain and cannot satisfy Telegraph's Base Sepolia x402 balance check.
-
-  remaining_t0_proof:
-    - fresh burner receives Base Sepolia test USDC
-    - Base Sepolia transaction is confirmed
-    - hardened launcher reruns with same fresh burner private key clipboard-only
-    - genuine x402-paid Telegraph inference returns success
-    - normalized real EvidenceItem produced
-    - hero-vertical relevance reviewed
-    - durable evidence persisted
 
   collaborator_benita:
     message_sent: false
-    release_condition: FRONTEND_DATA_CONTRACT_READY_AFTER_T0_METADATA_DISCOVERY
+    release_condition: FRONTEND_DATA_CONTRACT_READY_AFTER_T0_METADATA_DISCOVERY_AND_EVIDENCE_REVIEW
 
-  next_gates_after_t0_pass:
+  next_gates_after_t0_closed_pass:
     - SKEPTARA_T1_DETERMINISTIC_POLICY_PASS
     - SKEPTARA_T2_INDEPENDENT_AUDITOR_PASS
     - SKEPTARA_T3_FAIL_CLOSED_MERGE_GATE_PASS
@@ -87,7 +89,7 @@ handover:
     - SKEPTARA_BUILD_CANDIDATE_READY
     - HUMAN_PROTECTED_FINAL_SUBMISSION
 
-  exact_next_gate: SKEPTARA_T0_FUND_FRESH_BURNER_BASE_SEPOLIA_AND_RETRY_008
+  exact_next_gate: SKEPTARA_T0_ATTEMPT_008_EVIDENCE_REVIEW_AND_DURABLE_PERSISTENCE
   exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_REVIEW
   exact_next_action: >-
-    Open Circle's public testnet faucet, select USDC, change Network from Arc Testnet to Base Sepolia, send to the same fresh burner's PUBLIC address, and confirm the transfer is on Base Sepolia. Then run scripts/t0-from-clipboard.ps1 and copy the fresh private key only after the helper is waiting; do not paste the key into PowerShell or chat.
+    Return the sanitized contents of evidence/t0-real-telegraph/runtime/2026-09-06T21-42-53-570Z/03-paid-challenge.json and 04-normalized-evidence-item.json. Never return the private key. ChatGPT reviews the actual CVE finding/provenance, persists durable evidence, closes T0 if justified, freezes the frontend metadata contract, and proceeds to T1.
