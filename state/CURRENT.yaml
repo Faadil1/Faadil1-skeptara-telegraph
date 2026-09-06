@@ -1,13 +1,13 @@
 canonical_state:
   protocol_version: 1
   system: SKEPTARA_TELEGRAPH_TRACK3
-  version: 0.5.2-t2-live-runtime-pass-evidence-review-pending
+  version: 0.5.3-t2-runtime-pass-rejected-v0-2-remediation-live-retry-next
   date: 2026-09-06
   source_of_truth: GITHUB
   repository: Faadil1/Faadil1-skeptara-telegraph
   branch: main
 
-  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_LIVE_CLEAN_RUNTIME_PASS__EVIDENCE_REVIEW_PENDING
+  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_LIVE_RUN_001_RUNTIME_PASS_REJECTED_ON_EVIDENCE_REVIEW__AUDITOR_V0_2_REMEDIATED__LOCAL_TEST_AND_LIVE_RETRY_REQUIRED
 
   authority:
     product_intent_source: product/PRD.md
@@ -21,6 +21,8 @@ canonical_state:
     path: product/PRD.md
     living: true
     approval_state: HUMAN_LOCK_PASS
+    changed_by_t2_review: false
+    t2_review_classification: execution_detail
 
   product_core:
     public_name: Skeptara
@@ -37,19 +39,9 @@ canonical_state:
     - id: SKEPTARA_T1_DETERMINISTIC_POLICY_PASS
       status: PASS
       validation: 10_OF_10_NODE_TESTS_PASS
-      implementation: src/policy.mjs
-    - id: SKEPTARA_T2_CORE_IMPLEMENTATION
-      status: PASS_IMPLEMENTATION_LIVE_GATE_OPEN
-      implementation:
-        - src/auditor.mjs
-        - src/telegraph-client.mjs
-        - scripts/t2-live-audit.mjs
-        - scripts/t2-from-clipboard.ps1
-      evidence: evidence/t2/OFFLINE-IMPLEMENTATION-VALIDATION.md
-    - id: SKEPTARA_T2_USER_FULL_REPOSITORY_TEST
+    - id: SKEPTARA_T2_USER_FULL_REPOSITORY_TEST_V0_1
       status: PASS
       result: 19_OF_19_NODE_TESTS_PASS__0_FAIL
-      evidence: evidence/t2/LOCAL-USER-VALIDATION-AND-CLEAN-PR.md
     - id: SKEPTARA_T2_CONTROLLED_CLEAN_PR_BINDING
       status: PASS
       repository: Faadil1/Faadil1-skeptara-telegraph
@@ -59,37 +51,31 @@ canonical_state:
       dependency_change: lodash_4_17_20_TO_4_17_21
       merge_authorized: false
     - id: SKEPTARA_T2_LIVE_CLEAN_RUN_001
-      status: RUNTIME_PASS_EVIDENCE_REVIEW_PENDING
-      date: 2026-09-06
-      action: Faadil1/Faadil1-skeptara-telegraph#1
-      head_sha: 73cf5bdd69163924228e3e21d67fa9f405d99904
-      risk_tier: MEDIUM
-      coverage: 2_OF_2
+      status: RUNTIME_PASS_REJECTED_ON_EVIDENCE_REVIEW
+      runtime_reported_outcome: PASS
+      runtime_reported_coverage: 2_OF_2
       spend_atomic_usdc: 20000
-      spend_cap_atomic_usdc: 20000
-      actual_intents:
-        - CVE_LOOKUP
-        - FACT_CHECK
-      evidence_summary:
-        - intent: CVE_LOOKUP
-          materiality: NONE
-          reason_code: NO_MATERIAL_COUNTER_EVIDENCE_REPORTED
-          cost_usd: 0.01
-        - intent: FACT_CHECK
-          materiality: AMBIGUOUS
-          reason_code: UNCLASSIFIED_EXTERNAL_EVIDENCE
-          cost_usd: 0.01
-      runtime_outcome: PASS
-      runtime_reason: REQUIRED_COVERAGE_COMPLETE_NO_BLOCKING_EVIDENCE
-      local_runtime_dir: evidence/t2-runtime/2026-09-06T22-33-25-514Z
-      durable_runtime_summary: evidence/t2/LIVE-CLEAN-RUN-001-RUNTIME-PASS-PENDING-REVIEW.md
+      actual_intents: [CVE_LOOKUP, FACT_CHECK]
+      review_result: ESCALATE_REQUIRED
+      defect: PAID_CVE_PATH_WAS_INVALID_AND_DID_NOT_COMPLETE_MEANINGFUL_INVESTIGATION
+      evidence: evidence/t2/live-clean-run-001/REVIEW.md
+    - id: SKEPTARA_T2_AUDITOR_V0_2_REMEDIATION
+      status: IMPLEMENTED_LOCAL_VALIDATION_REQUIRED
+      implementation: src/auditor.mjs
+      auditor_version: skeptara-auditor-v0.2
+      changes:
+        - PAID_RESPONSE_NOT_AUTOMATICALLY_COMPLETED_COVERAGE
+        - INVALID_OR_MISSING_PATH_INPUT_MARKED_INCOMPLETE_CRITICAL_AMBIGUOUS
+        - INCOMPLETE_PATH_DOES_NOT_INCREMENT_COVERAGE
+        - GENERIC_DEPENDENCY_PLAN_AVOIDS_DIRECT_CVE_LOOKUP_WITHOUT_EXPLICIT_CVE_ID
+        - DEPENDENCY_PREFERENCE_FACT_CHECK_WEB_SEARCH_NEWS_SEARCH_URL_SCAN
+      regression_tests_added: 2
 
   t0_contract:
     status: CLOSED_PASS
     network: eip155:84532
     asset: USDC
     observed_price_atomic: 10000
-    real_intent: CVE_LOOKUP
     challenged_target: lodash@4.17.20
     cve_id: CVE-2020-28500
     normalized_materiality: BLOCKING
@@ -104,43 +90,40 @@ canonical_state:
 
   t2_contract:
     gate: SKEPTARA_T2_INDEPENDENT_AUDITOR_PASS
-    status: LIVE_RUNTIME_PASS_EVIDENCE_REVIEW_REQUIRED
-    auditor_version: skeptara-auditor-v0.1
-    implementation:
-      auditor_core: src/auditor.mjs
-      telegraph_adapter: src/telegraph-client.mjs
-      live_runner: scripts/t2-live-audit.mjs
-      secure_launcher: scripts/t2-from-clipboard.ps1
-      contract: docs/T2_AUDITOR_CONTRACT.md
-    validated:
-      isolated_full_repo_tests: 19_OF_19_PASS
-      user_machine_full_repo_tests: 19_OF_19_PASS
-      canonical_action_facts_only: true
-      constructor_persuasive_rationale_input: forbidden
-      bounded_quote_before_payment: true
-      required_coverage_tracking: true
-      bounded_spend_tracking: true
-      actual_returned_intents_recorded: true
-      live_clean_required_coverage_completed: true
-      live_clean_spend_within_cap: true
-    live_clean_run_001:
-      repository: Faadil1/Faadil1-skeptara-telegraph
-      pr_number: 1
-      head_sha: 73cf5bdd69163924228e3e21d67fa9f405d99904
-      risk_tier: MEDIUM
-      completed_coverage: 2
-      required_coverage: 2
-      spend_observed_atomic: 20000
-      spend_cap_atomic: 20000
-      actual_intents: [CVE_LOOKUP, FACT_CHECK]
-      runtime_outcome: PASS
-      review_concern: FACT_CHECK_ITEM_IS_AMBIGUOUS_AND_MUST_BE_INSPECTED_BEFORE_T2_CLOSE
+    status: V0_2_REMEDIATED_LOCAL_TEST_AND_LIVE_RETRY_REQUIRED
+    auditor_version: skeptara-auditor-v0.2
+    contract: docs/T2_AUDITOR_CONTRACT.md
+    review_truth:
+      live_run_001_paid_calls: 2
+      live_run_001_spend_atomic: 20000
+      live_run_001_runtime_pass_accepted: false
+      cve_path:
+        actual_intent: CVE_LOOKUP
+        miner_id: "20260828"
+        result_found: false
+        result_missing: valid request input
+        miner_reason: lookup could not be completed because request was invalid and required a CVE identifier
+        corrected_coverage_complete: false
+        corrected_materiality: AMBIGUOUS
+        corrected_critical: true
+      fact_check_path:
+        actual_intent: FACT_CHECK
+        miner_id: "4433"
+        verdict: unverified
+        confidence: 0.2
+        evidence: null
+        materiality: AMBIGUOUS
+        critical: false
+      corrected_gate_interpretation: ESCALATE
     remaining_before_closed_pass:
-      - review sanitized evidence/t2-runtime/2026-09-06T22-33-25-514Z/02-audit-result.json
-      - inspect actual FACT_CHECK raw/normalized result and criticality
-      - confirm runtime PASS is consistent with policy and no material evidence is hidden by AMBIGUOUS normalization
-      - persist sanitized final live T2 challenge record durably under evidence/t2/
-      - only then promote SKEPTARA_T2_INDEPENDENT_AUDITOR_PASS
+      - user git pull
+      - run full repository npm test against auditor v0.2
+      - expected tests: 21 total if no other test-count change
+      - verify PR #1 still open at exact head 73cf5bdd69163924228e3e21d67fa9f405d99904
+      - run one bounded live clean MEDIUM retry through hardened launcher
+      - review actual returned evidence and meaningful coverage
+      - persist sanitized final live T2 record
+      - close T2 only if real retry justifies PASS
 
   security_boundary:
     prior_exposed_burner_status: COMPROMISED_DO_NOT_REUSE_OR_FUND
@@ -150,16 +133,16 @@ canonical_state:
 
   branches:
     main: CURRENT
-    feat_frontend_benita: SYNCED_TO_MAIN_BEFORE_COLLABORATOR_WORK
+    feat_frontend_benita: COLLABORATOR_BRANCH_EXISTS__DO_NOT_FORCE_SYNC_IF_COLLABORATOR_HAS_STARTED_WORK
     demo_clean_lodash_upgrade: INTENTIONALLY_FROZEN_FOR_PR_1_HEAD_BINDING
 
   build_gates:
     prd_v0_1_human_lock: PASS
     t0_real_telegraph_challenge: CLOSED_PASS
     t1_deterministic_risk_scorer: PASS
-    t2_independent_auditor: LIVE_RUNTIME_PASS_EVIDENCE_REVIEW_REQUIRED
+    t2_independent_auditor: V0_2_REMEDIATED_RETRY_REQUIRED
     t3_fail_closed_merge_gate: NOT_STARTED
-    t4_two_case_real_demo: CLEAN_CASE_LIVE_AUDIT_RUNTIME_PASS__CHALLENGED_EVIDENCE_ANCHOR_EXISTS__FULL_GATE_NOT_STARTED
+    t4_two_case_real_demo: CLEAN_CASE_NOT_YET_PROVEN__CHALLENGED_EVIDENCE_ANCHOR_EXISTS
     trace_design_review: NOT_STARTED
     project_finisher: NOT_STARTED
     final_submission: PROTECTED_NOT_AUTHORIZED
@@ -167,7 +150,6 @@ canonical_state:
   collaborator:
     frontend_data_contract: FROZEN_V0_1
     branch: feat/frontend-benita
-    branch_synced_to_main: true
     release_condition: SATISFIED
 
   state_persistence_rule:
@@ -175,7 +157,7 @@ canonical_state:
     evidence_before_pass_claim: REQUIRED
     repository_truth_outranks_chat_memory: true
 
-  exact_next_gate: SKEPTARA_T2_LIVE_CLEAN_RUN_001_EVIDENCE_REVIEW
+  exact_next_gate: SKEPTARA_T2_V0_2_LOCAL_TEST_AND_LIVE_RETRY_002
   exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_REVIEW
   exact_next_action: >-
-    Return the sanitized local file evidence/t2-runtime/2026-09-06T22-33-25-514Z/02-audit-result.json. ChatGPT must inspect the actual FACT_CHECK AMBIGUOUS item, confirm criticality/materiality and policy consistency, persist the final sanitized live challenge evidence, and only then close T2 or remediate if needed. Do not run another paid audit yet.
+    Pull main and run npm test. Auditor v0.2 must pass the full repository suite before another paid run. If tests pass, verify PR #1 still has exact head SHA 73cf5bdd69163924228e3e21d67fa9f405d99904, then run the hardened T2 launcher for live retry 002. Return terminal output and the new sanitized 02-audit-result.json. Do not merge PR #1 and do not force a PASS.
