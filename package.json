@@ -7,7 +7,9 @@
     "node": ">=20"
   },
   "scripts": {
-    "t0": "node scripts/t0-real-telegraph.mjs"
+    "t0": "node scripts/t0-real-telegraph.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "test:policy": "node --test tests/policy.test.mjs"
   },
   "dependencies": {
     "@x402/evm": "^2.11.0",
