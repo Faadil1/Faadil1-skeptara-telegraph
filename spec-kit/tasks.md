@@ -17,16 +17,22 @@ Status: DERIVED READY — subordinate to living PRD v0.1.
 
 - [x] T0.1 Discover live relevant intents/miners.
 - [x] T0.2 Confirm current Telegraph route.
-- [x] T0.3 Configure a valid exported burner EVM key locally only. *(Attempt 005 launcher validation PASS.)*
-- [ ] T0.4 Execute first successful real paid Telegraph challenge. *(Attempt 005 reached paid stage but failed closed; diagnostic pending.)*
+- [x] T0.3 Configure a valid exported burner EVM key locally only.
+- [ ] T0.4 Execute first successful real paid Telegraph challenge.
 - [ ] T0.5 Capture actual returned miner/intent/cost/provenance/signal fields.
 - [ ] T0.6 Normalize one real EvidenceItem.
 - [x] T0.7 Prove source-unavailable failure => ESCALATE/BLOCK.
 - [x] T0.8 Persist Attempts 001–004 and canonical updates.
 - [x] T0.9 Reach paid-call stage with valid local EVM key. *(Attempt 005.)*
-- [ ] T0.10 Inspect `runtime/2026-09-06T21-15-17-533Z/02-paid-challenge-failure.json` and classify blocker.
-- [ ] T0.11 Apply bounded remediation and rerun only after classification.
-- [ ] T0.12 Persist successful T0 evidence and update CURRENT/HANDOVER.
+- [x] T0.10 Classify Attempt 005 to x402 settlement layer: final HTTP 402, `PAYMENT-RESPONSE` present, body null; exact settlement reason was not decoded by old harness.
+- [x] T0.11 Add unsigned x402 quote preflight and decoded `PAYMENT-REQUIRED` evidence.
+- [x] T0.12 Enforce exact Base Sepolia + <=100000 atomic USDC safety boundary before paid retry.
+- [x] T0.13 Align paid client construction with Telegraph official MCP (`x402Client.fromConfig` + `wrapFetchWithPayment`).
+- [x] T0.14 Decode/persist final `PAYMENT-RESPONSE` settlement result/error reason.
+- [ ] T0.15 Run retry 006 and classify decoded quote/settlement result.
+- [ ] T0.16 If and only if decoded settlement proves insufficient funds, minimally fund the burner with the exact testnet asset/network in the quote.
+- [ ] T0.17 Obtain one successful genuine x402-paid Telegraph inference.
+- [ ] T0.18 Persist successful T0 evidence + normalized EvidenceItem + CURRENT/HANDOVER update.
 
 ## T1 — Deterministic policy core
 
@@ -106,4 +112,4 @@ After every passed/failed major gate:
 
 ## Reconciliation record
 
-Attempt 005 is the first T0 run to pass local EVM-key format validation and reach the paid-call stage. Free discovery passed; paid challenge failed closed; negative-path fail-closed semantics remained PASS. Exact next gate: `SKEPTARA_T0_PAID_CALL_FAILURE_DIAGNOSTIC_005`.
+Attempt 005 reached the genuine x402 payment transport and ended with HTTP 402 plus a `PAYMENT-RESPONSE` header. The prior harness did not decode the settlement envelope, so the exact failure reason remained unknown. The runner now performs a free unsigned quote preflight, enforces the bounded Base Sepolia payment contract, uses Telegraph's official MCP client construction, and decodes both `PAYMENT-REQUIRED` and `PAYMENT-RESPONSE`. Exact next gate: `SKEPTARA_T0_X402_SETTLEMENT_DIAGNOSTIC_RETRY_006`.
