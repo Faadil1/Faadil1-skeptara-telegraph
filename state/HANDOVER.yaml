@@ -9,8 +9,8 @@ handover:
   resume_rule: >-
     Read state/CURRENT.yaml first, then this HANDOVER, then product/PRD.md. The living PRD is canonical product intent; Spec Kit files are derived execution contracts. Repository truth outranks chat/runtime memory. After every major gate persist evidence and update BOTH CURRENT and HANDOVER.
 
-  current_milestone: T0_CLOSED_PASS__T1_DETERMINISTIC_POLICY_PASS__FRONTEND_CONTRACT_FROZEN__T2_OPEN_NEXT
-  lifecycle_status: PRODUCT_CONTRACT_LOCKED__REAL_TELEGRAPH_PROVEN__DETERMINISTIC_POLICY_PROVEN__INDEPENDENT_AUDITOR_NEXT
+  current_milestone: T0_CLOSED_PASS__T1_DETERMINISTIC_POLICY_PASS__FRONTEND_CONTRACT_FROZEN__BENITA_BRANCH_CREATED__T2_OPEN_NEXT
+  lifecycle_status: PRODUCT_CONTRACT_LOCKED__REAL_TELEGRAPH_PROVEN__DETERMINISTIC_POLICY_PROVEN__FRONTEND_PARALLELIZABLE__INDEPENDENT_AUDITOR_NEXT
 
   project:
     public_name: Skeptara
@@ -80,6 +80,7 @@ handover:
     path: docs/FRONTEND_DATA_CONTRACT.md
     release_condition: SATISFIED
     benita_message_sent: false
+    branch_status: CREATED
     branch: feat/frontend-benita
     allowed_scope: UI_UX__VISUAL_IDENTITY__CHALLENGE_PROGRESS__EVIDENCE_LEGIBILITY__PASS_BLOCK_ESCALATE__SCREENSHOTS_DEMO_NARRATIVE
     forbidden_scope: WALLET_PRIVATE_KEYS__GITHUB_WRITE_CREDENTIAL__RISK_GATE_SEMANTIC_CHANGES_WITHOUT_RECONCILIATION
@@ -117,4 +118,4 @@ handover:
   exact_next_gate: SKEPTARA_T2_INDEPENDENT_AUDITOR_PASS
   exact_next_owner: CHATGPT_ORCHESTRATED_IMPLEMENTATION_WITH_HUMAN_LOCAL_PAID_RUNTIME_WHEN_REQUIRED
   exact_next_action: >-
-    Implement the independent auditor against the proven T0 Telegraph/x402 path and T1 policy contract. Preserve constructor/auditor separation, bounded spend, coverage accounting and fail-closed semantics. Any paid live verification must use the fresh burner only through the hardened local clipboard secret boundary. Create the Benita frontend branch from the now-frozen frontend contract; do not give that branch wallet or protected GitHub-write responsibility.
+    Implement the independent auditor against the proven T0 Telegraph/x402 path and T1 policy contract. Preserve constructor/auditor separation, bounded spend, coverage accounting and fail-closed semantics. Any paid live verification must use the fresh burner only through the hardened local clipboard secret boundary. Benita can now work in feat/frontend-benita from docs/FRONTEND_DATA_CONTRACT.md; do not give that branch wallet or protected GitHub-write responsibility.
