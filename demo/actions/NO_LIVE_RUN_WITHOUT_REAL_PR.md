@@ -1,0 +1,1 @@
+Guardrail: `scripts/t2-live-audit.mjs` defaults to `demo/actions/clean-pr.json`. That file must not be created until it contains a real GitHub repository, PR number and head SHA. Unit-test fixtures remain synthetic only under `tests/`.
