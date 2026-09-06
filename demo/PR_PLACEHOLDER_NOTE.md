@@ -1,1 +1,0 @@
-Controlled PR branches are created separately and must not rely on placeholder action metadata. This note is non-authoritative and may be removed after real demo PR snapshots are persisted.
