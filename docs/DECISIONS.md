@@ -67,3 +67,21 @@ Status: PROVISIONAL_LOCK
 Date: 2026-09-06
 
 Reason: selected after an exact-name collision screen found no obvious current AI/software product or GitHub repository collision. This is not legal trademark clearance and can be revisited only if a material collision appears.
+
+## D-012 — Planned intent is not claimed intent
+Status: LOCKED  
+Date: 2026-09-06
+
+Reason: the T2 auditor may prefer/request an evidence mode, but Skeptara records and reasons from the actual intent returned by Telegraph. Cross-intent claims use observed returned intents only.
+
+## D-013 — Asymmetric stopping on blocking evidence
+Status: LOCKED  
+Date: 2026-09-06
+
+Reason: once material BLOCKING counter-evidence is found, the challenge may stop immediately and return BLOCK. A clean PASS candidate must still complete all mandatory risk-tier coverage.
+
+## D-014 — Live capability discovery before paid planning
+Status: LOCKED  
+Date: 2026-09-06
+
+Reason: T2 discovers current Telegraph capabilities before building a paid plan. If required evidence paths cannot be formed from supported capabilities, the challenge ESCALATEs before spending.
