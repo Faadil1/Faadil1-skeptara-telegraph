@@ -15,16 +15,18 @@ Status: DERIVED READY — subordinate to living PRD v0.1.
 
 ## T0 — Real Telegraph challenge
 
-- [ ] T0.1 Discover live relevant intents/miners. *(Attempt 001 could not reach the stale route; retry 002 uses current `/api/miners`.)*
-- [x] T0.2 Confirm current Telegraph route from official docs: `https://devnode.telegraphprotocol.com`, discovery `/api/miners`, Engine `/engine/v1/ask`.
-- [x] T0.3 Configure burner wallet secret locally/server-side only. *(Human local process; secret never recorded.)*
+- [x] T0.1 Discover live relevant intents/miners. *(Attempt 002 reached live `/api/miners`; sampled relevant intent families include FACT_CHECK, NEWS_HEADLINES and URL_SCAN. Dependency-security strength still requires paid-result qualification.)*
+- [x] T0.2 Confirm current Telegraph route: `https://devnode.telegraphprotocol.com`, discovery `/api/miners`, Engine `/engine/v1/ask`.
+- [ ] T0.3 Configure a valid exported burner EVM private key locally/server-side only. *(Attempt 002 secret boundary was safe but the supplied local value failed EVM-key format validation. Harness normalization remediated; retry 003 pending.)*
 - [ ] T0.4 Execute first real paid Telegraph challenge.
 - [ ] T0.5 Capture actual returned miner/intent/cost/provenance/signal fields.
 - [ ] T0.6 Normalize one real EvidenceItem.
-- [x] T0.7 Prove source-unavailable failure => ESCALATE/BLOCK. *(Attempt 001 negative-path PASS.)*
+- [x] T0.7 Prove source-unavailable failure => ESCALATE/BLOCK. *(Negative path PASS.)*
 - [x] T0.8a Persist Attempt 001 evidence + update CURRENT/HANDOVER.
 - [x] T0.8b Remediate stale route in harness + env template.
-- [ ] T0.9 Run retry 002 on current official devnode route and persist reviewed evidence.
+- [x] T0.8c Persist Attempt 002 live-discovery/key-format evidence + update CURRENT/HANDOVER.
+- [x] T0.8d Harden key-input normalization without exposing secret material.
+- [ ] T0.9 Run retry 003 with valid local burner EVM key and persist reviewed evidence.
 
 ## T1 — Deterministic policy core
 
@@ -104,4 +106,4 @@ After every passed/failed major gate:
 
 ## Reconciliation record
 
-`SKEPTARA_PRD_V0_1_HUMAN_LOCK` passed on 2026-09-06. Attempt 001 of T0 failed closed before payment because the harness targeted an older Telegraph route. The current official devnode route has been applied as an execution-detail remediation; product intent is unchanged. Exact next gate: `SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE_RETRY_002`.
+`SKEPTARA_PRD_V0_1_HUMAN_LOCK` passed on 2026-09-06. T0 Attempt 001 failed closed on a stale route and was remediated. Attempt 002 proved the current live devnode discovery route from the personal Windows runtime, but stopped before payment because the local burner secret was not in valid EVM private-key form. Key-input normalization is now hardened. Exact next gate: `SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE_RETRY_003`.
