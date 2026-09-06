@@ -1,0 +1,1 @@
+A real clean dependency PR action snapshot will be persisted here only after the PR exists and its head SHA is known. Do not run the live T2 audit against synthetic values.
