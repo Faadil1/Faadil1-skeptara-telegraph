@@ -9,9 +9,9 @@ handover:
   resume_rule: >-
     Read state/CURRENT.yaml first, then this HANDOVER, then product/PRD.md. The living PRD is canonical product intent; Spec Kit files are derived execution contracts. Repository truth outranks chat/runtime memory. Confirm the exact next gate before implementation. After every major gate, persist evidence and update BOTH CURRENT and HANDOVER.
 
-  current_milestone: T0_ATTEMPT_002_LIVE_DISCOVERY_PASS__KEY_FORMAT_BLOCK__HARNESS_NORMALIZATION_REMEDIATED__RETRY_003_PENDING
-  previous_milestone: T0_ATTEMPT_001_STALE_ROUTE_REMEDIATED
-  lifecycle_status: PRODUCT_CONTRACT_LOCKED__T0_ACTIVE__LIVE_ROUTE_PROVEN__LOCAL_SECRET_FORMAT_RETRY_REQUIRED
+  current_milestone: T0_ATTEMPT_003_LIVE_DISCOVERY_PASS__CLIPBOARD_VALUE_INVALID__SAFE_CLIPBOARD_LAUNCHER_COMMITTED__RETRY_004_PENDING
+  previous_milestone: T0_ATTEMPT_002_LIVE_DISCOVERY_PASS__KEY_FORMAT_BLOCK_REMEDIATED
+  lifecycle_status: PRODUCT_CONTRACT_LOCKED__T0_ACTIVE__LIVE_ROUTE_PROVEN__LOCAL_SECRET_INJECTION_RETRY_REQUIRED
 
   project:
     public_name: Skeptara
@@ -33,31 +33,34 @@ handover:
   active_gate:
     id: SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE
     status: OPEN_RETRY_REQUIRED
-    attempt_002:
-      environment: HUMAN_PERSONAL_WINDOWS_MACHINE
-      free_discovery: PASS
+    route_and_discovery:
+      base_url: https://devnode.telegraphprotocol.com
       discovery_url: https://devnode.telegraphprotocol.com/api/miners
-      sampled_live_relevant_intents:
+      engine_ask: https://devnode.telegraphprotocol.com/engine/v1/ask
+      payment_network: Base_Sepolia_eip155_84532
+      payment_asset: USDC
+      live_discovery_proven_on_user_machine: true
+      sampled_relevant_intents:
         - FACT_CHECK
         - NEWS_HEADLINES
         - URL_SCAN
+    attempt_003:
+      environment: HUMAN_PERSONAL_WINDOWS_MACHINE
+      free_discovery: PASS
+      local_secret_trimmed_length: 794
+      private_key_format_valid: false
       paid_inference_attempted: false
-      blocker: BURNER_PRIVATE_KEY_LOCAL_FORMAT_INVALID
       negative_path_SOURCE_UNAVAILABLE: PASS_ESCALATE
-      evidence: evidence/t0-real-telegraph/ATTEMPT-002-DISCOVERY-PASS-KEY-FORMAT-BLOCK.md
+      evidence: evidence/t0-real-telegraph/ATTEMPT-003-CLIPBOARD-INJECTION-BLOCK.md
       classification: execution_detail
       product_intent_changed: false
+      likely_issue: clipboard content was not the exported private key at the moment of capture; no secret content was recorded
     remediation:
-      script: scripts/t0-real-telegraph.mjs
+      helper: scripts/t0-from-clipboard.ps1
       status: COMMITTED
-      behavior:
-        - trim whitespace
-        - accept 64-hex EVM key without 0x and prefix locally
-        - accept standard 0x plus 64-hex key
-        - strip one pair of surrounding quotes
-        - invalid diagnostics reveal length only, never key material
-      warning: Use the exported private key for the burner EVM account, not wallet password, public address, or recovery phrase.
-    retry_003_required_proof:
+      usage: >-
+        Run the helper first. Only after it pauses, switch to the burner wallet and copy ONLY the exported EVM private key. Return to PowerShell and press Enter; do not paste the secret into the terminal. The helper validates format, replaces clipboard contents with harmless text, injects the key only into the local process, runs T0, and removes the environment variable afterward.
+    retry_004_required_proof:
       - local exported burner EVM private key passes format validation
       - genuine x402-paid Telegraph challenge succeeds
       - actual response metadata is captured without fabrication
@@ -69,6 +72,7 @@ handover:
     telegraph_private_key_in_chat: FORBIDDEN
     telegraph_private_key_in_git: FORBIDDEN
     telegraph_private_key_in_browser: FORBIDDEN
+    secret_value_logged: false
     usage: LOCAL_PROCESS_ONLY_FOR_BURNER_WALLET
 
   collaborator_benita:
@@ -91,7 +95,7 @@ handover:
     material_decision_history_location: docs/DECISIONS.md
     task_progress_location: spec-kit/tasks.md
 
-  exact_next_gate: SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE_RETRY_003
+  exact_next_gate: SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE_RETRY_004
   exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_REVIEW
   exact_next_action: >-
-    Git pull. Export the burner EVM account private key from the wallet locally. Inject it only into the current PowerShell process and run npm run t0. The current harness accepts 64 hex with or without 0x and strips whitespace/quotes. Share only sanitized output/evidence. ChatGPT reviews and persists the result before any T0 promotion, T1 start, or Benita frontend release.
+    Git pull, then run powershell -ExecutionPolicy Bypass -File .\scripts\t0-from-clipboard.ps1. When prompted, copy ONLY the exported burner EVM private key from the wallet and press Enter without pasting it into PowerShell. Share only sanitized T0 output/evidence. ChatGPT reviews and persists the result before T0 promotion, T1 start, or Benita frontend release.
