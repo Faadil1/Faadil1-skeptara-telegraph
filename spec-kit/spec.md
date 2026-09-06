@@ -1,6 +1,6 @@
 # Skeptara Specification
 
-Status: DERIVED DRAFT — requires PRD v0.1 human lock before build authority.
+Status: DERIVED READY — reconciled to approved PRD v0.1.
 
 ## Scope
 
@@ -127,3 +127,7 @@ Given a PASS exists but head SHA changes, the previous PASS is invalid and merge
 - No claim that x402 itself is the product innovation.
 - No claim of on-chain receipt fields unless actually exposed/captured.
 - No production-readiness claim from a hackathon demo.
+
+## Reconciliation record
+
+Reconciled after `SKEPTARA_PRD_V0_1_HUMAN_LOCK` PASS on 2026-09-06. No product-intent expansion introduced.
