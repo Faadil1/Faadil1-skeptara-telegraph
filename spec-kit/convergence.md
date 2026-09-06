@@ -28,7 +28,7 @@ Any of the following blocks convergence:
 - live Telegraph dependency is replaced by a mock on the submission path;
 - evidence claims include fabricated/unverified fields;
 - merge executor accepts stale/mismatched/non-allow-listed action;
-- material T0 discovery changes hero vertical without PRD revision;
+- material discovery changes hero vertical without PRD revision;
 - README/demo/UX claims exceed observed evidence;
 - canonical state or handover points to a stale gate.
 
@@ -39,12 +39,14 @@ Any of the following blocks convergence:
 - decision/change history.
 
 ### Technical evidence
-- tests/CI;
+- deterministic policy tests;
 - T0 live Telegraph transcript/normalized record;
+- x402 settlement evidence;
 - negative-path gate evidence;
-- protected merge denial/allow evidence.
+- protected merge denial/allow evidence when T3 opens.
 
 ### Design/judge evidence
+- frozen frontend data contract;
 - deployed frontend;
 - judge-path screenshots/replay;
 - TRACE findings when triggered.
@@ -57,8 +59,15 @@ Any of the following blocks convergence:
 
 ## Current convergence status
 
-`PRODUCT_CONTRACT_CONVERGED — PRD_V0_1_HUMAN_LOCK_PASS — IMPLEMENTATION_T0_OPEN`
+`PRODUCT_CONTRACT_CONVERGED — PRD_V0_1_HUMAN_LOCK_PASS — T0_CLOSED_PASS — T1_DETERMINISTIC_POLICY_PASS — T2_OPEN_NEXT`
 
-This is **not** a build-complete or terminal convergence claim. It only certifies that the approved product source and derived execution artifacts agree sufficiently to open T0.
+Evidence basis:
+- real paid Telegraph T0 evidence: `evidence/t0-real-telegraph/attempt-008/`;
+- T0 challenged-case relevance: `lodash@4.17.20` → `CVE-2020-28500` → `BLOCKING`;
+- deterministic policy: `src/policy.mjs`;
+- policy tests: `tests/policy.test.mjs`, 10/10 locally validated;
+- frontend contract: `docs/FRONTEND_DATA_CONTRACT.md`.
 
-Next convergence checkpoint: after `SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE` closes and its discoveries are classified.
+This is **not** a build-complete or terminal convergence claim. T2/T3/T4, TRACE, deployment, Project Finisher and protected final submission remain open.
+
+Next convergence checkpoint: after `SKEPTARA_T2_INDEPENDENT_AUDITOR_PASS`.
