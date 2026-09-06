@@ -1,6 +1,6 @@
 # Skeptara T2 Independent Auditor Contract
 
-Status: **IMPLEMENTED — local live verification pending**
+Status: **IMPLEMENTED v0.2 — live retry required after evidence-quality remediation**
 Date: 2026-09-06
 
 ## Purpose
@@ -16,13 +16,14 @@ T2 turns the successful T0 Telegraph spike into a reusable independent counter-e
 
 ## Planning
 
-The auditor discovers live intents and selects only supported evidence paths. Dependency-change preference order is:
+The auditor discovers live intents and selects only supported evidence paths. For generic dependency package/version actions, current preference order is:
 
-1. `CVE_LOOKUP`
-2. `FACT_CHECK`
-3. `WEB_SEARCH`
-4. `NEWS_SEARCH`
-5. `URL_SCAN`
+1. `FACT_CHECK`
+2. `WEB_SEARCH`
+3. `NEWS_SEARCH`
+4. `URL_SCAN`
+
+Direct `CVE_LOOKUP` is not planned for a generic package/version action without an explicit CVE identifier because live T2 evidence showed the selected `/cve` miner can require a CVE ID. If Telegraph actually returns `CVE_LOOKUP`, Skeptara records that actual intent truthfully.
 
 The plan contains a stable `plan_fingerprint`, required path count, per-path budget and counter-evidence query derived from canonical action facts only.
 
@@ -38,15 +39,19 @@ T1 caps remain authoritative:
 
 Each live path performs an unsigned x402 quote check before payment. A quote outside Base Sepolia or above the remaining/per-path cap is rejected fail-closed.
 
+A successful paid response counts toward spend immediately. It counts toward required evidence coverage only if the investigation itself completed meaningfully. Missing/invalid required input, an endpoint refusing the requested investigation, or equivalent incomplete-path evidence cannot count as clean coverage.
+
 ## Stopping rule
 
 Material `BLOCKING` counter-evidence stops the challenge immediately and returns BLOCK. This is asymmetric: proof against execution does not require spending the remaining budget.
 
-A clean PASS candidate must complete all mandatory coverage. Missing capability, payment/runtime failure, budget exhaustion before required coverage, or critical ambiguity cannot PASS.
+A clean PASS candidate must complete all mandatory coverage. Missing capability, invalid/incomplete evidence path, payment/runtime failure, budget exhaustion before required coverage, or critical ambiguity cannot PASS.
 
 ## Evidence normalization
 
 For dependency CVE evidence, Skeptara may classify `BLOCKING` when the returned target version can be machine-checked as inside an explicitly reported affected range. A known CVE with an unparseable/ambiguous range is not silently treated as clean; it remains AMBIGUOUS and critical for MEDIUM/HIGH.
+
+Results that explicitly report missing/invalid required input are normalized as `INCOMPLETE_EVIDENCE_PATH`, `materiality: AMBIGUOUS`, `critical: true`, `coverage_complete: false`.
 
 Protocol-exposed provenance remains distinct from miner-reported source labels.
 
@@ -60,14 +65,20 @@ Protocol-exposed provenance remains distinct from miner-reported source labels.
 
 The private key is never accepted as an auditor domain input and must not enter persisted challenge output.
 
+## Live run 001 review
+
+The first clean MEDIUM live run reported `PASS`, but evidence review rejected that promotion because its `CVE_LOOKUP` path said the request was invalid and the lookup could not be completed. The old normalizer counted that paid response as clean coverage. That defect is fixed in auditor v0.2.
+
+Evidence: `evidence/t2/live-clean-run-001/REVIEW.md`.
+
 ## T2 pass criteria
 
 Before `SKEPTARA_T2_INDEPENDENT_AUDITOR_PASS` can close:
 
-1. all deterministic T1 + T2 tests pass locally;
-2. T0 challenged-case evidence replays to BLOCK under the T2 normalization/gate semantics;
+1. all deterministic T1 + T2 tests pass locally after v0.2 remediation;
+2. T0 challenged-case evidence remains compatible with BLOCK semantics;
 3. live capability discovery yields enough supported paths for the selected clean MEDIUM case;
-4. one live clean MEDIUM audit completes its required coverage within 20000 atomic USDC and produces a non-ESCALATE result consistent with the actual evidence;
+4. one live clean MEDIUM retry completes meaningful required coverage within 20000 atomic USDC and produces a non-ESCALATE result consistent with the actual evidence;
 5. sanitized challenge record is reviewed and persisted durably.
 
 T2 does not authorize GitHub merge. T3 remains the protected execution gate.
