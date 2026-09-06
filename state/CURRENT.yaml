@@ -1,13 +1,13 @@
 canonical_state:
   protocol_version: 1
   system: SKEPTARA_TELEGRAPH_TRACK3
-  version: 0.2.0-prd-locked-t0-open
+  version: 0.2.1-t0-preflight-local-proof-pending
   date: 2026-09-06
   source_of_truth: GITHUB
   repository: Faadil1/Faadil1-skeptara-telegraph
   branch: main
 
-  lifecycle_status: PRD_V0_1_HUMAN_LOCK_PASS__SPEC_KIT_RECONCILED__T0_REAL_TELEGRAPH_CHALLENGE_OPEN
+  lifecycle_status: PRD_V0_1_HUMAN_LOCK_PASS__SPEC_KIT_RECONCILED__T0_PREFLIGHT_READY__LOCAL_REAL_TELEGRAPH_PROOF_PENDING
 
   authority:
     project_go: HUMAN_GO_RECEIVED
@@ -110,6 +110,16 @@ canonical_state:
         - spec-kit/plan.md
         - spec-kit/tasks.md
         - spec-kit/convergence.md
+    - id: SKEPTARA_T0_PREFLIGHT
+      status: PASS_PREFLIGHT_ONLY
+      date: 2026-09-06
+      result: OFFICIAL_ROUTE_BASELINED__HARNESS_COMMITTED__CHAT_RUNTIME_CONNECTION_REFUSED__LOCAL_PROOF_REQUIRED
+      evidence:
+        - evidence/t0-real-telegraph/PREFLIGHT.md
+        - scripts/t0-real-telegraph.mjs
+        - package.json
+        - .env.example
+        - .gitignore
 
   product_source:
     status: PRD_READY
@@ -145,7 +155,7 @@ canonical_state:
   build_gates:
     prd_v0_1_human_lock: PASS
     spec_plan_tasks_ready: PASS_RECONCILED
-    t0_real_telegraph_challenge: OPEN
+    t0_real_telegraph_challenge: OPEN_LOCAL_REAL_PROOF_PENDING
     t1_deterministic_risk_scorer: NOT_STARTED
     t2_independent_auditor: NOT_STARTED
     t3_fail_closed_merge_gate: NOT_STARTED
@@ -158,19 +168,33 @@ canonical_state:
     benita_message_sent: false
     benita_scope_locked: DRAFTED_IN_PLAN_NOT_RELEASED
     release_condition: FRONTEND_DATA_CONTRACT_READY
-    reason: PRD_IS_LOCKED_BUT_FRONTEND_DATA_CONTRACT_MUST_STABILIZE_BEFORE_DEEP_UI_HANDOFF
+    reason: PRD_IS_LOCKED_BUT_FRONTEND_DATA_CONTRACT_MUST_STABILIZE_AFTER_T0_REAL_METADATA_DISCOVERY
 
   t0_contract:
     gate: SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE
-    status: OPEN
-    required_proof:
-      - discover live relevant Telegraph intents/miners
-      - confirm current Telegraph Engine/MCP route
-      - execute at least one genuine paid challenge call
-      - capture only actually exposed intent/miner/cost/provenance fields
-      - normalize one real EvidenceItem
-      - prove payment/source failure is fail-closed
-      - persist evidence under evidence/t0-real-telegraph/
+    status: OPEN_LOCAL_REAL_PROOF_PENDING
+    official_route_baseline:
+      source: telegraphprotocol/telegraph-mcp/README.md
+      node_url: http://13.237.89.59:7044
+      engine_url: http://13.237.89.59:8080
+      daemon_url: http://13.237.89.59:8081
+      free_discovery: GET_/v1/subnets
+      paid_inference: POST_/v1/ask
+    orchestrator_probe:
+      result: CONNECTION_REFUSED
+      interpretation: NOT_CONCLUSIVE_GLOBAL_OUTAGE
+      evidence: evidence/t0-real-telegraph/PREFLIGHT.md
+    harness:
+      path: scripts/t0-real-telegraph.mjs
+      command: npm_install_THEN_npm_run_t0
+      evidence_output: evidence/t0-real-telegraph/runtime/<timestamp>/
+    required_proof_remaining:
+      - reachable live Telegraph discovery from approved local/server runtime
+      - one genuine paid challenge call using local/server-only burner wallet
+      - actual returned miner/intent/cost/provenance fields captured without fabrication
+      - one normalized real EvidenceItem
+      - negative-path fail-closed evidence
+      - evidence persisted and reviewed
     stop_rule: >-
       If live Telegraph capabilities cannot support the dependency/security challenge quickly, classify the discovery. If it materially changes the hero vertical or mechanism, revise the living PRD with human approval before continuing. Do not substitute mocks for submission-path evidence.
 
@@ -188,6 +212,6 @@ canonical_state:
     repository_truth_outranks_chat_memory: true
 
   exact_next_gate: SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE
-  exact_next_owner: CHATGPT_ORCHESTRATOR_PLUS_HUMAN_LOCAL_SECRET_BOUNDARY
+  exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_REVIEW
   exact_next_action: >-
-    Execute the bounded T0 Telegraph spike: discover current live intents/miners and the working Engine/MCP route, then use a local/server-only burner wallet to perform one genuine paid challenge call without exposing the key to Git, browser code, or chat. Capture only real returned metadata, normalize one EvidenceItem, exercise a payment/source failure path as fail-closed, persist evidence, classify discoveries, and update CURRENT + HANDOVER before claiming T0 PASS.
+    On a personal/approved machine clone or pull the repo, run npm install, set TELEGRAPH_EVM_PRIVATE_KEY only in the local environment for a burner wallet and optionally set TELEGRAPH_ENGINE_URL/EVM_NETWORK, then run npm run t0. Do not paste the key into chat. Return or push only the sanitized runtime evidence/output. ChatGPT will inspect the evidence, classify any Telegraph capability discovery, update CURRENT + HANDOVER, and only then declare T0 PASS or fail/pivot.
