@@ -46,26 +46,22 @@ Status: DERIVED READY — subordinate to living PRD v0.1.
 - [x] T2.13 Bind live clean run to real GitHub PR #1, head `73cf5bdd69163924228e3e21d67fa9f405d99904`.
 - [x] T2.14 Real clean dependency PR created: isolated `lodash 4.17.20 -> 4.17.21`; merge not authorized.
 - [x] T2.15 Run first live clean MEDIUM audit through hardened launcher.
-  - paid calls: 2
-  - spend: `20000/20000` atomic USDC
-  - runtime-reported coverage: `2/2`
-  - runtime-reported outcome: `PASS`
 - [x] T2.16 Review live run 001 evidence. **Runtime PASS rejected.**
-  - `CVE_LOOKUP` miner explicitly reported that the lookup could not be completed because the request was invalid and lacked a CVE identifier.
-  - v0.1 incorrectly converted `found:false/not_found` into `NONE` before checking path validity.
-  - correct fail-closed interpretation: mandatory coverage incomplete → `ESCALATE`.
-  - evidence: `evidence/t2/live-clean-run-001/REVIEW.md`.
+  - paid `CVE_LOOKUP` path did not perform a valid investigation;
+  - mandatory coverage was therefore incomplete;
+  - correct fail-closed interpretation: `ESCALATE`.
 - [x] T2.17 Implement auditor v0.2 remediation.
   - paid response is not automatically completed coverage;
   - invalid/missing required input → `EVIDENCE_PATH_INPUT_INVALID`, `critical:true`, `coverage_complete:false`;
   - incomplete paths do not increment coverage;
-  - generic dependency planning no longer selects direct `CVE_LOOKUP` without an explicit CVE identifier;
+  - generic dependency planning no longer selects direct `CVE_LOOKUP` without explicit CVE ID;
   - dependency preference: `FACT_CHECK`, `WEB_SEARCH`, `NEWS_SEARCH`, `URL_SCAN`.
 - [x] T2.18 Add regression tests for invalid paid evidence path and revised planning.
-- [ ] T2.19 Pull auditor v0.2 and run full repository `npm test` on user machine. Expected total: **21 tests** (11 auditor + 10 policy) if no other test count changes.
-- [ ] T2.20 Run bounded live clean MEDIUM retry 002 against unchanged PR #1 head if it remains exact.
-- [ ] T2.21 Review actual retry evidence/coverage/spend/outcome and persist sanitized final record.
-- [ ] T2.22 Promote `SKEPTARA_T2_INDEPENDENT_AUDITOR_PASS` only if retry completes meaningful required coverage and the real evidence justifies PASS.
+- [x] T2.19 Pull auditor v0.2 and run full repository `npm test` on user machine: **21/21 PASS, 0 fail**. *(`evidence/t2/LOCAL-USER-VALIDATION-V0.2-21-OF-21.md`)*
+- [x] T2.20 Re-verify PR #1 before retry 002: open, unmerged, mergeable, exact head `73cf5bdd69163924228e3e21d67fa9f405d99904`.
+- [ ] T2.21 Run bounded live clean MEDIUM retry 002 against unchanged PR #1 head; maximum `20000` atomic USDC.
+- [ ] T2.22 Review actual retry intents, meaningful coverage, raw findings, spend and outcome; persist sanitized final record.
+- [ ] T2.23 Promote `SKEPTARA_T2_INDEPENDENT_AUDITOR_PASS` only if retry completes meaningful required coverage and real evidence justifies PASS.
 
 ## T3 — Protected merge gate
 
@@ -83,7 +79,7 @@ Status: DERIVED READY — subordinate to living PRD v0.1.
 
 - [x] T4.1 create/select clean dependency PR. *(PR #1)*
 - [ ] T4.2 create/select challengeable dependency PR.
-- [ ] T4.3 real clean-case proof remains pending because live run 001 PASS was rejected on evidence review.
+- [ ] T4.3 real clean-case proof remains pending until retry 002 passes evidence review.
 - [x] T4.4 real Telegraph challenged evidence anchor exists from T0 for `lodash@4.17.20`; dedicated challenged PR still required.
 - [ ] T4.5 execute bounded real merge only for fresh PASS case if explicitly authorized.
 - [ ] T4.6 prove challenged case cannot merge.
@@ -125,6 +121,6 @@ After every passed/failed major gate:
 
 ## Reconciliation record
 
-Live run 001 was valuable precisely because evidence review caught a false-positive PASS in auditor v0.1. The paid CVE path did not perform a valid investigation; therefore it cannot count toward mandatory coverage. This is an `execution_detail` defect, not a product-intent change. Auditor v0.2 now fails closed on incomplete paid evidence paths and avoids generic direct CVE_LOOKUP planning without an explicit CVE identifier.
+Live run 001 caught a false-positive PASS and triggered auditor v0.2 fail-closed remediation. The user's real clone now passes **21/21** tests with both regression cases green, and PR #1 has been reverified unchanged at the exact bound head SHA. This is still an `execution_detail` change; PRD v0.1 remains product authority and unchanged.
 
-Exact next gate: `SKEPTARA_T2_V0_2_LOCAL_TEST_AND_LIVE_RETRY_002`.
+Exact next gate: `SKEPTARA_T2_V0_2_LIVE_CLEAN_RETRY_002`.
