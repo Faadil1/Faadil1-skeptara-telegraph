@@ -1,0 +1,17 @@
+{
+  "name": "skeptara-telegraph",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "t0": "node scripts/t0-real-telegraph.mjs"
+  },
+  "dependencies": {
+    "@x402/evm": "^2.11.0",
+    "@x402/fetch": "^2.11.0",
+    "viem": "^2.21.0"
+  }
+}
