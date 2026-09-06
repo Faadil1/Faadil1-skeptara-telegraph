@@ -9,8 +9,8 @@ handover:
   resume_rule: >-
     Read state/CURRENT.yaml first, then this HANDOVER, then product/PRD.md. The living PRD is canonical product intent; Spec Kit files are derived execution contracts. Repository truth outranks chat/runtime memory. After every major gate persist evidence and update BOTH CURRENT and HANDOVER.
 
-  current_milestone: T0_CLOSED_PASS__T1_PASS__T2_LIVE_RUN_001_PASS_REJECTED__AUDITOR_V0_2_REMEDIATED__LOCAL_TEST_AND_LIVE_RETRY_NEXT
-  lifecycle_status: PRODUCT_CONTRACT_LOCKED__REAL_TELEGRAPH_PROVEN__DETERMINISTIC_POLICY_PROVEN__T2_FALSE_PASS_CAUGHT_BY_EVIDENCE_REVIEW__FAIL_CLOSED_REMEDIATION_IMPLEMENTED
+  current_milestone: T0_CLOSED_PASS__T1_PASS__T2_RUN_001_PASS_REJECTED__AUDITOR_V0_2_REMEDIATED__USER_TEST_21_OF_21_PASS__PR_1_REVERIFIED__LIVE_RETRY_002_NEXT
+  lifecycle_status: PRODUCT_CONTRACT_LOCKED__REAL_TELEGRAPH_PROVEN__DETERMINISTIC_POLICY_PROVEN__FALSE_PASS_CAUGHT_AND_REMEDIATED__V0_2_LOCAL_GATE_PASS__LIVE_RETRY_OPEN
 
   project:
     public_name: Skeptara
@@ -40,10 +40,11 @@ handover:
 
   t2_current:
     gate: SKEPTARA_T2_INDEPENDENT_AUDITOR_PASS
-    status: V0_2_REMEDIATED_LOCAL_TEST_AND_LIVE_RETRY_REQUIRED
+    status: V0_2_LOCAL_VALIDATION_PASS__LIVE_RETRY_002_REQUIRED
     auditor_version: skeptara-auditor-v0.2
     contract: docs/T2_AUDITOR_CONTRACT.md
     review_evidence: evidence/t2/live-clean-run-001/REVIEW.md
+    v0_2_local_evidence: evidence/t2/LOCAL-USER-VALIDATION-V0.2-21-OF-21.md
     clean_case_binding:
       repository: Faadil1/Faadil1-skeptara-telegraph
       pr_number: 1
@@ -52,51 +53,36 @@ handover:
       dependency_change: lodash_4_17_20_TO_4_17_21
       merge_authorized: false
     live_run_001:
-      risk_tier: MEDIUM
-      paid_calls: 2
-      spend_atomic: 20000
       runtime_reported_outcome: PASS
       accepted_after_review: false
       corrected_outcome: ESCALATE
-      cve_path:
-        actual_intent: CVE_LOOKUP
-        result_found: false
-        missing: valid request input
-        raw_reason_summary: lookup could not be completed because the request was invalid and required a CVE identifier
-        v0_1_wrong_materiality: NONE
-        v0_2_correct_materiality: AMBIGUOUS
-        v0_2_critical: true
-        v0_2_coverage_complete: false
-      fact_check_path:
-        actual_intent: FACT_CHECK
-        verdict: unverified
-        confidence: 0.2
-        evidence: null
-        materiality: AMBIGUOUS
-        critical: false
+      defect: invalid paid CVE path was incorrectly counted as completed coverage
     remediation_v0_2:
       - paid response contributes spend but not automatically coverage
       - invalid/missing evidence-path input becomes incomplete critical ambiguity
       - incomplete paths do not increment completed coverage
-      - generic package-version audits avoid direct CVE_LOOKUP planning without an explicit CVE identifier
-      - dependency intent preference is FACT_CHECK, WEB_SEARCH, NEWS_SEARCH, URL_SCAN
-      - regression tests added for live-run-001 defect
+      - generic package-version audits avoid direct CVE_LOOKUP without explicit CVE identifier
+      - generic dependency preference is FACT_CHECK, WEB_SEARCH, NEWS_SEARCH, URL_SCAN
+    validation_v0_2:
+      user_machine_full_repo: 21_OF_21_PASS__0_FAIL
+      invalid_input_fail_closed_regression: PASS
+      paid_invalid_path_no_coverage_regression: PASS
+      pr_1_reverified_open: true
+      pr_1_reverified_unmerged: true
+      pr_1_reverified_mergeable: true
+      pr_1_reverified_head_sha: 73cf5bdd69163924228e3e21d67fa9f405d99904
     remaining_before_pass:
-      - user git pull
-      - full npm test on auditor v0.2
-      - expected test count 21 if no unrelated test-count change
-      - verify PR #1 exact head unchanged
-      - live clean MEDIUM retry 002 through hardened clipboard launcher
-      - review retry evidence/meaningful coverage/spend/outcome
-      - persist sanitized final record
+      - bounded live clean MEDIUM retry 002 through hardened clipboard launcher
+      - review actual returned intents and meaningful coverage
+      - review raw evidence/materiality/spend/outcome
+      - persist sanitized retry record durably
       - only then close T2 if justified
 
   frontend_parallel:
     contract: docs/FRONTEND_DATA_CONTRACT.md
     branch: feat/frontend-benita
     release_condition: SATISFIED
-    branch_unique_commits_at_last_check: 0
-    sync_policy: safe fast-forward while branch has no collaborator commits; once Benita commits, reconcile normally and never force-move her work.
+    sync_policy: safe fast-forward only while Benita has no unique commits; once she commits, reconcile normally and never force-move her work.
 
   security:
     prior_burner: COMPROMISED_DO_NOT_REUSE_OR_FUND
@@ -111,7 +97,7 @@ handover:
     - SKEPTARA_BUILD_CANDIDATE_READY
     - HUMAN_PROTECTED_FINAL_SUBMISSION
 
-  exact_next_gate: SKEPTARA_T2_V0_2_LOCAL_TEST_AND_LIVE_RETRY_002
+  exact_next_gate: SKEPTARA_T2_V0_2_LIVE_CLEAN_RETRY_002
   exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_REVIEW
   exact_next_action: >-
-    Pull main and run npm test. Do not run a paid retry unless the v0.2 suite passes. Then confirm PR #1 still points to exact head 73cf5bdd69163924228e3e21d67fa9f405d99904 and run scripts/t2-from-clipboard.ps1. Return terminal output and the new sanitized 02-audit-result.json. Never merge PR #1 before T3 and never force a PASS.
+    Run powershell -ExecutionPolicy Bypass -File .\scripts\t2-from-clipboard.ps1 with the fresh Base Sepolia burner. The retry remains bound to PR #1 exact head 73cf5bdd69163924228e3e21d67fa9f405d99904, MEDIUM risk, two meaningful evidence paths, maximum 20000 atomic USDC. Return terminal output and the sanitized 02-audit-result.json. Never merge PR #1 before T3 and never force a PASS.
