@@ -41,7 +41,7 @@ Status: DERIVED READY — subordinate to living PRD v0.1.
 - [x] T0.23 Obtain genuine x402-paid Telegraph inference success.
 - [x] T0.24 Confirm settlement success `true` and retain fail-closed negative path.
 - [x] T0.25 Review Attempt 008 paid result/provenance.
-- [x] T0.26 Review/normalize materiality: `lodash@4.17.20` is inside the miner-reported and independently NVD-confirmed affected range for `CVE-2020-28500`; challenged-case materiality = `BLOCKING`.
+- [x] T0.26 Review/normalize materiality for `lodash@4.17.20` / `CVE-2020-28500` to `BLOCKING`.
 - [x] T0.27 Persist sanitized successful runtime evidence durably in `evidence/t0-real-telegraph/attempt-008/`.
 - [x] T0.28 Promote `SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE` to `CLOSED_PASS`.
 
@@ -58,19 +58,26 @@ Status: DERIVED READY — subordinate to living PRD v0.1.
 - [x] T1.9 test material `BLOCKING` counter-evidence always BLOCKS.
 - [x] T1.10 test clean MEDIUM completed challenge can PASS.
 
-Test command: `npm test` / `npm run test:policy`.
-
-Local pre-commit-equivalent validation of the exact policy/test code: **10/10 Node tests PASS**.
+Local validation: **10/10 Node policy tests PASS**.
 
 ## T2 — Independent auditor
 
-- [ ] T2.1 Telegraph adapter from T0 proven path.
-- [ ] T2.2 independent auditor input contract.
-- [ ] T2.3 exclude constructor persuasive rationale.
-- [ ] T2.4 evidence-path planner constrained by risk contract.
-- [ ] T2.5 bounded spend tracker.
-- [ ] T2.6 finding normalization.
-- [ ] T2.7 persist challenge record/evidence refs.
+- [x] T2.1 Implement Telegraph adapter from the proven T0 x402 path. *(`src/telegraph-client.mjs`)*
+- [x] T2.2 Define independent auditor input contract: canonical action facts + deterministic T1 risk only. *(`src/auditor.mjs`)*
+- [x] T2.3 Exclude constructor persuasive rationale from auditor query construction.
+- [x] T2.4 Implement live-capability-aware evidence-path planner constrained by T1 risk contract.
+- [x] T2.5 Implement bounded per-path/total spend tracking and fail-closed quote rejection.
+- [x] T2.6 Implement evidence normalization including machine-checkable CVE affected-range handling.
+- [x] T2.7 Implement replayable ChallengeResult with plan fingerprint, coverage, spend, evidence, reason codes and expiry.
+- [x] T2.8 Implement asymmetric stopping: `BLOCKING` evidence may stop early; PASS still requires full mandatory coverage.
+- [x] T2.9 Add secure local T2 runtime launcher. *(`scripts/t2-from-clipboard.ps1`, `scripts/t2-live-audit.mjs`)*
+- [x] T2.10 Add deterministic auditor tests: **9/9 PASS** in pre-commit-equivalent local validation. *(`tests/auditor.test.mjs`)*
+- [x] T2.11 Persist T2 contract/implementation validation. *(`docs/T2_AUDITOR_CONTRACT.md`, `evidence/t2/OFFLINE-IMPLEMENTATION-VALIDATION.md`)*
+- [ ] T2.12 Pull main and run full repository `npm test` on the user machine.
+- [ ] T2.13 Bind the clean live T2 run to a truthful controlled GitHub action snapshot (real repo/PR/head SHA; no synthetic live evidence).
+- [ ] T2.14 Run one live clean MEDIUM audit through the hardened launcher; expected budget ceiling `20000` atomic USDC.
+- [ ] T2.15 Review and durably persist sanitized live T2 challenge record.
+- [ ] T2.16 Promote `SKEPTARA_T2_INDEPENDENT_AUDITOR_PASS` only if the live result satisfies the actual evidence/gate rules; do not force PASS if Telegraph finds counter-evidence or coverage is incomplete.
 
 ## T3 — Protected merge gate
 
@@ -129,6 +136,6 @@ After every passed/failed major gate:
 
 ## Reconciliation record
 
-Attempt 008 closed T0 with a genuine Base Sepolia x402 paid Telegraph call routed to `CVE_LOOKUP` / miner `20260828`, settlement success, cost `$0.01`, signal hash, and real vulnerability evidence for `lodash@4.17.20`. Evidence review confirmed direct hero-vertical relevance and normalized the challenged-case finding to `BLOCKING`. T0 is `CLOSED_PASS`.
+T0 is `CLOSED_PASS` with real paid `CVE_LOOKUP` evidence and T1 is `PASS` with deterministic fail-closed policy. T2 core implementation is now complete offline: live capability discovery, bounded x402 adapter, counter-evidence planner, constructor/auditor context separation, spend/coverage accounting, evidence normalization, asymmetric BLOCK stop, ChallengeResult persistence shape, and 9/9 auditor tests. Product intent is unchanged (`execution_detail`).
 
-T1 deterministic policy is implemented and locally validated 10/10: stable action fingerprinting, deterministic LOW/MEDIUM/HIGH risk, T0-derived spend caps, and fail-closed PASS/BLOCK/ESCALATE semantics. Frontend contract is frozen and `feat/frontend-benita` has been created. Exact next gate: `SKEPTARA_T2_INDEPENDENT_AUDITOR_PASS`.
+Exact next gate: `SKEPTARA_T2_LOCAL_FULL_TEST_AND_LIVE_CLEAN_AUDIT`.
