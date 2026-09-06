@@ -1,13 +1,13 @@
 canonical_state:
   protocol_version: 1
   system: SKEPTARA_TELEGRAPH_TRACK3
-  version: 0.2.3-t0-attempt-002-key-format-remediated
+  version: 0.2.4-t0-attempt-003-clipboard-remediated
   date: 2026-09-06
   source_of_truth: GITHUB
   repository: Faadil1/Faadil1-skeptara-telegraph
   branch: main
 
-  lifecycle_status: PRD_V0_1_LOCKED__SPEC_KIT_RECONCILED__T0_ACTIVE__LIVE_DISCOVERY_CONFIRMED__LOCAL_KEY_FORMAT_BLOCK_REMEDIATED__RETRY_003_REQUIRED
+  lifecycle_status: PRD_V0_1_LOCKED__SPEC_KIT_RECONCILED__T0_ACTIVE__LIVE_DISCOVERY_CONFIRMED__CLIPBOARD_SECRET_INJECTION_BLOCK_REMEDIATED__RETRY_004_REQUIRED
 
   authority:
     project_go: HUMAN_GO_RECEIVED
@@ -80,17 +80,29 @@ canonical_state:
       date: 2026-09-06
       result: DEVNODE_HTTPS_ROUTE_APPLIED
     - id: SKEPTARA_T0_ATTEMPT_002
-      status: FAIL_CLOSED_REMEDIATED_PENDING_RETRY
+      status: FAIL_CLOSED_REMEDIATED
       date: 2026-09-06
       result: LIVE_FREE_DISCOVERY_PASS__PAID_CALL_NOT_ATTEMPTED__LOCAL_PRIVATE_KEY_FORMAT_INVALID__NEGATIVE_PATH_PASS
       discovery_class: execution_detail
       product_change_required: false
       evidence: evidence/t0-real-telegraph/ATTEMPT-002-DISCOVERY-PASS-KEY-FORMAT-BLOCK.md
     - id: SKEPTARA_T0_KEY_INPUT_REMEDIATION_001
+      status: PASS
+      date: 2026-09-06
+      result: ACCEPT_64_HEX_WITH_OR_WITHOUT_0X__SAFE_LENGTH_DIAGNOSTIC
+      evidence: scripts/t0-real-telegraph.mjs
+    - id: SKEPTARA_T0_ATTEMPT_003
+      status: FAIL_CLOSED_REMEDIATED
+      date: 2026-09-06
+      result: LIVE_FREE_DISCOVERY_PASS__LOCAL_SECRET_VALUE_LENGTH_794__PAID_CALL_NOT_ATTEMPTED__NEGATIVE_PATH_PASS
+      discovery_class: execution_detail
+      product_change_required: false
+      evidence: evidence/t0-real-telegraph/ATTEMPT-003-CLIPBOARD-INJECTION-BLOCK.md
+    - id: SKEPTARA_T0_CLIPBOARD_LAUNCHER_REMEDIATION_001
       status: PASS_CODE_REMEDIATED_PENDING_LOCAL_RETRY
       date: 2026-09-06
-      result: ACCEPT_64_HEX_WITH_OR_WITHOUT_0X__TRIM_WHITESPACE__STRIP_SURROUNDING_QUOTES__SAFE_LENGTH_DIAGNOSTIC
-      evidence: scripts/t0-real-telegraph.mjs
+      result: WAIT_THEN_COPY_SECRET__VALIDATE_LOCALLY__CLEAR_CLIPBOARD__LOCAL_PROCESS_ONLY
+      evidence: scripts/t0-from-clipboard.ps1
 
   t0_contract:
     gate: SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE
@@ -103,7 +115,6 @@ canonical_state:
       payment_network: Base_Sepolia_eip155_84532
       payment_asset: USDC
     attempt_002:
-      runtime: HUMAN_PERSONAL_WINDOWS_MACHINE
       free_discovery: PASS
       route_reachability: PROVEN_LOCAL
       sampled_relevant_intents:
@@ -111,20 +122,25 @@ canonical_state:
         - NEWS_HEADLINES
         - URL_SCAN
       paid_inference_attempted: false
-      block_reason: LOCAL_BURNER_PRIVATE_KEY_FORMAT_INVALID
+      negative_source_unavailable_semantics: PASS_ESCALATE
+    attempt_003:
+      runtime: HUMAN_PERSONAL_WINDOWS_MACHINE
+      free_discovery: PASS
+      local_value_trimmed_length: 794
+      valid_evm_private_key_format: false
+      paid_inference_attempted: false
       negative_source_unavailable_semantics: PASS_ESCALATE
       classification: execution_detail
-      evidence: evidence/t0-real-telegraph/ATTEMPT-002-DISCOVERY-PASS-KEY-FORMAT-BLOCK.md
-    key_input_remediation:
-      script: scripts/t0-real-telegraph.mjs
+      evidence: evidence/t0-real-telegraph/ATTEMPT-003-CLIPBOARD-INJECTION-BLOCK.md
+    clipboard_launcher:
+      path: scripts/t0-from-clipboard.ps1
       status: COMMITTED
-      accepted_local_forms:
-        - 64_HEX_WITHOUT_PREFIX
-        - 0x_PLUS_64_HEX
-        - ABOVE_WITH_SURROUNDING_SINGLE_OR_DOUBLE_QUOTES
-      invalid_input_diagnostic: TRIMMED_LENGTH_ONLY_NO_SECRET_VALUE
+      operating_rule: PASTE_LAUNCHER_FIRST__COPY_PRIVATE_KEY_ONLY_WHEN_PROMPTED__PRESS_ENTER__NEVER_PASTE_SECRET_IN_TERMINAL
+      secret_value_logged: false
+      clipboard_cleared_after_read: true
+      environment_variable_removed_after_run: true
     required_proof_remaining:
-      - correct exported burner EVM private key loaded locally
+      - correct exported burner EVM private key passes local format validation
       - at least one genuine x402-paid Telegraph challenge succeeds
       - actual exposed miner_intent_cost_signal_hash_or_other_metadata is captured without fabrication
       - one normalized real EvidenceItem is produced
@@ -168,7 +184,7 @@ canonical_state:
       - spec-kit/tasks.md
       - docs/ARCHITECTURE.md
 
-  exact_next_gate: SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE_RETRY_003
+  exact_next_gate: SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE_RETRY_004
   exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_REVIEW
   exact_next_action: >-
-    Pull main. Export the actual private key of the burner EVM account locally; do not use the wallet password, public address, or seed phrase. The remediated harness accepts 64 hex characters with or without 0x and strips whitespace/quotes locally. Inject the key into the current PowerShell process, run npm run t0, and return only sanitized terminal output/evidence. Do not start T1 or Benita deep UI work until T0 is reviewed.
+    Git pull. Run PowerShell helper scripts/t0-from-clipboard.ps1. When the helper pauses, switch to the burner wallet and copy ONLY the exported EVM private key, return to PowerShell, and press Enter without pasting the key. The helper validates locally, clears the clipboard, injects the secret only into the local process, runs npm run t0, and removes the environment variable afterward. Return only sanitized terminal output/evidence. Do not start T1 or Benita deep UI work until T0 is reviewed.
