@@ -15,14 +15,16 @@ Status: DERIVED READY — subordinate to living PRD v0.1.
 
 ## T0 — Real Telegraph challenge
 
-- [ ] T0.1 Discover live relevant intents/miners.
-- [ ] T0.2 Confirm current Telegraph Engine/MCP route.
-- [ ] T0.3 Configure burner wallet secret locally/server-side only.
+- [ ] T0.1 Discover live relevant intents/miners. *(Attempt 001 could not reach the stale route; retry 002 uses current `/api/miners`.)*
+- [x] T0.2 Confirm current Telegraph route from official docs: `https://devnode.telegraphprotocol.com`, discovery `/api/miners`, Engine `/engine/v1/ask`.
+- [x] T0.3 Configure burner wallet secret locally/server-side only. *(Human local process; secret never recorded.)*
 - [ ] T0.4 Execute first real paid Telegraph challenge.
-- [ ] T0.5 Capture actual returned miner/intent/cost/provenance fields.
+- [ ] T0.5 Capture actual returned miner/intent/cost/provenance/signal fields.
 - [ ] T0.6 Normalize one real EvidenceItem.
-- [ ] T0.7 Prove payment/source failure => ESCALATE/BLOCK.
-- [ ] T0.8 Persist T0 evidence and update CURRENT/HANDOVER.
+- [x] T0.7 Prove source-unavailable failure => ESCALATE/BLOCK. *(Attempt 001 negative-path PASS.)*
+- [x] T0.8a Persist Attempt 001 evidence + update CURRENT/HANDOVER.
+- [x] T0.8b Remediate stale route in harness + env template.
+- [ ] T0.9 Run retry 002 on current official devnode route and persist reviewed evidence.
 
 ## T1 — Deterministic policy core
 
@@ -69,9 +71,9 @@ Status: DERIVED READY — subordinate to living PRD v0.1.
 
 ## UX / Benita
 
-- [ ] UX.1 freeze frontend data contract.
+- [ ] UX.1 freeze frontend data contract after T0 real metadata discovery.
 - [ ] UX.2 create Benita branch after contract lock.
-- [ ] UX.3 send concise product brief + repo/branch.
+- [ ] UX.3 send concise locked Skeptara product brief + repo/branch.
 - [ ] UX.4 risk-tier presentation.
 - [ ] UX.5 live challenge-progress presentation.
 - [ ] UX.6 counter-evidence/provenance presentation.
@@ -102,4 +104,4 @@ After every passed/failed major gate:
 
 ## Reconciliation record
 
-`SKEPTARA_PRD_V0_1_HUMAN_LOCK` passed on 2026-09-06. Product/source setup is closed except collaborator/frontend contract release. T0 is now the exact active technical gate.
+`SKEPTARA_PRD_V0_1_HUMAN_LOCK` passed on 2026-09-06. Attempt 001 of T0 failed closed before payment because the harness targeted an older Telegraph route. The current official devnode route has been applied as an execution-detail remediation; product intent is unchanged. Exact next gate: `SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE_RETRY_002`.
