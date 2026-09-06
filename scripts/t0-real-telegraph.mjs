@@ -9,10 +9,27 @@ const baseUrl = (process.env.TELEGRAPH_BASE_URL || "https://devnode.telegraphpro
 const engineUrl = (process.env.TELEGRAPH_ENGINE_URL || `${baseUrl}/engine`).replace(/\/$/, "");
 const discoveryUrl = process.env.TELEGRAPH_DISCOVERY_URL || `${baseUrl}/api/miners`;
 const evmNetwork = process.env.EVM_NETWORK || "eip155:84532";
-const privateKey = process.env.TELEGRAPH_EVM_PRIVATE_KEY;
+const rawPrivateKey = process.env.TELEGRAPH_EVM_PRIVATE_KEY;
 const maxPaymentAtomic = BigInt(process.env.SKEPTARA_T0_MAX_PAYMENT_ATOMIC || "100000"); // 0.10 USDC max per call.
 const query = process.env.SKEPTARA_T0_QUERY ||
   "Find material security evidence that should block merging a dependency change to lodash@4.17.20. Return concrete vulnerabilities or advisories if supported by the available Telegraph intelligence.";
+
+function normalizePrivateKey(value) {
+  if (!value) return null;
+  let normalized = value.trim();
+  if (
+    (normalized.startsWith('"') && normalized.endsWith('"')) ||
+    (normalized.startsWith("'") && normalized.endsWith("'"))
+  ) {
+    normalized = normalized.slice(1, -1).trim();
+  }
+  if (/^[0-9a-fA-F]{64}$/.test(normalized)) {
+    normalized = `0x${normalized}`;
+  }
+  return normalized;
+}
+
+const privateKey = normalizePrivateKey(rawPrivateKey);
 
 if (evmNetwork !== "eip155:84532") {
   throw new Error("T0_NETWORK_GUARD: Skeptara T0 permits Base Sepolia only (eip155:84532).");
@@ -34,10 +51,11 @@ async function writeJson(name, value) {
 }
 
 function assertNoSecretLeak(value) {
-  if (!privateKey) return;
   const serialized = JSON.stringify(value);
-  if (serialized.includes(privateKey)) {
-    throw new Error("SECRET_LEAK_GUARD: private key appeared in evidence payload");
+  for (const candidate of [rawPrivateKey, privateKey]) {
+    if (candidate && serialized.includes(candidate)) {
+      throw new Error("SECRET_LEAK_GUARD: private key appeared in evidence payload");
+    }
   }
 }
 
@@ -55,7 +73,7 @@ const preflight = {
   engine_url: engineUrl,
   payment_network: evmNetwork,
   payment_cap_atomic: maxPaymentAtomic.toString(),
-  route_baseline: "OFFICIAL_DOCS_2026-08-20_PLUS_X402_DOCS_2026-08-13",
+  route_baseline: "CURRENT_DEVNODE_HTTPS",
   checked_at: new Date().toISOString(),
 };
 
@@ -79,10 +97,14 @@ console.log(`[Skeptara T0] discovery URL: ${discoveryUrl}`);
 console.log(`[Skeptara T0] evidence: ${path.join(outDir, "01-free-discovery.json")}`);
 
 if (!preflight.ok) {
-  console.error("T0 cannot proceed to paid inference until the current official discovery route is reachable.");
+  console.error("T0 cannot proceed to paid inference until the current discovery route is reachable.");
   process.exitCode = 2;
 } else if (!privateKey || !/^0x[0-9a-fA-F]{64}$/.test(privateKey)) {
-  console.error("TELEGRAPH_EVM_PRIVATE_KEY is missing or invalid. Configure a burner-wallet key only in your local/server environment; never paste it into chat or commit it.");
+  const rawLength = typeof rawPrivateKey === "string" ? rawPrivateKey.trim().length : 0;
+  console.error(
+    `TELEGRAPH_EVM_PRIVATE_KEY is present but not a valid EVM private key (observed trimmed length: ${rawLength}; expected 64 hex chars, optionally prefixed with 0x). ` +
+    "Use the exported private key of the burner EVM account, not the wallet password, address, or recovery phrase. Never paste the key into chat or commit it.",
+  );
   process.exitCode = 3;
 } else {
   const account = privateKeyToAccount(privateKey);
