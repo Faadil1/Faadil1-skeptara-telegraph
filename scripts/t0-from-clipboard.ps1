@@ -1,36 +1,52 @@
 $ErrorActionPreference = "Stop"
 
 Write-Host "Skeptara T0 secure local launcher"
-Write-Host "1. Leave this PowerShell window open."
-Write-Host "2. NOW switch to your burner wallet and copy ONLY the exported EVM private key."
-Write-Host "3. Return here and press ENTER. Do not paste the key into PowerShell."
-Read-Host "Press ENTER after the burner private key is in the clipboard" | Out-Null
+Write-Host "1. Keep this PowerShell window open."
+Write-Host "2. Switch to the burner wallet and copy ONLY the exported EVM private key."
+Write-Host "3. Do NOT type or paste the key into PowerShell."
+Write-Host "4. This helper will detect a valid key in the clipboard automatically for up to 90 seconds."
+Write-Host ""
+Write-Host "Waiting for a valid EVM private key in the clipboard..." -ForegroundColor Yellow
 
-$raw = [string](Get-Clipboard -Raw)
-$pk = $raw.Trim()
+$raw = $null
+$pk = $null
+$deadline = (Get-Date).AddSeconds(90)
 
-if ($pk.Length -ge 2) {
-    if (($pk.StartsWith('"') -and $pk.EndsWith('"')) -or ($pk.StartsWith("'") -and $pk.EndsWith("'"))) {
-        $pk = $pk.Substring(1, $pk.Length - 2).Trim()
+while ((Get-Date) -lt $deadline) {
+    try {
+        $candidateRaw = [string](Get-Clipboard -Raw)
+        $candidate = $candidateRaw.Trim()
+
+        if ($candidate.Length -ge 2) {
+            if (($candidate.StartsWith('"') -and $candidate.EndsWith('"')) -or ($candidate.StartsWith("'") -and $candidate.EndsWith("'"))) {
+                $candidate = $candidate.Substring(1, $candidate.Length - 2).Trim()
+            }
+        }
+
+        if ($candidate -match '^[0-9a-fA-F]{64}$') {
+            $candidate = "0x$candidate"
+        }
+
+        if ($candidate -match '^0x[0-9a-fA-F]{64}$') {
+            $raw = $candidateRaw
+            $pk = $candidate
+            break
+        }
     }
+    catch {
+        # Clipboard may be temporarily unavailable while another app owns it.
+    }
+
+    Start-Sleep -Milliseconds 500
 }
 
-if ($pk -match '^[0-9a-fA-F]{64}$') {
-    $pk = "0x$pk"
-}
-
-if ($pk -notmatch '^0x[0-9a-fA-F]{64}$') {
-    Write-Host "INVALID private-key format" -ForegroundColor Red
-    Write-Host "Observed trimmed length: $($pk.Length)"
-    Write-Host "Expected: 64 hex characters, or 66 including 0x."
-    Write-Host "Do not use a wallet address, password, recovery phrase, keystore JSON, or copied command block."
-    Set-Clipboard -Value "Skeptara clipboard cleared"
-    $pk = $null
-    $raw = $null
+if (-not $pk) {
+    Write-Host "No valid EVM private key was detected in the clipboard within 90 seconds." -ForegroundColor Red
+    Write-Host "Restart the helper and copy the burner account private key after the waiting message appears."
     exit 3
 }
 
-Write-Host "VALID EVM private-key format. Launching T0 without printing the key." -ForegroundColor Green
+Write-Host "VALID EVM private-key format detected. Launching T0 without printing the key." -ForegroundColor Green
 
 $exitCode = 1
 try {
@@ -43,6 +59,8 @@ finally {
     Remove-Item Env:TELEGRAPH_EVM_PRIVATE_KEY -ErrorAction SilentlyContinue
     $pk = $null
     $raw = $null
+    $candidate = $null
+    $candidateRaw = $null
 }
 
 exit $exitCode
