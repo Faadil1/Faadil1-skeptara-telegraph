@@ -1,6 +1,6 @@
 # Skeptara Convergence Contract
 
-Status: DERIVED DRAFT
+Status: DERIVED READY — reconciled to approved PRD v0.1
 
 Spec Kit convergence is not terminal product completion. It means the derived execution artifacts agree with the current approved living PRD and canonical state.
 
@@ -57,6 +57,8 @@ Any of the following blocks convergence:
 
 ## Current convergence status
 
-`NOT_CONVERGED — PRD_V0_1_HUMAN_LOCK_PENDING`
+`PRODUCT_CONTRACT_CONVERGED — PRD_V0_1_HUMAN_LOCK_PASS — IMPLEMENTATION_T0_OPEN`
 
-Next convergence checkpoint: immediately after human lock of PRD v0.1 and reconciliation of derived artifacts.
+This is **not** a build-complete or terminal convergence claim. It only certifies that the approved product source and derived execution artifacts agree sufficiently to open T0.
+
+Next convergence checkpoint: after `SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE` closes and its discoveries are classified.
