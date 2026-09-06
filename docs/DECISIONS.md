@@ -85,3 +85,15 @@ Status: LOCKED
 Date: 2026-09-06
 
 Reason: T2 discovers current Telegraph capabilities before building a paid plan. If required evidence paths cannot be formed from supported capabilities, the challenge ESCALATEs before spending.
+
+## D-015 — Paid response is not automatically completed evidence coverage
+Status: LOCKED  
+Date: 2026-09-06
+
+Reason: T2 live clean run 001 returned HTTP/payment success for a CVE path whose miner explicitly said the lookup could not be completed because the request lacked a required CVE identifier. A paid call counts toward spend, but it counts toward required coverage only when the evidence path itself completed meaningfully. Invalid/missing required input is fail-closed and cannot become clean evidence.
+
+## D-016 — Generic dependency audits do not plan direct CVE_LOOKUP without an explicit CVE identifier
+Status: LOCKED  
+Date: 2026-09-06
+
+Reason: live Telegraph evidence showed the selected `/cve` miner can require an explicit CVE identifier. Package/version-only actions therefore prefer package-compatible `FACT_CHECK`, `WEB_SEARCH`, `NEWS_SEARCH`, and `URL_SCAN` paths. Skeptara may still record an actual returned `CVE_LOOKUP` intent when Telegraph routes there; planned intent is not claimed intent.
