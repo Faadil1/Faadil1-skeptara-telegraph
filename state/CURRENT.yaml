@@ -1,13 +1,13 @@
 canonical_state:
   protocol_version: 1
   system: SKEPTARA_TELEGRAPH_TRACK3
-  version: 0.2.9-t0-attempt-007-wrong-testnet-funding
+  version: 0.3.0-t0-runtime-success-evidence-review-pending
   date: 2026-09-06
   source_of_truth: GITHUB
   repository: Faadil1/Faadil1-skeptara-telegraph
   branch: main
 
-  lifecycle_status: PRD_V0_1_LOCKED__SPEC_KIT_RECONCILED__T0_ACTIVE__FRESH_BURNER_CREATED__ARC_TESTNET_USDC_FUNDED__BASE_SEPOLIA_BALANCE_STILL_INSUFFICIENT__RETRY_008_REQUIRED
+  lifecycle_status: PRD_V0_1_LOCKED__SPEC_KIT_RECONCILED__T0_REAL_X402_RUNTIME_SUCCESS__EVIDENCE_REVIEW_PENDING
 
   authority:
     product_intent_source: product/PRD.md
@@ -45,32 +45,27 @@ canonical_state:
       result: FINAL_HTTP_402__PAYMENT_RESPONSE_PRESENT
     - id: SKEPTARA_T0_ATTEMPT_006
       status: FAIL_CLOSED_DIAGNOSED
-      date: 2026-09-06
-      result: LIVE_DISCOVERY_PASS__X402_QUOTE_10000_ATOMIC_USDC_BASE_SEPOLIA__SETTLEMENT_INVALID_EXACT_EVM_INSUFFICIENT_BALANCE__NEGATIVE_PATH_PASS
-      discovery_class: execution_detail
-      product_change_required: false
+      result: BASE_SEPOLIA_0_01_USDC_REQUIRED__INSUFFICIENT_BALANCE
       evidence: evidence/t0-real-telegraph/ATTEMPT-006-INSUFFICIENT-BALANCE-AND-KEY-EXPOSURE.md
     - id: SKEPTARA_BURNER_CREDENTIAL_INCIDENT_001
       status: ROTATED
-      date: 2026-09-06
       result: PRIOR_EXPOSED_BURNER_RETIRED__FRESH_BURNER_CREATED
-      repository_secret_recorded: false
-    - id: SKEPTARA_T0_CLIPBOARD_LAUNCHER_HARDENING_002
-      status: PASS
-      date: 2026-09-06
-      result: NO_TERMINAL_INPUT_PROMPT__AUTO_DETECT_VALID_CLIPBOARD_KEY__CLEAR_CLIPBOARD__PROCESS_ONLY_SECRET
-      evidence: scripts/t0-from-clipboard.ps1
     - id: SKEPTARA_T0_ATTEMPT_007
-      status: FAIL_CLOSED_RETRY_REQUIRED
+      status: FAIL_CLOSED_REMEDIATED
+      result: FRESH_BURNER__ARC_TESTNET_FUNDED_BY_MISTAKE__BASE_SEPOLIA_STILL_UNFUNDED
+      evidence: evidence/t0-real-telegraph/ATTEMPT-007-WRONG-TESTNET-FUNDING.md
+    - id: SKEPTARA_T0_ATTEMPT_008
+      status: RUNTIME_PASS_EVIDENCE_REVIEW_PENDING
       date: 2026-09-06
-      result: FRESH_BURNER__HARDENED_LAUNCHER_PASS__20_TEST_USDC_FUNDED_ON_ARC_TESTNET__TELEGRAPH_QUOTE_REQUIRES_BASE_SEPOLIA__SETTLEMENT_INVALID_EXACT_EVM_INSUFFICIENT_BALANCE__NEGATIVE_PATH_PASS
+      result: LIVE_DISCOVERY_PASS__X402_QUOTE_10000_ATOMIC_USDC_BASE_SEPOLIA__REAL_PAID_CHALLENGE_PASS__MINER_20260828__INTENT_CVE_LOOKUP__COST_0_01__SIGNAL_HASH_PRESENT__SETTLEMENT_SUCCESS_TRUE__NEGATIVE_PATH_PASS
       discovery_class: execution_detail
       product_change_required: false
-      evidence: evidence/t0-real-telegraph/ATTEMPT-007-WRONG-TESTNET-FUNDING.md
+      local_runtime_evidence_location: evidence/t0-real-telegraph/runtime/2026-09-06T21-42-53-570Z/
+      durable_summary_evidence: evidence/t0-real-telegraph/ATTEMPT-008-RUNTIME-SUCCESS-PENDING-REVIEW.md
 
   t0_contract:
     gate: SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE
-    status: OPEN_CORRECT_NETWORK_FUNDING_REQUIRED
+    status: RUNTIME_PASS_EVIDENCE_REVIEW_REQUIRED
     route:
       base_url: https://devnode.telegraphprotocol.com
       free_discovery: GET_https://devnode.telegraphprotocol.com/api/miners
@@ -81,40 +76,47 @@ canonical_state:
       proven_asset_family: USDC
       proven_amount_atomic: 10000
       proven_amount_usdc: 0.01
-      max_payment_atomic: 100000
-      settlement_reason_attempt_007: invalid_exact_evm_insufficient_balance
+      settlement_success_attempt_008: true
+    attempt_008:
+      runtime: HUMAN_PERSONAL_WINDOWS_MACHINE
+      free_discovery: PASS
+      paid_inference: PASS
+      miner_id: "20260828"
+      intent: CVE_LOOKUP
+      cost_usd: 0.01
+      signal_hash: 0x060d6688d94acfa0728417eefe947c15de495103024a9df83f8433f0e78a5917
+      negative_source_unavailable_semantics: PASS_ESCALATE
+      secret_boundary: PASS_NO_KEY_PRINTED_IN_REPORTED_OUTPUT
+      local_runtime_evidence_location: evidence/t0-real-telegraph/runtime/2026-09-06T21-42-53-570Z/
     proven:
       live_discovery_on_user_machine: true
       x402_quote_decoded: true
-      paid_transport_stage_reached: true
-      fail_closed: PASS
-      negative_source_unavailable_semantics: PASS_ESCALATE
-      fresh_burner_created: true
-      hardened_launcher_secret_boundary: PASS
-      circle_faucet_transfer_succeeded: true
-      circle_faucet_transfer_network: Arc_Testnet
-      telegraph_required_network: Base_Sepolia
-      wrong_network_funding_root_cause: true
-    security_boundary:
-      prior_exposed_burner_status: COMPROMISED_DO_NOT_REUSE_OR_FUND
-      fresh_burner_status: ACTIVE_FOR_T0
-      fresh_private_key_printed_or_shared: false
-      private_key_in_repo: false
-      launcher_hardened_against_terminal_paste: true
+      fresh_burner_base_sepolia_funded: true
+      genuine_x402_paid_call_success: true
+      real_miner_routing_observed: true
+      real_intent_routing_observed: CVE_LOOKUP
+      settlement_success: true
+      signal_hash_exposed: true
+      fail_closed_negative_path: PASS
     remaining_proof:
-      - fund the fresh burner PUBLIC address with Base Sepolia test USDC, not Arc Testnet USDC
-      - confirm Base Sepolia USDC transfer success
-      - rerun hardened clipboard-only launcher with the same fresh burner
-      - obtain one genuine successful Telegraph x402 inference
-      - normalize one real EvidenceItem
-      - review hero-vertical relevance of live result
-      - persist successful T0 evidence
+      - review sanitized 03-paid-challenge.json from Attempt 008
+      - review sanitized 04-normalized-evidence-item.json from Attempt 008
+      - qualify actual returned CVE evidence for hero-vertical relevance and materiality
+      - persist sanitized runtime result/evidence item durably in repository
+      - only then promote T0 to CLOSED_PASS and release T1 / frontend data contract
+
+  security_boundary:
+    prior_exposed_burner_status: COMPROMISED_DO_NOT_REUSE_OR_FUND
+    fresh_burner_status: ACTIVE_FOR_T0
+    fresh_private_key_printed_or_shared: false
+    private_key_in_repo: false
+    hardened_clipboard_launcher: PASS
 
   build_gates:
     prd_v0_1_human_lock: PASS
     spec_plan_tasks_ready: PASS_RECONCILED
-    t0_real_telegraph_challenge: OPEN_CORRECT_NETWORK_FUNDING_REQUIRED
-    t1_deterministic_risk_scorer: NOT_STARTED
+    t0_real_telegraph_challenge: RUNTIME_PASS_EVIDENCE_REVIEW_REQUIRED
+    t1_deterministic_risk_scorer: BLOCKED_UNTIL_T0_EVIDENCE_REVIEW
     t2_independent_auditor: NOT_STARTED
     t3_fail_closed_merge_gate: NOT_STARTED
     t4_two_case_real_demo: NOT_STARTED
@@ -124,14 +126,14 @@ canonical_state:
 
   collaborator:
     benita_message_sent: false
-    release_condition: FRONTEND_DATA_CONTRACT_READY_AFTER_T0_METADATA_DISCOVERY
+    release_condition: FRONTEND_DATA_CONTRACT_READY_AFTER_T0_METADATA_DISCOVERY_AND_EVIDENCE_REVIEW
 
   state_persistence_rule:
     after_every_major_gate: UPDATE_CURRENT_AND_HANDOVER
     evidence_before_pass_claim: REQUIRED
     repository_truth_outranks_chat_memory: true
 
-  exact_next_gate: SKEPTARA_T0_FUND_FRESH_BURNER_BASE_SEPOLIA_AND_RETRY_008
+  exact_next_gate: SKEPTARA_T0_ATTEMPT_008_EVIDENCE_REVIEW_AND_DURABLE_PERSISTENCE
   exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_REVIEW
   exact_next_action: >-
-    Keep the fresh burner. In Circle's public faucet choose USDC and explicitly change Network from Arc Testnet to Base Sepolia before sending to the fresh burner's PUBLIC address. Confirm the resulting transaction is on Base Sepolia, then run scripts/t0-from-clipboard.ps1 with the same fresh private key via clipboard-only detection. Never paste the private key into PowerShell or chat.
+    Read and return the sanitized local files evidence/t0-real-telegraph/runtime/2026-09-06T21-42-53-570Z/03-paid-challenge.json and 04-normalized-evidence-item.json. Do not share any private key. ChatGPT reviews the actual returned CVE result/provenance, classifies hero-vertical relevance/materiality, persists sanitized evidence, and only then promotes T0 to CLOSED_PASS and starts T1.
