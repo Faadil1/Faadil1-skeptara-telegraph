@@ -15,20 +15,18 @@ Status: DERIVED READY — subordinate to living PRD v0.1.
 
 ## T0 — Real Telegraph challenge
 
-- [x] T0.1 Discover live relevant intents/miners. *(Live `/api/miners` confirmed from personal Windows runtime; sampled relevant intents include FACT_CHECK, NEWS_HEADLINES and URL_SCAN.)*
-- [x] T0.2 Confirm current Telegraph route: `https://devnode.telegraphprotocol.com`, discovery `/api/miners`, Engine `/engine/v1/ask`.
-- [ ] T0.3 Configure a valid exported burner EVM private key locally/server-side only. *(Attempts 002/003 preserved secret boundary but local injected value was not a valid key. Retry 004 uses a dedicated clipboard launcher.)*
-- [ ] T0.4 Execute first real paid Telegraph challenge.
+- [x] T0.1 Discover live relevant intents/miners.
+- [x] T0.2 Confirm current Telegraph route.
+- [x] T0.3 Configure a valid exported burner EVM key locally only. *(Attempt 005 launcher validation PASS.)*
+- [ ] T0.4 Execute first successful real paid Telegraph challenge. *(Attempt 005 reached paid stage but failed closed; diagnostic pending.)*
 - [ ] T0.5 Capture actual returned miner/intent/cost/provenance/signal fields.
 - [ ] T0.6 Normalize one real EvidenceItem.
-- [x] T0.7 Prove source-unavailable failure => ESCALATE/BLOCK. *(Negative path PASS.)*
-- [x] T0.8a Persist Attempt 001 evidence + update CURRENT/HANDOVER.
-- [x] T0.8b Remediate stale route in harness + env template.
-- [x] T0.8c Persist Attempt 002 live-discovery/key-format evidence + update CURRENT/HANDOVER.
-- [x] T0.8d Harden key-input normalization without exposing secret material.
-- [x] T0.8e Persist Attempt 003 clipboard-injection block + update CURRENT/HANDOVER.
-- [x] T0.8f Add safe Windows clipboard launcher (`scripts/t0-from-clipboard.ps1`).
-- [ ] T0.9 Run retry 004 with the exported burner key copied only after helper prompt, then persist reviewed evidence.
+- [x] T0.7 Prove source-unavailable failure => ESCALATE/BLOCK.
+- [x] T0.8 Persist Attempts 001–004 and canonical updates.
+- [x] T0.9 Reach paid-call stage with valid local EVM key. *(Attempt 005.)*
+- [ ] T0.10 Inspect `runtime/2026-09-06T21-15-17-533Z/02-paid-challenge-failure.json` and classify blocker.
+- [ ] T0.11 Apply bounded remediation and rerun only after classification.
+- [ ] T0.12 Persist successful T0 evidence and update CURRENT/HANDOVER.
 
 ## T1 — Deterministic policy core
 
@@ -103,9 +101,9 @@ Status: DERIVED READY — subordinate to living PRD v0.1.
 After every passed/failed major gate:
 1. persist evidence;
 2. update `state/CURRENT.yaml` milestone history + exact next gate;
-3. update `state/HANDOVER.yaml` so a new conversation can resume without reconstructing state from chat;
-4. reconcile PRD/spec/plan/tasks if the discovery class requires it.
+3. update `state/HANDOVER.yaml`;
+4. reconcile PRD/spec/plan/tasks if required.
 
 ## Reconciliation record
 
-`SKEPTARA_PRD_V0_1_HUMAN_LOCK` passed on 2026-09-06. T0 Attempt 001 failed closed on a stale route and was remediated. Attempt 002 proved the current live devnode discovery route but stopped before payment on invalid local secret format. Attempt 003 again proved live discovery but the local clipboard-derived value had trimmed length 794, so payment was not attempted. A dedicated wait-then-copy clipboard launcher is now committed. Exact next gate: `SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE_RETRY_004`.
+Attempt 005 is the first T0 run to pass local EVM-key format validation and reach the paid-call stage. Free discovery passed; paid challenge failed closed; negative-path fail-closed semantics remained PASS. Exact next gate: `SKEPTARA_T0_PAID_CALL_FAILURE_DIAGNOSTIC_005`.
