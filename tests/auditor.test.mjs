@@ -25,19 +25,19 @@ const clean = canonicalizeAction({
   created_at: "2026-09-06T21:00:00Z",
 });
 
-test("MEDIUM dependency audit plan chooses two supported evidence paths deterministically", () => {
+test("MEDIUM dependency audit plan chooses two generic package-compatible evidence paths deterministically", () => {
   const risk = assessRisk(challenged);
   const plan = buildAuditPlan({ actionSnapshot: challenged, riskAssessment: risk, availableIntents: ["WEB_SEARCH", "FACT_CHECK", "CVE_LOOKUP"] });
   assert.equal(plan.executable, true);
   assert.equal(plan.paths.length, 2);
-  assert.deepEqual(plan.paths.map((p) => p.desired_intent), ["CVE_LOOKUP", "FACT_CHECK"]);
+  assert.deepEqual(plan.paths.map((p) => p.desired_intent), ["FACT_CHECK", "WEB_SEARCH"]);
   assert.equal(plan.paths[0].max_cost_atomic, 10000);
   assert.equal(plan.paths[1].max_cost_atomic, 10000);
 });
 
 test("auditor queries contain canonical facts but no constructor rationale input", () => {
   const risk = assessRisk(challenged);
-  const plan = buildAuditPlan({ actionSnapshot: challenged, riskAssessment: risk, availableIntents: ["CVE_LOOKUP", "FACT_CHECK"] });
+  const plan = buildAuditPlan({ actionSnapshot: challenged, riskAssessment: risk, availableIntents: ["FACT_CHECK", "WEB_SEARCH"] });
   const joined = plan.paths.map((p) => p.query).join("\n");
   assert.match(joined, /lodash@4\.17\.20/);
   assert.match(joined, /Seek|Search|Fact-check/i);
@@ -66,6 +66,7 @@ test("known CVE range that contains target version normalizes to BLOCKING", () =
   });
   assert.equal(item.materiality, "BLOCKING");
   assert.equal(item.reason_code, "KNOWN_VULNERABILITY_AFFECTS_TARGET_DEPENDENCY_VERSION");
+  assert.equal(item.coverage_complete, true);
 });
 
 test("same CVE upper bound does not block target at fixed version", () => {
@@ -77,6 +78,30 @@ test("same CVE upper bound does not block target at fixed version", () => {
   });
   assert.equal(item.materiality, "ADVISORY");
   assert.equal(item.reason_code, "KNOWN_VULNERABILITY_DOES_NOT_MATCH_TARGET_VERSION_RANGE");
+  assert.equal(item.coverage_complete, true);
+});
+
+test("invalid evidence-path input is critical, incomplete, and cannot count as clean evidence", () => {
+  const item = normalizeTelegraphEvidence({
+    path: { path_id: "path-1-cve_lookup", desired_intent: "CVE_LOOKUP" },
+    actionSnapshot: clean,
+    challengeId: "challenge-invalid",
+    paidCall: {
+      response: {
+        intent: "CVE_LOOKUP",
+        result: {
+          found: false,
+          missing: "valid request input",
+          verdict: "not_found",
+          reason: "The CVE vulnerability lookup cannot be completed because the supplied request is invalid: a CVE lookup requires an identifier such as CVE-2021-44228.",
+        },
+      },
+    },
+  });
+  assert.equal(item.materiality, "AMBIGUOUS");
+  assert.equal(item.reason_code, "EVIDENCE_PATH_INPUT_INVALID");
+  assert.equal(item.critical, true);
+  assert.equal(item.coverage_complete, false);
 });
 
 test("BLOCKING evidence causes asymmetric early stop after first path", async () => {
@@ -91,7 +116,7 @@ test("BLOCKING evidence causes asymmetric early stop after first path", async ()
       };
     },
   };
-  const output = await runIndependentAudit({ actionInput: challenged, availableIntents: ["CVE_LOOKUP", "FACT_CHECK"], adapter, now: () => new Date("2026-09-06T22:00:00Z"), challengeId: "challenge-block" });
+  const output = await runIndependentAudit({ actionInput: challenged, availableIntents: ["FACT_CHECK", "WEB_SEARCH"], adapter, now: () => new Date("2026-09-06T22:00:00Z"), challengeId: "challenge-block" });
   assert.equal(calls, 1);
   assert.equal(output.challenge_result.outcome, "BLOCK");
   assert.equal(output.challenge_result.completed_coverage, 1);
@@ -100,16 +125,45 @@ test("BLOCKING evidence causes asymmetric early stop after first path", async ()
 
 test("clean MEDIUM audit requires both paths and can PASS", async () => {
   const responses = [
-    { quote_amount_atomic: 10000, payment_response: { success: true, network: "eip155:84532" }, response: { intent: "CVE_LOOKUP", cost_usd: 0.01, result: { found: false, verdict: "not_found" } } },
-    { quote_amount_atomic: 10000, payment_response: { success: true, network: "eip155:84532" }, response: { intent: "FACT_CHECK", cost_usd: 0.01, result: { verdict: "safe" } } },
+    { quote_amount_atomic: 10000, payment_response: { success: true, network: "eip155:84532" }, response: { intent: "FACT_CHECK", cost_usd: 0.01, result: { verdict: "unverified", evidence: null } } },
+    { quote_amount_atomic: 10000, payment_response: { success: true, network: "eip155:84532" }, response: { intent: "WEB_SEARCH", cost_usd: 0.01, result: { found: false, verdict: "not_found" } } },
   ];
   let index = 0;
   const adapter = { async ask() { return responses[index++]; } };
-  const output = await runIndependentAudit({ actionInput: clean, availableIntents: ["CVE_LOOKUP", "FACT_CHECK"], adapter, now: () => new Date("2026-09-06T22:00:00Z"), challengeId: "challenge-pass" });
+  const output = await runIndependentAudit({ actionInput: clean, availableIntents: ["FACT_CHECK", "WEB_SEARCH"], adapter, now: () => new Date("2026-09-06T22:00:00Z"), challengeId: "challenge-pass" });
   assert.equal(output.challenge_result.outcome, "PASS");
   assert.equal(output.challenge_result.completed_coverage, 2);
   assert.equal(output.challenge_result.spend_observed_atomic, 20000);
   assert.equal(output.challenge_result.evidence_items.length, 2);
+});
+
+test("paid but invalid required path does not count as coverage and escalates", async () => {
+  const responses = [
+    {
+      quote_amount_atomic: 10000,
+      payment_response: { success: true, network: "eip155:84532" },
+      response: {
+        intent: "CVE_LOOKUP",
+        cost_usd: 0.01,
+        result: {
+          found: false,
+          missing: "valid request input",
+          verdict: "not_found",
+          reason: "The CVE vulnerability lookup cannot be completed because the supplied request is invalid and requires an identifier.",
+        },
+      },
+    },
+    { quote_amount_atomic: 10000, payment_response: { success: true, network: "eip155:84532" }, response: { intent: "WEB_SEARCH", cost_usd: 0.01, result: { found: false, verdict: "not_found" } } },
+  ];
+  let index = 0;
+  const adapter = { async ask() { return responses[index++]; } };
+  const output = await runIndependentAudit({ actionInput: clean, availableIntents: ["FACT_CHECK", "WEB_SEARCH"], adapter, challengeId: "challenge-invalid-path" });
+  assert.equal(output.challenge_result.outcome, "ESCALATE");
+  assert.equal(output.challenge_result.completed_coverage, 1);
+  assert.equal(output.challenge_result.spend_observed_atomic, 20000);
+  assert.ok(output.challenge_result.reason_codes.includes("INCOMPLETE_REQUIRED_COVERAGE"));
+  assert.ok(output.challenge_result.reason_codes.includes("BUDGET_EXHAUSTED_BEFORE_REQUIRED_COVERAGE"));
+  assert.equal(output.challenge_result.runtime_errors[0].code, "EVIDENCE_PATH_INCOMPLETE");
 });
 
 test("insufficient supported paths fails closed without calling paid adapter", async () => {
@@ -123,14 +177,14 @@ test("insufficient supported paths fails closed without calling paid adapter", a
 
 test("adapter failure fails closed with runtime evidence and incomplete coverage", async () => {
   const adapter = { async ask() { const err = new Error("HTTP 503"); err.code = "TELEGRAPH_HTTP_ERROR"; throw err; } };
-  const output = await runIndependentAudit({ actionInput: clean, availableIntents: ["CVE_LOOKUP", "FACT_CHECK"], adapter, challengeId: "challenge-error" });
+  const output = await runIndependentAudit({ actionInput: clean, availableIntents: ["FACT_CHECK", "WEB_SEARCH"], adapter, challengeId: "challenge-error" });
   assert.equal(output.challenge_result.outcome, "ESCALATE");
   assert.equal(output.challenge_result.runtime_errors[0].code, "TELEGRAPH_HTTP_ERROR");
 });
 
 test("quote beyond per-path budget fails closed before accepting spend", async () => {
-  const adapter = { async ask() { return { quote_amount_atomic: 15000, response: { intent: "CVE_LOOKUP", result: { found: false } } }; } };
-  const output = await runIndependentAudit({ actionInput: clean, availableIntents: ["CVE_LOOKUP", "FACT_CHECK"], adapter, challengeId: "challenge-budget" });
+  const adapter = { async ask() { return { quote_amount_atomic: 15000, response: { intent: "FACT_CHECK", result: { found: false } } }; } };
+  const output = await runIndependentAudit({ actionInput: clean, availableIntents: ["FACT_CHECK", "WEB_SEARCH"], adapter, challengeId: "challenge-budget" });
   assert.equal(output.challenge_result.outcome, "ESCALATE");
   assert.equal(output.challenge_result.spend_observed_atomic, 0);
   assert.equal(output.challenge_result.runtime_errors[0].code, "QUOTE_EXCEEDS_REMAINING_BUDGET");
