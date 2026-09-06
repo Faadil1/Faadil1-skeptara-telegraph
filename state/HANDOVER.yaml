@@ -9,8 +9,8 @@ handover:
   resume_rule: >-
     Read state/CURRENT.yaml first, then this HANDOVER, then product/PRD.md. The living PRD is canonical product intent; Spec Kit files are derived execution contracts. Repository truth outranks chat/runtime memory. After every major gate persist evidence and update BOTH CURRENT and HANDOVER.
 
-  current_milestone: T0_CLOSED_PASS__T1_PASS__T2_CORE_IMPLEMENTED__USER_TEST_19_OF_19_PASS__REAL_CLEAN_PR_1_BOUND__LIVE_AUDIT_NEXT
-  lifecycle_status: PRODUCT_CONTRACT_LOCKED__REAL_TELEGRAPH_PROVEN__DETERMINISTIC_POLICY_PROVEN__INDEPENDENT_AUDITOR_IMPLEMENTED__REAL_CLEAN_ACTION_BOUND__LIVE_GATE_OPEN
+  current_milestone: T0_CLOSED_PASS__T1_PASS__T2_LIVE_CLEAN_RUNTIME_PASS__EVIDENCE_REVIEW_PENDING
+  lifecycle_status: PRODUCT_CONTRACT_LOCKED__REAL_TELEGRAPH_PROVEN__DETERMINISTIC_POLICY_PROVEN__INDEPENDENT_AUDITOR_LIVE_RUNTIME_PASS__REVIEW_REQUIRED_BEFORE_T2_CLOSE
 
   project:
     public_name: Skeptara
@@ -30,23 +30,19 @@ handover:
     t0:
       status: CLOSED_PASS
       evidence_root: evidence/t0-real-telegraph/attempt-008/
-      network: eip155:84532
-      price_atomic: 10000
       real_intent: CVE_LOOKUP
-      real_miner_id: "20260828"
       challenged_target: lodash@4.17.20
       cve_id: CVE-2020-28500
       materiality: BLOCKING
     t1:
       status: PASS
       implementation: src/policy.mjs
-      tests: tests/policy.test.mjs
-      validation: 10_OF_10_PASS
+      validation: 10_OF_10_POLICY_TESTS_PASS
       medium_contract: 2_paths__20000_atomic_USDC
 
   t2_current:
     gate: SKEPTARA_T2_INDEPENDENT_AUDITOR_PASS
-    status: LIVE_CLEAN_AUDIT_REQUIRED
+    status: LIVE_RUNTIME_PASS_EVIDENCE_REVIEW_REQUIRED
     contract: docs/T2_AUDITOR_CONTRACT.md
     implementation:
       auditor_core: src/auditor.mjs
@@ -54,54 +50,61 @@ handover:
       live_runner: scripts/t2-live-audit.mjs
       secure_launcher: scripts/t2-from-clipboard.ps1
       tests: tests/auditor.test.mjs
-    implemented_invariants:
-      - canonical action facts only; no constructor persuasive rationale input
-      - live Telegraph capabilities discovered before paid planning
-      - planned desired intent is not claimed as actual intent
-      - actual returned Telegraph intent is recorded
-      - quote checked against per-path and total budget before accepting spend
-      - BLOCKING evidence may stop immediately with BLOCK
-      - clean PASS requires full mandatory coverage
-      - missing capability/payment/runtime/coverage remains fail-closed
-      - challenge record binds action fingerprint/head SHA/risk/plan/coverage/spend/expiry
-      - persisted output is sanitized; payer/private secret fields removed
     validation:
-      isolated_precommit_full_repo: 19_OF_19_PASS
+      isolated_full_repo: 19_OF_19_PASS
       user_machine_full_repo: 19_OF_19_PASS
-      evidence: evidence/t2/LOCAL-USER-VALIDATION-AND-CLEAN-PR.md
-    clean_case:
+    clean_case_binding:
       repository: Faadil1/Faadil1-skeptara-telegraph
       pr_number: 1
       branch: demo/clean-lodash-upgrade
       head_sha: 73cf5bdd69163924228e3e21d67fa9f405d99904
-      base_branch: main
-      changed_file: demo/controlled-clean/package.json
       dependency_change: lodash_4_17_20_TO_4_17_21
-      action_file: demo/actions/clean-pr.json
-      expected_policy_tier: MEDIUM
-      required_paths: 2
-      spend_cap_atomic: 20000
       merge_authorized: false
-    remaining_before_pass:
-      - user pulls latest main containing demo/actions/clean-pr.json
-      - live clean MEDIUM audit runs through scripts/t2-from-clipboard.ps1
-      - actual evidence, returned intents, spend, coverage and outcome are reviewed
-      - sanitized live result is promoted to evidence/t2/
-      - only then mark T2 PASS
+    live_run_001:
+      runtime_dir: evidence/t2-runtime/2026-09-06T22-33-25-514Z
+      risk_tier: MEDIUM
+      live_capability_discovery: PASS
+      completed_coverage: 2
+      required_coverage: 2
+      spend_observed_atomic: 20000
+      spend_cap_atomic: 20000
+      actual_evidence:
+        - intent: CVE_LOOKUP
+          materiality: NONE
+          reason_code: NO_MATERIAL_COUNTER_EVIDENCE_REPORTED
+          cost_usd: 0.01
+        - intent: FACT_CHECK
+          materiality: AMBIGUOUS
+          reason_code: UNCLASSIFIED_EXTERNAL_EVIDENCE
+          cost_usd: 0.01
+      runtime_outcome: PASS
+      runtime_reason: REQUIRED_COVERAGE_COMPLETE_NO_BLOCKING_EVIDENCE
+      durable_summary: evidence/t2/LIVE-CLEAN-RUN-001-RUNTIME-PASS-PENDING-REVIEW.md
+    review_boundary:
+      - runtime PASS is not yet T2 CLOSED_PASS
+      - inspect sanitized 02-audit-result.json
+      - inspect FACT_CHECK AMBIGUOUS content and whether it is critical/material
+      - confirm no material counter-evidence is hidden by current normalization
+      - persist final sanitized live challenge record
+      - only then close T2 or remediate
 
   frontend_parallel:
     contract: docs/FRONTEND_DATA_CONTRACT.md
     branch: feat/frontend-benita
-    message_sent: false
+    branch_synced_to_main_before_work: true
     allowed_scope: UI_UX__VISUAL_IDENTITY__CHALLENGE_PROGRESS__EVIDENCE_LEGIBILITY__PASS_BLOCK_ESCALATE
     forbidden_scope: WALLET_PRIVATE_KEYS__PROTECTED_GITHUB_WRITE_CREDENTIAL__GATE_SEMANTIC_CHANGES
+
+  branches:
+    main: CURRENT
+    feat/frontend-benita: SYNCED_TO_MAIN
+    demo/clean-lodash-upgrade: FROZEN_ON_PR_1_HEAD_SHA
 
   security:
     prior_burner: COMPROMISED_DO_NOT_REUSE_OR_FUND
     fresh_burner: ACTIVE_BOUNDED_TESTNET_ONLY
     fresh_private_key_printed_or_shared: false
     repository_secret_recorded: false
-    t2_secret_launcher: scripts/t2-from-clipboard.ps1
 
   next_gates_after_t2:
     - SKEPTARA_T3_FAIL_CLOSED_MERGE_GATE_PASS
@@ -110,7 +113,7 @@ handover:
     - SKEPTARA_BUILD_CANDIDATE_READY
     - HUMAN_PROTECTED_FINAL_SUBMISSION
 
-  exact_next_gate: SKEPTARA_T2_LIVE_CLEAN_MEDIUM_AUDIT_REVIEW
+  exact_next_gate: SKEPTARA_T2_LIVE_CLEAN_RUN_001_EVIDENCE_REVIEW
   exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_REVIEW
   exact_next_action: >-
-    Git pull once more to receive the real clean PR #1 action snapshot. Then run powershell -ExecutionPolicy Bypass -File .\scripts\t2-from-clipboard.ps1 and copy the fresh Base Sepolia burner private key only after the helper is waiting. Never paste or print the private key. Return terminal output plus sanitized evidence/t2-runtime/<timestamp>/02-audit-result.json. Accept the live result as returned: full clean coverage may PASS, material evidence BLOCKs, and incomplete/runtime ambiguity ESCALATEs.
+    Do not spend again yet. Read and return evidence/t2-runtime/2026-09-06T22-33-25-514Z/02-audit-result.json. ChatGPT reviews the actual FACT_CHECK ambiguous evidence, validates the deterministic PASS against policy, persists a final sanitized record under evidence/t2/, and then either closes T2 or remediates the normalization/gate if needed.
