@@ -1,13 +1,13 @@
 canonical_state:
   protocol_version: 1
   system: SKEPTARA_TELEGRAPH_TRACK3
-  version: 0.4.0-t0-closed-t1-pass-t2-next
+  version: 0.4.1-t0-closed-t1-pass-t2-next-frontend-branch-ready
   date: 2026-09-06
   source_of_truth: GITHUB
   repository: Faadil1/Faadil1-skeptara-telegraph
   branch: main
 
-  lifecycle_status: PRD_V0_1_LOCKED__SPEC_KIT_RECONCILED__T0_CLOSED_PASS__T1_DETERMINISTIC_POLICY_PASS__T2_OPEN_NEXT
+  lifecycle_status: PRD_V0_1_LOCKED__SPEC_KIT_RECONCILED__T0_CLOSED_PASS__T1_DETERMINISTIC_POLICY_PASS__FRONTEND_BRANCH_CREATED__T2_OPEN_NEXT
 
   authority:
     product_intent_source: product/PRD.md
@@ -76,6 +76,14 @@ canonical_state:
       result: ACTION_CANONICALIZATION__SHA256_FINGERPRINT__LOW_MEDIUM_HIGH_RISK__T0_DERIVED_SPEND_CAPS__FAIL_CLOSED_EVALUATOR__10_OF_10_TESTS_PASS
       implementation: src/policy.mjs
       tests: tests/policy.test.mjs
+    - id: SKEPTARA_FRONTEND_DATA_CONTRACT_V0_1
+      status: FROZEN
+      date: 2026-09-06
+      path: docs/FRONTEND_DATA_CONTRACT.md
+    - id: SKEPTARA_BENITA_FRONTEND_BRANCH
+      status: CREATED
+      date: 2026-09-06
+      branch: feat/frontend-benita
 
   t0_contract:
     gate: SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE
@@ -174,7 +182,8 @@ canonical_state:
     frontend_data_contract: FROZEN_V0_1
     frontend_data_contract_path: docs/FRONTEND_DATA_CONTRACT.md
     release_condition: SATISFIED
-    branch_status: READY_TO_CREATE
+    branch_status: CREATED
+    branch: feat/frontend-benita
 
   state_persistence_rule:
     after_every_major_gate: UPDATE_CURRENT_AND_HANDOVER
@@ -184,4 +193,4 @@ canonical_state:
   exact_next_gate: SKEPTARA_T2_INDEPENDENT_AUDITOR_PASS
   exact_next_owner: CHATGPT_ORCHESTRATED_IMPLEMENTATION_WITH_HUMAN_LOCAL_PAID_RUNTIME_WHEN_REQUIRED
   exact_next_action: >-
-    Build the independent auditor from the proven T0 Telegraph path: canonical action facts only, no constructor persuasive rationale; deterministic evidence-path plan from T1 risk contract; bounded spend/coverage accounting; real Telegraph adapter; finding normalization; replayable challenge record. Reuse the fresh burner only through the hardened local secret boundary for any required paid verification. In parallel, create the Benita frontend branch from the frozen v0.1 data contract and release only UI/UX scope.
+    Build the independent auditor from the proven T0 Telegraph path: canonical action facts only, no constructor persuasive rationale; deterministic evidence-path plan from T1 risk contract; bounded spend/coverage accounting; real Telegraph adapter; finding normalization; replayable challenge record. Reuse the fresh burner only through the hardened local secret boundary for any required paid verification. Benita frontend work may proceed on feat/frontend-benita using only docs/FRONTEND_DATA_CONTRACT.md and the locked final-product brief.
