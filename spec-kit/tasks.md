@@ -8,7 +8,7 @@ Status: DERIVED READY — subordinate to living PRD v0.1.
 - [x] P0.2 Replace placeholder README with operating model.
 - [x] P0.3 Create canonical state.
 - [x] P0.4 Draft living PRD v0.1.
-- [x] P0.5 Derive Spec Kit constitution/spec/plan.
+- [x] P0.5 Derive Spec Kit constitution/spec/plan/tasks/convergence.
 - [x] P0.6 Human-lock PRD v0.1.
 - [x] P0.7 Reconcile canonical state after PRD lock.
 - [x] P0.8 Freeze frontend data contract after T0 evidence review. *(`docs/FRONTEND_DATA_CONTRACT.md`)*
@@ -97,7 +97,7 @@ Local pre-commit-equivalent validation of the exact policy/test code: **10/10 No
 ## UX / Benita
 
 - [x] UX.1 freeze frontend data contract after T0 evidence review.
-- [ ] UX.2 create Benita branch after contract lock.
+- [x] UX.2 create Benita branch after contract lock. *(`feat/frontend-benita`)*
 - [ ] UX.3 send concise locked Skeptara product brief + repo/branch.
 - [ ] UX.4 risk-tier presentation.
 - [ ] UX.5 live challenge-progress presentation.
@@ -131,4 +131,4 @@ After every passed/failed major gate:
 
 Attempt 008 closed T0 with a genuine Base Sepolia x402 paid Telegraph call routed to `CVE_LOOKUP` / miner `20260828`, settlement success, cost `$0.01`, signal hash, and real vulnerability evidence for `lodash@4.17.20`. Evidence review confirmed direct hero-vertical relevance and normalized the challenged-case finding to `BLOCKING`. T0 is `CLOSED_PASS`.
 
-T1 deterministic policy is implemented and locally validated 10/10: stable action fingerprinting, deterministic LOW/MEDIUM/HIGH risk, T0-derived spend caps, and fail-closed PASS/BLOCK/ESCALATE semantics. Exact next gate: `SKEPTARA_T2_INDEPENDENT_AUDITOR_PASS`.
+T1 deterministic policy is implemented and locally validated 10/10: stable action fingerprinting, deterministic LOW/MEDIUM/HIGH risk, T0-derived spend caps, and fail-closed PASS/BLOCK/ESCALATE semantics. Frontend contract is frozen and `feat/frontend-benita` has been created. Exact next gate: `SKEPTARA_T2_INDEPENDENT_AUDITOR_PASS`.
