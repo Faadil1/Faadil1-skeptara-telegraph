@@ -1,10 +1,15 @@
 import crypto from "node:crypto";
 import { assessRisk, canonicalizeAction, evaluateChallenge } from "./policy.mjs";
 
-export const AUDITOR_VERSION = "skeptara-auditor-v0.1";
+export const AUDITOR_VERSION = "skeptara-auditor-v0.2";
 export const DEFAULT_CHALLENGE_TTL_MS = 15 * 60 * 1000;
 
-const DEPENDENCY_INTENT_ORDER = Object.freeze(["CVE_LOOKUP", "FACT_CHECK", "WEB_SEARCH", "NEWS_SEARCH", "URL_SCAN"]);
+// Live T2 review showed that Telegraph's CVE_LOOKUP miner may require an explicit
+// CVE identifier. Generic dependency actions therefore prefer evidence modes
+// that accept package/version facts directly. CVE_LOOKUP remains supported when
+// Telegraph actually routes a call there, but it is not planned as a generic
+// package-version path.
+const DEPENDENCY_INTENT_ORDER = Object.freeze(["FACT_CHECK", "WEB_SEARCH", "NEWS_SEARCH", "URL_SCAN"]);
 const GENERAL_INTENT_ORDER = Object.freeze(["FACT_CHECK", "WEB_SEARCH", "NEWS_SEARCH", "URL_SCAN", "CVE_LOOKUP"]);
 
 function uniqueStrings(values = []) {
@@ -71,7 +76,7 @@ export function buildAuditPlan({ actionSnapshot, riskAssessment, availableIntent
   const supported = uniqueStrings(availableIntents.map((intent) => intent.toUpperCase()));
   const preference = intentOrderFor(actionSnapshot);
   const preferredSupported = preference.filter((intent) => supported.includes(intent));
-  const otherSupported = supported.filter((intent) => !preferredSupported.includes(intent));
+  const otherSupported = supported.filter((intent) => !preferredSupported.includes(intent) && intent !== "CVE_LOOKUP");
   const ordered = [...preferredSupported, ...otherSupported];
 
   const requiredCount = Number(riskAssessment.required_evidence_paths);
@@ -138,6 +143,13 @@ function dependencyTargetVersion(actionSnapshot) {
   return actionSnapshot.dependency_changes.find((change) => change.to)?.to ?? null;
 }
 
+function evidencePathInputInvalid(result) {
+  if (!result || typeof result !== "object") return false;
+  if (result.missing) return true;
+  const text = `${result.reason ?? ""} ${result.error ?? ""}`.toLowerCase();
+  return /cannot be completed|supplied request is invalid|invalid request|requires an identifier|missing or malformed input/.test(text);
+}
+
 export function normalizeTelegraphEvidence({ path, paidCall, actionSnapshot, challengeId }) {
   assertCanonicalAction(actionSnapshot);
   if (!path?.path_id) throw new TypeError("audit path required");
@@ -152,8 +164,15 @@ export function normalizeTelegraphEvidence({ path, paidCall, actionSnapshot, cha
   let reasonCode = "UNCLASSIFIED_EXTERNAL_EVIDENCE";
   let findingType = "EXTERNAL_COUNTER_EVIDENCE";
   let critical = false;
+  let coverageComplete = true;
 
-  if (result && typeof result === "object") {
+  if (evidencePathInputInvalid(result)) {
+    materiality = "AMBIGUOUS";
+    reasonCode = "EVIDENCE_PATH_INPUT_INVALID";
+    findingType = "INCOMPLETE_EVIDENCE_PATH";
+    critical = true;
+    coverageComplete = false;
+  } else if (result && typeof result === "object") {
     const found = result.found === true || String(result.verdict ?? "").toLowerCase() === "found";
     const notFound = result.found === false || ["not_found", "none", "clean"].includes(String(result.verdict ?? "").toLowerCase());
 
@@ -203,6 +222,7 @@ export function normalizeTelegraphEvidence({ path, paidCall, actionSnapshot, cha
     materiality,
     reason_code: reasonCode,
     critical,
+    coverage_complete: coverageComplete,
     raw_result: result,
   };
 }
@@ -332,9 +352,18 @@ export async function runIndependentAudit({
       }
 
       spendObservedAtomic += quotedAtomic;
-      completedEvidencePaths += 1;
       const item = normalizeTelegraphEvidence({ path, paidCall, actionSnapshot, challengeId });
       evidenceItems.push(item);
+
+      if (item.coverage_complete) {
+        completedEvidencePaths += 1;
+      } else {
+        runtimeErrors.push({
+          code: "EVIDENCE_PATH_INCOMPLETE",
+          path_id: path.path_id,
+          reason_code: item.reason_code,
+        });
+      }
 
       if (item.materiality === "BLOCKING") break;
     } catch (error) {
@@ -346,6 +375,10 @@ export async function runIndependentAudit({
       requiredSourceUnavailable = true;
       break;
     }
+  }
+
+  if (completedEvidencePaths < riskAssessment.required_evidence_paths && spendObservedAtomic >= riskAssessment.spend_cap_atomic) {
+    budgetExhausted = true;
   }
 
   const challengeResult = buildChallengeResult({
