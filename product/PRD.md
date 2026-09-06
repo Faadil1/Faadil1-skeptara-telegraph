@@ -1,7 +1,7 @@
 # Skeptara — Living Product Requirements Document
 
 Version: **0.1**  
-Status: **DRAFT — HUMAN LOCK REQUIRED**  
+Status: **PRD_READY — HUMAN LOCK PASS**  
 Date: **2026-09-06**  
 Hackathon: **Telegraph Protocol 2026 — Track 3 Application**
 
@@ -309,8 +309,10 @@ Code must never silently override this document.
 
 These are implementation-discovery questions unless they force a material change to the hero vertical or product mechanism.
 
-## 21. Next approval
+## 21. Approval record
 
-Human project owner review of PRD v0.1.
+`SKEPTARA_PRD_V0_1_HUMAN_LOCK` = **PASS** on 2026-09-06 by the human project owner.
 
-Approval promotes state to `PRD_READY` and opens reconciliation of derived Spec Kit artifacts followed by `SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE`.
+Evidence: `evidence/prd-v0.1-human-lock/README.md`
+
+This approval promotes the product source to `PRD_READY` and opens reconciliation of the derived Spec Kit artifacts followed by `SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE`.
