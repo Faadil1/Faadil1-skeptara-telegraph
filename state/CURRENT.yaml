@@ -1,13 +1,13 @@
 canonical_state:
   protocol_version: 1
   system: SKEPTARA_TELEGRAPH_TRACK3
-  version: 0.4.1-t0-closed-t1-pass-t2-next-frontend-branch-ready
+  version: 0.5.0-t2-core-implemented-live-verification-next
   date: 2026-09-06
   source_of_truth: GITHUB
   repository: Faadil1/Faadil1-skeptara-telegraph
   branch: main
 
-  lifecycle_status: PRD_V0_1_LOCKED__SPEC_KIT_RECONCILED__T0_CLOSED_PASS__T1_DETERMINISTIC_POLICY_PASS__FRONTEND_BRANCH_CREATED__T2_OPEN_NEXT
+  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CORE_IMPLEMENTED__LOCAL_FULL_TEST_AND_LIVE_CLEAN_AUDIT_REQUIRED
 
   authority:
     product_intent_source: product/PRD.md
@@ -31,146 +31,106 @@ canonical_state:
     self_audit_by_reviewed_agent: forbidden
 
   milestone_history:
-    - id: HUMAN_PROJECT_GO
-      status: PASS
-      date: 2026-09-06
-    - id: SKEPTARA_PRD_V0_1_HUMAN_LOCK
-      status: PASS
-      date: 2026-09-06
-    - id: SKEPTARA_T0_ATTEMPTS_001_TO_004
-      status: FAIL_CLOSED_REMEDIATED
-      result: ROUTE_AND_LOCAL_SECRET_INPUT_ISSUES_RESOLVED
-    - id: SKEPTARA_T0_ATTEMPT_005
-      status: FAIL_CLOSED_DIAGNOSED_TO_SETTLEMENT_LAYER
-      result: FINAL_HTTP_402__PAYMENT_RESPONSE_PRESENT
-    - id: SKEPTARA_T0_ATTEMPT_006
-      status: FAIL_CLOSED_DIAGNOSED
-      result: BASE_SEPOLIA_0_01_USDC_REQUIRED__INSUFFICIENT_BALANCE
-      evidence: evidence/t0-real-telegraph/ATTEMPT-006-INSUFFICIENT-BALANCE-AND-KEY-EXPOSURE.md
-    - id: SKEPTARA_BURNER_CREDENTIAL_INCIDENT_001
-      status: ROTATED
-      result: PRIOR_EXPOSED_BURNER_RETIRED__FRESH_BURNER_CREATED
-    - id: SKEPTARA_T0_ATTEMPT_007
-      status: FAIL_CLOSED_REMEDIATED
-      result: FRESH_BURNER__ARC_TESTNET_FUNDED_BY_MISTAKE__BASE_SEPOLIA_STILL_UNFUNDED
-      evidence: evidence/t0-real-telegraph/ATTEMPT-007-WRONG-TESTNET-FUNDING.md
-    - id: SKEPTARA_T0_ATTEMPT_008
-      status: PASS
-      date: 2026-09-06
-      result: LIVE_DISCOVERY_PASS__X402_QUOTE_10000_ATOMIC_USDC_BASE_SEPOLIA__REAL_PAID_CHALLENGE_PASS__MINER_20260828__INTENT_CVE_LOOKUP__COST_0_01__SIGNAL_HASH_PRESENT__SETTLEMENT_SUCCESS_TRUE__NEGATIVE_PATH_PASS
-      discovery_class: execution_detail
-      product_change_required: false
-      evidence: evidence/t0-real-telegraph/attempt-008/README.md
-    - id: SKEPTARA_T0_EVIDENCE_REVIEW_008
-      status: PASS
-      date: 2026-09-06
-      result: LODASH_4_17_20_MATCHES_CVE_2020_28500_AFFECTED_RANGE_LT_4_17_21__HERO_RELEVANCE_DIRECT__MATERIALITY_BLOCKING
-      independent_primary_verification: NVD
-      evidence: evidence/t0-real-telegraph/attempt-008/04-normalized-evidence-item.sanitized.json
     - id: SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE
       status: CLOSED_PASS
       date: 2026-09-06
+      evidence: evidence/t0-real-telegraph/attempt-008/
     - id: SKEPTARA_T1_DETERMINISTIC_POLICY_PASS
       status: PASS
       date: 2026-09-06
-      result: ACTION_CANONICALIZATION__SHA256_FINGERPRINT__LOW_MEDIUM_HIGH_RISK__T0_DERIVED_SPEND_CAPS__FAIL_CLOSED_EVALUATOR__10_OF_10_TESTS_PASS
+      validation: 10_OF_10_NODE_TESTS_PASS
       implementation: src/policy.mjs
-      tests: tests/policy.test.mjs
     - id: SKEPTARA_FRONTEND_DATA_CONTRACT_V0_1
       status: FROZEN
-      date: 2026-09-06
       path: docs/FRONTEND_DATA_CONTRACT.md
     - id: SKEPTARA_BENITA_FRONTEND_BRANCH
       status: CREATED
-      date: 2026-09-06
       branch: feat/frontend-benita
+    - id: SKEPTARA_T2_CORE_IMPLEMENTATION
+      status: PASS_IMPLEMENTATION_LIVE_GATE_OPEN
+      date: 2026-09-06
+      discovery_class: execution_detail
+      product_change_required: false
+      implementation:
+        - src/auditor.mjs
+        - src/telegraph-client.mjs
+        - scripts/t2-live-audit.mjs
+        - scripts/t2-from-clipboard.ps1
+      tests: tests/auditor.test.mjs
+      offline_validation: 9_OF_9_AUDITOR_TESTS_PASS
+      evidence: evidence/t2/OFFLINE-IMPLEMENTATION-VALIDATION.md
 
   t0_contract:
-    gate: SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE
     status: CLOSED_PASS
-    route:
-      base_url: https://devnode.telegraphprotocol.com
-      free_discovery: GET_https://devnode.telegraphprotocol.com/api/miners
-      engine_ask: POST_https://devnode.telegraphprotocol.com/engine/v1/ask
-    x402:
-      proven_network: eip155:84532
-      proven_network_name: Base_Sepolia
-      proven_asset_family: USDC
-      proven_amount_atomic: 10000
-      proven_amount_usdc: 0.01
-      settlement_success: true
-    real_runtime_evidence:
-      miner_id: "20260828"
-      miner_name: PREFLIGHT_Infrastructure_Signals
-      endpoint: /cve
-      intent: CVE_LOOKUP
-      cost_usd: 0.01
-      signal_hash: 0x060d6688d94acfa0728417eefe947c15de495103024a9df83f8433f0e78a5917
-      cve_id: CVE-2020-28500
-      target_dependency: lodash@4.17.20
-      affected_range: <4.17.21
-      normalized_materiality: BLOCKING
-      reason_code: KNOWN_VULNERABILITY_AFFECTS_TARGET_DEPENDENCY_VERSION
-      durable_evidence: evidence/t0-real-telegraph/attempt-008/
-    proven:
-      live_discovery_on_user_machine: true
-      x402_quote_decoded: true
-      genuine_x402_paid_call_success: true
-      real_miner_routing_observed: true
-      real_intent_routing_observed: CVE_LOOKUP
-      settlement_success: true
-      signal_hash_exposed: true
-      hero_vertical_relevance: DIRECT
-      fail_closed_negative_path: PASS
+    network: eip155:84532
+    asset: USDC
+    observed_price_atomic: 10000
+    real_intent: CVE_LOOKUP
+    real_miner_id: "20260828"
+    settlement_success: true
+    challenged_target: lodash@4.17.20
+    cve_id: CVE-2020-28500
+    normalized_materiality: BLOCKING
 
   t1_contract:
-    gate: SKEPTARA_T1_DETERMINISTIC_POLICY_PASS
     status: PASS
-    implementation: src/policy.mjs
-    tests: tests/policy.test.mjs
     policy_version: skeptara-risk-v0.1
-    fingerprint: SHA256_CANONICAL_ACTION_FACTS
     risk_contracts:
-      LOW:
-        required_evidence_paths: 1
-        spend_cap_atomic: 10000
-        cross_intent_policy: NOT_REQUIRED
-      MEDIUM:
-        required_evidence_paths: 2
-        spend_cap_atomic: 20000
-        cross_intent_policy: PREFERRED
-      HIGH:
-        required_evidence_paths: 3
-        spend_cap_atomic: 30000
-        cross_intent_policy: REQUIRED_IF_SUPPORTED
-    deterministic_invariants:
-      - BLOCKING_EVIDENCE_ALWAYS_BLOCKS
-      - INCOMPLETE_REQUIRED_COVERAGE_ESCALATES
-      - BUDGET_EXHAUSTION_BEFORE_COVERAGE_ESCALATES
-      - REQUIRED_SOURCE_UNAVAILABLE_ESCALATES
-      - CRITICAL_AMBIGUITY_ESCALATES_FOR_MEDIUM_HIGH
-      - HIGH_CROSS_INTENT_REQUIREMENT_ENFORCED_WHEN_SUPPORTED
-      - CLEAN_COMPLETE_CHALLENGE_MAY_PASS
-    validation: 10_OF_10_NODE_TESTS_PASS
+      LOW: { required_evidence_paths: 1, spend_cap_atomic: 10000, cross_intent_policy: NOT_REQUIRED }
+      MEDIUM: { required_evidence_paths: 2, spend_cap_atomic: 20000, cross_intent_policy: PREFERRED }
+      HIGH: { required_evidence_paths: 3, spend_cap_atomic: 30000, cross_intent_policy: REQUIRED_IF_SUPPORTED }
+
+  t2_contract:
+    gate: SKEPTARA_T2_INDEPENDENT_AUDITOR_PASS
+    status: CORE_IMPLEMENTED_LOCAL_AND_LIVE_VERIFICATION_REQUIRED
+    auditor_version: skeptara-auditor-v0.1
+    implementation:
+      auditor_core: src/auditor.mjs
+      telegraph_adapter: src/telegraph-client.mjs
+      live_runner: scripts/t2-live-audit.mjs
+      secure_launcher: scripts/t2-from-clipboard.ps1
+      contract: docs/T2_AUDITOR_CONTRACT.md
+    implemented:
+      canonical_action_facts_only: true
+      constructor_persuasive_rationale_input: forbidden
+      live_capability_discovery_before_paid_plan: true
+      desired_intent_is_not_claimed_actual_intent: true
+      bounded_quote_before_payment: true
+      total_and_per_path_spend_tracking: true
+      required_coverage_tracking: true
+      evidence_normalization: true
+      cve_affected_range_machine_check: true
+      blocking_evidence_asymmetric_early_stop: true
+      clean_pass_requires_full_coverage: true
+      replayable_challenge_result: true
+      expiry_binding_present: true
+      sanitized_runtime_persistence_shape: true
+    offline_validation:
+      auditor_tests: 9_OF_9_PASS
+      policy_tests_previous_gate: 10_OF_10_PASS
+      combined_expected_repository_tests: 19
+    remaining_before_closed_pass:
+      - user git pull
+      - full repository npm test on user machine
+      - create or select truthful controlled GitHub PR action snapshot for clean MEDIUM case
+      - run one live T2 clean MEDIUM audit with fresh burner through secure launcher
+      - review actual returned intents/findings/coverage/spend
+      - persist sanitized live T2 record under evidence/t2/
+      - close T2 only if actual gate result justifies it
 
   security_boundary:
     prior_exposed_burner_status: COMPROMISED_DO_NOT_REUSE_OR_FUND
-    fresh_burner_status: ACTIVE_FOR_T0_T2_ONLY_AS_NEEDED
-    fresh_private_key_printed_or_shared: false
+    fresh_burner_status: ACTIVE_BOUNDED_TESTNET_ONLY
     private_key_in_repo: false
-    hardened_clipboard_launcher: PASS
-
-  spec_kit:
-    status: DERIVED_RECONCILED_TO_PRD_V0_1_AND_T0_T1_EVIDENCE
-    convergence: PRODUCT_CONTRACT_CONVERGED__T0_PASS__T1_PASS__BUILD_NOT_COMPLETE
-    authority: NONE_OVER_PRODUCT_INTENT
+    fresh_private_key_printed_or_shared: false
+    t2_launcher: scripts/t2-from-clipboard.ps1
 
   build_gates:
     prd_v0_1_human_lock: PASS
     spec_plan_tasks_ready: PASS_RECONCILED
     t0_real_telegraph_challenge: CLOSED_PASS
     t1_deterministic_risk_scorer: PASS
-    t2_independent_auditor: OPEN_NEXT
+    t2_independent_auditor: CORE_IMPLEMENTED_LIVE_VERIFICATION_REQUIRED
     t3_fail_closed_merge_gate: NOT_STARTED
     t4_two_case_real_demo: NOT_STARTED
     trace_design_review: NOT_STARTED
@@ -180,17 +140,15 @@ canonical_state:
   collaborator:
     benita_message_sent: false
     frontend_data_contract: FROZEN_V0_1
-    frontend_data_contract_path: docs/FRONTEND_DATA_CONTRACT.md
-    release_condition: SATISFIED
-    branch_status: CREATED
     branch: feat/frontend-benita
+    release_condition: SATISFIED
 
   state_persistence_rule:
     after_every_major_gate: UPDATE_CURRENT_AND_HANDOVER
     evidence_before_pass_claim: REQUIRED
     repository_truth_outranks_chat_memory: true
 
-  exact_next_gate: SKEPTARA_T2_INDEPENDENT_AUDITOR_PASS
-  exact_next_owner: CHATGPT_ORCHESTRATED_IMPLEMENTATION_WITH_HUMAN_LOCAL_PAID_RUNTIME_WHEN_REQUIRED
+  exact_next_gate: SKEPTARA_T2_LOCAL_FULL_TEST_AND_LIVE_CLEAN_AUDIT
+  exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_REVIEW
   exact_next_action: >-
-    Build the independent auditor from the proven T0 Telegraph path: canonical action facts only, no constructor persuasive rationale; deterministic evidence-path plan from T1 risk contract; bounded spend/coverage accounting; real Telegraph adapter; finding normalization; replayable challenge record. Reuse the fresh burner only through the hardened local secret boundary for any required paid verification. Benita frontend work may proceed on feat/frontend-benita using only docs/FRONTEND_DATA_CONTRACT.md and the locked final-product brief.
+    Pull main and run npm test. If all tests pass, do not run paid T2 yet until a truthful controlled GitHub clean dependency PR snapshot is present in demo/actions/clean-pr.json. Then use scripts/t2-from-clipboard.ps1 with the fresh bounded Base Sepolia burner. Return terminal output plus the sanitized evidence/t2-runtime/<timestamp>/02-audit-result.json for review. T2 remains open until the actual live clean audit is reviewed and durably persisted.
