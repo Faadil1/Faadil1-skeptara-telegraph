@@ -1,0 +1,110 @@
+canonical_state:
+  protocol_version: 1
+  system: SKEPTARA_TELEGRAPH_TRACK3
+  version: 0.1.0-bootstrap
+  date: 2026-09-06
+  source_of_truth: GITHUB
+  repository: Faadil1/Faadil1-skeptara-telegraph
+  branch: main
+
+  lifecycle_status: REPOSITORY_BOOTSTRAPPED__LIVING_PRD_AND_SPEC_KIT_DERIVATION_IN_PROGRESS
+
+  authority:
+    project_go: HUMAN_GO_RECEIVED
+    product_intent_source: product/PRD.md
+    product_source_owner: HUMAN_PROJECT_OWNER
+    implementation_owner: CHATGPT_ORCHESTRATED_WITH_COLLABORATOR_HANDOFFS
+    design_experience_assurance: TRACE_WHEN_TRIGGERED
+    terminal_assurance: PROJECT_FINISHER
+    protected_external_action: HUMAN_BOUNDED_AUTHORIZATION
+
+  hackathon:
+    program: TELEGRAPH_PROTOCOL_HACKATHON_2026
+    track: TRACK_3_APPLICATION
+    deadline_utc: 2026-09-07T23:59:00Z
+    real_miners_required: true
+    mock_intelligence_allowed_for_submission: false
+
+  naming:
+    public_name: Skeptara
+    repository_name: Faadil1-skeptara-telegraph
+    status: PROVISIONAL_COLLISION_SCREEN_PASS
+    note: >-
+      Exact-name web/GitHub screening found no obvious AI/software product collision at bootstrap time. This is a hackathon naming screen, not legal trademark clearance.
+
+  product_core:
+    vertical: AUTONOMOUS_GITHUB_DEPENDENCY_MERGE
+    mechanism: RISK_PROPORTIONAL_INDEPENDENT_COUNTER_EVIDENCE_BEFORE_EXECUTION
+    flow: PR_PROPOSED__DETERMINISTIC_RISK_TIER__INDEPENDENT_TELEGRAPH_CHALLENGE__PASS_OR_BLOCK__BOUNDED_REAL_GITHUB_MERGE
+    fail_closed: true
+    self_risk_scoring_by_reviewed_agent: forbidden
+    self_audit_by_reviewed_agent: forbidden
+    generic_execution_warrant_positioning: killed
+    generic_verification_gate_positioning: killed
+
+  locked_decisions:
+    - LIVING_PRD_REMAINS_CANONICAL_PRODUCT_INTENT_SOURCE
+    - SPEC_KIT_ARTIFACTS_ARE_DERIVED_EXECUTION_CONTRACTS_NOT_PRODUCT_AUTHORITY
+    - MATERIAL_PRODUCT_DISCOVERIES_ROUTE_BACK_TO_PRD_BEFORE_DERIVED_ARTIFACT_RECONCILIATION
+    - CODE_MUST_NOT_BECOME_DE_FACTO_PRODUCT_SOURCE
+    - CONSTRUCTOR_AND_AUDITOR_MUST_BE_SEPARATED
+    - RISK_TIER_MUST_BE_ASSIGNED_BY_EXTERNAL_DETERMINISTIC_RUBRIC_FOR_MVP
+    - INCOMPLETE_CHALLENGE_COVERAGE_BLOCKS_EXECUTION
+    - EXHAUSTED_BUDGET_BEFORE_REQUIRED_COVERAGE_BLOCKS_EXECUTION
+    - REAL_TELEGRAPH_INTELLIGENCE_REQUIRED_FOR_T0_AND_SUBMISSION
+    - TELEGRAPH_WALLET_SECRETS_NEVER_ENTER_BROWSER_GIT_OR_CHAT
+    - REAL_GITHUB_WRITES_RESTRICTED_TO_ALLOW_LISTED_DEMO_SCOPE
+
+  milestone_history:
+    - id: HUMAN_PROJECT_GO
+      status: PASS
+      date: 2026-09-06
+    - id: MULTI_LLM_COLLISION_RED_TEAM
+      status: PASS_WITH_PIVOTS
+      date: 2026-09-06
+      result: ECONOMIC_VERIFICATION_CORE_AND_INDEPENDENT_AUDITOR_SURVIVED
+    - id: PRODUCT_NAME_SCREEN
+      status: PROVISIONAL_PASS
+      date: 2026-09-06
+      result: SKEPTARA_SELECTED
+    - id: REPOSITORY_BOOTSTRAP
+      status: PASS
+      date: 2026-09-06
+      evidence: README.md
+
+  product_source:
+    status: DRAFTING_V0_1
+    path: product/PRD.md
+    living: true
+    frozen_after_initial_approval: false
+    historical_revisions_required: true
+
+  spec_kit:
+    upstream_reference: github/spec-kit
+    orchestration_reference: Faadil1/spec-kit-orchestration
+    role: DERIVED_EXECUTION_LAYER
+    local_path: spec-kit/
+    authority: NONE_OVER_PRODUCT_INTENT
+    status: DERIVATION_IN_PROGRESS
+
+  build_gates:
+    prd_v0_1_human_lock: PENDING
+    spec_plan_tasks_ready: PENDING
+    t0_real_telegraph_challenge: BLOCKED_BY_PRD_AND_SPEC_DERIVATION
+    t1_deterministic_risk_scorer: NOT_STARTED
+    t2_independent_auditor: NOT_STARTED
+    t3_fail_closed_merge_gate: NOT_STARTED
+    t4_two_case_real_demo: NOT_STARTED
+    trace_design_review: NOT_STARTED
+    project_finisher: NOT_STARTED
+    final_submission: PROTECTED_NOT_AUTHORIZED
+
+  collaborator:
+    benita_message_sent: false
+    benita_scope_locked: false
+    reason: WAIT_UNTIL_REPOSITORY_PRODUCT_CONTRACT_AND_FRONTEND_BOUNDARY_ARE_READY
+
+  exact_next_gate: SKEPTARA_PRD_V0_1_HUMAN_LOCK
+  exact_next_owner: HUMAN_PROJECT_OWNER
+  exact_next_action: >-
+    Review product/PRD.md v0.1 after it is committed. If approved, promote product source to PRD_READY, reconcile derived Spec Kit artifacts, then open SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE. Do not begin deep UI polish or any protected GitHub merge execution before those gates.
