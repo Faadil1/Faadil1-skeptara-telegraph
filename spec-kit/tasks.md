@@ -15,9 +15,9 @@ Status: DERIVED READY — subordinate to living PRD v0.1.
 
 ## T0 — Real Telegraph challenge
 
-- [x] T0.1 Discover live relevant intents/miners. *(Attempt 002 reached live `/api/miners`; sampled relevant intent families include FACT_CHECK, NEWS_HEADLINES and URL_SCAN. Dependency-security strength still requires paid-result qualification.)*
+- [x] T0.1 Discover live relevant intents/miners. *(Live `/api/miners` confirmed from personal Windows runtime; sampled relevant intents include FACT_CHECK, NEWS_HEADLINES and URL_SCAN.)*
 - [x] T0.2 Confirm current Telegraph route: `https://devnode.telegraphprotocol.com`, discovery `/api/miners`, Engine `/engine/v1/ask`.
-- [ ] T0.3 Configure a valid exported burner EVM private key locally/server-side only. *(Attempt 002 secret boundary was safe but the supplied local value failed EVM-key format validation. Harness normalization remediated; retry 003 pending.)*
+- [ ] T0.3 Configure a valid exported burner EVM private key locally/server-side only. *(Attempts 002/003 preserved secret boundary but local injected value was not a valid key. Retry 004 uses a dedicated clipboard launcher.)*
 - [ ] T0.4 Execute first real paid Telegraph challenge.
 - [ ] T0.5 Capture actual returned miner/intent/cost/provenance/signal fields.
 - [ ] T0.6 Normalize one real EvidenceItem.
@@ -26,7 +26,9 @@ Status: DERIVED READY — subordinate to living PRD v0.1.
 - [x] T0.8b Remediate stale route in harness + env template.
 - [x] T0.8c Persist Attempt 002 live-discovery/key-format evidence + update CURRENT/HANDOVER.
 - [x] T0.8d Harden key-input normalization without exposing secret material.
-- [ ] T0.9 Run retry 003 with valid local burner EVM key and persist reviewed evidence.
+- [x] T0.8e Persist Attempt 003 clipboard-injection block + update CURRENT/HANDOVER.
+- [x] T0.8f Add safe Windows clipboard launcher (`scripts/t0-from-clipboard.ps1`).
+- [ ] T0.9 Run retry 004 with the exported burner key copied only after helper prompt, then persist reviewed evidence.
 
 ## T1 — Deterministic policy core
 
@@ -106,4 +108,4 @@ After every passed/failed major gate:
 
 ## Reconciliation record
 
-`SKEPTARA_PRD_V0_1_HUMAN_LOCK` passed on 2026-09-06. T0 Attempt 001 failed closed on a stale route and was remediated. Attempt 002 proved the current live devnode discovery route from the personal Windows runtime, but stopped before payment because the local burner secret was not in valid EVM private-key form. Key-input normalization is now hardened. Exact next gate: `SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE_RETRY_003`.
+`SKEPTARA_PRD_V0_1_HUMAN_LOCK` passed on 2026-09-06. T0 Attempt 001 failed closed on a stale route and was remediated. Attempt 002 proved the current live devnode discovery route but stopped before payment on invalid local secret format. Attempt 003 again proved live discovery but the local clipboard-derived value had trimmed length 794, so payment was not attempted. A dedicated wait-then-copy clipboard launcher is now committed. Exact next gate: `SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE_RETRY_004`.
