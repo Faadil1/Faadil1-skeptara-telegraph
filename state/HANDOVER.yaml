@@ -9,9 +9,9 @@ handover:
   resume_rule: >-
     Read state/CURRENT.yaml first, then this HANDOVER, then product/PRD.md. Treat the living PRD as canonical product intent and Spec Kit files as derived execution contracts. Repository truth outranks chat/runtime memory. Before continuing implementation, confirm the exact next gate in CURRENT and do not silently skip it. After every major gate, persist evidence and update BOTH CURRENT and HANDOVER.
 
-  current_milestone: PRD_V0_1_DRAFT_READY__SPEC_KIT_DERIVED_DRAFT_READY__HUMAN_LOCK_PENDING
-  previous_milestone: REPOSITORY_BOOTSTRAP_PASS
-  lifecycle_status: PRODUCT_CONTRACT_PREPARED__IMPLEMENTATION_NOT_YET_OPEN
+  current_milestone: PRD_V0_1_HUMAN_LOCK_PASS__SPEC_KIT_RECONCILED__T0_OPEN
+  previous_milestone: PRD_V0_1_DRAFT_READY__SPEC_KIT_DERIVED_DRAFT_READY__HUMAN_LOCK_PENDING
+  lifecycle_status: PRODUCT_CONTRACT_LOCKED__IMPLEMENTATION_OPEN_AT_T0_ONLY
 
   project:
     public_name: Skeptara
@@ -24,8 +24,10 @@ handover:
 
   product_truth:
     canonical_source: product/PRD.md
-    current_revision: v0.1_DRAFT
-    approval: PENDING_HUMAN_LOCK
+    current_revision: v0.1
+    status: PRD_READY
+    approval: HUMAN_LOCK_PASS_2026_09_06
+    approval_evidence: evidence/prd-v0.1-human-lock/README.md
     living_prd: true
     code_as_product_source: FORBIDDEN
     material_change_rule: HUMAN_APPROVAL_THEN_PRD_REVISION_THEN_DERIVED_RECONCILIATION
@@ -68,7 +70,8 @@ handover:
       plan: spec-kit/plan.md
       tasks: spec-kit/tasks.md
       convergence: spec-kit/convergence.md
-    status: DERIVED_DRAFT_READY_BLOCKED_ON_PRD_HUMAN_LOCK
+    status: DERIVED_READY_RECONCILED_TO_PRD_V0_1
+    convergence: PRODUCT_CONTRACT_CONVERGED_IMPLEMENTATION_NOT_COMPLETE
     orchestration_reference: Faadil1/spec-kit-orchestration
 
   architecture:
@@ -95,8 +98,9 @@ handover:
 
   collaborator_benita:
     message_sent: false
-    reason: Benita has not been told the discarded initial concepts and should receive only the locked product brief, not the internal ideation history.
-    release_condition: PRD_V0_1_HUMAN_LOCK_AND_FRONTEND_CONTRACT_READY
+    reason: >-
+      Benita has not been told the discarded initial concepts and should receive only the locked Skeptara product brief. PRD v0.1 is now locked, but deep frontend work waits for the frontend data contract to stabilize.
+    release_condition: FRONTEND_DATA_CONTRACT_READY
     intended_scope:
       - frontend UI/UX
       - visual identity
@@ -108,18 +112,22 @@ handover:
       - GitHub protected write credentials
       - changing risk or gate semantics without product-source reconciliation
 
-  next_build_after_prd_lock:
-    gate: SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE
+  active_gate:
+    id: SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE
+    status: OPEN
+    purpose: prove sponsor-native dependency before deep implementation
     required_proof:
       - discover live relevant Telegraph intents/miners
-      - prove current Telegraph route
+      - confirm current Telegraph Engine/MCP route
       - execute at least one genuine paid challenge call
       - capture only actually exposed intent/miner/cost/provenance fields
       - normalize a real EvidenceItem
       - prove payment/source failure is fail-closed
       - persist evidence under evidence/t0-real-telegraph/
+    secret_boundary: >-
+      Burner wallet/private key must be configured by the human on a personal/local or approved server environment. Never send the private key into chat, GitHub, frontend code, screenshots, or public logs.
     stop_rule: >-
-      If live Telegraph capabilities cannot support the dependency/security challenge quickly, classify the discovery. If it changes the hero vertical or product mechanism, revise the living PRD with human approval before proceeding. Do not cover the failure with mocks.
+      If live Telegraph capabilities cannot support the dependency/security challenge quickly, classify the discovery. If it changes the hero vertical or product mechanism, revise the living PRD with human approval before proceeding. Do not cover failure with mocks.
 
   state_persistence:
     rule: UPDATE_CURRENT_AND_HANDOVER_AFTER_EVERY_MAJOR_GATE
@@ -129,7 +137,7 @@ handover:
     task_progress_location: spec-kit/tasks.md
     prd_revision_history: preserve_via_git_and_document_version
 
-  exact_next_gate: SKEPTARA_PRD_V0_1_HUMAN_LOCK
-  exact_next_owner: HUMAN_PROJECT_OWNER
+  exact_next_gate: SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE
+  exact_next_owner: CHATGPT_ORCHESTRATOR_PLUS_HUMAN_LOCAL_SECRET_BOUNDARY
   exact_next_action: >-
-    Review product/PRD.md v0.1. On approval, update PRD status to PRD_READY, update canonical state + handover, mark derived Spec Kit artifacts reconciled/ready, then start T0. Only after the frontend data contract is stable should Benita receive the concise final product message and branch assignment.
+    Start T0 now. First discover the live Telegraph capabilities/route without secrets where possible. Then have the human configure a burner wallet key only in the local/server environment and run one genuine paid challenge. Persist raw-safe evidence + normalized EvidenceItem + negative-path evidence. Classify findings and update CURRENT/HANDOVER before any T0 PASS claim. Do not start protected merge execution or deep UI polish yet.
