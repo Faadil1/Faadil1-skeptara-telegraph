@@ -1,0 +1,41 @@
+{
+  "challenge_id": "b3c70926-f4d3-41cc-9bb2-ed580700a55f",
+  "intent": "CVE_LOOKUP",
+  "miner_id": "20260828",
+  "miner_name": "PREFLIGHT Infrastructure Signals",
+  "endpoint": "/cve",
+  "signal_hash": "0x060d6688d94acfa0728417eefe947c15de495103024a9df83f8433f0e78a5917",
+  "request_timestamp": "2026-09-06T21:42:55.789Z",
+  "response_timestamp": "2026-09-06T21:42:58.914798367Z",
+  "cost_usd": 0.01,
+  "duration_ms": 954,
+  "source_provenance": {
+    "telegraph_exposed_field": null,
+    "miner_reported_source": "CVE.org and NVD",
+    "independent_review_reference": "https://nvd.nist.gov/vuln/detail/CVE-2020-28500"
+  },
+  "settlement": {
+    "success": true,
+    "network": "eip155:84532",
+    "transaction": "0xbd615a33c14b471b7c9b3d093f218eb73128bd6aab07b9791138d35baea76b39"
+  },
+  "normalized_finding_type": "KNOWN_DEPENDENCY_VULNERABILITY",
+  "materiality": "BLOCKING",
+  "reason_code": "KNOWN_VULNERABILITY_AFFECTS_TARGET_DEPENDENCY_VERSION",
+  "target": {
+    "package": "lodash",
+    "version": "4.17.20"
+  },
+  "finding": {
+    "cve_id": "CVE-2020-28500",
+    "found": true,
+    "affected_range": "<4.17.21",
+    "severity": "MEDIUM",
+    "cvss_score": 5.3,
+    "vulnerability_class": "Regular Expression Denial of Service (ReDoS)",
+    "known_exploitation": "not_reported"
+  },
+  "hero_vertical_relevance": "DIRECT",
+  "review_note": "For Skeptara v0.1 challenged-case policy, a target dependency version explicitly inside the affected range of a known CVE is material blocking counter-evidence. This does not establish a universal production rule for every MEDIUM-severity CVE.",
+  "secret_sanitization": "payer address omitted; private key never persisted"
+}
