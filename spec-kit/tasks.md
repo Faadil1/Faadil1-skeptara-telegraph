@@ -1,6 +1,6 @@
 # Skeptara Task Ledger
 
-Status: DERIVED DRAFT — subordinate to living PRD.
+Status: DERIVED READY — subordinate to living PRD v0.1.
 
 ## P0 — Product/source setup
 
@@ -9,8 +9,8 @@ Status: DERIVED DRAFT — subordinate to living PRD.
 - [x] P0.3 Create canonical state.
 - [x] P0.4 Draft living PRD v0.1.
 - [x] P0.5 Derive Spec Kit constitution/spec/plan.
-- [ ] P0.6 Human-lock PRD v0.1.
-- [ ] P0.7 Reconcile canonical state after PRD lock.
+- [x] P0.6 Human-lock PRD v0.1.
+- [x] P0.7 Reconcile canonical state after PRD lock.
 - [ ] P0.8 Finalize collaborator/frontend contract and send Benita message.
 
 ## T0 — Real Telegraph challenge
@@ -99,3 +99,7 @@ After every passed/failed major gate:
 2. update `state/CURRENT.yaml` milestone history + exact next gate;
 3. update `state/HANDOVER.yaml` so a new conversation can resume without reconstructing state from chat;
 4. reconcile PRD/spec/plan/tasks if the discovery class requires it.
+
+## Reconciliation record
+
+`SKEPTARA_PRD_V0_1_HUMAN_LOCK` passed on 2026-09-06. Product/source setup is closed except collaborator/frontend contract release. T0 is now the exact active technical gate.
