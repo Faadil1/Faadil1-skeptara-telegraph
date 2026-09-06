@@ -1,13 +1,13 @@
 canonical_state:
   protocol_version: 1
   system: SKEPTARA_TELEGRAPH_TRACK3
-  version: 0.1.2-prd-spec-handover-ready
+  version: 0.2.0-prd-locked-t0-open
   date: 2026-09-06
   source_of_truth: GITHUB
   repository: Faadil1/Faadil1-skeptara-telegraph
   branch: main
 
-  lifecycle_status: REPOSITORY_BOOTSTRAPPED__PRD_V0_1_DRAFT_READY__SPEC_KIT_DERIVED_DRAFT_READY__DURABLE_HANDOVER_READY__HUMAN_LOCK_PENDING
+  lifecycle_status: PRD_V0_1_HUMAN_LOCK_PASS__SPEC_KIT_RECONCILED__T0_REAL_TELEGRAPH_CHALLENGE_OPEN
 
   authority:
     project_go: HUMAN_GO_RECEIVED
@@ -95,14 +95,31 @@ canonical_state:
       status: PASS
       date: 2026-09-06
       evidence: state/HANDOVER.yaml
+    - id: SKEPTARA_PRD_V0_1_HUMAN_LOCK
+      status: PASS
+      date: 2026-09-06
+      authority: HUMAN_PROJECT_OWNER
+      evidence: evidence/prd-v0.1-human-lock/README.md
+    - id: SPEC_KIT_RECONCILIATION_AFTER_PRD_V0_1_LOCK
+      status: PASS
+      date: 2026-09-06
+      result: PRODUCT_CONTRACT_CONVERGED_NO_PRODUCT_INTENT_EXPANSION
+      evidence:
+        - spec-kit/constitution.md
+        - spec-kit/spec.md
+        - spec-kit/plan.md
+        - spec-kit/tasks.md
+        - spec-kit/convergence.md
 
   product_source:
-    status: PRD_V0_1_DRAFT_READY_FOR_HUMAN_LOCK
+    status: PRD_READY
+    revision: v0.1
     path: product/PRD.md
     living: true
     frozen_after_initial_approval: false
     historical_revisions_required: true
-    approval_state: PENDING_HUMAN_LOCK
+    approval_state: HUMAN_LOCK_PASS
+    approval_evidence: evidence/prd-v0.1-human-lock/README.md
 
   spec_kit:
     upstream_reference: github/spec-kit
@@ -110,7 +127,8 @@ canonical_state:
     role: DERIVED_EXECUTION_LAYER
     local_path: spec-kit/
     authority: NONE_OVER_PRODUCT_INTENT
-    status: DERIVED_DRAFT_READY_PENDING_PRODUCT_SOURCE_LOCK
+    status: DERIVED_READY_RECONCILED_TO_PRD_V0_1
+    convergence: PRODUCT_CONTRACT_CONVERGED_IMPLEMENTATION_NOT_COMPLETE
     artifacts:
       constitution: spec-kit/constitution.md
       specification: spec-kit/spec.md
@@ -125,9 +143,9 @@ canonical_state:
     evidence_index: evidence/README.md
 
   build_gates:
-    prd_v0_1_human_lock: PENDING
-    spec_plan_tasks_ready: DERIVED_DRAFT_READY_BLOCKED_ON_PRD_LOCK
-    t0_real_telegraph_challenge: BLOCKED_ON_PRD_LOCK
+    prd_v0_1_human_lock: PASS
+    spec_plan_tasks_ready: PASS_RECONCILED
+    t0_real_telegraph_challenge: OPEN
     t1_deterministic_risk_scorer: NOT_STARTED
     t2_independent_auditor: NOT_STARTED
     t3_fail_closed_merge_gate: NOT_STARTED
@@ -139,8 +157,22 @@ canonical_state:
   collaborator:
     benita_message_sent: false
     benita_scope_locked: DRAFTED_IN_PLAN_NOT_RELEASED
-    release_condition: PRD_V0_1_LOCK_AND_FRONTEND_DATA_CONTRACT_READY
-    reason: WAIT_UNTIL_PRODUCT_CONTRACT_IS_HUMAN_LOCKED_BEFORE_ASSIGNING_DEEP_UI_WORK
+    release_condition: FRONTEND_DATA_CONTRACT_READY
+    reason: PRD_IS_LOCKED_BUT_FRONTEND_DATA_CONTRACT_MUST_STABILIZE_BEFORE_DEEP_UI_HANDOFF
+
+  t0_contract:
+    gate: SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE
+    status: OPEN
+    required_proof:
+      - discover live relevant Telegraph intents/miners
+      - confirm current Telegraph Engine/MCP route
+      - execute at least one genuine paid challenge call
+      - capture only actually exposed intent/miner/cost/provenance fields
+      - normalize one real EvidenceItem
+      - prove payment/source failure is fail-closed
+      - persist evidence under evidence/t0-real-telegraph/
+    stop_rule: >-
+      If live Telegraph capabilities cannot support the dependency/security challenge quickly, classify the discovery. If it materially changes the hero vertical or mechanism, revise the living PRD with human approval before continuing. Do not substitute mocks for submission-path evidence.
 
   state_persistence_rule:
     after_every_major_gate: UPDATE_CURRENT_AND_HANDOVER
@@ -155,7 +187,7 @@ canonical_state:
       - docs/ARCHITECTURE.md
     repository_truth_outranks_chat_memory: true
 
-  exact_next_gate: SKEPTARA_PRD_V0_1_HUMAN_LOCK
-  exact_next_owner: HUMAN_PROJECT_OWNER
+  exact_next_gate: SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE
+  exact_next_owner: CHATGPT_ORCHESTRATOR_PLUS_HUMAN_LOCAL_SECRET_BOUNDARY
   exact_next_action: >-
-    Review product/PRD.md v0.1. If approved, promote product source to PRD_READY, reconcile derived Spec Kit artifacts without product-intent expansion, update CURRENT and HANDOVER, then open SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE. Do not begin deep UI polish or protected GitHub merge execution before those gates.
+    Execute the bounded T0 Telegraph spike: discover current live intents/miners and the working Engine/MCP route, then use a local/server-only burner wallet to perform one genuine paid challenge call without exposing the key to Git, browser code, or chat. Capture only real returned metadata, normalize one EvidenceItem, exercise a payment/source failure path as fail-closed, persist evidence, classify discoveries, and update CURRENT + HANDOVER before claiming T0 PASS.
