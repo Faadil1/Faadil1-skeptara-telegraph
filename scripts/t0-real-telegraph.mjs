@@ -1,7 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import crypto from "node:crypto";
-import { wrapFetchWithPaymentFromConfig } from "@x402/fetch";
+import { wrapFetchWithPayment, x402Client } from "@x402/fetch";
 import { ExactEvmScheme, toClientEvmSigner } from "@x402/evm";
 import { privateKeyToAccount } from "viem/accounts";
 
@@ -27,6 +27,19 @@ function normalizePrivateKey(value) {
     normalized = `0x${normalized}`;
   }
   return normalized;
+}
+
+function decodeBase64JsonHeader(value) {
+  if (!value) return null;
+  try {
+    const decoded = Buffer.from(value, "base64").toString("utf8");
+    return JSON.parse(decoded);
+  } catch (error) {
+    return {
+      decode_error: error instanceof Error ? error.message : String(error),
+      encoded_length: value.length,
+    };
+  }
 }
 
 const privateKey = normalizePrivateKey(rawPrivateKey);
@@ -63,6 +76,18 @@ async function parseResponseBody(res) {
   const text = await res.text();
   if (!text) return null;
   try { return JSON.parse(text); } catch { return { raw_text: text }; }
+}
+
+function requestInit() {
+  return {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      accept: "application/json",
+    },
+    body: JSON.stringify({ query }),
+    signal: AbortSignal.timeout(60000),
+  };
 }
 
 const preflight = {
@@ -108,99 +133,174 @@ if (!preflight.ok) {
   process.exitCode = 3;
 } else {
   const account = privateKeyToAccount(privateKey);
-  const paidFetch = wrapFetchWithPaymentFromConfig(fetch, {
-    schemes: [
-      {
-        network: evmNetwork,
-        client: new ExactEvmScheme(toClientEvmSigner(account)),
-      },
-    ],
-    policies: [
-      (_version, requirements) =>
-        requirements.filter(
-          (requirement) =>
-            requirement.network === evmNetwork &&
-            /^\d+$/.test(requirement.amount) &&
-            BigInt(requirement.amount) <= maxPaymentAtomic,
-        ),
-    ],
-  });
 
-  const paidStartedAt = new Date().toISOString();
+  // First inspect the x402 quote without authorizing any payment. This gives us
+  // an auditable network/amount/asset/payTo contract before the paid retry.
+  let eligibleRequirement = null;
   try {
-    const res = await paidFetch(`${engineUrl}/v1/ask`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        accept: "application/json",
-      },
-      body: JSON.stringify({ query }),
-      signal: AbortSignal.timeout(60000),
-    });
-    const body = await parseResponseBody(res);
+    const quoteRes = await fetch(`${engineUrl}/v1/ask`, requestInit());
+    const quoteBody = await parseResponseBody(quoteRes);
+    const requiredHeader = quoteRes.headers.get("payment-required");
+    const responseHeader = quoteRes.headers.get("payment-response");
+    const paymentRequired = decodeBase64JsonHeader(requiredHeader);
+    const paymentResponse = decodeBase64JsonHeader(responseHeader);
 
-    const settlementHeader = res.headers.get("payment-response");
-    const paidCall = {
+    const quoteEvidence = {
       gate: "SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE",
-      phase: "PAID_CHALLENGE",
-      started_at: paidStartedAt,
-      completed_at: new Date().toISOString(),
+      phase: "X402_QUOTE_PREFLIGHT",
+      checked_at: new Date().toISOString(),
       engine_url: engineUrl,
-      query,
-      http_status: res.status,
-      ok: res.ok,
-      payment_response_header_present: Boolean(settlementHeader),
-      response: body,
+      http_status: quoteRes.status,
+      payment_required_header_present: Boolean(requiredHeader),
+      payment_response_header_present: Boolean(responseHeader),
+      payment_required: paymentRequired,
+      payment_response: paymentResponse,
+      response: quoteBody,
     };
-    assertNoSecretLeak(paidCall);
-    await writeJson("02-paid-challenge.json", paidCall);
+    assertNoSecretLeak(quoteEvidence);
+    await writeJson("02-x402-quote.json", quoteEvidence);
 
-    if (!res.ok) {
-      throw new Error(`Telegraph paid challenge returned HTTP ${res.status}`);
+    if (quoteRes.status !== 402 || !paymentRequired || !Array.isArray(paymentRequired.accepts)) {
+      throw new Error("X402_QUOTE_INVALID: expected HTTP 402 with a decodable PAYMENT-REQUIRED accepts[] envelope.");
     }
 
-    const challengeId = crypto.randomUUID();
-    const evidenceItem = {
-      challenge_id: challengeId,
-      intent: body?.intent ?? null,
-      miner_id: body?.miner_id ?? body?.miner_used ?? null,
-      miner_name: body?.miner_name ?? null,
-      endpoint: body?.endpoint ?? null,
-      signal_hash: body?.signal_hash ?? null,
-      request_timestamp: paidStartedAt,
-      response_timestamp: body?.timestamp ?? new Date().toISOString(),
-      cost_usd: body?.cost_usd ?? null,
-      duration_ms: body?.duration_ms ?? null,
-      reasoning: body?.reasoning ?? null,
-      source_provenance: body?.source_provenance ?? null,
-      settlement_header_present: Boolean(settlementHeader),
-      normalized_finding_type: "T0_UNCLASSIFIED_RAW_RESULT",
-      materiality: "AMBIGUOUS",
-      raw_result: body?.result ?? body,
-      t0_note: "Normalization proof only. This EvidenceItem does not by itself authorize a GitHub merge.",
-    };
-    assertNoSecretLeak(evidenceItem);
-    await writeJson("03-normalized-evidence-item.json", evidenceItem);
+    eligibleRequirement = paymentRequired.accepts.find((requirement) =>
+      requirement &&
+      requirement.scheme === "exact" &&
+      requirement.network === evmNetwork &&
+      typeof requirement.amount === "string" &&
+      /^\d+$/.test(requirement.amount) &&
+      BigInt(requirement.amount) <= maxPaymentAtomic
+    ) ?? null;
 
-    console.log("[Skeptara T0] real paid Telegraph challenge: PASS");
-    console.log(`[Skeptara T0] miner: ${evidenceItem.miner_id ?? "not exposed"}`);
-    console.log(`[Skeptara T0] intent: ${evidenceItem.intent ?? "not exposed"}`);
-    console.log(`[Skeptara T0] cost_usd: ${evidenceItem.cost_usd ?? "not exposed"}`);
-    console.log(`[Skeptara T0] signal_hash: ${evidenceItem.signal_hash ?? "not exposed"}`);
-    console.log(`[Skeptara T0] evidence: ${outDir}`);
+    if (!eligibleRequirement) {
+      const rejection = {
+        gate: "SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE",
+        phase: "X402_QUOTE_PREFLIGHT",
+        outcome: "ESCALATE",
+        reason_code: "NO_ELIGIBLE_BOUNDED_PAYMENT_REQUIREMENT",
+        network_required: evmNetwork,
+        max_payment_atomic: maxPaymentAtomic.toString(),
+        observed_accepts: paymentRequired.accepts,
+        at: new Date().toISOString(),
+      };
+      assertNoSecretLeak(rejection);
+      await writeJson("03-x402-quote-rejected.json", rejection);
+      throw new Error("No x402 payment requirement fits Skeptara's Base Sepolia + $0.10 safety boundary.");
+    }
+
+    console.log(`[Skeptara T0] x402 quote: ${eligibleRequirement.amount} atomic USDC on ${eligibleRequirement.network}`);
   } catch (error) {
     const failure = {
       gate: "SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE",
-      phase: "PAID_CHALLENGE",
+      phase: "X402_QUOTE_PREFLIGHT",
       outcome: "ESCALATE",
-      reason_code: "TELEGRAPH_PAID_CALL_FAILED",
+      reason_code: "X402_QUOTE_PREFLIGHT_FAILED",
       at: new Date().toISOString(),
       error: error instanceof Error ? error.message : String(error),
     };
     assertNoSecretLeak(failure);
-    await writeJson("02-paid-challenge-failure.json", failure);
-    console.error("[Skeptara T0] paid challenge failed => ESCALATE (fail closed)");
+    await writeJson("03-x402-quote-failure.json", failure);
+    console.error("[Skeptara T0] x402 quote preflight failed => ESCALATE (fail closed)");
     process.exitCode = 4;
+  }
+
+  if (eligibleRequirement) {
+    // Match Telegraph's official MCP client construction exactly. The bounded
+    // price/network check already happened above, so no custom SDK policy is
+    // inserted into the payment transport itself.
+    const evmSigner = toClientEvmSigner(account);
+    const client = x402Client.fromConfig({
+      schemes: [
+        {
+          network: evmNetwork,
+          client: new ExactEvmScheme(evmSigner),
+        },
+      ],
+    });
+    const paidFetch = wrapFetchWithPayment(fetch, client);
+
+    const paidStartedAt = new Date().toISOString();
+    try {
+      const res = await paidFetch(`${engineUrl}/v1/ask`, requestInit());
+      const body = await parseResponseBody(res);
+
+      const requiredHeader = res.headers.get("payment-required");
+      const settlementHeader = res.headers.get("payment-response");
+      const decodedRequirement = decodeBase64JsonHeader(requiredHeader);
+      const decodedSettlement = decodeBase64JsonHeader(settlementHeader);
+
+      const paidCall = {
+        gate: "SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE",
+        phase: "PAID_CHALLENGE",
+        started_at: paidStartedAt,
+        completed_at: new Date().toISOString(),
+        engine_url: engineUrl,
+        query,
+        http_status: res.status,
+        ok: res.ok,
+        payment_required_header_present: Boolean(requiredHeader),
+        payment_response_header_present: Boolean(settlementHeader),
+        payment_required: decodedRequirement,
+        payment_response: decodedSettlement,
+        response: body,
+      };
+      assertNoSecretLeak(paidCall);
+      await writeJson("03-paid-challenge.json", paidCall);
+
+      if (!res.ok) {
+        const settlementReason = decodedSettlement?.errorReason || decodedSettlement?.errorMessage || null;
+        throw new Error(
+          settlementReason
+            ? `Telegraph paid challenge returned HTTP ${res.status}; settlement=${settlementReason}`
+            : `Telegraph paid challenge returned HTTP ${res.status}`,
+        );
+      }
+
+      const challengeId = crypto.randomUUID();
+      const evidenceItem = {
+        challenge_id: challengeId,
+        intent: body?.intent ?? null,
+        miner_id: body?.miner_id ?? body?.miner_used ?? null,
+        miner_name: body?.miner_name ?? null,
+        endpoint: body?.endpoint ?? null,
+        signal_hash: body?.signal_hash ?? null,
+        request_timestamp: paidStartedAt,
+        response_timestamp: body?.timestamp ?? new Date().toISOString(),
+        cost_usd: body?.cost_usd ?? null,
+        duration_ms: body?.duration_ms ?? null,
+        reasoning: body?.reasoning ?? null,
+        source_provenance: body?.source_provenance ?? null,
+        settlement: decodedSettlement,
+        normalized_finding_type: "T0_UNCLASSIFIED_RAW_RESULT",
+        materiality: "AMBIGUOUS",
+        raw_result: body?.result ?? body,
+        t0_note: "Normalization proof only. This EvidenceItem does not by itself authorize a GitHub merge.",
+      };
+      assertNoSecretLeak(evidenceItem);
+      await writeJson("04-normalized-evidence-item.json", evidenceItem);
+
+      console.log("[Skeptara T0] real paid Telegraph challenge: PASS");
+      console.log(`[Skeptara T0] miner: ${evidenceItem.miner_id ?? "not exposed"}`);
+      console.log(`[Skeptara T0] intent: ${evidenceItem.intent ?? "not exposed"}`);
+      console.log(`[Skeptara T0] cost_usd: ${evidenceItem.cost_usd ?? "not exposed"}`);
+      console.log(`[Skeptara T0] signal_hash: ${evidenceItem.signal_hash ?? "not exposed"}`);
+      console.log(`[Skeptara T0] settlement success: ${decodedSettlement?.success ?? "not exposed"}`);
+      console.log(`[Skeptara T0] evidence: ${outDir}`);
+    } catch (error) {
+      const failure = {
+        gate: "SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE",
+        phase: "PAID_CHALLENGE",
+        outcome: "ESCALATE",
+        reason_code: "TELEGRAPH_PAID_CALL_FAILED",
+        at: new Date().toISOString(),
+        error: error instanceof Error ? error.message : String(error),
+      };
+      assertNoSecretLeak(failure);
+      await writeJson("04-paid-challenge-failure.json", failure);
+      console.error(`[Skeptara T0] paid challenge failed => ESCALATE (fail closed): ${failure.error}`);
+      process.exitCode = 5;
+    }
   }
 }
 
@@ -220,6 +320,6 @@ try {
     observed_error: error instanceof Error ? error.message : String(error),
   };
   assertNoSecretLeak(negative);
-  await writeJson("04-negative-source-unavailable.json", negative);
+  await writeJson("05-negative-source-unavailable.json", negative);
   console.log("[Skeptara T0] negative path SOURCE_UNAVAILABLE => ESCALATE: PASS");
 }
