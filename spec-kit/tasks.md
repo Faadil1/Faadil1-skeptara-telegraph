@@ -31,13 +31,16 @@ Status: DERIVED READY — subordinate to living PRD v0.1.
 - [x] T0.14 Decode/persist final `PAYMENT-RESPONSE` settlement result/error reason.
 - [x] T0.15 Run retry 006 and classify decoded result: `10000` atomic USDC on `eip155:84532`; settlement `invalid_exact_evm_insufficient_balance`.
 - [x] T0.16 Prove the payment blocker is insufficient Base Sepolia USDC balance, not route/key-format/product failure.
-- [x] T0.17 Record burner credential exposure incident and require rotation. *(Do not reuse or fund the exposed burner.)*
+- [x] T0.17 Record burner credential exposure incident and require rotation.
 - [x] T0.18 Harden Windows launcher so no terminal input is requested; valid clipboard key is auto-detected and clipboard is cleared.
-- [ ] T0.19 Create a fresh dedicated burner EVM account/wallet with a new private key.
-- [ ] T0.20 Fund only the fresh PUBLIC address with Base Sepolia test USDC from the Circle faucet.
-- [ ] T0.21 Run retry 007 with hardened clipboard-only launcher and fresh burner.
-- [ ] T0.22 Obtain one successful genuine x402-paid Telegraph inference.
-- [ ] T0.23 Persist successful T0 evidence + normalized EvidenceItem + CURRENT/HANDOVER update.
+- [x] T0.19 Create a fresh dedicated burner EVM account/wallet with a new private key.
+- [ ] T0.20 Fund the fresh PUBLIC address with Base Sepolia test USDC. *(Attempt 007 funded 20 test USDC on Arc Testnet instead; wrong chain.)*
+- [x] T0.21 Run retry 007 with hardened clipboard-only launcher and fresh burner. *(Fail-closed: Arc Testnet funding did not satisfy Base Sepolia balance.)*
+- [x] T0.22 Classify Attempt 007 root cause as wrong-testnet faucet selection: Arc Testnet vs required Base Sepolia.
+- [ ] T0.23 Fund the same fresh burner PUBLIC address with Circle faucet `USDC` on `Base Sepolia` explicitly.
+- [ ] T0.24 Run retry 008 with same fresh burner through hardened clipboard-only launcher.
+- [ ] T0.25 Obtain one successful genuine x402-paid Telegraph inference.
+- [ ] T0.26 Persist successful T0 evidence + normalized EvidenceItem + CURRENT/HANDOVER update.
 
 ## T1 — Deterministic policy core
 
@@ -117,4 +120,4 @@ After every passed/failed major gate:
 
 ## Reconciliation record
 
-Attempt 006 proved the live x402 requirement is `10000` atomic USDC (`0.01 USDC`) on Base Sepolia (`eip155:84532`) and decoded the settlement failure as `invalid_exact_evm_insufficient_balance`. During that retry, the burner private key was entered into visible terminal text and later shared in chat, so that burner must be treated as compromised and must not be funded or reused. The PowerShell launcher is now hardened to require no terminal input and auto-detect the clipboard key. Exact next gate: `SKEPTARA_T0_ROTATE_EXPOSED_BURNER_AND_FUND_TEST_USDC_RETRY_007`.
+Attempt 007 used a fresh burner and the hardened clipboard-only launcher correctly. Circle faucet funding succeeded for 20 test USDC, but the transaction was on Arc Testnet. Telegraph's live x402 quote requires `10000` atomic USDC (`0.01 USDC`) on Base Sepolia (`eip155:84532`), so settlement correctly remained `invalid_exact_evm_insufficient_balance`. No product change is required. Exact next gate: `SKEPTARA_T0_FUND_FRESH_BURNER_BASE_SEPOLIA_AND_RETRY_008`.
