@@ -1,13 +1,13 @@
 canonical_state:
   protocol_version: 1
   system: SKEPTARA_TELEGRAPH_TRACK3
-  version: 0.2.2-t0-attempt-001-remediated
+  version: 0.2.3-t0-attempt-002-key-format-remediated
   date: 2026-09-06
   source_of_truth: GITHUB
   repository: Faadil1/Faadil1-skeptara-telegraph
   branch: main
 
-  lifecycle_status: PRD_V0_1_LOCKED__SPEC_KIT_RECONCILED__T0_ACTIVE__ATTEMPT_001_FAILED_STALE_ROUTE__REMEDIATED__LOCAL_RETRY_REQUIRED
+  lifecycle_status: PRD_V0_1_LOCKED__SPEC_KIT_RECONCILED__T0_ACTIVE__LIVE_DISCOVERY_CONFIRMED__LOCAL_KEY_FORMAT_BLOCK_REMEDIATED__RETRY_003_REQUIRED
 
   authority:
     project_go: HUMAN_GO_RECEIVED
@@ -55,24 +55,11 @@ canonical_state:
     - id: MULTI_LLM_COLLISION_RED_TEAM
       status: PASS_WITH_PIVOTS
       date: 2026-09-06
-      result: ECONOMIC_VERIFICATION_CORE_AND_INDEPENDENT_AUDITOR_SURVIVED
     - id: PRODUCT_NAME_SCREEN
       status: PROVISIONAL_PASS
       date: 2026-09-06
       result: SKEPTARA_SELECTED
     - id: REPOSITORY_BOOTSTRAP
-      status: PASS
-      date: 2026-09-06
-    - id: LIVING_PRD_V0_1_DRAFT
-      status: PASS_DRAFT_READY_FOR_HUMAN_LOCK
-      date: 2026-09-06
-    - id: SPEC_KIT_DERIVATION_V0_1
-      status: PASS_DERIVED_DRAFT_READY
-      date: 2026-09-06
-    - id: ARCHITECTURE_AND_DECISION_BASELINE
-      status: PASS
-      date: 2026-09-06
-    - id: DURABLE_HANDOVER_BASELINE
       status: PASS
       date: 2026-09-06
     - id: SKEPTARA_PRD_V0_1_HUMAN_LOCK
@@ -83,66 +70,73 @@ canonical_state:
     - id: SPEC_KIT_RECONCILIATION_AFTER_PRD_V0_1_LOCK
       status: PASS
       date: 2026-09-06
-      result: PRODUCT_CONTRACT_CONVERGED_NO_PRODUCT_INTENT_EXPANSION
-    - id: SKEPTARA_T0_PREFLIGHT
-      status: PASS_PREFLIGHT_ONLY
-      date: 2026-09-06
     - id: SKEPTARA_T0_ATTEMPT_001
       status: FAIL_CLOSED_REMEDIATED
       date: 2026-09-06
-      result: FREE_DISCOVERY_FAILED_ON_STALE_13_237_89_59_8080_ROUTE__NEGATIVE_PATH_ESCALATE_PASS__NO_PAID_CALL_ATTEMPTED
-      discovery_class: execution_detail
-      product_change_required: false
+      result: STALE_ROUTE__NO_PAID_CALL__NEGATIVE_PATH_PASS
       evidence: evidence/t0-real-telegraph/ATTEMPT-001-STALE-ROUTE.md
     - id: SKEPTARA_T0_ROUTE_REMEDIATION_001
+      status: PASS
+      date: 2026-09-06
+      result: DEVNODE_HTTPS_ROUTE_APPLIED
+    - id: SKEPTARA_T0_ATTEMPT_002
+      status: FAIL_CLOSED_REMEDIATED_PENDING_RETRY
+      date: 2026-09-06
+      result: LIVE_FREE_DISCOVERY_PASS__PAID_CALL_NOT_ATTEMPTED__LOCAL_PRIVATE_KEY_FORMAT_INVALID__NEGATIVE_PATH_PASS
+      discovery_class: execution_detail
+      product_change_required: false
+      evidence: evidence/t0-real-telegraph/ATTEMPT-002-DISCOVERY-PASS-KEY-FORMAT-BLOCK.md
+    - id: SKEPTARA_T0_KEY_INPUT_REMEDIATION_001
       status: PASS_CODE_REMEDIATED_PENDING_LOCAL_RETRY
       date: 2026-09-06
-      result: CURRENT_OFFICIAL_DEVNODE_ROUTE_APPLIED
-      evidence:
-        - scripts/t0-real-telegraph.mjs
-        - .env.example
+      result: ACCEPT_64_HEX_WITH_OR_WITHOUT_0X__TRIM_WHITESPACE__STRIP_SURROUNDING_QUOTES__SAFE_LENGTH_DIAGNOSTIC
+      evidence: scripts/t0-real-telegraph.mjs
+
+  t0_contract:
+    gate: SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE
+    status: OPEN_RETRY_REQUIRED
+    route:
+      base_url: https://devnode.telegraphprotocol.com
+      free_discovery: GET_https://devnode.telegraphprotocol.com/api/miners
+      engine_base: https://devnode.telegraphprotocol.com/engine
+      paid_auto_routed_inference: POST_https://devnode.telegraphprotocol.com/engine/v1/ask
+      payment_network: Base_Sepolia_eip155_84532
+      payment_asset: USDC
+    attempt_002:
+      runtime: HUMAN_PERSONAL_WINDOWS_MACHINE
+      free_discovery: PASS
+      route_reachability: PROVEN_LOCAL
+      sampled_relevant_intents:
+        - FACT_CHECK
+        - NEWS_HEADLINES
+        - URL_SCAN
+      paid_inference_attempted: false
+      block_reason: LOCAL_BURNER_PRIVATE_KEY_FORMAT_INVALID
+      negative_source_unavailable_semantics: PASS_ESCALATE
+      classification: execution_detail
+      evidence: evidence/t0-real-telegraph/ATTEMPT-002-DISCOVERY-PASS-KEY-FORMAT-BLOCK.md
+    key_input_remediation:
+      script: scripts/t0-real-telegraph.mjs
+      status: COMMITTED
+      accepted_local_forms:
+        - 64_HEX_WITHOUT_PREFIX
+        - 0x_PLUS_64_HEX
+        - ABOVE_WITH_SURROUNDING_SINGLE_OR_DOUBLE_QUOTES
+      invalid_input_diagnostic: TRIMMED_LENGTH_ONLY_NO_SECRET_VALUE
+    required_proof_remaining:
+      - correct exported burner EVM private key loaded locally
+      - at least one genuine x402-paid Telegraph challenge succeeds
+      - actual exposed miner_intent_cost_signal_hash_or_other_metadata is captured without fabrication
+      - one normalized real EvidenceItem is produced
+      - sanitized evidence is reviewed and persisted
+      - hero vertical relevance of live evidence is qualified after paid result
+    stop_rule: >-
+      If live Telegraph capability cannot support the dependency-security hero vertical quickly, classify the discovery. A material hero-vertical or mechanism change requires living-PRD approval before continuing. Never substitute mocks on the submission path.
 
   spec_kit:
     status: DERIVED_READY_RECONCILED_TO_PRD_V0_1
     convergence: PRODUCT_CONTRACT_CONVERGED_IMPLEMENTATION_NOT_COMPLETE
     authority: NONE_OVER_PRODUCT_INTENT
-
-  t0_contract:
-    gate: SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE
-    status: OPEN_RETRY_REQUIRED
-    attempt_001:
-      runtime: HUMAN_PERSONAL_WINDOWS_MACHINE
-      free_discovery: FAILED
-      paid_inference_attempted: false
-      negative_source_unavailable_semantics: PASS_ESCALATE
-      root_cause: STALE_ROUTE_BASELINE_IN_HARNESS
-      classification: execution_detail
-      evidence: evidence/t0-real-telegraph/ATTEMPT-001-STALE-ROUTE.md
-    current_official_route_baseline:
-      source: docs.telegraphprotocol.com
-      source_updates:
-        engine_inference: 2026-08-20
-        x402_inference: 2026-08-13
-      base_url: https://devnode.telegraphprotocol.com
-      free_discovery: GET_https://devnode.telegraphprotocol.com/api/miners
-      engine_base: https://devnode.telegraphprotocol.com/engine
-      paid_auto_routed_inference: POST_https://devnode.telegraphprotocol.com/engine/v1/ask
-      documented_payment_network: Base_Sepolia_eip155_84532
-      documented_payment_asset: USDC
-    harness:
-      path: scripts/t0-real-telegraph.mjs
-      status: REMEDIATED_FOR_CURRENT_ROUTE
-      command: npm_run_t0
-      evidence_output: evidence/t0-real-telegraph/runtime/<timestamp>/
-    required_proof_remaining:
-      - current official free discovery succeeds locally
-      - at least one genuine x402-paid Telegraph challenge succeeds
-      - actual exposed miner_intent_cost_signal_hash_or_other_metadata is captured without fabrication
-      - one normalized real EvidenceItem is produced
-      - negative failure semantics remain fail_closed
-      - sanitized evidence is reviewed and persisted
-    stop_rule: >-
-      If current live Telegraph capability cannot support the dependency-security hero vertical quickly, classify the discovery. A material hero-vertical or mechanism change requires living-PRD approval before continuing. Never substitute mocks on the submission path.
 
   build_gates:
     prd_v0_1_human_lock: PASS
@@ -174,7 +168,7 @@ canonical_state:
       - spec-kit/tasks.md
       - docs/ARCHITECTURE.md
 
-  exact_next_gate: SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE_RETRY_002
+  exact_next_gate: SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE_RETRY_003
   exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_REVIEW
   exact_next_action: >-
-    Pull the remediated repository on the personal machine. Re-inject the burner private key only into the local PowerShell process and run npm run t0 again. The harness now targets https://devnode.telegraphprotocol.com/api/miners and https://devnode.telegraphprotocol.com/engine/v1/ask. Return only sanitized terminal output/evidence. Do not start T1 or Benita deep UI work until T0 is reviewed.
+    Pull main. Export the actual private key of the burner EVM account locally; do not use the wallet password, public address, or seed phrase. The remediated harness accepts 64 hex characters with or without 0x and strips whitespace/quotes locally. Inject the key into the current PowerShell process, run npm run t0, and return only sanitized terminal output/evidence. Do not start T1 or Benita deep UI work until T0 is reviewed.
