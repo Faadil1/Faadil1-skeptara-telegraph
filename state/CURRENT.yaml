@@ -1,13 +1,13 @@
 canonical_state:
   protocol_version: 1
   system: SKEPTARA_TELEGRAPH_TRACK3
-  version: 0.2.8-t0-insufficient-balance-key-rotation-required
+  version: 0.2.9-t0-attempt-007-wrong-testnet-funding
   date: 2026-09-06
   source_of_truth: GITHUB
   repository: Faadil1/Faadil1-skeptara-telegraph
   branch: main
 
-  lifecycle_status: PRD_V0_1_LOCKED__SPEC_KIT_RECONCILED__T0_ACTIVE__X402_QUOTE_PROVEN__INSUFFICIENT_BALANCE_PROVEN__EXPOSED_BURNER_ROTATION_REQUIRED
+  lifecycle_status: PRD_V0_1_LOCKED__SPEC_KIT_RECONCILED__T0_ACTIVE__FRESH_BURNER_CREATED__ARC_TESTNET_USDC_FUNDED__BASE_SEPOLIA_BALANCE_STILL_INSUFFICIENT__RETRY_008_REQUIRED
 
   authority:
     product_intent_source: product/PRD.md
@@ -51,20 +51,26 @@ canonical_state:
       product_change_required: false
       evidence: evidence/t0-real-telegraph/ATTEMPT-006-INSUFFICIENT-BALANCE-AND-KEY-EXPOSURE.md
     - id: SKEPTARA_BURNER_CREDENTIAL_INCIDENT_001
-      status: ROTATION_REQUIRED
+      status: ROTATED
       date: 2026-09-06
-      result: PRIVATE_KEY_WAS_ENTERED_IN_VISIBLE_TERMINAL_PROMPT_AND_SHARED_IN_CHAT__DO_NOT_REUSE_OR_FUND
+      result: PRIOR_EXPOSED_BURNER_RETIRED__FRESH_BURNER_CREATED
       repository_secret_recorded: false
-      evidence: evidence/t0-real-telegraph/ATTEMPT-006-INSUFFICIENT-BALANCE-AND-KEY-EXPOSURE.md
     - id: SKEPTARA_T0_CLIPBOARD_LAUNCHER_HARDENING_002
       status: PASS
       date: 2026-09-06
       result: NO_TERMINAL_INPUT_PROMPT__AUTO_DETECT_VALID_CLIPBOARD_KEY__CLEAR_CLIPBOARD__PROCESS_ONLY_SECRET
       evidence: scripts/t0-from-clipboard.ps1
+    - id: SKEPTARA_T0_ATTEMPT_007
+      status: FAIL_CLOSED_RETRY_REQUIRED
+      date: 2026-09-06
+      result: FRESH_BURNER__HARDENED_LAUNCHER_PASS__20_TEST_USDC_FUNDED_ON_ARC_TESTNET__TELEGRAPH_QUOTE_REQUIRES_BASE_SEPOLIA__SETTLEMENT_INVALID_EXACT_EVM_INSUFFICIENT_BALANCE__NEGATIVE_PATH_PASS
+      discovery_class: execution_detail
+      product_change_required: false
+      evidence: evidence/t0-real-telegraph/ATTEMPT-007-WRONG-TESTNET-FUNDING.md
 
   t0_contract:
     gate: SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE
-    status: OPEN_ROTATE_AND_FUND_FRESH_BURNER
+    status: OPEN_CORRECT_NETWORK_FUNDING_REQUIRED
     route:
       base_url: https://devnode.telegraphprotocol.com
       free_discovery: GET_https://devnode.telegraphprotocol.com/api/miners
@@ -76,24 +82,29 @@ canonical_state:
       proven_amount_atomic: 10000
       proven_amount_usdc: 0.01
       max_payment_atomic: 100000
-      settlement_reason_attempt_006: invalid_exact_evm_insufficient_balance
+      settlement_reason_attempt_007: invalid_exact_evm_insufficient_balance
     proven:
       live_discovery_on_user_machine: true
       x402_quote_decoded: true
       paid_transport_stage_reached: true
-      insufficient_balance_root_cause: true
       fail_closed: PASS
       negative_source_unavailable_semantics: PASS_ESCALATE
+      fresh_burner_created: true
+      hardened_launcher_secret_boundary: PASS
+      circle_faucet_transfer_succeeded: true
+      circle_faucet_transfer_network: Arc_Testnet
+      telegraph_required_network: Base_Sepolia
+      wrong_network_funding_root_cause: true
     security_boundary:
-      exposed_burner_credential_status: COMPROMISED_DO_NOT_REUSE_OR_FUND
-      new_burner_required: true
+      prior_exposed_burner_status: COMPROMISED_DO_NOT_REUSE_OR_FUND
+      fresh_burner_status: ACTIVE_FOR_T0
+      fresh_private_key_printed_or_shared: false
       private_key_in_repo: false
-      private_key_in_chat_or_terminal_transcript: EXPOSED_BY_USER_INPUT
       launcher_hardened_against_terminal_paste: true
     remaining_proof:
-      - create a fresh dedicated burner EVM account/wallet
-      - fund only the fresh public address with Base Sepolia test USDC
-      - use the hardened clipboard-only launcher with the fresh private key
+      - fund the fresh burner PUBLIC address with Base Sepolia test USDC, not Arc Testnet USDC
+      - confirm Base Sepolia USDC transfer success
+      - rerun hardened clipboard-only launcher with the same fresh burner
       - obtain one genuine successful Telegraph x402 inference
       - normalize one real EvidenceItem
       - review hero-vertical relevance of live result
@@ -102,7 +113,7 @@ canonical_state:
   build_gates:
     prd_v0_1_human_lock: PASS
     spec_plan_tasks_ready: PASS_RECONCILED
-    t0_real_telegraph_challenge: OPEN_ROTATE_AND_FUND_FRESH_BURNER
+    t0_real_telegraph_challenge: OPEN_CORRECT_NETWORK_FUNDING_REQUIRED
     t1_deterministic_risk_scorer: NOT_STARTED
     t2_independent_auditor: NOT_STARTED
     t3_fail_closed_merge_gate: NOT_STARTED
@@ -120,7 +131,7 @@ canonical_state:
     evidence_before_pass_claim: REQUIRED
     repository_truth_outranks_chat_memory: true
 
-  exact_next_gate: SKEPTARA_T0_ROTATE_EXPOSED_BURNER_AND_FUND_TEST_USDC_RETRY_007
+  exact_next_gate: SKEPTARA_T0_FUND_FRESH_BURNER_BASE_SEPOLIA_AND_RETRY_008
   exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_REVIEW
   exact_next_action: >-
-    Treat the previously used burner key as compromised because it appeared in visible terminal/chat text. Create a fresh dedicated burner EVM account or wallet, copy only its public address to the Circle Base Sepolia faucet, obtain test USDC, then git pull and run the hardened scripts/t0-from-clipboard.ps1. The helper now requires no terminal input: after it starts waiting, copy the fresh private key from the wallet and it will detect it automatically. Never paste a private key into PowerShell or chat.
+    Keep the fresh burner. In Circle's public faucet choose USDC and explicitly change Network from Arc Testnet to Base Sepolia before sending to the fresh burner's PUBLIC address. Confirm the resulting transaction is on Base Sepolia, then run scripts/t0-from-clipboard.ps1 with the same fresh private key via clipboard-only detection. Never paste the private key into PowerShell or chat.
