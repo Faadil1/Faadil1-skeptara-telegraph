@@ -5,7 +5,9 @@ import { wrapFetchWithPayment, x402Client } from "@x402/fetch";
 import { ExactEvmScheme, toClientEvmSigner } from "@x402/evm";
 import { privateKeyToAccount } from "viem/accounts";
 
-const engineUrl = (process.env.TELEGRAPH_ENGINE_URL || "http://13.237.89.59:8080").replace(/\/$/, "");
+const baseUrl = (process.env.TELEGRAPH_BASE_URL || "https://devnode.telegraphprotocol.com").replace(/\/$/, "");
+const engineUrl = (process.env.TELEGRAPH_ENGINE_URL || `${baseUrl}/engine`).replace(/\/$/, "");
+const discoveryUrl = process.env.TELEGRAPH_DISCOVERY_URL || `${baseUrl}/api/miners`;
 const evmNetwork = process.env.EVM_NETWORK || "eip155:*";
 const privateKey = process.env.TELEGRAPH_EVM_PRIVATE_KEY;
 const query = process.env.SKEPTARA_T0_QUERY ||
@@ -34,14 +36,17 @@ function assertNoSecretLeak(value) {
 const preflight = {
   gate: "SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE",
   phase: "FREE_DISCOVERY",
+  base_url: baseUrl,
+  discovery_url: discoveryUrl,
   engine_url: engineUrl,
+  route_baseline: "OFFICIAL_DOCS_2026-08-20_PLUS_X402_DOCS_2026-08-13",
   checked_at: new Date().toISOString(),
 };
 
 try {
-  const res = await fetch(`${engineUrl}/v1/subnets`, {
+  const res = await fetch(discoveryUrl, {
     headers: { accept: "application/json" },
-    signal: AbortSignal.timeout(8000),
+    signal: AbortSignal.timeout(10000),
   });
   const text = await res.text();
   let body;
@@ -57,10 +62,11 @@ try {
 assertNoSecretLeak(preflight);
 await writeJson("01-free-discovery.json", preflight);
 console.log("[Skeptara T0] free discovery:", preflight.ok ? "OK" : "FAILED");
+console.log(`[Skeptara T0] discovery URL: ${discoveryUrl}`);
 console.log(`[Skeptara T0] evidence: ${path.join(outDir, "01-free-discovery.json")}`);
 
 if (!preflight.ok) {
-  console.error("T0 cannot proceed to paid inference until the Engine discovery route is reachable.");
+  console.error("T0 cannot proceed to paid inference until the current official discovery route is reachable.");
   process.exitCode = 2;
 } else if (!privateKey || !/^0x[0-9a-fA-F]{64}$/.test(privateKey)) {
   console.error("TELEGRAPH_EVM_PRIVATE_KEY is missing or invalid. Configure a burner-wallet key only in your local/server environment; never paste it into chat or commit it.");
@@ -93,6 +99,7 @@ if (!preflight.ok) {
     let body;
     try { body = JSON.parse(text); } catch { body = { raw_text: text }; }
 
+    const settlementHeader = res.headers.get("payment-response");
     const paidCall = {
       gate: "SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE",
       phase: "PAID_CHALLENGE",
@@ -102,6 +109,7 @@ if (!preflight.ok) {
       query,
       http_status: res.status,
       ok: res.ok,
+      payment_response_header_present: Boolean(settlementHeader),
       response: body,
     };
     assertNoSecretLeak(paidCall);
@@ -115,14 +123,17 @@ if (!preflight.ok) {
     const evidenceItem = {
       challenge_id: challengeId,
       intent: body?.intent ?? null,
-      miner_used: body?.miner_used ?? null,
+      miner_id: body?.miner_id ?? body?.miner_used ?? null,
       miner_name: body?.miner_name ?? null,
       endpoint: body?.endpoint ?? null,
+      signal_hash: body?.signal_hash ?? null,
       request_timestamp: paidStartedAt,
       response_timestamp: body?.timestamp ?? new Date().toISOString(),
       cost_usd: body?.cost_usd ?? null,
       duration_ms: body?.duration_ms ?? null,
+      reasoning: body?.reasoning ?? null,
       source_provenance: body?.source_provenance ?? null,
+      settlement_header_present: Boolean(settlementHeader),
       normalized_finding_type: "T0_UNCLASSIFIED_RAW_RESULT",
       materiality: "AMBIGUOUS",
       raw_result: body?.result ?? body,
@@ -132,9 +143,10 @@ if (!preflight.ok) {
     await writeJson("03-normalized-evidence-item.json", evidenceItem);
 
     console.log("[Skeptara T0] real paid Telegraph challenge: PASS");
-    console.log(`[Skeptara T0] miner: ${evidenceItem.miner_used ?? "not exposed"}`);
+    console.log(`[Skeptara T0] miner: ${evidenceItem.miner_id ?? "not exposed"}`);
     console.log(`[Skeptara T0] intent: ${evidenceItem.intent ?? "not exposed"}`);
     console.log(`[Skeptara T0] cost_usd: ${evidenceItem.cost_usd ?? "not exposed"}`);
+    console.log(`[Skeptara T0] signal_hash: ${evidenceItem.signal_hash ?? "not exposed"}`);
     console.log(`[Skeptara T0] evidence: ${outDir}`);
   } catch (error) {
     const failure = {
