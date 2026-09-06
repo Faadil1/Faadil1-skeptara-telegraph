@@ -71,13 +71,14 @@ Local validation: **10/10 Node policy tests PASS**.
 - [x] T2.7 Implement replayable ChallengeResult with plan fingerprint, coverage, spend, evidence, reason codes and expiry.
 - [x] T2.8 Implement asymmetric stopping: `BLOCKING` evidence may stop early; PASS still requires full mandatory coverage.
 - [x] T2.9 Add secure local T2 runtime launcher. *(`scripts/t2-from-clipboard.ps1`, `scripts/t2-live-audit.mjs`)*
-- [x] T2.10 Add deterministic auditor tests: **9/9 PASS** in pre-commit-equivalent local validation. *(`tests/auditor.test.mjs`)*
+- [x] T2.10 Add deterministic auditor tests: **9/9 PASS** in isolated validation. *(`tests/auditor.test.mjs`)*
 - [x] T2.11 Persist T2 contract/implementation validation. *(`docs/T2_AUDITOR_CONTRACT.md`, `evidence/t2/OFFLINE-IMPLEMENTATION-VALIDATION.md`)*
-- [ ] T2.12 Pull main and run full repository `npm test` on the user machine.
-- [ ] T2.13 Bind the clean live T2 run to a truthful controlled GitHub action snapshot (real repo/PR/head SHA; no synthetic live evidence).
-- [ ] T2.14 Run one live clean MEDIUM audit through the hardened launcher; expected budget ceiling `20000` atomic USDC.
-- [ ] T2.15 Review and durably persist sanitized live T2 challenge record.
-- [ ] T2.16 Promote `SKEPTARA_T2_INDEPENDENT_AUDITOR_PASS` only if the live result satisfies the actual evidence/gate rules; do not force PASS if Telegraph finds counter-evidence or coverage is incomplete.
+- [x] T2.12 Pull main and run full repository `npm test` on the user machine: **19/19 PASS, 0 fail**.
+- [x] T2.13 Bind clean live T2 run to truthful controlled GitHub PR #1 with exact head SHA `73cf5bdd69163924228e3e21d67fa9f405d99904`. *(`demo/actions/clean-pr.json`)*
+- [x] T2.14 Create real clean dependency PR: isolated `lodash 4.17.20 -> 4.17.21` fixture on branch `demo/clean-lodash-upgrade`; merge not authorized.
+- [ ] T2.15 Run one live clean MEDIUM audit through the hardened launcher; budget ceiling `20000` atomic USDC.
+- [ ] T2.16 Review actual returned intents/findings/coverage/spend/outcome and durably persist sanitized live T2 challenge record.
+- [ ] T2.17 Promote `SKEPTARA_T2_INDEPENDENT_AUDITOR_PASS` only if the live result satisfies the actual evidence/gate rules; do not force PASS if Telegraph finds counter-evidence or coverage is incomplete.
 
 ## T3 — Protected merge gate
 
@@ -93,10 +94,10 @@ Local validation: **10/10 Node policy tests PASS**.
 
 ## T4 — Real two-case proof
 
-- [ ] T4.1 create/select clean dependency PR.
+- [x] T4.1 create/select clean dependency PR. *(Real PR #1 created and bound; not merged.)*
 - [ ] T4.2 create/select challengeable dependency PR.
 - [ ] T4.3 run real Telegraph evidence on clean case.
-- [ ] T4.4 run real Telegraph evidence on challenged case.
+- [x] T4.4 existing real Telegraph challenged evidence anchor available from T0 for `lodash@4.17.20`; a dedicated challenged PR is still required for full T4.
 - [ ] T4.5 execute bounded real merge only for PASS case if authorized.
 - [ ] T4.6 prove challenged case cannot merge.
 - [ ] T4.7 capture evidence/replay instructions.
@@ -136,6 +137,6 @@ After every passed/failed major gate:
 
 ## Reconciliation record
 
-T0 is `CLOSED_PASS` with real paid `CVE_LOOKUP` evidence and T1 is `PASS` with deterministic fail-closed policy. T2 core implementation is now complete offline: live capability discovery, bounded x402 adapter, counter-evidence planner, constructor/auditor context separation, spend/coverage accounting, evidence normalization, asymmetric BLOCK stop, ChallengeResult persistence shape, and 9/9 auditor tests. Product intent is unchanged (`execution_detail`).
+T0 is `CLOSED_PASS`; T1 is `PASS`; T2 core is implemented. The user's real repository clone now passes **19/19** tests. A truthful controlled GitHub clean dependency PR (`#1`) is open with exact head SHA `73cf5bdd69163924228e3e21d67fa9f405d99904`, and `demo/actions/clean-pr.json` binds the upcoming live audit to that real action. No merge is authorized by this setup.
 
-Exact next gate: `SKEPTARA_T2_LOCAL_FULL_TEST_AND_LIVE_CLEAN_AUDIT`.
+Exact next gate: `SKEPTARA_T2_LIVE_CLEAN_MEDIUM_AUDIT_REVIEW`.
