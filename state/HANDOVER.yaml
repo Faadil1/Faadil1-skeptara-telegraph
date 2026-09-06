@@ -9,8 +9,8 @@ handover:
   resume_rule: >-
     Read state/CURRENT.yaml first, then this HANDOVER, then product/PRD.md. The living PRD is canonical product intent; Spec Kit files are derived execution contracts. Repository truth outranks chat/runtime memory. After every major gate persist evidence and update BOTH CURRENT and HANDOVER.
 
-  current_milestone: T0_CLOSED_PASS__T1_PASS__T2_CORE_IMPLEMENTED__LIVE_CLEAN_AUDIT_NEXT
-  lifecycle_status: PRODUCT_CONTRACT_LOCKED__REAL_TELEGRAPH_PROVEN__DETERMINISTIC_POLICY_PROVEN__INDEPENDENT_AUDITOR_IMPLEMENTED__LIVE_GATE_OPEN
+  current_milestone: T0_CLOSED_PASS__T1_PASS__T2_CORE_IMPLEMENTED__USER_TEST_19_OF_19_PASS__REAL_CLEAN_PR_1_BOUND__LIVE_AUDIT_NEXT
+  lifecycle_status: PRODUCT_CONTRACT_LOCKED__REAL_TELEGRAPH_PROVEN__DETERMINISTIC_POLICY_PROVEN__INDEPENDENT_AUDITOR_IMPLEMENTED__REAL_CLEAN_ACTION_BOUND__LIVE_GATE_OPEN
 
   project:
     public_name: Skeptara
@@ -46,7 +46,7 @@ handover:
 
   t2_current:
     gate: SKEPTARA_T2_INDEPENDENT_AUDITOR_PASS
-    status: CORE_IMPLEMENTED_LIVE_VERIFICATION_REQUIRED
+    status: LIVE_CLEAN_AUDIT_REQUIRED
     contract: docs/T2_AUDITOR_CONTRACT.md
     implementation:
       auditor_core: src/auditor.mjs
@@ -65,15 +65,27 @@ handover:
       - missing capability/payment/runtime/coverage remains fail-closed
       - challenge record binds action fingerprint/head SHA/risk/plan/coverage/spend/expiry
       - persisted output is sanitized; payer/private secret fields removed
-    offline_validation:
-      auditor_tests: 9_OF_9_PASS
-      evidence: evidence/t2/OFFLINE-IMPLEMENTATION-VALIDATION.md
+    validation:
+      isolated_precommit_full_repo: 19_OF_19_PASS
+      user_machine_full_repo: 19_OF_19_PASS
+      evidence: evidence/t2/LOCAL-USER-VALIDATION-AND-CLEAN-PR.md
+    clean_case:
+      repository: Faadil1/Faadil1-skeptara-telegraph
+      pr_number: 1
+      branch: demo/clean-lodash-upgrade
+      head_sha: 73cf5bdd69163924228e3e21d67fa9f405d99904
+      base_branch: main
+      changed_file: demo/controlled-clean/package.json
+      dependency_change: lodash_4_17_20_TO_4_17_21
+      action_file: demo/actions/clean-pr.json
+      expected_policy_tier: MEDIUM
+      required_paths: 2
+      spend_cap_atomic: 20000
+      merge_authorized: false
     remaining_before_pass:
-      - user pulls latest main
-      - full `npm test` passes on the real repo clone
-      - truthful controlled GitHub clean dependency PR snapshot is persisted at demo/actions/clean-pr.json
+      - user pulls latest main containing demo/actions/clean-pr.json
       - live clean MEDIUM audit runs through scripts/t2-from-clipboard.ps1
-      - actual evidence, returned intents, spend and outcome are reviewed
+      - actual evidence, returned intents, spend, coverage and outcome are reviewed
       - sanitized live result is promoted to evidence/t2/
       - only then mark T2 PASS
 
@@ -98,7 +110,7 @@ handover:
     - SKEPTARA_BUILD_CANDIDATE_READY
     - HUMAN_PROTECTED_FINAL_SUBMISSION
 
-  exact_next_gate: SKEPTARA_T2_LOCAL_FULL_TEST_AND_LIVE_CLEAN_AUDIT
+  exact_next_gate: SKEPTARA_T2_LIVE_CLEAN_MEDIUM_AUDIT_REVIEW
   exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_REVIEW
   exact_next_action: >-
-    First git pull and run npm test. Do not start the paid T2 audit until demo/actions/clean-pr.json contains a truthful real GitHub repo/PR/head SHA snapshot. After that, run powershell -ExecutionPolicy Bypass -File .\scripts\t2-from-clipboard.ps1 and copy the fresh private key only after the helper is waiting. Return terminal output and sanitized 02-audit-result.json. T2 remains open until reviewed.
+    Git pull once more to receive the real clean PR #1 action snapshot. Then run powershell -ExecutionPolicy Bypass -File .\scripts\t2-from-clipboard.ps1 and copy the fresh Base Sepolia burner private key only after the helper is waiting. Never paste or print the private key. Return terminal output plus sanitized evidence/t2-runtime/<timestamp>/02-audit-result.json. Accept the live result as returned: full clean coverage may PASS, material evidence BLOCKs, and incomplete/runtime ambiguity ESCALATEs.
