@@ -1,6 +1,6 @@
 # Skeptara Specification
 
-Status: DERIVED READY — reconciled to approved PRD v0.1.
+Status: DERIVED READY — reconciled to approved PRD v0.1 and T0 runtime proof.
 
 ## Scope
 
@@ -33,8 +33,10 @@ Required fields:
 - risk_tier: LOW | MEDIUM | HIGH
 - reason_codes[]
 - required_evidence_paths
-- cross_intent_required: bool
-- spend_cap
+- cross_intent_policy
+- spend_cap_atomic
+- spend_asset
+- spend_network
 - policy_version
 
 ### EvidenceItem
@@ -76,35 +78,48 @@ Required fields:
 
 ## Risk policy v0.1
 
+T0 observed a real Telegraph x402 price of `10000` atomic USDC (`$0.01`) on Base Sepolia. The initial hackathon spend caps are therefore implementation parameters aligned to one unit per required evidence path:
+
 ### LOW
 - docs/copy/cosmetic-only
 - min evidence paths: 1
-- cross-intent: no
+- cross-intent: not required
+- spend cap: `10000` atomic USDC (`$0.01`)
 
 ### MEDIUM
 - dependency/API/schema/build changes
 - min evidence paths: 2
-- prefer distinct intents
+- distinct intents preferred
+- spend cap: `20000` atomic USDC (`$0.02`)
 
 ### HIGH
 - auth/payments/secrets/infra/CI permissions/security-sensitive dependency surface
 - min evidence paths: 3
 - cross-intent required if live capability supports it
 - critical ambiguity => ESCALATE
+- spend cap: `30000` atomic USDC (`$0.03`)
 
-Exact spend caps are configuration values to be set after T0 observes live Telegraph pricing.
+Network: `eip155:84532` (Base Sepolia). Asset family: USDC.
 
-## T0 requirement
+These are bounded MVP implementation values derived after T0 and do not change the approved product intent.
 
-`SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE` must prove:
-- live Telegraph endpoint/tool availability;
-- discovery of relevant current miners/intents;
-- at least one genuine paid inference/challenge call;
-- capture of real returned miner/intent/cost/provenance fields without fabrication;
-- a normalized EvidenceItem produced from the live result;
-- negative behavior for unavailable/payment-failure path is fail-closed.
+## T0 result
 
-T0 does **not** require a full UI or real GitHub merge.
+`SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE = CLOSED_PASS`
+
+Observed real runtime proof:
+- live discovery succeeded;
+- x402 paid call succeeded;
+- miner `20260828` / `PREFLIGHT Infrastructure Signals`;
+- intent `CVE_LOOKUP`;
+- endpoint `/cve`;
+- cost `$0.01`;
+- settlement success `true` on Base Sepolia;
+- signal hash present;
+- real result found `CVE-2020-28500` affecting Lodash versions prior to `4.17.21`, including target `lodash@4.17.20`;
+- negative source-unavailable behavior remained fail-closed => ESCALATE.
+
+Durable evidence: `evidence/t0-real-telegraph/attempt-008/`.
 
 ## Acceptance scenarios
 
@@ -112,7 +127,9 @@ T0 does **not** require a full UI or real GitHub merge.
 Given an allow-listed PR with a dependency change and MEDIUM risk, when required evidence paths complete and no blocking evidence is found, then ChallengeResult may be PASS and the exact reviewed head SHA becomes merge-eligible.
 
 ### B. Vulnerable/problematic dependency PR
-Given an allow-listed PR where real Telegraph evidence yields a material known vulnerability/advisory sufficient under policy, then ChallengeResult is BLOCK and merge execution is denied.
+Given an allow-listed PR where real Telegraph evidence yields a known vulnerability affecting the target dependency version, then the evidence may normalize to `BLOCKING`, ChallengeResult is BLOCK, and merge execution is denied.
+
+For the hackathon challenged-case fixture, `lodash@4.17.20` + `CVE-2020-28500` is the proven real example. This is a demo policy classification, not a claim that every MEDIUM-severity CVE must universally block in production.
 
 ### C. Incomplete intelligence
 Given required coverage cannot complete due to budget/source/payment/runtime failure, outcome is ESCALATE and merge is denied.
@@ -130,4 +147,4 @@ Given a PASS exists but head SHA changes, the previous PASS is invalid and merge
 
 ## Reconciliation record
 
-Reconciled after `SKEPTARA_PRD_V0_1_HUMAN_LOCK` PASS on 2026-09-06. No product-intent expansion introduced.
+Reconciled after `SKEPTARA_PRD_V0_1_HUMAN_LOCK` PASS and T0 Attempt 008 runtime/evidence review on 2026-09-06. T0 discoveries are classified as `execution_detail`; no product-intent change was introduced.
