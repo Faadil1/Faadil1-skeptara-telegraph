@@ -9,9 +9,9 @@ handover:
   resume_rule: >-
     Read state/CURRENT.yaml first, then this HANDOVER, then product/PRD.md. The living PRD is canonical product intent; Spec Kit files are derived execution contracts. Repository truth outranks chat/runtime memory. Confirm the exact next gate before implementation. After every major gate, persist evidence and update BOTH CURRENT and HANDOVER.
 
-  current_milestone: T0_ATTEMPT_003_LIVE_DISCOVERY_PASS__CLIPBOARD_VALUE_INVALID__SAFE_CLIPBOARD_LAUNCHER_COMMITTED__RETRY_004_PENDING
-  previous_milestone: T0_ATTEMPT_002_LIVE_DISCOVERY_PASS__KEY_FORMAT_BLOCK_REMEDIATED
-  lifecycle_status: PRODUCT_CONTRACT_LOCKED__T0_ACTIVE__LIVE_ROUTE_PROVEN__LOCAL_SECRET_INJECTION_RETRY_REQUIRED
+  current_milestone: T0_ATTEMPT_004_CLIPBOARD_LAUNCHER_PASS__PUBLIC_ADDRESS_COPIED__RETRY_005_PENDING
+  previous_milestone: T0_ATTEMPT_003_CLIPBOARD_VALUE_INVALID__SAFE_LAUNCHER_COMMITTED
+  lifecycle_status: PRODUCT_CONTRACT_LOCKED__T0_ACTIVE__LIVE_ROUTE_PROVEN__ACTUAL_BURNER_PRIVATE_KEY_EXPORT_REQUIRED
 
   project:
     public_name: Skeptara
@@ -44,24 +44,20 @@ handover:
         - FACT_CHECK
         - NEWS_HEADLINES
         - URL_SCAN
-    attempt_003:
+    attempt_004:
       environment: HUMAN_PERSONAL_WINDOWS_MACHINE
-      free_discovery: PASS
-      local_secret_trimmed_length: 794
-      private_key_format_valid: false
+      clipboard_launcher: PASS
+      observed_trimmed_length: 42
+      interpretation: PUBLIC_EVM_ACCOUNT_ADDRESS_COPIED_NOT_PRIVATE_KEY
       paid_inference_attempted: false
-      negative_path_SOURCE_UNAVAILABLE: PASS_ESCALATE
-      evidence: evidence/t0-real-telegraph/ATTEMPT-003-CLIPBOARD-INJECTION-BLOCK.md
+      secret_value_logged: false
+      evidence: evidence/t0-real-telegraph/ATTEMPT-004-PUBLIC-ADDRESS-COPIED.md
       classification: execution_detail
       product_intent_changed: false
-      likely_issue: clipboard content was not the exported private key at the moment of capture; no secret content was recorded
-    remediation:
-      helper: scripts/t0-from-clipboard.ps1
-      status: COMMITTED
-      usage: >-
-        Run the helper first. Only after it pauses, switch to the burner wallet and copy ONLY the exported EVM private key. Return to PowerShell and press Enter; do not paste the secret into the terminal. The helper validates format, replaces clipboard contents with harmless text, injects the key only into the local process, runs T0, and removes the environment variable afterward.
-    retry_004_required_proof:
-      - local exported burner EVM private key passes format validation
+    retry_005_required_action: >-
+      In MetaMask Extension select the burner account, use the three-dot menu beside that account, open Account details, choose Private key, authenticate, hold to reveal, and copy that private key. A public address copied from the wallet home screen is only 42 characters and is not signing material. Run the Skeptara clipboard launcher first; only after it pauses should the key be copied, then return to PowerShell and press Enter without pasting.
+    retry_005_required_proof:
+      - local exported burner EVM private key passes 64/66-character hex validation
       - genuine x402-paid Telegraph challenge succeeds
       - actual response metadata is captured without fabrication
       - normalized real EvidenceItem exists
@@ -95,7 +91,7 @@ handover:
     material_decision_history_location: docs/DECISIONS.md
     task_progress_location: spec-kit/tasks.md
 
-  exact_next_gate: SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE_RETRY_004
+  exact_next_gate: SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE_RETRY_005
   exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_REVIEW
   exact_next_action: >-
-    Git pull, then run powershell -ExecutionPolicy Bypass -File .\scripts\t0-from-clipboard.ps1. When prompted, copy ONLY the exported burner EVM private key from the wallet and press Enter without pasting it into PowerShell. Share only sanitized T0 output/evidence. ChatGPT reviews and persists the result before T0 promotion, T1 start, or Benita frontend release.
+    Export the actual burner account private key through MetaMask Account details -> Private key. Then run powershell -ExecutionPolicy Bypass -File .\scripts\t0-from-clipboard.ps1 first, copy the private key only when prompted, return to PowerShell and press Enter without pasting the secret. Share only sanitized output/evidence. ChatGPT reviews and persists the result before T0 promotion, T1 start, or Benita frontend release.
