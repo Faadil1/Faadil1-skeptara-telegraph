@@ -1,13 +1,13 @@
 canonical_state:
   protocol_version: 1
   system: SKEPTARA_TELEGRAPH_TRACK3
-  version: 0.2.4-t0-attempt-003-clipboard-remediated
+  version: 0.2.5-t0-attempt-004-public-address-block
   date: 2026-09-06
   source_of_truth: GITHUB
   repository: Faadil1/Faadil1-skeptara-telegraph
   branch: main
 
-  lifecycle_status: PRD_V0_1_LOCKED__SPEC_KIT_RECONCILED__T0_ACTIVE__LIVE_DISCOVERY_CONFIRMED__CLIPBOARD_SECRET_INJECTION_BLOCK_REMEDIATED__RETRY_004_REQUIRED
+  lifecycle_status: PRD_V0_1_LOCKED__SPEC_KIT_RECONCILED__T0_ACTIVE__LIVE_DISCOVERY_CONFIRMED__ATTEMPT_004_PUBLIC_ADDRESS_BLOCK__RETRY_005_REQUIRED
 
   authority:
     project_go: HUMAN_GO_RECEIVED
@@ -75,34 +75,23 @@ canonical_state:
       date: 2026-09-06
       result: STALE_ROUTE__NO_PAID_CALL__NEGATIVE_PATH_PASS
       evidence: evidence/t0-real-telegraph/ATTEMPT-001-STALE-ROUTE.md
-    - id: SKEPTARA_T0_ROUTE_REMEDIATION_001
-      status: PASS
-      date: 2026-09-06
-      result: DEVNODE_HTTPS_ROUTE_APPLIED
     - id: SKEPTARA_T0_ATTEMPT_002
       status: FAIL_CLOSED_REMEDIATED
       date: 2026-09-06
-      result: LIVE_FREE_DISCOVERY_PASS__PAID_CALL_NOT_ATTEMPTED__LOCAL_PRIVATE_KEY_FORMAT_INVALID__NEGATIVE_PATH_PASS
-      discovery_class: execution_detail
-      product_change_required: false
+      result: LIVE_FREE_DISCOVERY_PASS__PRIVATE_KEY_FORMAT_INVALID__NO_PAID_CALL
       evidence: evidence/t0-real-telegraph/ATTEMPT-002-DISCOVERY-PASS-KEY-FORMAT-BLOCK.md
-    - id: SKEPTARA_T0_KEY_INPUT_REMEDIATION_001
-      status: PASS
-      date: 2026-09-06
-      result: ACCEPT_64_HEX_WITH_OR_WITHOUT_0X__SAFE_LENGTH_DIAGNOSTIC
-      evidence: scripts/t0-real-telegraph.mjs
     - id: SKEPTARA_T0_ATTEMPT_003
       status: FAIL_CLOSED_REMEDIATED
       date: 2026-09-06
-      result: LIVE_FREE_DISCOVERY_PASS__LOCAL_SECRET_VALUE_LENGTH_794__PAID_CALL_NOT_ATTEMPTED__NEGATIVE_PATH_PASS
+      result: LIVE_FREE_DISCOVERY_PASS__CLIPBOARD_VALUE_LENGTH_794__NO_PAID_CALL
+      evidence: evidence/t0-real-telegraph/ATTEMPT-003-CLIPBOARD-INJECTION-BLOCK.md
+    - id: SKEPTARA_T0_ATTEMPT_004
+      status: FAIL_CLOSED_RETRY_REQUIRED
+      date: 2026-09-06
+      result: CLIPBOARD_LAUNCHER_WORKED__TRIMMED_LENGTH_42__PUBLIC_EVM_ADDRESS_COPIED_NOT_PRIVATE_KEY__NO_PAID_CALL
       discovery_class: execution_detail
       product_change_required: false
-      evidence: evidence/t0-real-telegraph/ATTEMPT-003-CLIPBOARD-INJECTION-BLOCK.md
-    - id: SKEPTARA_T0_CLIPBOARD_LAUNCHER_REMEDIATION_001
-      status: PASS_CODE_REMEDIATED_PENDING_LOCAL_RETRY
-      date: 2026-09-06
-      result: WAIT_THEN_COPY_SECRET__VALIDATE_LOCALLY__CLEAR_CLIPBOARD__LOCAL_PROCESS_ONLY
-      evidence: scripts/t0-from-clipboard.ps1
+      evidence: evidence/t0-real-telegraph/ATTEMPT-004-PUBLIC-ADDRESS-COPIED.md
 
   t0_contract:
     gate: SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE
@@ -114,35 +103,23 @@ canonical_state:
       paid_auto_routed_inference: POST_https://devnode.telegraphprotocol.com/engine/v1/ask
       payment_network: Base_Sepolia_eip155_84532
       payment_asset: USDC
-    attempt_002:
-      free_discovery: PASS
-      route_reachability: PROVEN_LOCAL
-      sampled_relevant_intents:
-        - FACT_CHECK
-        - NEWS_HEADLINES
-        - URL_SCAN
-      paid_inference_attempted: false
+    proven:
+      live_discovery_on_user_machine: true
       negative_source_unavailable_semantics: PASS_ESCALATE
-    attempt_003:
+      local_secret_value_never_recorded: true
+      clipboard_launcher_validation: PASS
+    attempt_004:
       runtime: HUMAN_PERSONAL_WINDOWS_MACHINE
-      free_discovery: PASS
-      local_value_trimmed_length: 794
-      valid_evm_private_key_format: false
+      clipboard_value_trimmed_length: 42
+      interpretation: PUBLIC_EVM_ADDRESS_NOT_PRIVATE_KEY
       paid_inference_attempted: false
-      negative_source_unavailable_semantics: PASS_ESCALATE
       classification: execution_detail
-      evidence: evidence/t0-real-telegraph/ATTEMPT-003-CLIPBOARD-INJECTION-BLOCK.md
-    clipboard_launcher:
-      path: scripts/t0-from-clipboard.ps1
-      status: COMMITTED
-      operating_rule: PASTE_LAUNCHER_FIRST__COPY_PRIVATE_KEY_ONLY_WHEN_PROMPTED__PRESS_ENTER__NEVER_PASTE_SECRET_IN_TERMINAL
-      secret_value_logged: false
-      clipboard_cleared_after_read: true
-      environment_variable_removed_after_run: true
+      evidence: evidence/t0-real-telegraph/ATTEMPT-004-PUBLIC-ADDRESS-COPIED.md
     required_proof_remaining:
-      - correct exported burner EVM private key passes local format validation
+      - export the actual private key of the burner EVM account locally
+      - private-key format passes launcher validation
       - at least one genuine x402-paid Telegraph challenge succeeds
-      - actual exposed miner_intent_cost_signal_hash_or_other_metadata is captured without fabrication
+      - actual exposed response metadata is captured without fabrication
       - one normalized real EvidenceItem is produced
       - sanitized evidence is reviewed and persisted
       - hero vertical relevance of live evidence is qualified after paid result
@@ -184,7 +161,7 @@ canonical_state:
       - spec-kit/tasks.md
       - docs/ARCHITECTURE.md
 
-  exact_next_gate: SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE_RETRY_004
+  exact_next_gate: SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE_RETRY_005
   exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_REVIEW
   exact_next_action: >-
-    Git pull. Run PowerShell helper scripts/t0-from-clipboard.ps1. When the helper pauses, switch to the burner wallet and copy ONLY the exported EVM private key, return to PowerShell, and press Enter without pasting the key. The helper validates locally, clears the clipboard, injects the secret only into the local process, runs npm run t0, and removes the environment variable afterward. Return only sanitized terminal output/evidence. Do not start T1 or Benita deep UI work until T0 is reviewed.
+    In MetaMask Extension open the burner account selector, use the three-dot menu beside the burner account, open Account details, choose Private key, authenticate, hold to reveal, and copy the private key itself. Do not copy the 42-character public account address from the wallet home screen. Then run scripts/t0-from-clipboard.ps1 first; only when it pauses, copy the private key, return to PowerShell and press Enter without pasting it. Share only sanitized output/evidence.
