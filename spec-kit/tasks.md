@@ -12,73 +12,51 @@ Status: DERIVED READY — subordinate to living PRD v0.1.
 - [x] P0.6 Human-lock PRD v0.1.
 - [x] P0.7 Reconcile canonical state after PRD lock.
 - [x] P0.8 Freeze frontend data contract after T0 evidence review. *(`docs/FRONTEND_DATA_CONTRACT.md`)*
-- [ ] P0.9 Send Benita final-product-only brief with branch/repo details.
+- [ ] P0.9 Send Benita final-product-only brief + PRD PDF + repo/branch details.
 
 ## T0 — Real Telegraph challenge
 
-- [x] T0.1 Discover live relevant intents/miners.
-- [x] T0.2 Confirm current Telegraph route.
-- [x] T0.3 Configure a valid exported burner EVM key locally only.
-- [x] T0.4 Execute first successful real paid Telegraph challenge. *(Attempt 008 PASS.)*
-- [x] T0.5 Capture returned miner/intent/cost/signal metadata.
-- [x] T0.6 Produce and review one normalized real EvidenceItem.
-- [x] T0.7 Prove source-unavailable failure => ESCALATE/BLOCK.
-- [x] T0.8 Persist Attempts 001–004 and canonical updates.
-- [x] T0.9 Reach paid-call stage with valid local EVM key.
-- [x] T0.10 Classify Attempt 005 to x402 settlement layer.
-- [x] T0.11 Add unsigned x402 quote preflight and decoded `PAYMENT-REQUIRED` evidence.
-- [x] T0.12 Enforce exact Base Sepolia + <=100000 atomic USDC safety boundary.
-- [x] T0.13 Align paid client construction with Telegraph official MCP.
-- [x] T0.14 Decode/persist final `PAYMENT-RESPONSE` settlement result/error reason.
-- [x] T0.15 Run retry 006 and classify insufficient balance.
-- [x] T0.16 Prove payment blocker was insufficient Base Sepolia USDC balance.
-- [x] T0.17 Record burner credential exposure incident and rotate.
-- [x] T0.18 Harden Windows launcher with clipboard-only auto-detection.
-- [x] T0.19 Create fresh dedicated burner.
-- [x] T0.20 Diagnose wrong-chain Arc Testnet faucet funding in Attempt 007.
-- [x] T0.21 Fund fresh burner on required Base Sepolia test USDC network.
-- [x] T0.22 Run retry 008 with fresh funded burner and hardened launcher.
-- [x] T0.23 Obtain genuine x402-paid Telegraph inference success.
-- [x] T0.24 Confirm settlement success `true` and retain fail-closed negative path.
-- [x] T0.25 Review Attempt 008 paid result/provenance.
-- [x] T0.26 Review/normalize materiality for `lodash@4.17.20` / `CVE-2020-28500` to `BLOCKING`.
-- [x] T0.27 Persist sanitized successful runtime evidence durably in `evidence/t0-real-telegraph/attempt-008/`.
-- [x] T0.28 Promote `SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE` to `CLOSED_PASS`.
+- [x] T0.1–T0.28 Complete real Telegraph/x402 spike, evidence review and durable persistence.
+- [x] `SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE = CLOSED_PASS`.
+- [x] Real challenged anchor: `lodash@4.17.20` → `CVE-2020-28500` → `BLOCKING`.
 
 ## T1 — Deterministic policy core
 
-- [x] T1.1 ActionSnapshot schema/canonicalization. *(`src/policy.mjs`)*
-- [x] T1.2 action_fingerprint binding via stable SHA-256 over canonical action facts.
-- [x] T1.3 deterministic risk rubric v0.1: LOW/MEDIUM/HIGH with conservative default.
-- [x] T1.4 risk → challenge contract mapping with T0-derived Base Sepolia USDC caps: 10000/20000/30000 atomic.
-- [x] T1.5 deterministic PASS/BLOCK/ESCALATE evaluator.
-- [x] T1.6 test LOW/MEDIUM/HIGH classification.
-- [x] T1.7 test incomplete coverage/budget/source failure cannot PASS.
-- [x] T1.8 test critical ambiguity and required-if-supported cross-intent semantics.
-- [x] T1.9 test material `BLOCKING` counter-evidence always BLOCKS.
-- [x] T1.10 test clean MEDIUM completed challenge can PASS.
-
-Local validation: **10/10 Node policy tests PASS**.
+- [x] T1.1 ActionSnapshot canonicalization + stable SHA-256 fingerprint.
+- [x] T1.2 Deterministic LOW/MEDIUM/HIGH rubric.
+- [x] T1.3 Risk → evidence-depth/spend contract.
+- [x] T1.4 Deterministic PASS/BLOCK/ESCALATE evaluator.
+- [x] T1.5 Fail-closed tests.
+- [x] Local policy validation: **10/10 PASS**.
 
 ## T2 — Independent auditor
 
-- [x] T2.1 Implement Telegraph adapter from the proven T0 x402 path. *(`src/telegraph-client.mjs`)*
-- [x] T2.2 Define independent auditor input contract: canonical action facts + deterministic T1 risk only. *(`src/auditor.mjs`)*
-- [x] T2.3 Exclude constructor persuasive rationale from auditor query construction.
-- [x] T2.4 Implement live-capability-aware evidence-path planner constrained by T1 risk contract.
-- [x] T2.5 Implement bounded per-path/total spend tracking and fail-closed quote rejection.
-- [x] T2.6 Implement evidence normalization including machine-checkable CVE affected-range handling.
-- [x] T2.7 Implement replayable ChallengeResult with plan fingerprint, coverage, spend, evidence, reason codes and expiry.
-- [x] T2.8 Implement asymmetric stopping: `BLOCKING` evidence may stop early; PASS still requires full mandatory coverage.
-- [x] T2.9 Add secure local T2 runtime launcher. *(`scripts/t2-from-clipboard.ps1`, `scripts/t2-live-audit.mjs`)*
-- [x] T2.10 Add deterministic auditor tests: **9/9 PASS** in isolated validation. *(`tests/auditor.test.mjs`)*
-- [x] T2.11 Persist T2 contract/implementation validation. *(`docs/T2_AUDITOR_CONTRACT.md`, `evidence/t2/OFFLINE-IMPLEMENTATION-VALIDATION.md`)*
-- [x] T2.12 Pull main and run full repository `npm test` on the user machine: **19/19 PASS, 0 fail**.
-- [x] T2.13 Bind clean live T2 run to truthful controlled GitHub PR #1 with exact head SHA `73cf5bdd69163924228e3e21d67fa9f405d99904`. *(`demo/actions/clean-pr.json`)*
-- [x] T2.14 Create real clean dependency PR: isolated `lodash 4.17.20 -> 4.17.21` fixture on branch `demo/clean-lodash-upgrade`; merge not authorized.
-- [ ] T2.15 Run one live clean MEDIUM audit through the hardened launcher; budget ceiling `20000` atomic USDC.
-- [ ] T2.16 Review actual returned intents/findings/coverage/spend/outcome and durably persist sanitized live T2 challenge record.
-- [ ] T2.17 Promote `SKEPTARA_T2_INDEPENDENT_AUDITOR_PASS` only if the live result satisfies the actual evidence/gate rules; do not force PASS if Telegraph finds counter-evidence or coverage is incomplete.
+- [x] T2.1 Implement Telegraph adapter from proven T0 path. *(`src/telegraph-client.mjs`)*
+- [x] T2.2 Define canonical-facts-only auditor input contract. *(`src/auditor.mjs`)*
+- [x] T2.3 Exclude constructor persuasive rationale.
+- [x] T2.4 Implement capability-aware evidence-path planner.
+- [x] T2.5 Implement bounded per-path/total spend tracking.
+- [x] T2.6 Implement evidence normalization including CVE affected-range checks.
+- [x] T2.7 Implement replayable ChallengeResult with coverage/spend/evidence/expiry.
+- [x] T2.8 Implement asymmetric `BLOCKING` early stop; PASS still needs full coverage.
+- [x] T2.9 Add secure live launcher. *(`scripts/t2-from-clipboard.ps1`, `scripts/t2-live-audit.mjs`)*
+- [x] T2.10 Add deterministic auditor tests: **9/9 PASS**.
+- [x] T2.11 Full repository isolated validation: **19/19 PASS**.
+- [x] T2.12 Full repository user-machine validation: **19/19 PASS, 0 fail**.
+- [x] T2.13 Bind live clean run to real GitHub PR #1, head `73cf5bdd69163924228e3e21d67fa9f405d99904`.
+- [x] T2.14 Real clean dependency PR created: isolated `lodash 4.17.20 -> 4.17.21`; merge not authorized.
+- [x] T2.15 Run first live clean MEDIUM audit through hardened launcher.
+  - live capabilities discovered
+  - coverage `2/2`
+  - spend `20000/20000` atomic USDC
+  - actual intent `CVE_LOOKUP` → `NONE`, `$0.01`
+  - actual intent `FACT_CHECK` → `AMBIGUOUS`, `$0.01`
+  - runtime outcome `PASS`
+  - runtime reason `REQUIRED_COVERAGE_COMPLETE_NO_BLOCKING_EVIDENCE`
+  - runtime directory `evidence/t2-runtime/2026-09-06T22-33-25-514Z`
+- [ ] T2.16 Review sanitized `02-audit-result.json`, especially the `FACT_CHECK` `AMBIGUOUS` item and its criticality/materiality.
+- [ ] T2.17 Persist final sanitized live T2 challenge record durably under `evidence/t2/`.
+- [ ] T2.18 Promote `SKEPTARA_T2_INDEPENDENT_AUDITOR_PASS` only if review confirms the runtime PASS is policy-consistent and no material counter-evidence is hidden by normalization.
 
 ## T3 — Protected merge gate
 
@@ -94,19 +72,20 @@ Local validation: **10/10 Node policy tests PASS**.
 
 ## T4 — Real two-case proof
 
-- [x] T4.1 create/select clean dependency PR. *(Real PR #1 created and bound; not merged.)*
+- [x] T4.1 create/select clean dependency PR. *(PR #1)*
 - [ ] T4.2 create/select challengeable dependency PR.
-- [ ] T4.3 run real Telegraph evidence on clean case.
-- [x] T4.4 existing real Telegraph challenged evidence anchor available from T0 for `lodash@4.17.20`; a dedicated challenged PR is still required for full T4.
-- [ ] T4.5 execute bounded real merge only for PASS case if authorized.
+- [x] T4.3 first real Telegraph clean-case audit runtime completed; final T2 evidence review pending.
+- [x] T4.4 real Telegraph challenged evidence anchor exists from T0 for `lodash@4.17.20`; dedicated challenged PR still required.
+- [ ] T4.5 execute bounded real merge only for fresh PASS case if explicitly authorized.
 - [ ] T4.6 prove challenged case cannot merge.
 - [ ] T4.7 capture evidence/replay instructions.
 
 ## UX / Benita
 
 - [x] UX.1 freeze frontend data contract after T0 evidence review.
-- [x] UX.2 create Benita branch after contract lock. *(`feat/frontend-benita`)*
-- [ ] UX.3 send concise locked Skeptara product brief + repo/branch.
+- [x] UX.2 create `feat/frontend-benita`.
+- [x] UX.2b synchronize `feat/frontend-benita` to current `main` before collaborator work.
+- [ ] UX.3 send concise locked Skeptara brief + PRD PDF + repo/branch.
 - [ ] UX.4 risk-tier presentation.
 - [ ] UX.5 live challenge-progress presentation.
 - [ ] UX.6 counter-evidence/provenance presentation.
@@ -137,6 +116,6 @@ After every passed/failed major gate:
 
 ## Reconciliation record
 
-T0 is `CLOSED_PASS`; T1 is `PASS`; T2 core is implemented. The user's real repository clone now passes **19/19** tests. A truthful controlled GitHub clean dependency PR (`#1`) is open with exact head SHA `73cf5bdd69163924228e3e21d67fa9f405d99904`, and `demo/actions/clean-pr.json` binds the upcoming live audit to that real action. No merge is authorized by this setup.
+The first live T2 clean MEDIUM audit completed full coverage within the exact spend ceiling and returned runtime `PASS`. The actual intents were `CVE_LOOKUP` and `FACT_CHECK`. `CVE_LOOKUP` normalized cleanly to `NONE`; `FACT_CHECK` normalized to `AMBIGUOUS`. Because evidence integrity outranks forcing gate completion, T2 remains open until the sanitized audit result is reviewed and the ambiguous item is confirmed non-material/non-critical under policy.
 
-Exact next gate: `SKEPTARA_T2_LIVE_CLEAN_MEDIUM_AUDIT_REVIEW`.
+Exact next gate: `SKEPTARA_T2_LIVE_CLEAN_RUN_001_EVIDENCE_REVIEW`.
