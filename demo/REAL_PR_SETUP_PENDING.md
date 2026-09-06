@@ -1,0 +1,1 @@
+Real controlled demo PR setup remains pending until branch creation is performed. Do not use synthetic PR numbers or head SHAs in live T2 evidence.
