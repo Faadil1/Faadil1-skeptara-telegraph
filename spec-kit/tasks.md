@@ -40,23 +40,32 @@ Status: DERIVED READY — subordinate to living PRD v0.1.
 - [x] T2.7 Implement replayable ChallengeResult with coverage/spend/evidence/expiry.
 - [x] T2.8 Implement asymmetric `BLOCKING` early stop; PASS still needs full coverage.
 - [x] T2.9 Add secure live launcher. *(`scripts/t2-from-clipboard.ps1`, `scripts/t2-live-audit.mjs`)*
-- [x] T2.10 Add deterministic auditor tests: **9/9 PASS**.
-- [x] T2.11 Full repository isolated validation: **19/19 PASS**.
+- [x] T2.10 Initial deterministic auditor tests: **9/9 PASS**.
+- [x] T2.11 Full repository initial validation: **19/19 PASS**.
 - [x] T2.12 Full repository user-machine validation: **19/19 PASS, 0 fail**.
 - [x] T2.13 Bind live clean run to real GitHub PR #1, head `73cf5bdd69163924228e3e21d67fa9f405d99904`.
 - [x] T2.14 Real clean dependency PR created: isolated `lodash 4.17.20 -> 4.17.21`; merge not authorized.
 - [x] T2.15 Run first live clean MEDIUM audit through hardened launcher.
-  - live capabilities discovered
-  - coverage `2/2`
-  - spend `20000/20000` atomic USDC
-  - actual intent `CVE_LOOKUP` → `NONE`, `$0.01`
-  - actual intent `FACT_CHECK` → `AMBIGUOUS`, `$0.01`
-  - runtime outcome `PASS`
-  - runtime reason `REQUIRED_COVERAGE_COMPLETE_NO_BLOCKING_EVIDENCE`
-  - runtime directory `evidence/t2-runtime/2026-09-06T22-33-25-514Z`
-- [ ] T2.16 Review sanitized `02-audit-result.json`, especially the `FACT_CHECK` `AMBIGUOUS` item and its criticality/materiality.
-- [ ] T2.17 Persist final sanitized live T2 challenge record durably under `evidence/t2/`.
-- [ ] T2.18 Promote `SKEPTARA_T2_INDEPENDENT_AUDITOR_PASS` only if review confirms the runtime PASS is policy-consistent and no material counter-evidence is hidden by normalization.
+  - paid calls: 2
+  - spend: `20000/20000` atomic USDC
+  - runtime-reported coverage: `2/2`
+  - runtime-reported outcome: `PASS`
+- [x] T2.16 Review live run 001 evidence. **Runtime PASS rejected.**
+  - `CVE_LOOKUP` miner explicitly reported that the lookup could not be completed because the request was invalid and lacked a CVE identifier.
+  - v0.1 incorrectly converted `found:false/not_found` into `NONE` before checking path validity.
+  - correct fail-closed interpretation: mandatory coverage incomplete → `ESCALATE`.
+  - evidence: `evidence/t2/live-clean-run-001/REVIEW.md`.
+- [x] T2.17 Implement auditor v0.2 remediation.
+  - paid response is not automatically completed coverage;
+  - invalid/missing required input → `EVIDENCE_PATH_INPUT_INVALID`, `critical:true`, `coverage_complete:false`;
+  - incomplete paths do not increment coverage;
+  - generic dependency planning no longer selects direct `CVE_LOOKUP` without an explicit CVE identifier;
+  - dependency preference: `FACT_CHECK`, `WEB_SEARCH`, `NEWS_SEARCH`, `URL_SCAN`.
+- [x] T2.18 Add regression tests for invalid paid evidence path and revised planning.
+- [ ] T2.19 Pull auditor v0.2 and run full repository `npm test` on user machine. Expected total: **21 tests** (11 auditor + 10 policy) if no other test count changes.
+- [ ] T2.20 Run bounded live clean MEDIUM retry 002 against unchanged PR #1 head if it remains exact.
+- [ ] T2.21 Review actual retry evidence/coverage/spend/outcome and persist sanitized final record.
+- [ ] T2.22 Promote `SKEPTARA_T2_INDEPENDENT_AUDITOR_PASS` only if retry completes meaningful required coverage and the real evidence justifies PASS.
 
 ## T3 — Protected merge gate
 
@@ -74,7 +83,7 @@ Status: DERIVED READY — subordinate to living PRD v0.1.
 
 - [x] T4.1 create/select clean dependency PR. *(PR #1)*
 - [ ] T4.2 create/select challengeable dependency PR.
-- [x] T4.3 first real Telegraph clean-case audit runtime completed; final T2 evidence review pending.
+- [ ] T4.3 real clean-case proof remains pending because live run 001 PASS was rejected on evidence review.
 - [x] T4.4 real Telegraph challenged evidence anchor exists from T0 for `lodash@4.17.20`; dedicated challenged PR still required.
 - [ ] T4.5 execute bounded real merge only for fresh PASS case if explicitly authorized.
 - [ ] T4.6 prove challenged case cannot merge.
@@ -84,7 +93,7 @@ Status: DERIVED READY — subordinate to living PRD v0.1.
 
 - [x] UX.1 freeze frontend data contract after T0 evidence review.
 - [x] UX.2 create `feat/frontend-benita`.
-- [x] UX.2b synchronize `feat/frontend-benita` to current `main` before collaborator work.
+- [x] UX.2b synchronize `feat/frontend-benita` to `main` before collaborator work.
 - [ ] UX.3 send concise locked Skeptara brief + PRD PDF + repo/branch.
 - [ ] UX.4 risk-tier presentation.
 - [ ] UX.5 live challenge-progress presentation.
@@ -116,6 +125,6 @@ After every passed/failed major gate:
 
 ## Reconciliation record
 
-The first live T2 clean MEDIUM audit completed full coverage within the exact spend ceiling and returned runtime `PASS`. The actual intents were `CVE_LOOKUP` and `FACT_CHECK`. `CVE_LOOKUP` normalized cleanly to `NONE`; `FACT_CHECK` normalized to `AMBIGUOUS`. Because evidence integrity outranks forcing gate completion, T2 remains open until the sanitized audit result is reviewed and the ambiguous item is confirmed non-material/non-critical under policy.
+Live run 001 was valuable precisely because evidence review caught a false-positive PASS in auditor v0.1. The paid CVE path did not perform a valid investigation; therefore it cannot count toward mandatory coverage. This is an `execution_detail` defect, not a product-intent change. Auditor v0.2 now fails closed on incomplete paid evidence paths and avoids generic direct CVE_LOOKUP planning without an explicit CVE identifier.
 
-Exact next gate: `SKEPTARA_T2_LIVE_CLEAN_RUN_001_EVIDENCE_REVIEW`.
+Exact next gate: `SKEPTARA_T2_V0_2_LOCAL_TEST_AND_LIVE_RETRY_002`.
