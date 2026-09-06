@@ -1,6 +1,6 @@
 # Skeptara Implementation Plan
 
-Status: DERIVED DRAFT — execute only after PRD v0.1 human lock.
+Status: DERIVED READY — PRD v0.1 human-locked; T0 open.
 
 ## Phase 0 — Repository and product contract
 
@@ -10,7 +10,7 @@ Status: DERIVED DRAFT — execute only after PRD v0.1 human lock.
 - Derive Spec Kit constitution/spec/plan/tasks/convergence.
 - Lock collaborator boundaries before frontend work.
 
-Gate: `SKEPTARA_PRD_V0_1_HUMAN_LOCK`
+Gate: `SKEPTARA_PRD_V0_1_HUMAN_LOCK` — **PASS**
 
 ## Phase 1 — T0 real Telegraph spike
 
@@ -24,7 +24,7 @@ Goal: prove the sponsor-native dependency before deep build.
 6. Exercise payment/source failure and prove fail-closed behavior.
 7. Save evidence under `evidence/t0-real-telegraph/`.
 
-Gate: `SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE`
+Gate: `SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE` — **OPEN**
 
 Stop condition: if no viable live Telegraph evidence path can support the hero vertical quickly, classify the discovery. If material, revise PRD before proceeding; do not hide the failure with mocks.
 
@@ -119,3 +119,7 @@ Any implementation discovery is classified before changes propagate:
 - product_clarification → living PRD clarification then reconcile;
 - material_product_change → human approval + PRD revision first;
 - post_build_evolution → backlog unless needed for hackathon viability.
+
+## Reconciliation record
+
+Reconciled after `SKEPTARA_PRD_V0_1_HUMAN_LOCK` PASS on 2026-09-06. No product-intent expansion introduced.
