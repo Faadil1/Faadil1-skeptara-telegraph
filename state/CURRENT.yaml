@@ -133,7 +133,7 @@ canonical_state:
 
   branches:
     main: CURRENT
-    feat_frontend_benita: COLLABORATOR_BRANCH_EXISTS__DO_NOT_FORCE_SYNC_IF_COLLABORATOR_HAS_STARTED_WORK
+    feat_frontend_benita: SAFE_TO_FAST_FORWARD__NO_UNIQUE_COMMITS_AT_LAST_CHECK
     demo_clean_lodash_upgrade: INTENTIONALLY_FROZEN_FOR_PR_1_HEAD_BINDING
 
   build_gates:
