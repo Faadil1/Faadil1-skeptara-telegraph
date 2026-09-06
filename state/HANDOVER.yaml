@@ -7,59 +7,75 @@ handover:
   branch: main
 
   resume_rule: >-
-    Read state/CURRENT.yaml first, then this HANDOVER, then product/PRD.md. The living PRD is canonical product intent; Spec Kit files are derived execution contracts. Repository truth outranks chat/runtime memory. Confirm the exact next gate before implementation. After every major gate, persist evidence and update BOTH CURRENT and HANDOVER.
+    Read state/CURRENT.yaml first, then this HANDOVER, then product/PRD.md. The living PRD is canonical product intent; Spec Kit files are derived execution contracts. Repository truth outranks chat/runtime memory. After every major gate persist evidence and update BOTH CURRENT and HANDOVER.
 
-  current_milestone: T0_ATTEMPT_005_LIVE_DISCOVERY_PASS__PAID_CALL_REACHED__FAIL_CLOSED__DIAGNOSTIC_PENDING
-  lifecycle_status: PRODUCT_CONTRACT_LOCKED__T0_ACTIVE__ROOT_CAUSE_NOT_YET_CLASSIFIED
+  current_milestone: T0_ATTEMPT_005_FINAL_HTTP_402_WITH_PAYMENT_RESPONSE__DIAGNOSTIC_HARNESS_REMEDIATED__RETRY_006_PENDING
+  lifecycle_status: PRODUCT_CONTRACT_LOCKED__T0_ACTIVE__SETTLEMENT_REASON_NOT_YET_DECODED
 
   project:
     public_name: Skeptara
-    hackathon: TELEGRAPH_PROTOCOL_2026
-    track: TRACK_3_APPLICATION
-    deadline_utc: 2026-09-07T23:59:00Z
-    repository: Faadil1/Faadil1-skeptara-telegraph
     hero_vertical: AUTONOMOUS_GITHUB_DEPENDENCY_MERGE
+    deadline_utc: 2026-09-07T23:59:00Z
 
   product_truth:
     canonical_source: product/PRD.md
     current_revision: v0.1
     status: PRD_READY
     living_prd: true
+    product_intent_changed_by_t0: false
 
   active_gate:
     id: SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE
-    status: OPEN_DIAGNOSTIC_REQUIRED
+    status: OPEN_RETRY_006
     attempt_005:
       environment: HUMAN_PERSONAL_WINDOWS_MACHINE
-      local_key_format_validation: PASS
       free_discovery: PASS
-      paid_call_stage_reached: true
-      paid_call_success: false
+      valid_burner_evm_key_format: PASS
+      paid_transport_stage_reached: true
+      final_http_status: 402
+      payment_response_header_present: true
+      response_body: null
+      paid_success: false
       fail_closed: PASS
       negative_path_SOURCE_UNAVAILABLE: PASS_ESCALATE
       runtime_evidence_location: evidence/t0-real-telegraph/runtime/2026-09-06T21-15-17-533Z/
-      diagnostic_status: PENDING
-      product_intent_changed: false
-    diagnostic_required:
-      target_file: evidence/t0-real-telegraph/runtime/2026-09-06T21-15-17-533Z/02-paid-challenge-failure.json
-      rule: inspect sanitized failure details before any further paid retry
+      classification: execution_detail
+      unresolved_detail: settlement response existed but original harness did not decode it
+    diagnostic_remediation:
+      script: scripts/t0-real-telegraph.mjs
+      status: COMMITTED
+      behavior:
+        - unsigned quote preflight captures PAYMENT-REQUIRED
+        - base64 JSON quote decoded and persisted
+        - only exact eip155:84532 requirements at or below 100000 atomic USDC are eligible
+        - paid transport uses Telegraph official MCP x402Client.fromConfig + wrapFetchWithPayment pattern
+        - final PAYMENT-RESPONSE is decoded and persisted
+        - settlement errorReason is printed without exposing the private key
+        - all ambiguity remains ESCALATE/BLOCK
+    funding_rule: >-
+      Do not fund anything based on assumption. If retry 006 proves insufficient funds, use only the exact testnet network/asset from the decoded PAYMENT-REQUIRED quote and keep the burner minimally funded.
     remaining_t0_proof:
-      - classify attempt 005 blocker
-      - apply bounded remediation
-      - genuine x402-paid challenge succeeds
-      - actual returned metadata captured without fabrication
-      - normalized real EvidenceItem produced
-      - hero-vertical relevance reviewed
+      - decoded quote requirement
+      - decoded settlement result or successful 200
+      - successful genuine x402-paid Telegraph inference
+      - normalized real EvidenceItem
+      - hero-vertical relevance review
+      - durable evidence persistence
 
   collaborator_benita:
     message_sent: false
     release_condition: FRONTEND_DATA_CONTRACT_READY_AFTER_T0_METADATA_DISCOVERY
 
-  state_persistence:
-    rule: UPDATE_CURRENT_AND_HANDOVER_AFTER_EVERY_MAJOR_GATE
-    evidence_required_before_pass_claim: true
+  next_gates_after_t0_pass:
+    - SKEPTARA_T1_DETERMINISTIC_POLICY_PASS
+    - SKEPTARA_T2_INDEPENDENT_AUDITOR_PASS
+    - SKEPTARA_T3_FAIL_CLOSED_MERGE_GATE_PASS
+    - SKEPTARA_T4_TWO_CASE_REAL_DEMO_PASS
+    - SKEPTARA_TRACE_JUDGE_PATH_REVIEW
+    - SKEPTARA_BUILD_CANDIDATE_READY
+    - HUMAN_PROTECTED_FINAL_SUBMISSION
 
-  exact_next_gate: SKEPTARA_T0_PAID_CALL_FAILURE_DIAGNOSTIC_005
+  exact_next_gate: SKEPTARA_T0_X402_SETTLEMENT_DIAGNOSTIC_RETRY_006
   exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_REVIEW
   exact_next_action: >-
-    Read the sanitized local failure JSON from the Attempt 005 runtime directory and return only that diagnostic output. Do not rerun until the failure is classified and a bounded remediation is recorded.
+    git pull, then run powershell -ExecutionPolicy Bypass -File .\scripts\t0-from-clipboard.ps1. Copy the burner private key only when the helper pauses and press Enter without pasting. Return the terminal output. If the run still fails, also return 02-x402-quote.json and 03-paid-challenge.json from the new runtime directory. Never return the private key.
