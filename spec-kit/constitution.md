@@ -1,6 +1,6 @@
 # Skeptara Constitution
 
-Status: DERIVED DRAFT — subordinate to `product/PRD.md`
+Status: DERIVED READY — reconciled to approved `product/PRD.md` v0.1
 
 ## I. Product authority
 
@@ -37,3 +37,7 @@ READY, BUILD_CANDIDATE, and COMPLETE are distinct states. Demo success is not pr
 ## VIII. Historical traceability
 
 Canonical state, handover, PRD revisions, material decisions, gate results, and evidence references must remain traceable in GitHub so a new conversation/runtime can resume from repository truth rather than chat memory.
+
+## Reconciliation record
+
+Reconciled after `SKEPTARA_PRD_V0_1_HUMAN_LOCK` PASS on 2026-09-06. No product-intent expansion introduced.
