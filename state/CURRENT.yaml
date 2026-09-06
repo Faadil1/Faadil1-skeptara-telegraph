@@ -1,13 +1,13 @@
 canonical_state:
   protocol_version: 1
   system: SKEPTARA_TELEGRAPH_TRACK3
-  version: 0.2.1-t0-preflight-local-proof-pending
+  version: 0.2.2-t0-attempt-001-remediated
   date: 2026-09-06
   source_of_truth: GITHUB
   repository: Faadil1/Faadil1-skeptara-telegraph
   branch: main
 
-  lifecycle_status: PRD_V0_1_HUMAN_LOCK_PASS__SPEC_KIT_RECONCILED__T0_PREFLIGHT_READY__LOCAL_REAL_TELEGRAPH_PROOF_PENDING
+  lifecycle_status: PRD_V0_1_LOCKED__SPEC_KIT_RECONCILED__T0_ACTIVE__ATTEMPT_001_FAILED_STALE_ROUTE__REMEDIATED__LOCAL_RETRY_REQUIRED
 
   authority:
     project_go: HUMAN_GO_RECEIVED
@@ -18,42 +18,35 @@ canonical_state:
     terminal_assurance: PROJECT_FINISHER
     protected_external_action: HUMAN_BOUNDED_AUTHORIZATION
 
-  hackathon:
-    program: TELEGRAPH_PROTOCOL_HACKATHON_2026
-    track: TRACK_3_APPLICATION
-    deadline_utc: 2026-09-07T23:59:00Z
-    real_miners_required: true
-    mock_intelligence_allowed_for_submission: false
-
-  naming:
-    public_name: Skeptara
-    repository_name: Faadil1-skeptara-telegraph
-    status: PROVISIONAL_COLLISION_SCREEN_PASS
-    note: >-
-      Exact-name web/GitHub screening found no obvious AI/software product collision at bootstrap time. This is a hackathon naming screen, not legal trademark clearance.
+  product_source:
+    status: PRD_READY
+    revision: v0.1
+    path: product/PRD.md
+    living: true
+    approval_state: HUMAN_LOCK_PASS
+    approval_evidence: evidence/prd-v0.1-human-lock/README.md
 
   product_core:
+    public_name: Skeptara
     vertical: AUTONOMOUS_GITHUB_DEPENDENCY_MERGE
     mechanism: RISK_PROPORTIONAL_INDEPENDENT_COUNTER_EVIDENCE_BEFORE_EXECUTION
-    flow: PR_PROPOSED__DETERMINISTIC_RISK_TIER__INDEPENDENT_TELEGRAPH_CHALLENGE__PASS_OR_BLOCK__BOUNDED_REAL_GITHUB_MERGE
+    flow: PR_PROPOSED__DETERMINISTIC_RISK_TIER__INDEPENDENT_TELEGRAPH_CHALLENGE__PASS_BLOCK_ESCALATE__BOUNDED_REAL_GITHUB_MERGE
     fail_closed: true
     self_risk_scoring_by_reviewed_agent: forbidden
     self_audit_by_reviewed_agent: forbidden
-    generic_execution_warrant_positioning: killed
-    generic_verification_gate_positioning: killed
 
   locked_decisions:
-    - LIVING_PRD_REMAINS_CANONICAL_PRODUCT_INTENT_SOURCE
-    - SPEC_KIT_ARTIFACTS_ARE_DERIVED_EXECUTION_CONTRACTS_NOT_PRODUCT_AUTHORITY
-    - MATERIAL_PRODUCT_DISCOVERIES_ROUTE_BACK_TO_PRD_BEFORE_DERIVED_ARTIFACT_RECONCILIATION
+    - LIVING_PRD_IS_CANONICAL_PRODUCT_INTENT_SOURCE
+    - SPEC_KIT_IS_DERIVED_EXECUTION_LAYER_ONLY
+    - MATERIAL_PRODUCT_CHANGE_REQUIRES_PRD_REVISION_BEFORE_DERIVED_RECONCILIATION
     - CODE_MUST_NOT_BECOME_DE_FACTO_PRODUCT_SOURCE
-    - CONSTRUCTOR_AND_AUDITOR_MUST_BE_SEPARATED
-    - RISK_TIER_MUST_BE_ASSIGNED_BY_EXTERNAL_DETERMINISTIC_RUBRIC_FOR_MVP
-    - INCOMPLETE_CHALLENGE_COVERAGE_BLOCKS_EXECUTION
-    - EXHAUSTED_BUDGET_BEFORE_REQUIRED_COVERAGE_BLOCKS_EXECUTION
-    - REAL_TELEGRAPH_INTELLIGENCE_REQUIRED_FOR_T0_AND_SUBMISSION
-    - TELEGRAPH_WALLET_SECRETS_NEVER_ENTER_BROWSER_GIT_OR_CHAT
-    - REAL_GITHUB_WRITES_RESTRICTED_TO_ALLOW_LISTED_DEMO_SCOPE
+    - CONSTRUCTOR_AND_AUDITOR_ARE_SEPARATE
+    - RISK_TIER_IS_EXTERNAL_AND_DETERMINISTIC_FOR_MVP
+    - INCOMPLETE_REQUIRED_CHALLENGE_COVERAGE_CANNOT_PASS
+    - BUDGET_EXHAUSTION_BEFORE_REQUIRED_COVERAGE_CANNOT_PASS
+    - SUBMISSION_PATH_REQUIRES_REAL_TELEGRAPH_INTELLIGENCE
+    - TELEGRAPH_WALLET_SECRET_NEVER_ENTERS_CHAT_GIT_OR_BROWSER
+    - REAL_GITHUB_WRITES_ARE_EXPLICITLY_ALLOW_LISTED_ONLY
 
   milestone_history:
     - id: HUMAN_PROJECT_GO
@@ -70,31 +63,18 @@ canonical_state:
     - id: REPOSITORY_BOOTSTRAP
       status: PASS
       date: 2026-09-06
-      evidence: README.md
     - id: LIVING_PRD_V0_1_DRAFT
       status: PASS_DRAFT_READY_FOR_HUMAN_LOCK
       date: 2026-09-06
-      evidence: product/PRD.md
     - id: SPEC_KIT_DERIVATION_V0_1
       status: PASS_DERIVED_DRAFT_READY
       date: 2026-09-06
-      evidence:
-        - spec-kit/constitution.md
-        - spec-kit/spec.md
-        - spec-kit/plan.md
-        - spec-kit/tasks.md
-        - spec-kit/convergence.md
     - id: ARCHITECTURE_AND_DECISION_BASELINE
       status: PASS
       date: 2026-09-06
-      evidence:
-        - docs/ARCHITECTURE.md
-        - docs/DECISIONS.md
-        - evidence/README.md
     - id: DURABLE_HANDOVER_BASELINE
       status: PASS
       date: 2026-09-06
-      evidence: state/HANDOVER.yaml
     - id: SKEPTARA_PRD_V0_1_HUMAN_LOCK
       status: PASS
       date: 2026-09-06
@@ -104,58 +84,70 @@ canonical_state:
       status: PASS
       date: 2026-09-06
       result: PRODUCT_CONTRACT_CONVERGED_NO_PRODUCT_INTENT_EXPANSION
-      evidence:
-        - spec-kit/constitution.md
-        - spec-kit/spec.md
-        - spec-kit/plan.md
-        - spec-kit/tasks.md
-        - spec-kit/convergence.md
     - id: SKEPTARA_T0_PREFLIGHT
       status: PASS_PREFLIGHT_ONLY
       date: 2026-09-06
-      result: OFFICIAL_ROUTE_BASELINED__HARNESS_COMMITTED__CHAT_RUNTIME_CONNECTION_REFUSED__LOCAL_PROOF_REQUIRED
+    - id: SKEPTARA_T0_ATTEMPT_001
+      status: FAIL_CLOSED_REMEDIATED
+      date: 2026-09-06
+      result: FREE_DISCOVERY_FAILED_ON_STALE_13_237_89_59_8080_ROUTE__NEGATIVE_PATH_ESCALATE_PASS__NO_PAID_CALL_ATTEMPTED
+      discovery_class: execution_detail
+      product_change_required: false
+      evidence: evidence/t0-real-telegraph/ATTEMPT-001-STALE-ROUTE.md
+    - id: SKEPTARA_T0_ROUTE_REMEDIATION_001
+      status: PASS_CODE_REMEDIATED_PENDING_LOCAL_RETRY
+      date: 2026-09-06
+      result: CURRENT_OFFICIAL_DEVNODE_ROUTE_APPLIED
       evidence:
-        - evidence/t0-real-telegraph/PREFLIGHT.md
         - scripts/t0-real-telegraph.mjs
-        - package.json
         - .env.example
-        - .gitignore
-
-  product_source:
-    status: PRD_READY
-    revision: v0.1
-    path: product/PRD.md
-    living: true
-    frozen_after_initial_approval: false
-    historical_revisions_required: true
-    approval_state: HUMAN_LOCK_PASS
-    approval_evidence: evidence/prd-v0.1-human-lock/README.md
 
   spec_kit:
-    upstream_reference: github/spec-kit
-    orchestration_reference: Faadil1/spec-kit-orchestration
-    role: DERIVED_EXECUTION_LAYER
-    local_path: spec-kit/
-    authority: NONE_OVER_PRODUCT_INTENT
     status: DERIVED_READY_RECONCILED_TO_PRD_V0_1
     convergence: PRODUCT_CONTRACT_CONVERGED_IMPLEMENTATION_NOT_COMPLETE
-    artifacts:
-      constitution: spec-kit/constitution.md
-      specification: spec-kit/spec.md
-      plan: spec-kit/plan.md
-      tasks: spec-kit/tasks.md
-      convergence: spec-kit/convergence.md
+    authority: NONE_OVER_PRODUCT_INTENT
 
-  architecture:
-    status: BASELINE_READY
-    primary: docs/ARCHITECTURE.md
-    decisions: docs/DECISIONS.md
-    evidence_index: evidence/README.md
+  t0_contract:
+    gate: SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE
+    status: OPEN_RETRY_REQUIRED
+    attempt_001:
+      runtime: HUMAN_PERSONAL_WINDOWS_MACHINE
+      free_discovery: FAILED
+      paid_inference_attempted: false
+      negative_source_unavailable_semantics: PASS_ESCALATE
+      root_cause: STALE_ROUTE_BASELINE_IN_HARNESS
+      classification: execution_detail
+      evidence: evidence/t0-real-telegraph/ATTEMPT-001-STALE-ROUTE.md
+    current_official_route_baseline:
+      source: docs.telegraphprotocol.com
+      source_updates:
+        engine_inference: 2026-08-20
+        x402_inference: 2026-08-13
+      base_url: https://devnode.telegraphprotocol.com
+      free_discovery: GET_https://devnode.telegraphprotocol.com/api/miners
+      engine_base: https://devnode.telegraphprotocol.com/engine
+      paid_auto_routed_inference: POST_https://devnode.telegraphprotocol.com/engine/v1/ask
+      documented_payment_network: Base_Sepolia_eip155_84532
+      documented_payment_asset: USDC
+    harness:
+      path: scripts/t0-real-telegraph.mjs
+      status: REMEDIATED_FOR_CURRENT_ROUTE
+      command: npm_run_t0
+      evidence_output: evidence/t0-real-telegraph/runtime/<timestamp>/
+    required_proof_remaining:
+      - current official free discovery succeeds locally
+      - at least one genuine x402-paid Telegraph challenge succeeds
+      - actual exposed miner_intent_cost_signal_hash_or_other_metadata is captured without fabrication
+      - one normalized real EvidenceItem is produced
+      - negative failure semantics remain fail_closed
+      - sanitized evidence is reviewed and persisted
+    stop_rule: >-
+      If current live Telegraph capability cannot support the dependency-security hero vertical quickly, classify the discovery. A material hero-vertical or mechanism change requires living-PRD approval before continuing. Never substitute mocks on the submission path.
 
   build_gates:
     prd_v0_1_human_lock: PASS
     spec_plan_tasks_ready: PASS_RECONCILED
-    t0_real_telegraph_challenge: OPEN_LOCAL_REAL_PROOF_PENDING
+    t0_real_telegraph_challenge: OPEN_RETRY_REQUIRED
     t1_deterministic_risk_scorer: NOT_STARTED
     t2_independent_auditor: NOT_STARTED
     t3_fail_closed_merge_gate: NOT_STARTED
@@ -166,42 +158,14 @@ canonical_state:
 
   collaborator:
     benita_message_sent: false
-    benita_scope_locked: DRAFTED_IN_PLAN_NOT_RELEASED
-    release_condition: FRONTEND_DATA_CONTRACT_READY
-    reason: PRD_IS_LOCKED_BUT_FRONTEND_DATA_CONTRACT_MUST_STABILIZE_AFTER_T0_REAL_METADATA_DISCOVERY
-
-  t0_contract:
-    gate: SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE
-    status: OPEN_LOCAL_REAL_PROOF_PENDING
-    official_route_baseline:
-      source: telegraphprotocol/telegraph-mcp/README.md
-      node_url: http://13.237.89.59:7044
-      engine_url: http://13.237.89.59:8080
-      daemon_url: http://13.237.89.59:8081
-      free_discovery: GET_/v1/subnets
-      paid_inference: POST_/v1/ask
-    orchestrator_probe:
-      result: CONNECTION_REFUSED
-      interpretation: NOT_CONCLUSIVE_GLOBAL_OUTAGE
-      evidence: evidence/t0-real-telegraph/PREFLIGHT.md
-    harness:
-      path: scripts/t0-real-telegraph.mjs
-      command: npm_install_THEN_npm_run_t0
-      evidence_output: evidence/t0-real-telegraph/runtime/<timestamp>/
-    required_proof_remaining:
-      - reachable live Telegraph discovery from approved local/server runtime
-      - one genuine paid challenge call using local/server-only burner wallet
-      - actual returned miner/intent/cost/provenance fields captured without fabrication
-      - one normalized real EvidenceItem
-      - negative-path fail-closed evidence
-      - evidence persisted and reviewed
-    stop_rule: >-
-      If live Telegraph capabilities cannot support the dependency/security challenge quickly, classify the discovery. If it materially changes the hero vertical or mechanism, revise the living PRD with human approval before continuing. Do not substitute mocks for submission-path evidence.
+    benita_scope_locked: DRAFTED_NOT_RELEASED
+    release_condition: FRONTEND_DATA_CONTRACT_READY_AFTER_T0_METADATA_DISCOVERY
 
   state_persistence_rule:
     after_every_major_gate: UPDATE_CURRENT_AND_HANDOVER
     evidence_before_pass_claim: REQUIRED
-    new_conversation_resume_order:
+    repository_truth_outranks_chat_memory: true
+    resume_order:
       - state/CURRENT.yaml
       - state/HANDOVER.yaml
       - product/PRD.md
@@ -209,9 +173,8 @@ canonical_state:
       - spec-kit/plan.md
       - spec-kit/tasks.md
       - docs/ARCHITECTURE.md
-    repository_truth_outranks_chat_memory: true
 
-  exact_next_gate: SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE
+  exact_next_gate: SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE_RETRY_002
   exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_REVIEW
   exact_next_action: >-
-    On a personal/approved machine clone or pull the repo, run npm install, set TELEGRAPH_EVM_PRIVATE_KEY only in the local environment for a burner wallet and optionally set TELEGRAPH_ENGINE_URL/EVM_NETWORK, then run npm run t0. Do not paste the key into chat. Return or push only the sanitized runtime evidence/output. ChatGPT will inspect the evidence, classify any Telegraph capability discovery, update CURRENT + HANDOVER, and only then declare T0 PASS or fail/pivot.
+    Pull the remediated repository on the personal machine. Re-inject the burner private key only into the local PowerShell process and run npm run t0 again. The harness now targets https://devnode.telegraphprotocol.com/api/miners and https://devnode.telegraphprotocol.com/engine/v1/ask. Return only sanitized terminal output/evidence. Do not start T1 or Benita deep UI work until T0 is reviewed.
