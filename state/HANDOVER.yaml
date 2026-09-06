@@ -9,87 +9,112 @@ handover:
   resume_rule: >-
     Read state/CURRENT.yaml first, then this HANDOVER, then product/PRD.md. The living PRD is canonical product intent; Spec Kit files are derived execution contracts. Repository truth outranks chat/runtime memory. After every major gate persist evidence and update BOTH CURRENT and HANDOVER.
 
-  current_milestone: T0_ATTEMPT_008_REAL_X402_RUNTIME_PASS__CVE_LOOKUP_ROUTED__EVIDENCE_REVIEW_PENDING
-  lifecycle_status: PRODUCT_CONTRACT_LOCKED__T0_RUNTIME_SUCCESS__DURABLE_EVIDENCE_REVIEW_REQUIRED_BEFORE_PROMOTION
+  current_milestone: T0_CLOSED_PASS__T1_DETERMINISTIC_POLICY_PASS__FRONTEND_CONTRACT_FROZEN__T2_OPEN_NEXT
+  lifecycle_status: PRODUCT_CONTRACT_LOCKED__REAL_TELEGRAPH_PROVEN__DETERMINISTIC_POLICY_PROVEN__INDEPENDENT_AUDITOR_NEXT
 
   project:
     public_name: Skeptara
     hero_vertical: AUTONOMOUS_GITHUB_DEPENDENCY_MERGE
     deadline_utc: 2026-09-07T23:59:00Z
+    one_line: Higher-risk autonomous code changes must survive deeper independent paid Telegraph counter-evidence before merge can execute.
 
   product_truth:
     canonical_source: product/PRD.md
     current_revision: v0.1
     status: PRD_READY
     living_prd: true
-    product_intent_changed_by_t0: false
+    product_intent_changed_by_t0_or_t1: false
 
-  active_gate:
-    id: SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE
-    status: RUNTIME_PASS_EVIDENCE_REVIEW_REQUIRED
-    attempt_008:
-      environment: HUMAN_PERSONAL_WINDOWS_MACHINE
-      fresh_burner: ACTIVE_UNCOMPROMISED_FOR_T0
-      hardened_clipboard_launcher: PASS
-      free_discovery: PASS
-      x402_quote:
-        network: eip155:84532
-        network_name: Base_Sepolia
-        asset: USDC
-        amount_atomic: 10000
-        amount_usdc: 0.01
-      paid_challenge: PASS
+  t0_closed_pass:
+    status: CLOSED_PASS
+    evidence_root: evidence/t0-real-telegraph/attempt-008/
+    runtime:
+      network: eip155:84532
+      asset: USDC
+      quote_atomic: 10000
+      quote_usdc: 0.01
       miner_id: "20260828"
+      miner_name: PREFLIGHT Infrastructure Signals
+      endpoint: /cve
       intent: CVE_LOOKUP
       cost_usd: 0.01
       signal_hash: 0x060d6688d94acfa0728417eefe947c15de495103024a9df83f8433f0e78a5917
       settlement_success: true
-      negative_path_SOURCE_UNAVAILABLE: PASS_ESCALATE
-      local_runtime_evidence_location: evidence/t0-real-telegraph/runtime/2026-09-06T21-42-53-570Z/
-      durable_summary_evidence: evidence/t0-real-telegraph/ATTEMPT-008-RUNTIME-SUCCESS-PENDING-REVIEW.md
-      classification: execution_detail
-      product_intent_changed: false
+      negative_source_unavailable: PASS_ESCALATE
+    challenged_case:
+      target: lodash@4.17.20
+      cve_id: CVE-2020-28500
+      affected_range: <4.17.21
+      severity: MEDIUM
+      cvss_score: 5.3
+      hero_vertical_relevance: DIRECT
+      normalized_materiality: BLOCKING
+      reason_code: KNOWN_VULNERABILITY_AFFECTS_TARGET_DEPENDENCY_VERSION
+      independent_primary_verification: NVD
+    truth_boundary:
+      protocol_source_provenance_field: null
+      miner_reported_source: CVE.org and NVD
+      payer_address_persisted_in_durable_summary: false
+      private_key_persisted: false
 
-  proof_status:
-    proven:
-      - live Telegraph discovery from user machine
-      - bounded Base Sepolia x402 quote
-      - fresh funded burner successfully settles payment
-      - real paid Telegraph challenge returns success
-      - real miner id returned
-      - real CVE_LOOKUP intent returned
-      - cost metadata returned
-      - signal hash returned
-      - settlement success true
-      - source unavailable negative path remains fail-closed
-    still_required_before_closed_pass:
-      - review sanitized 03-paid-challenge.json
-      - review sanitized 04-normalized-evidence-item.json
-      - inspect actual CVE result/provenance for lodash 4.17.20
-      - classify materiality and hero-vertical relevance without fabrication
-      - persist sanitized evidence durably in repository
+  t1_pass:
+    status: PASS
+    implementation: src/policy.mjs
+    tests: tests/policy.test.mjs
+    validation: 10_OF_10_NODE_TESTS_PASS
+    action_fingerprint: stable_SHA256_over_canonical_action_facts
+    risk_contracts:
+      LOW: 1_path__10000_atomic_USDC__cross_intent_not_required
+      MEDIUM: 2_paths__20000_atomic_USDC__distinct_intents_preferred
+      HIGH: 3_paths__30000_atomic_USDC__cross_intent_required_if_supported
+    fail_closed:
+      blocking_evidence: BLOCK
+      incomplete_coverage: ESCALATE
+      budget_exhausted_before_coverage: ESCALATE
+      required_source_unavailable: ESCALATE
+      critical_ambiguity_medium_high: ESCALATE
+      spend_cap_exceeded: ESCALATE
+
+  frontend_contract:
+    status: FROZEN_V0_1
+    path: docs/FRONTEND_DATA_CONTRACT.md
+    release_condition: SATISFIED
+    benita_message_sent: false
+    branch: feat/frontend-benita
+    allowed_scope: UI_UX__VISUAL_IDENTITY__CHALLENGE_PROGRESS__EVIDENCE_LEGIBILITY__PASS_BLOCK_ESCALATE__SCREENSHOTS_DEMO_NARRATIVE
+    forbidden_scope: WALLET_PRIVATE_KEYS__GITHUB_WRITE_CREDENTIAL__RISK_GATE_SEMANTIC_CHANGES_WITHOUT_RECONCILIATION
 
   security_incident:
     id: SKEPTARA_BURNER_CREDENTIAL_INCIDENT_001
     status: ROTATED
     prior_burner: COMPROMISED_DO_NOT_REUSE_OR_FUND
-    fresh_burner_private_key_printed_or_shared: false
+    fresh_burner: ACTIVE_BOUNDED_TESTNET_ONLY
+    fresh_private_key_printed_or_shared: false
     repository_secret_recorded: false
+    launcher: scripts/t0-from-clipboard.ps1
 
-  collaborator_benita:
-    message_sent: false
-    release_condition: FRONTEND_DATA_CONTRACT_READY_AFTER_T0_METADATA_DISCOVERY_AND_EVIDENCE_REVIEW
+  active_gate:
+    id: SKEPTARA_T2_INDEPENDENT_AUDITOR_PASS
+    status: OPEN_NEXT
+    required_work:
+      - Telegraph adapter from T0 proven path
+      - auditor receives canonical action facts only, not constructor persuasive rationale
+      - deterministic evidence-path plan from T1 risk contract
+      - bounded spend tracker
+      - coverage tracker
+      - finding normalization
+      - challenge record persistence
+      - demonstrate BLOCK using real T0 CVE evidence path
+      - obtain clean-case evidence path needed for PASS candidate
 
-  next_gates_after_t0_closed_pass:
-    - SKEPTARA_T1_DETERMINISTIC_POLICY_PASS
-    - SKEPTARA_T2_INDEPENDENT_AUDITOR_PASS
+  next_gates_after_t2:
     - SKEPTARA_T3_FAIL_CLOSED_MERGE_GATE_PASS
     - SKEPTARA_T4_TWO_CASE_REAL_DEMO_PASS
     - SKEPTARA_TRACE_JUDGE_PATH_REVIEW
     - SKEPTARA_BUILD_CANDIDATE_READY
     - HUMAN_PROTECTED_FINAL_SUBMISSION
 
-  exact_next_gate: SKEPTARA_T0_ATTEMPT_008_EVIDENCE_REVIEW_AND_DURABLE_PERSISTENCE
-  exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_REVIEW
+  exact_next_gate: SKEPTARA_T2_INDEPENDENT_AUDITOR_PASS
+  exact_next_owner: CHATGPT_ORCHESTRATED_IMPLEMENTATION_WITH_HUMAN_LOCAL_PAID_RUNTIME_WHEN_REQUIRED
   exact_next_action: >-
-    Return the sanitized contents of evidence/t0-real-telegraph/runtime/2026-09-06T21-42-53-570Z/03-paid-challenge.json and 04-normalized-evidence-item.json. Never return the private key. ChatGPT reviews the actual CVE finding/provenance, persists durable evidence, closes T0 if justified, freezes the frontend metadata contract, and proceeds to T1.
+    Implement the independent auditor against the proven T0 Telegraph/x402 path and T1 policy contract. Preserve constructor/auditor separation, bounded spend, coverage accounting and fail-closed semantics. Any paid live verification must use the fresh burner only through the hardened local clipboard secret boundary. Create the Benita frontend branch from the now-frozen frontend contract; do not give that branch wallet or protected GitHub-write responsibility.
