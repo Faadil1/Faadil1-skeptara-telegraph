@@ -9,8 +9,8 @@ handover:
   resume_rule: >-
     Read state/CURRENT.yaml first, then this HANDOVER, then product/PRD.md. The living PRD is canonical product intent; Spec Kit files are derived execution contracts. Repository truth outranks chat/runtime memory. After every major gate persist evidence and update BOTH CURRENT and HANDOVER.
 
-  current_milestone: T0_ATTEMPT_006_X402_QUOTE_PROVEN__INSUFFICIENT_BALANCE_PROVEN__EXPOSED_BURNER_ROTATION_REQUIRED
-  lifecycle_status: PRODUCT_CONTRACT_LOCKED__T0_ACTIVE__FRESH_BURNER_AND_TEST_USDC_REQUIRED
+  current_milestone: T0_ATTEMPT_007_FRESH_BURNER__ARC_TESTNET_USDC_FUNDED__BASE_SEPOLIA_BALANCE_STILL_INSUFFICIENT__RETRY_008_PENDING
+  lifecycle_status: PRODUCT_CONTRACT_LOCKED__T0_ACTIVE__CORRECT_NETWORK_FUNDING_REQUIRED
 
   project:
     public_name: Skeptara
@@ -26,9 +26,11 @@ handover:
 
   active_gate:
     id: SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE
-    status: OPEN_ROTATE_AND_FUND_FRESH_BURNER
-    attempt_006:
+    status: OPEN_CORRECT_NETWORK_FUNDING_REQUIRED
+    attempt_007:
       environment: HUMAN_PERSONAL_WINDOWS_MACHINE
+      fresh_burner_created: true
+      hardened_clipboard_launcher: PASS
       free_discovery: PASS
       x402_quote:
         network: eip155:84532
@@ -36,37 +38,37 @@ handover:
         asset: USDC
         amount_atomic: 10000
         amount_usdc: 0.01
-      paid_transport_stage_reached: true
+      faucet_transfer:
+        amount_test_usdc: 20
+        observed_network: Arc_Testnet
+        transaction_status: SUCCESS
+        relevance_to_telegraph_balance: NONE_CROSS_CHAIN
       paid_success: false
       settlement_reason: invalid_exact_evm_insufficient_balance
       fail_closed: PASS
       negative_path_SOURCE_UNAVAILABLE: PASS_ESCALATE
       classification: execution_detail
       product_intent_changed: false
-      evidence: evidence/t0-real-telegraph/ATTEMPT-006-INSUFFICIENT-BALANCE-AND-KEY-EXPOSURE.md
+      evidence: evidence/t0-real-telegraph/ATTEMPT-007-WRONG-TESTNET-FUNDING.md
 
   security_incident:
     id: SKEPTARA_BURNER_CREDENTIAL_INCIDENT_001
-    status: ROTATION_REQUIRED
-    reason: >-
-      The burner private key was entered into the visible PowerShell prompt and the terminal transcript was then shared in chat. Treat that credential as compromised. Do not reuse or fund it.
+    status: ROTATED
+    prior_burner: COMPROMISED_DO_NOT_REUSE_OR_FUND
+    fresh_burner: ACTIVE_FOR_T0
+    fresh_private_key_printed_or_shared: false
     repository_secret_recorded: false
-    remediation:
-      - create fresh dedicated burner EVM account or wallet
-      - use only fresh public address for faucet funding
-      - never paste private key into PowerShell or chat
-      - use hardened scripts/t0-from-clipboard.ps1 which auto-detects clipboard key and requires no terminal input
 
   funding_rule:
     proven_requirement: 0.01_USDC_ON_BASE_SEPOLIA
-    recommended_source: Circle_testnet_faucet
-    note: >-
-      Fund only the fresh burner public address with testnet USDC. The Circle Base Sepolia faucet provides test USDC. No mainnet or real-value funding is needed for this T0.
+    current_wrong_chain_balance: Arc_Testnet_USDC
+    remediation: >-
+      Reuse the same fresh burner public address. In Circle's public faucet select USDC and explicitly choose Base Sepolia in the Network dropdown before sending. Arc Testnet USDC is valid test funding but is on a different chain and cannot satisfy Telegraph's Base Sepolia x402 balance check.
 
   remaining_t0_proof:
-    - fresh uncompromised burner created
     - fresh burner receives Base Sepolia test USDC
-    - hardened launcher run with fresh private key clipboard-only
+    - Base Sepolia transaction is confirmed
+    - hardened launcher reruns with same fresh burner private key clipboard-only
     - genuine x402-paid Telegraph inference returns success
     - normalized real EvidenceItem produced
     - hero-vertical relevance reviewed
@@ -85,7 +87,7 @@ handover:
     - SKEPTARA_BUILD_CANDIDATE_READY
     - HUMAN_PROTECTED_FINAL_SUBMISSION
 
-  exact_next_gate: SKEPTARA_T0_ROTATE_EXPOSED_BURNER_AND_FUND_TEST_USDC_RETRY_007
+  exact_next_gate: SKEPTARA_T0_FUND_FRESH_BURNER_BASE_SEPOLIA_AND_RETRY_008
   exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_REVIEW
   exact_next_action: >-
-    Create a fresh burner EVM account/wallet because the previous key is compromised. Use the fresh PUBLIC address in the Circle testnet faucet with Base Sepolia + USDC. Then git pull and launch scripts/t0-from-clipboard.ps1. Do not type or paste the new private key into PowerShell; once the helper says it is waiting, copy the new private key from the wallet and the helper will detect it automatically.
+    Open Circle's public testnet faucet, select USDC, change Network from Arc Testnet to Base Sepolia, send to the same fresh burner's PUBLIC address, and confirm the transfer is on Base Sepolia. Then run scripts/t0-from-clipboard.ps1 and copy the fresh private key only after the helper is waiting; do not paste the key into PowerShell or chat.
