@@ -1,0 +1,19 @@
+{
+  "repository": "Faadil1/Faadil1-skeptara-telegraph",
+  "pr_number": 1,
+  "head_sha": "73cf5bdd69163924228e3e21d67fa9f405d99904",
+  "base_branch": "main",
+  "changed_files": [
+    "demo/controlled-clean/package.json"
+  ],
+  "dependency_changes": [
+    {
+      "name": "lodash",
+      "from": "4.17.20",
+      "to": "4.17.21",
+      "type": "runtime",
+      "security_sensitive": false
+    }
+  ],
+  "security_sensitive_surfaces": []
+}
