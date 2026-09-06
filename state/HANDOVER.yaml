@@ -9,8 +9,8 @@ handover:
   resume_rule: >-
     Read state/CURRENT.yaml first, then this HANDOVER, then product/PRD.md. The living PRD is canonical product intent; Spec Kit files are derived execution contracts. Repository truth outranks chat/runtime memory. After every major gate persist evidence and update BOTH CURRENT and HANDOVER.
 
-  current_milestone: T0_ATTEMPT_005_FINAL_HTTP_402_WITH_PAYMENT_RESPONSE__DIAGNOSTIC_HARNESS_REMEDIATED__RETRY_006_PENDING
-  lifecycle_status: PRODUCT_CONTRACT_LOCKED__T0_ACTIVE__SETTLEMENT_REASON_NOT_YET_DECODED
+  current_milestone: T0_ATTEMPT_006_X402_QUOTE_PROVEN__INSUFFICIENT_BALANCE_PROVEN__EXPOSED_BURNER_ROTATION_REQUIRED
+  lifecycle_status: PRODUCT_CONTRACT_LOCKED__T0_ACTIVE__FRESH_BURNER_AND_TEST_USDC_REQUIRED
 
   project:
     public_name: Skeptara
@@ -26,41 +26,51 @@ handover:
 
   active_gate:
     id: SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE
-    status: OPEN_RETRY_006
-    attempt_005:
+    status: OPEN_ROTATE_AND_FUND_FRESH_BURNER
+    attempt_006:
       environment: HUMAN_PERSONAL_WINDOWS_MACHINE
       free_discovery: PASS
-      valid_burner_evm_key_format: PASS
+      x402_quote:
+        network: eip155:84532
+        network_name: Base_Sepolia
+        asset: USDC
+        amount_atomic: 10000
+        amount_usdc: 0.01
       paid_transport_stage_reached: true
-      final_http_status: 402
-      payment_response_header_present: true
-      response_body: null
       paid_success: false
+      settlement_reason: invalid_exact_evm_insufficient_balance
       fail_closed: PASS
       negative_path_SOURCE_UNAVAILABLE: PASS_ESCALATE
-      runtime_evidence_location: evidence/t0-real-telegraph/runtime/2026-09-06T21-15-17-533Z/
       classification: execution_detail
-      unresolved_detail: settlement response existed but original harness did not decode it
-    diagnostic_remediation:
-      script: scripts/t0-real-telegraph.mjs
-      status: COMMITTED
-      behavior:
-        - unsigned quote preflight captures PAYMENT-REQUIRED
-        - base64 JSON quote decoded and persisted
-        - only exact eip155:84532 requirements at or below 100000 atomic USDC are eligible
-        - paid transport uses Telegraph official MCP x402Client.fromConfig + wrapFetchWithPayment pattern
-        - final PAYMENT-RESPONSE is decoded and persisted
-        - settlement errorReason is printed without exposing the private key
-        - all ambiguity remains ESCALATE/BLOCK
-    funding_rule: >-
-      Do not fund anything based on assumption. If retry 006 proves insufficient funds, use only the exact testnet network/asset from the decoded PAYMENT-REQUIRED quote and keep the burner minimally funded.
-    remaining_t0_proof:
-      - decoded quote requirement
-      - decoded settlement result or successful 200
-      - successful genuine x402-paid Telegraph inference
-      - normalized real EvidenceItem
-      - hero-vertical relevance review
-      - durable evidence persistence
+      product_intent_changed: false
+      evidence: evidence/t0-real-telegraph/ATTEMPT-006-INSUFFICIENT-BALANCE-AND-KEY-EXPOSURE.md
+
+  security_incident:
+    id: SKEPTARA_BURNER_CREDENTIAL_INCIDENT_001
+    status: ROTATION_REQUIRED
+    reason: >-
+      The burner private key was entered into the visible PowerShell prompt and the terminal transcript was then shared in chat. Treat that credential as compromised. Do not reuse or fund it.
+    repository_secret_recorded: false
+    remediation:
+      - create fresh dedicated burner EVM account or wallet
+      - use only fresh public address for faucet funding
+      - never paste private key into PowerShell or chat
+      - use hardened scripts/t0-from-clipboard.ps1 which auto-detects clipboard key and requires no terminal input
+
+  funding_rule:
+    proven_requirement: 0.01_USDC_ON_BASE_SEPOLIA
+    recommended_source: Circle_testnet_faucet
+    note: >-
+      Fund only the fresh burner public address with testnet USDC. The Circle Base Sepolia faucet provides test USDC. No mainnet or real-value funding is needed for this T0.
+
+  remaining_t0_proof:
+    - fresh uncompromised burner created
+    - fresh burner receives Base Sepolia test USDC
+    - hardened launcher run with fresh private key clipboard-only
+    - genuine x402-paid Telegraph inference returns success
+    - normalized real EvidenceItem produced
+    - hero-vertical relevance reviewed
+    - durable evidence persisted
 
   collaborator_benita:
     message_sent: false
@@ -75,7 +85,7 @@ handover:
     - SKEPTARA_BUILD_CANDIDATE_READY
     - HUMAN_PROTECTED_FINAL_SUBMISSION
 
-  exact_next_gate: SKEPTARA_T0_X402_SETTLEMENT_DIAGNOSTIC_RETRY_006
+  exact_next_gate: SKEPTARA_T0_ROTATE_EXPOSED_BURNER_AND_FUND_TEST_USDC_RETRY_007
   exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_REVIEW
   exact_next_action: >-
-    git pull, then run powershell -ExecutionPolicy Bypass -File .\scripts\t0-from-clipboard.ps1. Copy the burner private key only when the helper pauses and press Enter without pasting. Return the terminal output. If the run still fails, also return 02-x402-quote.json and 03-paid-challenge.json from the new runtime directory. Never return the private key.
+    Create a fresh burner EVM account/wallet because the previous key is compromised. Use the fresh PUBLIC address in the Circle testnet faucet with Base Sepolia + USDC. Then git pull and launch scripts/t0-from-clipboard.ps1. Do not type or paste the new private key into PowerShell; once the helper says it is waiting, copy the new private key from the wallet and the helper will detect it automatically.
