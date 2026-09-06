@@ -2,6 +2,10 @@
 
 Evidence is gate-scoped. A gate is not PASS because code exists; it is PASS only when its required evidence is persisted and referenced from canonical state.
 
+Current evidence directories:
+
+- `evidence/prd-v0.1-human-lock/` — human approval that promoted PRD v0.1 to `PRD_READY` and opened T0.
+
 Planned evidence directories:
 
 - `evidence/t0-real-telegraph/` — live Telegraph capability discovery, paid challenge call, normalized EvidenceItem, negative path.
