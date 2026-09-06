@@ -9,9 +9,9 @@ handover:
   resume_rule: >-
     Read state/CURRENT.yaml first, then this HANDOVER, then product/PRD.md. The living PRD is canonical product intent; Spec Kit files are derived execution contracts. Repository truth outranks chat/runtime memory. Confirm the exact next gate before implementation. After every major gate, persist evidence and update BOTH CURRENT and HANDOVER.
 
-  current_milestone: T0_ATTEMPT_001_FAIL_CLOSED__STALE_ROUTE_IDENTIFIED__CURRENT_DEVNODE_ROUTE_REMEDIATED__RETRY_002_PENDING
-  previous_milestone: PRD_V0_1_HUMAN_LOCK_PASS__SPEC_KIT_RECONCILED__T0_PREFLIGHT_READY
-  lifecycle_status: PRODUCT_CONTRACT_LOCKED__T0_ACTIVE__RETRY_REQUIRED
+  current_milestone: T0_ATTEMPT_002_LIVE_DISCOVERY_PASS__KEY_FORMAT_BLOCK__HARNESS_NORMALIZATION_REMEDIATED__RETRY_003_PENDING
+  previous_milestone: T0_ATTEMPT_001_STALE_ROUTE_REMEDIATED
+  lifecycle_status: PRODUCT_CONTRACT_LOCKED__T0_ACTIVE__LIVE_ROUTE_PROVEN__LOCAL_SECRET_FORMAT_RETRY_REQUIRED
 
   project:
     public_name: Skeptara
@@ -30,51 +30,40 @@ handover:
     living_prd: true
     material_change_rule: HUMAN_APPROVAL_THEN_PRD_REVISION_THEN_DERIVED_RECONCILIATION
 
-  core_mechanism:
-    id: RISK_PROPORTIONAL_INDEPENDENT_COUNTER_EVIDENCE_BEFORE_EXECUTION
-    reviewed_agent_scores_own_risk: false
-    reviewed_agent_audits_itself: false
-    fail_closed: true
-    incomplete_required_coverage: ESCALATE_BLOCK
-    budget_exhausted_before_required_coverage: ESCALATE_BLOCK
-    stale_or_changed_pr_after_pass: DENY_MERGE
-
   active_gate:
     id: SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE
     status: OPEN_RETRY_REQUIRED
-    attempt_001:
+    attempt_002:
       environment: HUMAN_PERSONAL_WINDOWS_MACHINE
-      npm_install: PASS_0_VULNERABILITIES
-      free_discovery: FAILED
+      free_discovery: PASS
+      discovery_url: https://devnode.telegraphprotocol.com/api/miners
+      sampled_live_relevant_intents:
+        - FACT_CHECK
+        - NEWS_HEADLINES
+        - URL_SCAN
       paid_inference_attempted: false
+      blocker: BURNER_PRIVATE_KEY_LOCAL_FORMAT_INVALID
       negative_path_SOURCE_UNAVAILABLE: PASS_ESCALATE
-      evidence: evidence/t0-real-telegraph/ATTEMPT-001-STALE-ROUTE.md
+      evidence: evidence/t0-real-telegraph/ATTEMPT-002-DISCOVERY-PASS-KEY-FORMAT-BLOCK.md
       classification: execution_detail
       product_intent_changed: false
-    route_discovery:
-      old_harness_assumption:
-        engine_url: http://13.237.89.59:8080
-        discovery: GET_/v1/subnets
-      current_official_docs:
-        base_url: https://devnode.telegraphprotocol.com
-        discovery: GET_/api/miners
-        engine_base: https://devnode.telegraphprotocol.com/engine
-        auto_ask: POST_/engine/v1/ask
-        payment_network_documented: Base_Sepolia
-        payment_network_id: eip155:84532
-        payment_asset: USDC
-      conclusion: ATTEMPT_001_DOES_NOT_PROVE_GLOBAL_TELEGRAPH_OUTAGE
     remediation:
       script: scripts/t0-real-telegraph.mjs
-      env_template: .env.example
-      status: COMMITTED_CURRENT_ROUTE
-    retry_002_required_proof:
-      - free discovery succeeds on current devnode route
-      - genuine x402-paid call succeeds
+      status: COMMITTED
+      behavior:
+        - trim whitespace
+        - accept 64-hex EVM key without 0x and prefix locally
+        - accept standard 0x plus 64-hex key
+        - strip one pair of surrounding quotes
+        - invalid diagnostics reveal length only, never key material
+      warning: Use the exported private key for the burner EVM account, not wallet password, public address, or recovery phrase.
+    retry_003_required_proof:
+      - local exported burner EVM private key passes format validation
+      - genuine x402-paid Telegraph challenge succeeds
       - actual response metadata is captured without fabrication
       - normalized real EvidenceItem exists
-      - negative-path fail-closed behavior remains PASS
-      - sanitized runtime evidence is reviewed
+      - hero-vertical relevance of the returned evidence is reviewed
+      - sanitized runtime evidence is persisted
 
   secret_boundary:
     telegraph_private_key_in_chat: FORBIDDEN
@@ -85,7 +74,7 @@ handover:
   collaborator_benita:
     message_sent: false
     release_condition: FRONTEND_DATA_CONTRACT_READY_AFTER_T0_METADATA_DISCOVERY
-    note: Benita should receive only the locked Skeptara product brief, not discarded ideation history.
+    note: Benita receives only the locked Skeptara product brief, not discarded ideation history.
 
   next_gates_after_t0_pass:
     - SKEPTARA_T1_DETERMINISTIC_POLICY_PASS
@@ -102,7 +91,7 @@ handover:
     material_decision_history_location: docs/DECISIONS.md
     task_progress_location: spec-kit/tasks.md
 
-  exact_next_gate: SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE_RETRY_002
+  exact_next_gate: SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE_RETRY_003
   exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_REVIEW
   exact_next_action: >-
-    On the existing local clone, git pull the remediation, inject the burner private key only into the current PowerShell process, and run npm run t0. Do not set the obsolete 13.237.89.59 Engine URL. The harness now defaults to https://devnode.telegraphprotocol.com. Share only sanitized output/evidence. ChatGPT must review and persist the result before T0 is promoted.
+    Git pull. Export the burner EVM account private key from the wallet locally. Inject it only into the current PowerShell process and run npm run t0. The current harness accepts 64 hex with or without 0x and strips whitespace/quotes. Share only sanitized output/evidence. ChatGPT reviews and persists the result before any T0 promotion, T1 start, or Benita frontend release.
