@@ -1,0 +1,9 @@
+{
+  "name": "skeptara-controlled-clean-fixture",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Controlled dependency-change fixture for Skeptara T2/T3/T4 demo evidence. Not part of the root application runtime.",
+  "dependencies": {
+    "lodash": "4.17.20"
+  }
+}
