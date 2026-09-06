@@ -95,7 +95,8 @@ handover:
     contract: docs/FRONTEND_DATA_CONTRACT.md
     branch: feat/frontend-benita
     release_condition: SATISFIED
-    note: do not force-move collaborator branch if Benita has started committing; reconcile normally.
+    branch_unique_commits_at_last_check: 0
+    sync_policy: safe fast-forward while branch has no collaborator commits; once Benita commits, reconcile normally and never force-move her work.
 
   security:
     prior_burner: COMPROMISED_DO_NOT_REUSE_OR_FUND
