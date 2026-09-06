@@ -1,0 +1,135 @@
+handover:
+  protocol_version: 1
+  system: SKEPTARA_TELEGRAPH_TRACK3
+  date: 2026-09-06
+  source_of_truth: GITHUB
+  repository: Faadil1/Faadil1-skeptara-telegraph
+  branch: main
+
+  resume_rule: >-
+    Read state/CURRENT.yaml first, then this HANDOVER, then product/PRD.md. Treat the living PRD as canonical product intent and Spec Kit files as derived execution contracts. Repository truth outranks chat/runtime memory. Before continuing implementation, confirm the exact next gate in CURRENT and do not silently skip it. After every major gate, persist evidence and update BOTH CURRENT and HANDOVER.
+
+  current_milestone: PRD_V0_1_DRAFT_READY__SPEC_KIT_DERIVED_DRAFT_READY__HUMAN_LOCK_PENDING
+  previous_milestone: REPOSITORY_BOOTSTRAP_PASS
+  lifecycle_status: PRODUCT_CONTRACT_PREPARED__IMPLEMENTATION_NOT_YET_OPEN
+
+  project:
+    public_name: Skeptara
+    hackathon: TELEGRAPH_PROTOCOL_2026
+    track: TRACK_3_APPLICATION
+    deadline_utc: 2026-09-07T23:59:00Z
+    repository: Faadil1/Faadil1-skeptara-telegraph
+    hero_vertical: AUTONOMOUS_GITHUB_DEPENDENCY_MERGE
+    one_line: Higher-risk autonomous code changes must survive deeper independent paid Telegraph counter-evidence before merge can execute.
+
+  product_truth:
+    canonical_source: product/PRD.md
+    current_revision: v0.1_DRAFT
+    approval: PENDING_HUMAN_LOCK
+    living_prd: true
+    code_as_product_source: FORBIDDEN
+    material_change_rule: HUMAN_APPROVAL_THEN_PRD_REVISION_THEN_DERIVED_RECONCILIATION
+
+  core_mechanism:
+    id: RISK_PROPORTIONAL_INDEPENDENT_COUNTER_EVIDENCE_BEFORE_EXECUTION
+    flow: PR_PROPOSED__DETERMINISTIC_RISK_TIER__INDEPENDENT_TELEGRAPH_CHALLENGE__PASS_BLOCK_ESCALATE__BOUNDED_REAL_GITHUB_MERGE
+    reviewed_agent_scores_own_risk: false
+    reviewed_agent_audits_itself: false
+    fail_closed: true
+    budget_exhausted_before_required_coverage: ESCALATE_BLOCK
+    missing_required_telegraph_path: ESCALATE_BLOCK
+    stale_or_changed_pr_after_pass: DENY_MERGE
+
+  decisions_locked:
+    - generic pre-execution verification gate KILLED for insufficient differentiation
+    - generic execution-warrant framework KILLED as crowded/infrastructure-heavy
+    - treasury/DeFi vertical KILLED for crowding and remaining-time risk
+    - same-agent self-falsification KILLED
+    - majority vote is not the core mechanism
+    - risk-proportional evidence depth KEPT
+    - independent auditor topology KEPT
+    - dependency-change GitHub merge selected as v0.1 hero vertical
+    - x402 is enabling economic/audit infrastructure, not the claimed invention
+    - only real exposed Telegraph/x402 fields may be recorded
+    - Skeptara is provisional public name after exact-name collision screening
+
+  multi_model_red_team_summary:
+    Gemini: preserved risk_to_verification_depth; rejected generic while-loop/warrant framing
+    Grok: preserved paid evidence/refusal; highlighted conflict and real-action enforcement
+    Perplexity: preserved economic verification allocator; rejected generic framework pitch
+    Claude: preserved asymmetric fail-closed challenge; required constructor/auditor separation and external risk calibration
+    combined_result: CORE_SURVIVED_WITH_INDEPENDENT_AUDITOR_PIVOT
+
+  spec_kit:
+    authority: DERIVED_ONLY
+    artifacts:
+      constitution: spec-kit/constitution.md
+      specification: spec-kit/spec.md
+      plan: spec-kit/plan.md
+      tasks: spec-kit/tasks.md
+      convergence: spec-kit/convergence.md
+    status: DERIVED_DRAFT_READY_BLOCKED_ON_PRD_HUMAN_LOCK
+    orchestration_reference: Faadil1/spec-kit-orchestration
+
+  architecture:
+    primary: docs/ARCHITECTURE.md
+    decisions: docs/DECISIONS.md
+    evidence_index: evidence/README.md
+    major_components:
+      - ACTION_INTAKE
+      - DETERMINISTIC_RISK_SCORER
+      - CHALLENGE_CONTRACT_BUILDER
+      - INDEPENDENT_TELEGRAPH_AUDITOR
+      - EVIDENCE_NORMALIZER
+      - DETERMINISTIC_CHALLENGE_GATE
+      - PROTECTED_GITHUB_MERGE_EXECUTOR
+
+  security_and_protected_actions:
+    telegraph_private_key_in_git: FORBIDDEN
+    telegraph_private_key_in_chat: FORBIDDEN
+    telegraph_private_key_in_browser: FORBIDDEN
+    github_write_token_in_browser: FORBIDDEN
+    demo_github_write_scope: EXPLICIT_ALLOW_LIST_ONLY
+    final_submission: HUMAN_PROTECTED_NOT_AUTHORIZED
+    mainnet_or_user_capital_action: OUT_OF_SCOPE
+
+  collaborator_benita:
+    message_sent: false
+    reason: Benita has not been told the discarded initial concepts and should receive only the locked product brief, not the internal ideation history.
+    release_condition: PRD_V0_1_HUMAN_LOCK_AND_FRONTEND_CONTRACT_READY
+    intended_scope:
+      - frontend UI/UX
+      - visual identity
+      - risk/challenge/evidence legibility
+      - PASS_BLOCK_ESCALATE presentation
+      - screenshots/demo narrative support
+    excluded_scope:
+      - wallet/private key configuration
+      - GitHub protected write credentials
+      - changing risk or gate semantics without product-source reconciliation
+
+  next_build_after_prd_lock:
+    gate: SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE
+    required_proof:
+      - discover live relevant Telegraph intents/miners
+      - prove current Telegraph route
+      - execute at least one genuine paid challenge call
+      - capture only actually exposed intent/miner/cost/provenance fields
+      - normalize a real EvidenceItem
+      - prove payment/source failure is fail-closed
+      - persist evidence under evidence/t0-real-telegraph/
+    stop_rule: >-
+      If live Telegraph capabilities cannot support the dependency/security challenge quickly, classify the discovery. If it changes the hero vertical or product mechanism, revise the living PRD with human approval before proceeding. Do not cover the failure with mocks.
+
+  state_persistence:
+    rule: UPDATE_CURRENT_AND_HANDOVER_AFTER_EVERY_MAJOR_GATE
+    evidence_required_before_pass_claim: true
+    milestone_history_location: state/CURRENT.yaml
+    material_decision_history_location: docs/DECISIONS.md
+    task_progress_location: spec-kit/tasks.md
+    prd_revision_history: preserve_via_git_and_document_version
+
+  exact_next_gate: SKEPTARA_PRD_V0_1_HUMAN_LOCK
+  exact_next_owner: HUMAN_PROJECT_OWNER
+  exact_next_action: >-
+    Review product/PRD.md v0.1. On approval, update PRD status to PRD_READY, update canonical state + handover, mark derived Spec Kit artifacts reconciled/ready, then start T0. Only after the frontend data contract is stable should Benita receive the concise final product message and branch assignment.
