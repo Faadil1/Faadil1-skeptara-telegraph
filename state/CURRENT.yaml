@@ -1,13 +1,13 @@
 canonical_state:
   protocol_version: 1
   system: SKEPTARA_TELEGRAPH_TRACK3
-  version: 0.5.0-t2-core-implemented-live-verification-next
+  version: 0.5.1-t2-local-pass-clean-pr-bound-live-audit-next
   date: 2026-09-06
   source_of_truth: GITHUB
   repository: Faadil1/Faadil1-skeptara-telegraph
   branch: main
 
-  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CORE_IMPLEMENTED__LOCAL_FULL_TEST_AND_LIVE_CLEAN_AUDIT_REQUIRED
+  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CORE_IMPLEMENTED__USER_FULL_TEST_19_OF_19_PASS__REAL_CLEAN_PR_BOUND__LIVE_CLEAN_AUDIT_NEXT
 
   authority:
     product_intent_source: product/PRD.md
@@ -57,8 +57,23 @@ canonical_state:
         - scripts/t2-live-audit.mjs
         - scripts/t2-from-clipboard.ps1
       tests: tests/auditor.test.mjs
-      offline_validation: 9_OF_9_AUDITOR_TESTS_PASS
       evidence: evidence/t2/OFFLINE-IMPLEMENTATION-VALIDATION.md
+    - id: SKEPTARA_T2_USER_FULL_REPOSITORY_TEST
+      status: PASS
+      date: 2026-09-06
+      result: 19_OF_19_NODE_TESTS_PASS__0_FAIL
+      evidence: evidence/t2/LOCAL-USER-VALIDATION-AND-CLEAN-PR.md
+    - id: SKEPTARA_T2_CONTROLLED_CLEAN_PR_BINDING
+      status: PASS
+      date: 2026-09-06
+      repository: Faadil1/Faadil1-skeptara-telegraph
+      pr_number: 1
+      branch: demo/clean-lodash-upgrade
+      head_sha: 73cf5bdd69163924228e3e21d67fa9f405d99904
+      dependency_change: lodash_4_17_20_TO_4_17_21
+      action_file: demo/actions/clean-pr.json
+      merge_authorized: false
+      evidence: evidence/t2/LOCAL-USER-VALIDATION-AND-CLEAN-PR.md
 
   t0_contract:
     status: CLOSED_PASS
@@ -82,7 +97,7 @@ canonical_state:
 
   t2_contract:
     gate: SKEPTARA_T2_INDEPENDENT_AUDITOR_PASS
-    status: CORE_IMPLEMENTED_LOCAL_AND_LIVE_VERIFICATION_REQUIRED
+    status: LIVE_CLEAN_AUDIT_REQUIRED
     auditor_version: skeptara-auditor-v0.1
     implementation:
       auditor_core: src/auditor.mjs
@@ -105,16 +120,26 @@ canonical_state:
       replayable_challenge_result: true
       expiry_binding_present: true
       sanitized_runtime_persistence_shape: true
-    offline_validation:
-      auditor_tests: 9_OF_9_PASS
-      policy_tests_previous_gate: 10_OF_10_PASS
-      combined_expected_repository_tests: 19
+    validation:
+      isolated_precommit_tests: 19_OF_19_PASS
+      user_machine_full_repository_tests: 19_OF_19_PASS
+    clean_live_case:
+      repository: Faadil1/Faadil1-skeptara-telegraph
+      pr_number: 1
+      head_sha: 73cf5bdd69163924228e3e21d67fa9f405d99904
+      base_branch: main
+      changed_files:
+        - demo/controlled-clean/package.json
+      dependency_change: lodash_4_17_20_TO_4_17_21
+      risk_expected_from_policy: MEDIUM
+      required_evidence_paths: 2
+      spend_cap_atomic: 20000
+      action_file: demo/actions/clean-pr.json
+      merge_authorized: false
     remaining_before_closed_pass:
-      - user git pull
-      - full repository npm test on user machine
-      - create or select truthful controlled GitHub PR action snapshot for clean MEDIUM case
+      - user git pull to receive clean-pr.json and latest state
       - run one live T2 clean MEDIUM audit with fresh burner through secure launcher
-      - review actual returned intents/findings/coverage/spend
+      - review actual returned intents/findings/coverage/spend/outcome
       - persist sanitized live T2 record under evidence/t2/
       - close T2 only if actual gate result justifies it
 
@@ -130,9 +155,9 @@ canonical_state:
     spec_plan_tasks_ready: PASS_RECONCILED
     t0_real_telegraph_challenge: CLOSED_PASS
     t1_deterministic_risk_scorer: PASS
-    t2_independent_auditor: CORE_IMPLEMENTED_LIVE_VERIFICATION_REQUIRED
+    t2_independent_auditor: LIVE_CLEAN_AUDIT_REQUIRED
     t3_fail_closed_merge_gate: NOT_STARTED
-    t4_two_case_real_demo: NOT_STARTED
+    t4_two_case_real_demo: CLEAN_PR_CREATED__CHALLENGED_CASE_EVIDENCE_EXISTS__FULL_TWO_CASE_GATE_NOT_STARTED
     trace_design_review: NOT_STARTED
     project_finisher: NOT_STARTED
     final_submission: PROTECTED_NOT_AUTHORIZED
@@ -148,7 +173,7 @@ canonical_state:
     evidence_before_pass_claim: REQUIRED
     repository_truth_outranks_chat_memory: true
 
-  exact_next_gate: SKEPTARA_T2_LOCAL_FULL_TEST_AND_LIVE_CLEAN_AUDIT
+  exact_next_gate: SKEPTARA_T2_LIVE_CLEAN_MEDIUM_AUDIT_REVIEW
   exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_REVIEW
   exact_next_action: >-
-    Pull main and run npm test. If all tests pass, do not run paid T2 yet until a truthful controlled GitHub clean dependency PR snapshot is present in demo/actions/clean-pr.json. Then use scripts/t2-from-clipboard.ps1 with the fresh bounded Base Sepolia burner. Return terminal output plus the sanitized evidence/t2-runtime/<timestamp>/02-audit-result.json for review. T2 remains open until the actual live clean audit is reviewed and durably persisted.
+    Pull main to receive demo/actions/clean-pr.json bound to real PR #1 head 73cf5bdd69163924228e3e21d67fa9f405d99904. Then run powershell -ExecutionPolicy Bypass -File .\scripts\t2-from-clipboard.ps1 and copy the fresh bounded Base Sepolia burner private key only when the helper is waiting; never paste or print it. Return the terminal output and sanitized evidence/t2-runtime/<timestamp>/02-audit-result.json. The run may spend at most 20000 atomic USDC and T2 closes only if the actual evidence/gate result justifies it.
