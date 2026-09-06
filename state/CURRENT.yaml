@@ -1,21 +1,18 @@
 canonical_state:
   protocol_version: 1
   system: SKEPTARA_TELEGRAPH_TRACK3
-  version: 0.2.6-t0-attempt-005-paid-call-diagnostic-pending
+  version: 0.2.7-t0-http402-settlement-diagnostic-remediated
   date: 2026-09-06
   source_of_truth: GITHUB
   repository: Faadil1/Faadil1-skeptara-telegraph
   branch: main
 
-  lifecycle_status: PRD_V0_1_LOCKED__SPEC_KIT_RECONCILED__T0_ACTIVE__LIVE_DISCOVERY_CONFIRMED__PAID_CALL_REACHED__FAIL_CLOSED__DIAGNOSTIC_PENDING
+  lifecycle_status: PRD_V0_1_LOCKED__SPEC_KIT_RECONCILED__T0_ACTIVE__LIVE_DISCOVERY_PASS__VALID_EVM_KEY_PASS__FINAL_HTTP_402_WITH_PAYMENT_RESPONSE__DIAGNOSTIC_HARNESS_REMEDIATED__RETRY_006_REQUIRED
 
   authority:
-    project_go: HUMAN_GO_RECEIVED
     product_intent_source: product/PRD.md
     product_source_owner: HUMAN_PROJECT_OWNER
     implementation_owner: CHATGPT_ORCHESTRATED_WITH_COLLABORATOR_HANDOFFS
-    design_experience_assurance: TRACE_WHEN_TRIGGERED
-    terminal_assurance: PROJECT_FINISHER
     protected_external_action: HUMAN_BOUNDED_AUTHORIZATION
 
   product_source:
@@ -24,13 +21,11 @@ canonical_state:
     path: product/PRD.md
     living: true
     approval_state: HUMAN_LOCK_PASS
-    approval_evidence: evidence/prd-v0.1-human-lock/README.md
 
   product_core:
     public_name: Skeptara
     vertical: AUTONOMOUS_GITHUB_DEPENDENCY_MERGE
     mechanism: RISK_PROPORTIONAL_INDEPENDENT_COUNTER_EVIDENCE_BEFORE_EXECUTION
-    flow: PR_PROPOSED__DETERMINISTIC_RISK_TIER__INDEPENDENT_TELEGRAPH_CHALLENGE__PASS_BLOCK_ESCALATE__BOUNDED_REAL_GITHUB_MERGE
     fail_closed: true
     self_risk_scoring_by_reviewed_agent: forbidden
     self_audit_by_reviewed_agent: forbidden
@@ -48,64 +43,70 @@ canonical_state:
       result: STALE_ROUTE__NO_PAID_CALL
     - id: SKEPTARA_T0_ATTEMPT_002
       status: FAIL_CLOSED_REMEDIATED
-      result: LIVE_DISCOVERY_PASS__LOCAL_CREDENTIAL_FORMAT_INVALID__NO_PAID_CALL
+      result: LIVE_DISCOVERY_PASS__LOCAL_KEY_FORMAT_INVALID__NO_PAID_CALL
     - id: SKEPTARA_T0_ATTEMPT_003
       status: FAIL_CLOSED_REMEDIATED
       result: LIVE_DISCOVERY_PASS__CLIPBOARD_VALUE_INVALID__NO_PAID_CALL
     - id: SKEPTARA_T0_ATTEMPT_004
-      status: FAIL_CLOSED_RETRY_REQUIRED
+      status: FAIL_CLOSED_REMEDIATED
       result: PUBLIC_EVM_ADDRESS_COPIED__NO_PAID_CALL
     - id: SKEPTARA_T0_ATTEMPT_005
-      status: FAIL_CLOSED_DIAGNOSTIC_PENDING
+      status: FAIL_CLOSED_DIAGNOSED_TO_SETTLEMENT_LAYER
       date: 2026-09-06
-      result: VALID_LOCAL_EVM_KEY_FORMAT__LIVE_DISCOVERY_PASS__PAID_CHALLENGE_ATTEMPTED__PAID_CHALLENGE_FAILED__NEGATIVE_PATH_ESCALATE_PASS
-      discovery_class: execution_detail_pending_diagnostic
-      product_change_required: false_currently
+      result: VALID_LOCAL_EVM_KEY__LIVE_DISCOVERY_PASS__PAID_TRANSPORT_REACHED__FINAL_HTTP_402__PAYMENT_RESPONSE_HEADER_PRESENT__BODY_NULL__NEGATIVE_PATH_PASS
       runtime_evidence_location: evidence/t0-real-telegraph/runtime/2026-09-06T21-15-17-533Z/
+      discovery_class: execution_detail
+      product_change_required: false
+      diagnostic_gap: ORIGINAL_HARNESS_RECORDED_PAYMENT_RESPONSE_PRESENCE_BUT_NOT_DECODED_SETTLEMENT_REASON
+    - id: SKEPTARA_T0_X402_DIAGNOSTIC_REMEDIATION_001
+      status: PASS_CODE_REMEDIATED_PENDING_LOCAL_RETRY
+      date: 2026-09-06
+      result: UNSIGNED_QUOTE_PREFLIGHT__DECODE_PAYMENT_REQUIRED__BOUND_NETWORK_AND_AMOUNT__OFFICIAL_MCP_X402_CLIENT_PATTERN__DECODE_PAYMENT_RESPONSE_ON_FINAL_STATUS
+      evidence: scripts/t0-real-telegraph.mjs
 
   t0_contract:
     gate: SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE
-    status: OPEN_DIAGNOSTIC_REQUIRED
+    status: OPEN_RETRY_006
     route:
       base_url: https://devnode.telegraphprotocol.com
       free_discovery: GET_https://devnode.telegraphprotocol.com/api/miners
-      engine_base: https://devnode.telegraphprotocol.com/engine
-      paid_auto_routed_inference: POST_https://devnode.telegraphprotocol.com/engine/v1/ask
-      payment_network: Base_Sepolia_eip155_84532
-      payment_asset: USDC
+      engine_ask: POST_https://devnode.telegraphprotocol.com/engine/v1/ask
+    x402:
+      expected_network: eip155:84532
+      expected_asset_family: USDC
+      max_payment_atomic: 100000
+      max_payment_usdc: 0.10
+      official_mcp_transport_pattern: x402Client.fromConfig_PLUS_wrapFetchWithPayment
     proven:
       live_discovery_on_user_machine: true
-      local_evm_key_format_validation: PASS
-      paid_call_stage_reached: true
-      paid_call_success: false
-      negative_source_unavailable_semantics: PASS_ESCALATE
-      no_secret_value_recorded: true
-    attempt_005:
-      runtime: HUMAN_PERSONAL_WINDOWS_MACHINE
-      free_discovery: PASS
-      paid_inference_attempted: true
-      paid_inference_success: false
+      valid_exported_evm_key_loaded_locally: true
+      paid_transport_stage_reached: true
+      final_status_attempt_005: 402
+      payment_response_header_attempt_005: PRESENT
+      response_body_attempt_005: null
       fail_closed: PASS
-      diagnostic: PENDING_LOCAL_FAILURE_JSON
-      runtime_evidence_location: evidence/t0-real-telegraph/runtime/2026-09-06T21-15-17-533Z/
-    required_proof_remaining:
-      - inspect sanitized paid-call failure JSON
-      - classify blocker before remediation
-      - genuine x402-paid Telegraph challenge succeeds
-      - actual exposed response metadata is captured without fabrication
-      - one normalized real EvidenceItem is produced
-      - sanitized evidence is reviewed and persisted
-      - hero vertical relevance of live evidence is qualified after paid result
-
-  spec_kit:
-    status: DERIVED_READY_RECONCILED_TO_PRD_V0_1
-    convergence: PRODUCT_CONTRACT_CONVERGED_IMPLEMENTATION_NOT_COMPLETE
-    authority: NONE_OVER_PRODUCT_INTENT
+      negative_source_unavailable_semantics: PASS_ESCALATE
+      private_key_recorded: false
+    retry_006_harness_behavior:
+      - make unsigned POST to capture and decode PAYMENT-REQUIRED before authorizing payment
+      - persist network amount asset payTo scheme and x402 version without private material
+      - reject payment if no exact Base Sepolia requirement is within 100000 atomic USDC
+      - use the same x402Client.fromConfig plus wrapFetchWithPayment construction as Telegraph official MCP
+      - decode PAYMENT-RESPONSE on final response so settlement success or errorReason becomes visible
+      - remain fail_closed on any ambiguity
+    remaining_proof:
+      - run retry 006 locally
+      - classify decoded settlement response if final status remains 402
+      - if insufficient funds is proven, fund only the burner and only with the exact testnet asset/network required by decoded quote
+      - obtain one genuine successful Telegraph x402 inference
+      - normalize one real EvidenceItem
+      - review hero_vertical relevance of live miner result
+      - persist successful evidence
 
   build_gates:
     prd_v0_1_human_lock: PASS
     spec_plan_tasks_ready: PASS_RECONCILED
-    t0_real_telegraph_challenge: OPEN_DIAGNOSTIC_REQUIRED
+    t0_real_telegraph_challenge: OPEN_RETRY_006
     t1_deterministic_risk_scorer: NOT_STARTED
     t2_independent_auditor: NOT_STARTED
     t3_fail_closed_merge_gate: NOT_STARTED
@@ -116,23 +117,14 @@ canonical_state:
 
   collaborator:
     benita_message_sent: false
-    benita_scope_locked: DRAFTED_NOT_RELEASED
     release_condition: FRONTEND_DATA_CONTRACT_READY_AFTER_T0_METADATA_DISCOVERY
 
   state_persistence_rule:
     after_every_major_gate: UPDATE_CURRENT_AND_HANDOVER
     evidence_before_pass_claim: REQUIRED
     repository_truth_outranks_chat_memory: true
-    resume_order:
-      - state/CURRENT.yaml
-      - state/HANDOVER.yaml
-      - product/PRD.md
-      - spec-kit/spec.md
-      - spec-kit/plan.md
-      - spec-kit/tasks.md
-      - docs/ARCHITECTURE.md
 
-  exact_next_gate: SKEPTARA_T0_PAID_CALL_FAILURE_DIAGNOSTIC_005
+  exact_next_gate: SKEPTARA_T0_X402_SETTLEMENT_DIAGNOSTIC_RETRY_006
   exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_REVIEW
   exact_next_action: >-
-    Inspect the sanitized local failure JSON produced by the 2026-09-06T21-15-17-533Z run and return only its non-secret contents. Do not rerun or fund anything until the blocker is classified. ChatGPT will then choose the bounded remediation and update CURRENT + HANDOVER before another paid-call attempt.
+    Pull main and rerun scripts/t0-from-clipboard.ps1 with the same burner private key copied only when prompted. The remediated harness first decodes the unsigned x402 quote, enforces the Base Sepolia and <=0.10 USDC boundary, then uses Telegraph official MCP payment-client construction and decodes the final PAYMENT-RESPONSE. Return only terminal output and sanitized JSON. Do not fund anything until a decoded settlement reason or successful call is reviewed.
