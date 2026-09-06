@@ -7,11 +7,11 @@ handover:
   branch: main
 
   resume_rule: >-
-    Read state/CURRENT.yaml first, then this HANDOVER, then product/PRD.md. Treat the living PRD as canonical product intent and Spec Kit files as derived execution contracts. Repository truth outranks chat/runtime memory. Before continuing implementation, confirm the exact next gate in CURRENT and do not silently skip it. After every major gate, persist evidence and update BOTH CURRENT and HANDOVER.
+    Read state/CURRENT.yaml first, then this HANDOVER, then product/PRD.md. The living PRD is canonical product intent; Spec Kit files are derived execution contracts. Repository truth outranks chat/runtime memory. Confirm the exact next gate before implementation. After every major gate, persist evidence and update BOTH CURRENT and HANDOVER.
 
-  current_milestone: PRD_V0_1_HUMAN_LOCK_PASS__SPEC_KIT_RECONCILED__T0_PREFLIGHT_READY__LOCAL_REAL_TELEGRAPH_PROOF_PENDING
-  previous_milestone: PRD_V0_1_HUMAN_LOCK_PASS__SPEC_KIT_RECONCILED__T0_OPEN
-  lifecycle_status: PRODUCT_CONTRACT_LOCKED__T0_ACTIVE__LOCAL_SECRET_BOUNDARY_WAITING
+  current_milestone: T0_ATTEMPT_001_FAIL_CLOSED__STALE_ROUTE_IDENTIFIED__CURRENT_DEVNODE_ROUTE_REMEDIATED__RETRY_002_PENDING
+  previous_milestone: PRD_V0_1_HUMAN_LOCK_PASS__SPEC_KIT_RECONCILED__T0_PREFLIGHT_READY
+  lifecycle_status: PRODUCT_CONTRACT_LOCKED__T0_ACTIVE__RETRY_REQUIRED
 
   project:
     public_name: Skeptara
@@ -27,132 +27,82 @@ handover:
     current_revision: v0.1
     status: PRD_READY
     approval: HUMAN_LOCK_PASS_2026_09_06
-    approval_evidence: evidence/prd-v0.1-human-lock/README.md
     living_prd: true
-    code_as_product_source: FORBIDDEN
     material_change_rule: HUMAN_APPROVAL_THEN_PRD_REVISION_THEN_DERIVED_RECONCILIATION
 
   core_mechanism:
     id: RISK_PROPORTIONAL_INDEPENDENT_COUNTER_EVIDENCE_BEFORE_EXECUTION
-    flow: PR_PROPOSED__DETERMINISTIC_RISK_TIER__INDEPENDENT_TELEGRAPH_CHALLENGE__PASS_BLOCK_ESCALATE__BOUNDED_REAL_GITHUB_MERGE
     reviewed_agent_scores_own_risk: false
     reviewed_agent_audits_itself: false
     fail_closed: true
+    incomplete_required_coverage: ESCALATE_BLOCK
     budget_exhausted_before_required_coverage: ESCALATE_BLOCK
-    missing_required_telegraph_path: ESCALATE_BLOCK
     stale_or_changed_pr_after_pass: DENY_MERGE
-
-  decisions_locked:
-    - generic pre-execution verification gate KILLED for insufficient differentiation
-    - generic execution-warrant framework KILLED as crowded/infrastructure-heavy
-    - treasury/DeFi vertical KILLED for crowding and remaining-time risk
-    - same-agent self-falsification KILLED
-    - majority vote is not the core mechanism
-    - risk-proportional evidence depth KEPT
-    - independent auditor topology KEPT
-    - dependency-change GitHub merge selected as v0.1 hero vertical
-    - x402 is enabling economic/audit infrastructure, not the claimed invention
-    - only real exposed Telegraph/x402 fields may be recorded
-    - Skeptara is provisional public name after exact-name collision screening
-
-  multi_model_red_team_summary:
-    Gemini: preserved risk_to_verification_depth; rejected generic while-loop/warrant framing
-    Grok: preserved paid evidence/refusal; highlighted conflict and real-action enforcement
-    Perplexity: preserved economic verification allocator; rejected generic framework pitch
-    Claude: preserved asymmetric fail-closed challenge; required constructor/auditor separation and external risk calibration
-    combined_result: CORE_SURVIVED_WITH_INDEPENDENT_AUDITOR_PIVOT
-
-  spec_kit:
-    authority: DERIVED_ONLY
-    artifacts:
-      constitution: spec-kit/constitution.md
-      specification: spec-kit/spec.md
-      plan: spec-kit/plan.md
-      tasks: spec-kit/tasks.md
-      convergence: spec-kit/convergence.md
-    status: DERIVED_READY_RECONCILED_TO_PRD_V0_1
-    convergence: PRODUCT_CONTRACT_CONVERGED_IMPLEMENTATION_NOT_COMPLETE
-    orchestration_reference: Faadil1/spec-kit-orchestration
-
-  architecture:
-    primary: docs/ARCHITECTURE.md
-    decisions: docs/DECISIONS.md
-    evidence_index: evidence/README.md
-    major_components:
-      - ACTION_INTAKE
-      - DETERMINISTIC_RISK_SCORER
-      - CHALLENGE_CONTRACT_BUILDER
-      - INDEPENDENT_TELEGRAPH_AUDITOR
-      - EVIDENCE_NORMALIZER
-      - DETERMINISTIC_CHALLENGE_GATE
-      - PROTECTED_GITHUB_MERGE_EXECUTOR
-
-  security_and_protected_actions:
-    telegraph_private_key_in_git: FORBIDDEN
-    telegraph_private_key_in_chat: FORBIDDEN
-    telegraph_private_key_in_browser: FORBIDDEN
-    github_write_token_in_browser: FORBIDDEN
-    demo_github_write_scope: EXPLICIT_ALLOW_LIST_ONLY
-    final_submission: HUMAN_PROTECTED_NOT_AUTHORIZED
-    mainnet_or_user_capital_action: OUT_OF_SCOPE
-
-  collaborator_benita:
-    message_sent: false
-    reason: >-
-      Benita has not been told the discarded initial concepts and should receive only the locked Skeptara product brief. PRD v0.1 is locked, but frontend handoff waits until T0 reveals the real metadata contract exposed by Telegraph.
-    release_condition: FRONTEND_DATA_CONTRACT_READY_AFTER_T0_METADATA_DISCOVERY
-    intended_scope:
-      - frontend UI/UX
-      - visual identity
-      - risk/challenge/evidence legibility
-      - PASS_BLOCK_ESCALATE presentation
-      - screenshots/demo narrative support
-    excluded_scope:
-      - wallet/private key configuration
-      - GitHub protected write credentials
-      - changing risk or gate semantics without product-source reconciliation
 
   active_gate:
     id: SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE
-    status: OPEN_LOCAL_REAL_PROOF_PENDING
-    purpose: prove sponsor-native dependency before deep implementation
-    preflight:
-      official_source: telegraphprotocol/telegraph-mcp/README.md
-      documented_node_url: http://13.237.89.59:7044
-      documented_engine_url: http://13.237.89.59:8080
-      documented_daemon_url: http://13.237.89.59:8081
-      documented_free_discovery: GET_/v1/subnets
-      documented_paid_inference: POST_/v1/ask
-      chat_execution_environment_probe: CONNECTION_REFUSED_NOT_CONCLUSIVE
-      evidence: evidence/t0-real-telegraph/PREFLIGHT.md
-    harness:
-      package: package.json
+    status: OPEN_RETRY_REQUIRED
+    attempt_001:
+      environment: HUMAN_PERSONAL_WINDOWS_MACHINE
+      npm_install: PASS_0_VULNERABILITIES
+      free_discovery: FAILED
+      paid_inference_attempted: false
+      negative_path_SOURCE_UNAVAILABLE: PASS_ESCALATE
+      evidence: evidence/t0-real-telegraph/ATTEMPT-001-STALE-ROUTE.md
+      classification: execution_detail
+      product_intent_changed: false
+    route_discovery:
+      old_harness_assumption:
+        engine_url: http://13.237.89.59:8080
+        discovery: GET_/v1/subnets
+      current_official_docs:
+        base_url: https://devnode.telegraphprotocol.com
+        discovery: GET_/api/miners
+        engine_base: https://devnode.telegraphprotocol.com/engine
+        auto_ask: POST_/engine/v1/ask
+        payment_network_documented: Base_Sepolia
+        payment_network_id: eip155:84532
+        payment_asset: USDC
+      conclusion: ATTEMPT_001_DOES_NOT_PROVE_GLOBAL_TELEGRAPH_OUTAGE
+    remediation:
       script: scripts/t0-real-telegraph.mjs
       env_template: .env.example
-      gitignore: .gitignore
-      local_command: npm_install_THEN_npm_run_t0
-      sanitized_output: evidence/t0-real-telegraph/runtime/<timestamp>/
-    required_proof_remaining:
-      - live Engine discovery succeeds in approved local/server runtime
-      - genuine x402-paid Telegraph challenge succeeds
-      - only actually exposed response fields are captured
-      - normalized real EvidenceItem is produced
-      - source/payment failure remains fail-closed
-      - sanitized evidence is pushed or supplied for review
-    secret_boundary: >-
-      Burner wallet/private key must be configured by the human on a personal/local or approved server environment. Never send the private key into chat, GitHub, frontend code, screenshots, or public logs.
-    stop_rule: >-
-      If live Telegraph capabilities cannot support the dependency/security challenge quickly, classify the discovery. If it changes the hero vertical or product mechanism, revise the living PRD with human approval before proceeding. Do not cover failure with mocks.
+      status: COMMITTED_CURRENT_ROUTE
+    retry_002_required_proof:
+      - free discovery succeeds on current devnode route
+      - genuine x402-paid call succeeds
+      - actual response metadata is captured without fabrication
+      - normalized real EvidenceItem exists
+      - negative-path fail-closed behavior remains PASS
+      - sanitized runtime evidence is reviewed
+
+  secret_boundary:
+    telegraph_private_key_in_chat: FORBIDDEN
+    telegraph_private_key_in_git: FORBIDDEN
+    telegraph_private_key_in_browser: FORBIDDEN
+    usage: LOCAL_PROCESS_ONLY_FOR_BURNER_WALLET
+
+  collaborator_benita:
+    message_sent: false
+    release_condition: FRONTEND_DATA_CONTRACT_READY_AFTER_T0_METADATA_DISCOVERY
+    note: Benita should receive only the locked Skeptara product brief, not discarded ideation history.
+
+  next_gates_after_t0_pass:
+    - SKEPTARA_T1_DETERMINISTIC_POLICY_PASS
+    - SKEPTARA_T2_INDEPENDENT_AUDITOR_PASS
+    - SKEPTARA_T3_FAIL_CLOSED_MERGE_GATE_PASS
+    - SKEPTARA_T4_TWO_CASE_REAL_DEMO_PASS
+    - SKEPTARA_TRACE_JUDGE_PATH_REVIEW
+    - SKEPTARA_BUILD_CANDIDATE_READY
+    - HUMAN_PROTECTED_FINAL_SUBMISSION
 
   state_persistence:
     rule: UPDATE_CURRENT_AND_HANDOVER_AFTER_EVERY_MAJOR_GATE
     evidence_required_before_pass_claim: true
-    milestone_history_location: state/CURRENT.yaml
     material_decision_history_location: docs/DECISIONS.md
     task_progress_location: spec-kit/tasks.md
-    prd_revision_history: preserve_via_git_and_document_version
 
-  exact_next_gate: SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE
+  exact_next_gate: SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE_RETRY_002
   exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_REVIEW
   exact_next_action: >-
-    On the user's personal/approved machine pull Faadil1/Faadil1-skeptara-telegraph, run npm install, set TELEGRAPH_EVM_PRIVATE_KEY only in the local shell for a burner wallet, and run npm run t0. Do not paste the key into chat. Push or share only sanitized output/evidence. Then ChatGPT must inspect the live response, classify any capability discovery, update tasks + CURRENT + HANDOVER, and either PASS T0 or trigger the documented fail/pivot rule before T1.
+    On the existing local clone, git pull the remediation, inject the burner private key only into the current PowerShell process, and run npm run t0. Do not set the obsolete 13.237.89.59 Engine URL. The harness now defaults to https://devnode.telegraphprotocol.com. Share only sanitized output/evidence. ChatGPT must review and persist the result before T0 is promoted.
