@@ -1,17 +1,25 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import crypto from "node:crypto";
-import { wrapFetchWithPayment, x402Client } from "@x402/fetch";
+import { wrapFetchWithPaymentFromConfig } from "@x402/fetch";
 import { ExactEvmScheme, toClientEvmSigner } from "@x402/evm";
 import { privateKeyToAccount } from "viem/accounts";
 
 const baseUrl = (process.env.TELEGRAPH_BASE_URL || "https://devnode.telegraphprotocol.com").replace(/\/$/, "");
 const engineUrl = (process.env.TELEGRAPH_ENGINE_URL || `${baseUrl}/engine`).replace(/\/$/, "");
 const discoveryUrl = process.env.TELEGRAPH_DISCOVERY_URL || `${baseUrl}/api/miners`;
-const evmNetwork = process.env.EVM_NETWORK || "eip155:*";
+const evmNetwork = process.env.EVM_NETWORK || "eip155:84532";
 const privateKey = process.env.TELEGRAPH_EVM_PRIVATE_KEY;
+const maxPaymentAtomic = BigInt(process.env.SKEPTARA_T0_MAX_PAYMENT_ATOMIC || "100000"); // 0.10 USDC max per call.
 const query = process.env.SKEPTARA_T0_QUERY ||
   "Find material security evidence that should block merging a dependency change to lodash@4.17.20. Return concrete vulnerabilities or advisories if supported by the available Telegraph intelligence.";
+
+if (evmNetwork !== "eip155:84532") {
+  throw new Error("T0_NETWORK_GUARD: Skeptara T0 permits Base Sepolia only (eip155:84532).");
+}
+if (maxPaymentAtomic <= 0n || maxPaymentAtomic > 100000n) {
+  throw new Error("T0_PAYMENT_CAP_GUARD: max payment must be between 1 and 100000 atomic USDC (<= $0.10).");
+}
 
 const stamp = new Date().toISOString().replace(/[:.]/g, "-");
 const outDir = path.join("evidence", "t0-real-telegraph", "runtime", stamp);
@@ -33,12 +41,20 @@ function assertNoSecretLeak(value) {
   }
 }
 
+async function parseResponseBody(res) {
+  const text = await res.text();
+  if (!text) return null;
+  try { return JSON.parse(text); } catch { return { raw_text: text }; }
+}
+
 const preflight = {
   gate: "SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE",
   phase: "FREE_DISCOVERY",
   base_url: baseUrl,
   discovery_url: discoveryUrl,
   engine_url: engineUrl,
+  payment_network: evmNetwork,
+  payment_cap_atomic: maxPaymentAtomic.toString(),
   route_baseline: "OFFICIAL_DOCS_2026-08-20_PLUS_X402_DOCS_2026-08-13",
   checked_at: new Date().toISOString(),
 };
@@ -48,12 +64,9 @@ try {
     headers: { accept: "application/json" },
     signal: AbortSignal.timeout(10000),
   });
-  const text = await res.text();
-  let body;
-  try { body = JSON.parse(text); } catch { body = { raw_text: text }; }
   preflight.http_status = res.status;
   preflight.ok = res.ok;
-  preflight.body = body;
+  preflight.body = await parseResponseBody(res);
 } catch (error) {
   preflight.ok = false;
   preflight.error = error instanceof Error ? error.message : String(error);
@@ -73,16 +86,23 @@ if (!preflight.ok) {
   process.exitCode = 3;
 } else {
   const account = privateKeyToAccount(privateKey);
-  const evmSigner = toClientEvmSigner(account);
-  const client = x402Client.fromConfig({
+  const paidFetch = wrapFetchWithPaymentFromConfig(fetch, {
     schemes: [
       {
         network: evmNetwork,
-        client: new ExactEvmScheme(evmSigner),
+        client: new ExactEvmScheme(toClientEvmSigner(account)),
       },
     ],
+    policies: [
+      (_version, requirements) =>
+        requirements.filter(
+          (requirement) =>
+            requirement.network === evmNetwork &&
+            /^\d+$/.test(requirement.amount) &&
+            BigInt(requirement.amount) <= maxPaymentAtomic,
+        ),
+    ],
   });
-  const paidFetch = wrapFetchWithPayment(fetch, client);
 
   const paidStartedAt = new Date().toISOString();
   try {
@@ -95,9 +115,7 @@ if (!preflight.ok) {
       body: JSON.stringify({ query }),
       signal: AbortSignal.timeout(60000),
     });
-    const text = await res.text();
-    let body;
-    try { body = JSON.parse(text); } catch { body = { raw_text: text }; }
+    const body = await parseResponseBody(res);
 
     const settlementHeader = res.headers.get("payment-response");
     const paidCall = {
