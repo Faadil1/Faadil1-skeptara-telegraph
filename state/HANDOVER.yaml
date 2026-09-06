@@ -9,9 +9,9 @@ handover:
   resume_rule: >-
     Read state/CURRENT.yaml first, then this HANDOVER, then product/PRD.md. Treat the living PRD as canonical product intent and Spec Kit files as derived execution contracts. Repository truth outranks chat/runtime memory. Before continuing implementation, confirm the exact next gate in CURRENT and do not silently skip it. After every major gate, persist evidence and update BOTH CURRENT and HANDOVER.
 
-  current_milestone: PRD_V0_1_HUMAN_LOCK_PASS__SPEC_KIT_RECONCILED__T0_OPEN
-  previous_milestone: PRD_V0_1_DRAFT_READY__SPEC_KIT_DERIVED_DRAFT_READY__HUMAN_LOCK_PENDING
-  lifecycle_status: PRODUCT_CONTRACT_LOCKED__IMPLEMENTATION_OPEN_AT_T0_ONLY
+  current_milestone: PRD_V0_1_HUMAN_LOCK_PASS__SPEC_KIT_RECONCILED__T0_PREFLIGHT_READY__LOCAL_REAL_TELEGRAPH_PROOF_PENDING
+  previous_milestone: PRD_V0_1_HUMAN_LOCK_PASS__SPEC_KIT_RECONCILED__T0_OPEN
+  lifecycle_status: PRODUCT_CONTRACT_LOCKED__T0_ACTIVE__LOCAL_SECRET_BOUNDARY_WAITING
 
   project:
     public_name: Skeptara
@@ -99,8 +99,8 @@ handover:
   collaborator_benita:
     message_sent: false
     reason: >-
-      Benita has not been told the discarded initial concepts and should receive only the locked Skeptara product brief. PRD v0.1 is now locked, but deep frontend work waits for the frontend data contract to stabilize.
-    release_condition: FRONTEND_DATA_CONTRACT_READY
+      Benita has not been told the discarded initial concepts and should receive only the locked Skeptara product brief. PRD v0.1 is locked, but frontend handoff waits until T0 reveals the real metadata contract exposed by Telegraph.
+    release_condition: FRONTEND_DATA_CONTRACT_READY_AFTER_T0_METADATA_DISCOVERY
     intended_scope:
       - frontend UI/UX
       - visual identity
@@ -114,16 +114,31 @@ handover:
 
   active_gate:
     id: SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE
-    status: OPEN
+    status: OPEN_LOCAL_REAL_PROOF_PENDING
     purpose: prove sponsor-native dependency before deep implementation
-    required_proof:
-      - discover live relevant Telegraph intents/miners
-      - confirm current Telegraph Engine/MCP route
-      - execute at least one genuine paid challenge call
-      - capture only actually exposed intent/miner/cost/provenance fields
-      - normalize a real EvidenceItem
-      - prove payment/source failure is fail-closed
-      - persist evidence under evidence/t0-real-telegraph/
+    preflight:
+      official_source: telegraphprotocol/telegraph-mcp/README.md
+      documented_node_url: http://13.237.89.59:7044
+      documented_engine_url: http://13.237.89.59:8080
+      documented_daemon_url: http://13.237.89.59:8081
+      documented_free_discovery: GET_/v1/subnets
+      documented_paid_inference: POST_/v1/ask
+      chat_execution_environment_probe: CONNECTION_REFUSED_NOT_CONCLUSIVE
+      evidence: evidence/t0-real-telegraph/PREFLIGHT.md
+    harness:
+      package: package.json
+      script: scripts/t0-real-telegraph.mjs
+      env_template: .env.example
+      gitignore: .gitignore
+      local_command: npm_install_THEN_npm_run_t0
+      sanitized_output: evidence/t0-real-telegraph/runtime/<timestamp>/
+    required_proof_remaining:
+      - live Engine discovery succeeds in approved local/server runtime
+      - genuine x402-paid Telegraph challenge succeeds
+      - only actually exposed response fields are captured
+      - normalized real EvidenceItem is produced
+      - source/payment failure remains fail-closed
+      - sanitized evidence is pushed or supplied for review
     secret_boundary: >-
       Burner wallet/private key must be configured by the human on a personal/local or approved server environment. Never send the private key into chat, GitHub, frontend code, screenshots, or public logs.
     stop_rule: >-
@@ -138,6 +153,6 @@ handover:
     prd_revision_history: preserve_via_git_and_document_version
 
   exact_next_gate: SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE
-  exact_next_owner: CHATGPT_ORCHESTRATOR_PLUS_HUMAN_LOCAL_SECRET_BOUNDARY
+  exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_REVIEW
   exact_next_action: >-
-    Start T0 now. First discover the live Telegraph capabilities/route without secrets where possible. Then have the human configure a burner wallet key only in the local/server environment and run one genuine paid challenge. Persist raw-safe evidence + normalized EvidenceItem + negative-path evidence. Classify findings and update CURRENT/HANDOVER before any T0 PASS claim. Do not start protected merge execution or deep UI polish yet.
+    On the user's personal/approved machine pull Faadil1/Faadil1-skeptara-telegraph, run npm install, set TELEGRAPH_EVM_PRIVATE_KEY only in the local shell for a burner wallet, and run npm run t0. Do not paste the key into chat. Push or share only sanitized output/evidence. Then ChatGPT must inspect the live response, classify any capability discovery, update tasks + CURRENT + HANDOVER, and either PASS T0 or trigger the documented fail/pivot rule before T1.
