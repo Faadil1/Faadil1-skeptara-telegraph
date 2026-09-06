@@ -1,1 +1,0 @@
-No synthetic live snapshots.
