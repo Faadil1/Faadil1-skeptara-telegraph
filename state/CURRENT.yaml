@@ -1,13 +1,13 @@
 canonical_state:
   protocol_version: 1
   system: SKEPTARA_TELEGRAPH_TRACK3
-  version: 0.1.1-prd-and-spec-draft-ready
+  version: 0.1.2-prd-spec-handover-ready
   date: 2026-09-06
   source_of_truth: GITHUB
   repository: Faadil1/Faadil1-skeptara-telegraph
   branch: main
 
-  lifecycle_status: REPOSITORY_BOOTSTRAPPED__PRD_V0_1_DRAFT_READY__SPEC_KIT_DERIVED_DRAFT_READY__HUMAN_LOCK_PENDING
+  lifecycle_status: REPOSITORY_BOOTSTRAPPED__PRD_V0_1_DRAFT_READY__SPEC_KIT_DERIVED_DRAFT_READY__DURABLE_HANDOVER_READY__HUMAN_LOCK_PENDING
 
   authority:
     project_go: HUMAN_GO_RECEIVED
@@ -91,6 +91,10 @@ canonical_state:
         - docs/ARCHITECTURE.md
         - docs/DECISIONS.md
         - evidence/README.md
+    - id: DURABLE_HANDOVER_BASELINE
+      status: PASS
+      date: 2026-09-06
+      evidence: state/HANDOVER.yaml
 
   product_source:
     status: PRD_V0_1_DRAFT_READY_FOR_HUMAN_LOCK
