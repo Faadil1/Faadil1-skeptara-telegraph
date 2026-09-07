@@ -7,13 +7,13 @@ handover:
   branch: main
 
   resume_rule: >-
-    Read state/CURRENT.yaml first, then this HANDOVER, product/PRD.md, spec-kit/tasks.md, docs/JUDGE-CLAIM-BOUNDARIES.md, and the Winning Intelligence evidence. Repository truth outranks chat memory. After every major gate and protected execution boundary, persist evidence and update BOTH CURRENT and HANDOVER. This file must remain sufficient for a new conversation to take the lead.
+    Read state/CURRENT.yaml first, then this HANDOVER, product/PRD.md, spec-kit/tasks.md, docs/JUDGE-CLAIM-BOUNDARIES.md, docs/SUBMISSION-COMPLIANCE.md, and the Winning Intelligence evidence. Repository truth outranks chat memory. After every major gate and protected execution boundary, persist evidence and update BOTH CURRENT and HANDOVER. This file must remain sufficient for a new conversation to take the lead.
 
-  current_milestone: T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__NINE_SPOT_REMEDIATION_IMPLEMENTED__BENITA_PRIMARY_X_PROJECT_VOICE__LOCAL_VALIDATION_AND_TRACE_VISUAL_REVIEW_NEXT
+  current_milestone: T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__NINE_SPOT_REMEDIATION_IMPLEMENTED__BENITA_PRIMARY_X_PROJECT_VOICE__FAADIL_DISCORD_JOIN_VERIFIED__ANTI_AUTOMATION_GUIDANCE_APPLIED__LOCAL_VALIDATION_AND_TRACE_VISUAL_REVIEW_NEXT
 
   project:
     public_name: Skeptara
-    deadline_utc: 2026-09-07T23:59:00Z
+    deadline_utc: 2026-09-07T23:59:59Z
     hero_vertical: AUTONOMOUS_GITHUB_DEPENDENCY_MERGE
     safe_public_promise: Before an autonomous agent can merge code, Skeptara buys Telegraph-routed external evidence to try to prove the change unsafe.
     mechanism: EXTERNAL_DETERMINISTIC_RISK_TO_RISK_PROPORTIONAL_PAID_TELEGRAPH_COUNTER_EVIDENCE_TO_PASS_BLOCK_ESCALATE_TO_EXACT_PROTECTED_EXECUTION
@@ -69,6 +69,13 @@ handover:
         hs07: TRUTHFUL_FINAL_PROOF_ACTIVITY_LEDGER_BUILT
         hs08: README_AND_EVIDENCE_INDEX_REFRESHED_TO_T4
         hs09: HISTORICAL_REPLAY_LABELING_HUMAN_AUTH_EXPLANATION_ONE_COMMAND_DEMO_BUILT
+    discord_signal_004:
+      packet: evidence/winning-intelligence/WI-DISCORD-COMPETITIVE-SIGNAL-004.md
+      decision: NO_PIVOT__DIFFERENTIATION_REINFORCED__NO_VOLUME_CHASING
+      observed_collision:
+        - COGNIVERN_CONTROL_PLANE_CONFIDENCE_BUDGET_GOVERNED_ACTION
+        - PROOFPACT_MULTI_INTENT_VERIFIED_SETTLEMENT_DETERMINISTIC_RELEASE
+      strategic_response: LEAD_WITH_ACTION_LEVEL_COUNTER_EVIDENCE__RISK_PROPORTIONAL_SCRUTINY__EXACT_EXECUTION_BINDING
 
   new_judge_assets:
     challenge_dossier: public/index.html
@@ -99,14 +106,33 @@ handover:
     denied_actions: 1
     real_exact_head_merges: 1
     user_count_claim: NONE
+    do_not_inflate_request_volume: true
+
+  official_discord_guidance:
+    evidence: evidence/admin/TELEGRAPH-DISCORD-JOIN-AND-NETWORK-GUIDANCE-VERIFIED.md
+    source: HUMAN_SCREENSHOTS_OFFICIAL_HACKATHONS_CHANNEL
+    faadil_join_access: VERIFIED
+    faadil_project_activity: NOT_YET_VERIFIED
+    benita_join_activity: HUMAN_VERIFY
+    observed_staff_message:
+      scripted_automated_requests_stressing_network: true
+      hard_scripted_calls_will_not_count_for_judging: true
+      organic_requests_language: ONLY_ORGANIC_REQUESTS_WILL_BE_DETERMINED_AND_COUNTED
+    later_status: PAYMENT_FACILITATOR_ISSUE_REPORTED_FIXED
+    operational_policy:
+      no_automated_metric_traffic: true
+      no_repeated_live_calls_for_optics: true
+      no_auto_live_calls_on_public_page_load_refresh_poll_timer_background: true
+      default_judge_demo: CAPTURED_LIVE_HISTORICAL_REPLAY
+      any_future_live_call: BOUNDED_HUMAN_TRIGGERED_PRODUCT_NECESSARY_ONLY
 
   administrative_compliance:
     registration: { status: VERIFIED, evidence: evidence/admin/TELEGRAPH-REGISTRATION-VERIFIED.md }
     discord:
       official_invite: https://discord.gg/telegraphprotocol
-      verified_from: TELEGRAPH_OWNED_DEVELOPER_CONSOLE_AND_GUIDE
-      joined: HUMAN_ACTION_REQUIRED
-      activity: HUMAN_ACTION_REQUIRED
+      faadil_join_access: VERIFIED_FROM_HUMAN_SCREENSHOTS
+      faadil_project_activity: HUMAN_VERIFY_NOT_YET_SHOWN
+      benita_join_activity: HUMAN_VERIFY
     x:
       context: REGISTERED_WITH_LESS_THAN_24_HOURS_REMAINING
       required_tag: '@Telegraphprotoc'
@@ -133,7 +159,8 @@ handover:
     demo_replay_user_machine_validation: PENDING
     trace_human_visual_review: PENDING
     public_deployment_smoke: PENDING
-    discord_join_activity: PENDING_HUMAN
+    faadil_discord_project_activity: PENDING_HUMAN
+    benita_discord_join_activity: PENDING_HUMAN
     x_showcase_posts: PENDING_HUMAN
     benita_x_handle_capture: PENDING_HUMAN
     final_submission: PENDING_HUMAN
@@ -162,4 +189,4 @@ handover:
   exact_next_gate: SKEPTARA_HIDDEN_SPOT_REMEDIATION_LOCAL_VALIDATION_AND_TRACE_VISUAL_REVIEW
   exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_TRACE_REVIEW
   exact_next_action: >-
-    Pull main. Run `npm test` and `npm run demo`. If both pass, run `npm run demo:web`, open http://127.0.0.1:4173, and provide screenshots. TRACE must verify 5-second judge comprehension, the PR1 BLOCK/deny vs PR2 PASS/real merge split, controlled exact-CVE disclosure, MEDIUM-live vs LOW/HIGH-test distinction, historical replay labels, Telegraph routing causality, and human-authorization explanation. Benita is the primary X project voice because of stronger pitching; Faadil @roy1919875 is the complementary technical/proof amplification voice. Capture Benita's X handle when available. Do not mark public deployment, Discord activity, X posts, or final submission complete without human evidence.
+    Pull main. Run `npm test` and `npm run demo` only; do NOT run fresh paid Telegraph calls for activity/demo metrics. If both pass, run `npm run demo:web`, open http://127.0.0.1:4173, and provide screenshots. Verify the page performs no Telegraph request on load/refresh. TRACE must verify 5-second judge comprehension, PR1 BLOCK/deny vs PR2 PASS/real merge, controlled exact-CVE disclosure, MEDIUM-live vs LOW/HIGH-test distinction, historical replay labels, Telegraph routing causality, and human-authorization explanation. Discord access for Faadil is verified; a substantive Skeptara Discord post and Benita Discord membership/activity still need human evidence. Benita remains primary X project voice; Faadil @roy1919875 is the complementary technical/proof amplification voice.
