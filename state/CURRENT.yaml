@@ -1,19 +1,13 @@
 canonical_state:
   protocol_version: 1
   system: SKEPTARA_TELEGRAPH_TRACK3
-  version: 0.11.0-pr3-source-trace-pass-browser-trace-next
+  version: 0.12.0-final-trace-pass-pr3-merged-deploy-benita-next
   date: 2026-09-07
   source_of_truth: GITHUB
   repository: Faadil1/skeptara-telegraph
   branch: main
 
-  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__BENITA_FRONTEND_AND_README_RECONCILED__OWNER_INTEGRATION_V2__ROOT_41_OF_41_PASS__WEB_CLEAN_LINT_BUILD_PASS__SOURCE_CLAIM_BEHAVIOR_TRACE_PASS__BROWSER_VISUAL_NETWORK_TRACE_NEXT
-
-  authority:
-    product_intent_source: product/PRD.md
-    product_source_owner: HUMAN_PROJECT_OWNER
-    protected_external_action: HUMAN_BOUNDED_AUTHORIZATION
-    repository_truth_outranks_chat_memory: true
+  lifecycle_status: PRD_V0_1_LOCKED__T0_THRU_T4_CLOSED_PASS__FINAL_FRONTEND_TRACE_PASS__PR3_MERGED__PRODUCTION_DEPLOYMENT_ON_BENITA_VERCEL_PENDING_VERIFICATION
 
   product_core:
     public_name: Skeptara
@@ -28,19 +22,17 @@ canonical_state:
     t3: CLOSED_PASS
     t4: CLOSED_PASS
     hidden_spot_local_validation: PASS
-    pr3_clean_lint_build:
-      status: PASS
-      evidence: evidence/trace/PR3-CLEAN-LINT-BUILD-RERUN-PASS.md
-      validated_web_head: 1244294ee96c747c7220a7159de0652d9b04e019
-      lint: 0_WARNINGS__0_ERRORS
-      build: PASS
-    pr3_source_claim_behavior_trace:
-      status: PASS
-      evidence: evidence/trace/PR3-TRACE-SOURCE-BEHAVIOR-AUDIT-001.md
-      candidate_head: 4687cf37a8dd284b5079e709de326de9b01ef182
-      parent_validated_web_head: 1244294ee96c747c7220a7159de0652d9b04e019
-      latest_change_scope: DOCS_ONLY__DEMO_JUDGE_WALKTHROUGH
-      web_tree_changed_since_clean_validation: false
+    final_frontend_validation:
+      root_tests: 41_OF_41_PASS__0_FAIL
+      web_npm_ci: PASS__0_VULNERABILITIES_AT_OBSERVATION
+      web_lint: PASS__0_WARNINGS__0_ERRORS
+      web_build: PASS
+      source_claim_behavior_trace: PASS
+      browser_visual_network_trace: PASS_BY_HUMAN_ATTESTATION
+      evidence:
+        - evidence/trace/PR3-CLEAN-LINT-BUILD-RERUN-PASS.md
+        - evidence/trace/PR3-TRACE-SOURCE-BEHAVIOR-AUDIT-001.md
+        - evidence/trace/PR3-FINAL-BROWSER-TRACE-AND-MERGE-PASS.md
 
   t4_truth:
     pr1:
@@ -49,7 +41,6 @@ canonical_state:
       outcome: BLOCK
       paid_calls: 2
       completed_coverage: 1
-      spend_atomic: 20000
       actual_order:
         - CVE-2026-4800__AMBIGUOUS__NOT_COVERAGE
         - CVE-2026-2950__BLOCKING
@@ -61,7 +52,7 @@ canonical_state:
       paid_calls: 2
       completed_coverage: 2
       exact_head: 528d730f9ebdcb433e01ba9c79dcc9a5f66ce1c7
-      merge_commit_sha: c76c76e0c02dab28275d8e53d70da3f6f132e648
+      historical_merge_commit_sha: c76c76e0c02dab28275d8e53d70da3f6f132e648
 
   settlement_truth:
     status: VERIFIED
@@ -69,83 +60,44 @@ canonical_state:
     final_t4_paid_evidence_items: 4
     final_t4_distinct_settlement_transactions: 4
 
-  benita_frontend:
-    live_url_human_supplied: https://skeptara.vercel.app/
-    branch: feat/frontend-benita
-    latest_head_observed: 68dfc2b103dcc88ec821a3cc1f50f4f568074400
-    latest_unique_commit:
-      sha: 68dfc2b103dcc88ec821a3cc1f50f4f568074400
-      scope: README_ONLY
-      web_changed: false
-    correctness_fixes_absorbed: true
-    latest_readme_reconciled: true
-    never_force_move: true
-
-  owner_frontend_integration:
-    status: SOURCE_TRACE_PASS__BROWSER_TRACE_PENDING
-    stale_branch: integration/frontend-final
-    stale_branch_rule: DO_NOT_USE_OR_MERGE
-    candidate_branch: integration/frontend-final-v2
-    candidate_branch_rule: ONLY_CURRENT_INTEGRATION_CANDIDATE
-    draft_pr: 3
-    pr_url: https://github.com/Faadil1/skeptara-telegraph/pull/3
-    current_candidate_head: 4687cf37a8dd284b5079e709de326de9b01ef182
-    current_candidate_parent: 1244294ee96c747c7220a7159de0652d9b04e019
-    latest_head_change: DOCS_ONLY__JUDGE_WALKTHROUGH_CLAIM_TIGHTENING
-    merged: false
-    github_mergeable_last_observation: false
-    mergeability_rule: RECONCILE_WITH_LATEST_MAIN_AFTER_BROWSER_TRACE_BEFORE_MERGE
-    evidence:
-      integration: evidence/trace/OWNER-FRONTEND-INTEGRATION-001.md
-      first_validation: evidence/trace/PR3-LOCAL-VALIDATION-001.md
-      clean_rerun: evidence/trace/PR3-CLEAN-LINT-BUILD-RERUN-PASS.md
-      source_trace: evidence/trace/PR3-TRACE-SOURCE-BEHAVIOR-AUDIT-001.md
-    validated_web_tree:
-      root_tests: 41_OF_41_PASS__0_FAIL
-      web_npm_ci: PASS__0_VULNERABILITIES_AT_OBSERVATION
-      web_lint: 0_WARNINGS__0_ERRORS
-      web_build: PASS
-      dev_server: PASS__HTTP_127_0_0_1_5173
-    source_trace_findings:
-      five_second_comprehension: PASS
-      t4_claim_correctness: PASS
-      settlement_semantics: PASS
-      historical_replay_boundary: PASS
-      reduced_motion_source_behavior: PASS
-      routing_and_safe_404: PASS
-      responsive_source_rules: PASS_PENDING_BROWSER_RENDER
-      social_metadata: PASS
-      anti_ai_slop_copy: PASS
-      no_frontend_private_key_or_protected_write_credential: PASS
-      no_telegraph_or_github_write_path_in_replay_source: PASS
+  final_frontend_integration:
+    benita_branch: feat/frontend-benita
+    benita_branch_never_force_move: true
+    integration_branch: integration/frontend-final-v2
+    integration_head: 4687cf37a8dd284b5079e709de326de9b01ef182
+    pr: 3
+    pr_status: MERGED
+    merge_commit_sha: 0ce2211125f87aa1612c68f316a940b126963261
+    merge_exact_head_protected: true
+    evidence: evidence/trace/PR3-FINAL-BROWSER-TRACE-AND-MERGE-PASS.md
 
   claim_boundaries:
     exact_cve_seeded_mode: CONTROLLED_HACKATHON_PROOF_NOT_AUTOMATIC_UNKNOWN_VULNERABILITY_DISCOVERY
     risk_scaling: { low: POLICY_TEST_PROVEN, medium: LIVE_FINAL_T4_PROVEN, high: POLICY_TEST_PROVEN }
     independence: CHALLENGE_TOPOLOGY_NOT_STATISTICAL_OR_MODEL_LEVEL_MINER_INDEPENDENCE
     replay: HISTORICAL_REPLAY_NEVER_FRESH_EXECUTION_AUTHORIZATION
-    merge_runtime: T3_CONTRACT_TEST_PROVEN_PLUS_T4_REAL_EXACT_HEAD_MERGE__NO_FULLY_DEPLOYED_REPO_ADAPTER_CLAIM
-
-  security_and_trust:
-    frontend_private_key: NONE_OBSERVED
-    protected_github_write_credential: NONE_OBSERVED
-    public_page_mode: HISTORICAL_PROOF_REPLAY_ONLY
-    automatic_telegraph_request_on_load_or_replay: MUST_REMAIN_NONE
-    live_merge_button_with_browser_credentials: PROHIBITED
     no_fresh_telegraph_calls_for_optics: true
 
-  collaboration_and_finish_split:
-    reply_to_benita_before_browser_trace: HOLD
-    reason: FINISH_BROWSER_TRACE_FIRST_SO_BENITA_RECEIVES_ONLY_FINALIZATION_WORK
-    benita_after_trace:
-      - FINAL_DEMO_NARRATIVE_AND_PITCH
+  deployment:
+    public_url: https://skeptara.vercel.app/
+    vercel_owner: BENITA_SIDE
+    faadil_connected_vercel_project_present: false
+    github_final_merge_complete: true
+    production_deploy_from_merged_main: PENDING_BENITA_SIDE_OR_AUTO_DEPLOY_VERIFICATION
+    production_smoke: PENDING
+    rule: DO_NOT_CLAIM_DEPLOY_COMPLETE_UNTIL_PUBLIC_URL_OR_BENITA_VERCEL_CONFIRMS_MERGED_MAIN
+
+  collaboration_finish_split:
+    benita:
+      - DEPLOY_OR_CONFIRM_AUTO_DEPLOY_OF_MERGED_MAIN_ON_HER_VERCEL
+      - LEAD_FINAL_DEMO_NARRATIVE_AND_PITCH
       - PRIMARY_X_PROJECT_VOICE_AND_POSTS
       - DISCORD_OR_COMMUNITY_FINALIZATION_IF_NEEDED
-      - PRESENTATION_POLISH_ONLY_UNLESS_TRACE_FINDS_CONCRETE_REGRESSION
-    faadil_after_trace:
-      - TECHNICAL_PROOF_AND_EVIDENCE_GOVERNANCE
-      - FINAL_SUBMISSION_SITE_ACTION
-      - SUBMISSION_FORM_AND_FINAL_VERIFICATION
+    faadil:
+      - OWN_FINAL_SUBMISSION_SITE_ACTION
+      - VERIFY_TRACK3_SUBMISSION_AND_COMPLETE_FORM
+      - OWN_TECHNICAL_PROOF_AND_EVIDENCE_GOVERNANCE
+      - SUPPORT_BENITA_WITH_TECHNICAL_FACTS
     no_more_core_product_build_expected: true
 
   administrative_compliance:
@@ -156,22 +108,14 @@ canonical_state:
     benita_discord: HUMAN_VERIFY
     benita_x_handle: HUMAN_VERIFY
     x_posts: HUMAN_ACTION_REQUIRED
-    final_submission: HUMAN_VERIFY_NOT_SUBMITTED
-
-  local_workspace_note:
-    observed_untracked_paths:
-      - evidence/t0-real-telegraph/runtime/
-      - evidence/t2-runtime/
-      - package-lock.json
-    rule: DO_NOT_GIT_ADD_ALL__DO_NOT_COMMIT_RUNTIME_SECRET_BEARING_OR_UNREVIEWED_FILES
+    final_submission: NOT_SUBMITTED
 
   persistence_rule:
     after_every_major_gate: UPDATE_CURRENT_AND_HANDOVER
     after_every_execution_boundary: UPDATE_CURRENT_AND_HANDOVER
     handover_must_be_sufficient_for_next_conversation_to_take_lead: true
-    evidence_before_pass_claim: REQUIRED
 
-  exact_next_gate: SKEPTARA_PR3_BROWSER_VISUAL_NETWORK_TRACE
-  exact_next_owner: HUMAN_BROWSER_WITH_CHATGPT_TRACE_REVIEW
+  exact_next_gate: SKEPTARA_PRODUCTION_DEPLOY_FROM_MERGED_MAIN_AND_SMOKE
+  exact_next_owner: BENITA_VERCEL_WITH_FAADIL_PUBLIC_SMOKE_VERIFICATION
   exact_next_action: >-
-    On integration/frontend-final-v2 pull current candidate head 4687cf37a8dd284b5079e709de326de9b01ef182. The only change after validated web head 1244294 is demo/JUDGE_WALKTHROUGH.md, so the clean web lint/build evidence still applies. Run the Vite dev server and capture desktop landing, narrow/mobile landing, /case/pr1 after replay, /case/pr2 after replay, and an invalid route. In DevTools Network, capture page load and Replay showing no Telegraph request and no GitHub write request. Manually verify all four Base Sepolia settlement links and the historical real-merge commit link. Do not reply to Benita yet and do not merge PR #3. After browser TRACE PASS, reconcile PR #3 with latest main, rerun bounded checks only if web code changes, persist final TRACE, merge/smoke public deployment, then tell Benita to finish demo/pitch/X while Faadil handles the submission site.
+    PR #3 is merged at merge commit 0ce2211125f87aa1612c68f316a940b126963261 after final TRACE PASS. The production Vercel project belongs to Benita's side and is not present in Faadil's connected Vercel account. Benita must deploy/redeploy merged main, or confirm that her Git integration auto-deployed it. Then smoke-test https://skeptara.vercel.app/ against the final merged frontend. No more implementation changes unless the production smoke test exposes a concrete regression. After deploy PASS, Benita leads demo/pitch/X while Faadil completes the official hackathon submission.
