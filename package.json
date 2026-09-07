@@ -12,7 +12,8 @@
     "t2:replay:003": "node scripts/replay-t2-run003.mjs",
     "test": "node --test tests/*.test.mjs",
     "test:policy": "node --test tests/policy.test.mjs",
-    "test:auditor": "node --test tests/auditor.test.mjs"
+    "test:auditor": "node --test tests/auditor.test.mjs",
+    "test:merge-gate": "node --test tests/merge-gate.test.mjs"
   },
   "dependencies": {
     "@x402/evm": "^2.11.0",
