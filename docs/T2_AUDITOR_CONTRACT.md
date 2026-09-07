@@ -52,7 +52,7 @@ Evidence: `evidence/t2/live-clean-retry-002/REVIEW.md`.
 
 PR #1 (`lodash 4.17.20 -> 4.17.21`) is retained as a challenged candidate rather than rewritten. Current advisory validation showed `4.17.21` is not a defensible 2026 clean target.
 
-A new clean candidate is PR #2 (`lodash 4.17.20 -> 4.18.1`) on `demo/clean-lodash-4.18.1`, exact head `c40c5a3a15d6280005dfe7589ae7e2a960cc199c`.
+A new clean candidate is PR #2 (`lodash 4.17.20 -> 4.18.1`) on `demo/clean-lodash-4.18.1`, exact head `d2aa0ea25daf1f84b6cfdd98861d3f05df584b7a`.
 
 This changes the demo fixture, not Skeptara's product mechanism or hero vertical.
 
@@ -97,7 +97,7 @@ The private key is never an auditor domain input and must not enter persisted ch
 Before `SKEPTARA_T2_INDEPENDENT_AUDITOR_PASS` can close:
 
 1. full repository tests pass after v0.3 seeded-CVE addition;
-2. PR #2 remains open at exact head `c40c5a3a15d6280005dfe7589ae7e2a960cc199c`;
+2. PR #2 remains open at exact head `d2aa0ea25daf1f84b6cfdd98861d3f05df584b7a`;
 3. live capability discovery includes `CVE_LOOKUP`;
 4. a bounded PR #2 MEDIUM audit obtains two meaningful exact-CVE records within 20000 atomic USDC;
 5. actual returned records are reviewed and durably persisted;
