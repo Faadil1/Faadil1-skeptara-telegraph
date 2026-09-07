@@ -27,49 +27,51 @@ Status: DERIVED READY — subordinate to living PRD v0.1.
 
 ## T2 — Independent auditor
 
-### Core + first remediation
+### Core + evidence-quality hardening
 
-- [x] Implement generic auditor + Telegraph adapter + secure launcher.
-- [x] Implement bounded spend/coverage tracking and fail-closed negative paths.
-- [x] Full user-machine suite v0.1: **19/19 PASS**.
-- [x] Live run 001 against PR #1.
-- [x] Reject runtime PASS after review: paid CVE path was invalid and could not count as coverage.
-- [x] Implement auditor v0.2: paid response != automatic coverage; invalid path is incomplete/critical.
-- [x] Full user-machine suite v0.2: **21/21 PASS, 0 fail**.
+- [x] Generic auditor + Telegraph adapter + secure launcher.
+- [x] v0.1 user-machine suite: **19/19 PASS**.
+- [x] Live run 001 reviewed: runtime PASS rejected; invalid CVE path => corrected `ESCALATE`.
+- [x] v0.2 remediation: paid response != automatic meaningful coverage.
+- [x] v0.2 user-machine suite: **21/21 PASS**.
+- [x] Live retry 002 reviewed: runtime PASS rejected; unverified FACT_CHECK + irrelevant NEWS_SEARCH => corrected `0/2`, `ESCALATE`.
 
-### Retry 002 evidence review
+### Real demo fixtures
 
-- [x] Run live retry 002 against PR #1 at head `73cf5bdd69163924228e3e21d67fa9f405d99904`.
-  - spend `20000/20000` atomic USDC;
-  - actual intents `FACT_CHECK`, `NEWS_SEARCH`;
-  - runtime reported `PASS`.
-- [x] Review retry 002 and **reject runtime PASS**.
-  - FACT_CHECK returned `unverified`, confidence `0.2`, `evidence:null`;
-  - requested WEB_SEARCH routed to NEWS_SEARCH and returned articles unrelated to Lodash/package security;
-  - corrected meaningful coverage `0/2`;
-  - corrected fail-closed outcome `ESCALATE`;
-  - evidence: `evidence/t2/live-clean-retry-002/REVIEW.md`.
+- [x] PR #1 reclassified as challenged candidate: `lodash 4.17.20 -> 4.17.21`, head `73cf5bdd69163924228e3e21d67fa9f405d99904`.
+- [x] PR #2 clean candidate: `lodash 4.17.20 -> 4.18.1`, head `d2aa0ea25daf1f84b6cfdd98861d3f05df584b7a`.
+- [x] Persist clean/challenged action snapshots.
 
-### Demo-fixture correction
+### Seeded exact-CVE auditor
 
-- [x] Reclassify PR #1 (`lodash 4.17.20 -> 4.17.21`) as challenged candidate; preserve original head/history.
-- [x] Create clean PR #2: `lodash 4.17.20 -> 4.18.1` on `demo/clean-lodash-4.18.1`.
-- [x] Rebase controlled PR #2 branch onto current `main` before live evidence and bind clean action file to exact head `d2aa0ea25daf1f84b6cfdd98861d3f05df584b7a`.
-- [x] Persist `demo/actions/challenged-pr.json` for PR #1.
-
-### Auditor v0.3 seeded exact-CVE mode
-
-- [x] Add `src/seeded-cve-auditor.mjs`.
-- [x] Seed clean PR #2 with exact advisory IDs `CVE-2026-4800` and `CVE-2026-2950`.
-- [x] Require exact `CVE_LOOKUP` return, exact CVE ID match, found record, and machine-checkable affected-version range before coverage counts.
-- [x] Target inside returned affected range => BLOCKING; target outside range => ADVISORY.
-- [x] Add deterministic seeded-CVE tests including clean PASS, challenged BLOCK, and wrong-route ESCALATE.
-- [x] Update live runner to select seeded-CVE mode when action file contains `evidence_seeds.cve_ids`.
-- [x] T2.24 Full user-machine `npm test` after v0.3 addition: **26/26 PASS, 0 fail**. *(`evidence/t2/LOCAL-USER-VALIDATION-V0.3-26-OF-26.md`)*
-- [x] T2.25 Re-verify PR #2 after local tests: open, unmerged, mergeable, exact head `d2aa0ea25daf1f84b6cfdd98861d3f05df584b7a`.
-- [ ] T2.26 Run one bounded live PR #2 MEDIUM seeded-CVE audit through hardened launcher; max `20000` atomic USDC.
-- [ ] T2.27 Review exact returned CVE records/ranges/spend/outcome and persist sanitized evidence.
-- [ ] T2.28 Promote `SKEPTARA_T2_INDEPENDENT_AUDITOR_PASS` only if the reviewed live evidence truly satisfies the gate.
+- [x] v0.3 exact-CVE mode implemented.
+- [x] Clean PR #2 seeded with `CVE-2026-4800` and `CVE-2026-2950`.
+- [x] v0.3 user-machine full suite: **26/26 PASS, 0 fail**.
+- [x] T2.26 Run bounded live PR #2 seeded-CVE audit; spend `20000/20000` atomic USDC.
+  - runtime coverage `1/2`;
+  - `CVE-2026-4800` => `ADVISORY`, meaningful coverage;
+  - `CVE-2026-2950` => runtime `AMBIGUOUS`, `SEEDED_CVE_RECORD_NOT_RETURNED`;
+  - runtime outcome `ESCALATE`.
+- [x] T2.27 Review live run 003 raw evidence and persist sanitized replay fixture.
+  - Telegraph actually returned exact `CVE-2026-2950` with substantive Lodash advisory data;
+  - record included `fixed_versions:["4.18.0"]`, description `4.17.23 and earlier`, severity/CVSS/source/reference;
+  - runtime ESCALATE traced to v0.3 normalizer assuming miner-specific `found/verdict` fields and ignoring `fixed_versions` as a range boundary;
+  - corrected evidence interpretation: **2/2 meaningful non-blocking ADVISORY paths**;
+  - evidence: `evidence/t2/live-pr2-seeded-run-003/REVIEW.md`.
+- [x] Implement `skeptara-auditor-v0.4-seeded-cve` remediation.
+  - substantive exact CVE record may count without miner-specific `found/verdict`;
+  - exact CVE id with no substantive fields still fails closed;
+  - lowest `fixed_versions` value becomes exclusive affected-range boundary;
+  - `X.Y.Z and earlier` parsing added;
+  - two regression tests added from live run 003.
+- [x] Persist exact sanitized run 003 replay input.
+- [x] Add zero-spend deterministic replay command: `npm run t2:replay:003`.
+- [ ] T2.28 Pull latest main and run full `npm test` after v0.4. Expected total: **28 tests** if no unrelated count change.
+- [ ] T2.29 Run `npm run t2:replay:003` with zero new x402 spend.
+  - required replay coverage: `2/2`;
+  - required materialities: `[ADVISORY, ADVISORY]`;
+  - required outcome: `PASS`.
+- [ ] T2.30 Promote `SKEPTARA_T2_INDEPENDENT_AUDITOR_PASS` only after both user-machine gates are green and evidence is persisted.
 
 ## T3 — Protected merge gate
 
@@ -82,13 +84,14 @@ Status: DERIVED READY — subordinate to living PRD v0.1.
 - [ ] T3.7 Expired challenge => deny.
 - [ ] T3.8 BLOCK/ESCALATE => deny.
 - [ ] T3.9 Non-allow-listed target => deny.
+- [ ] T3.10 Require a **fresh unexpired live challenge** before any real merge; the run 003 replay can close T2 but is not merge authorization.
 
 ## T4 — Real two-case proof
 
 - [x] Challenged candidate exists: PR #1 (`4.17.21`).
 - [x] Clean candidate exists: PR #2 (`4.18.1`).
-- [ ] T4.1 Obtain reviewed live PASS evidence for PR #2.
-- [ ] T4.2 Obtain reviewed live BLOCK evidence for PR #1 using controlled seeded CVE path.
+- [ ] T4.1 Fresh live PASS execution proof for PR #2 after T3.
+- [ ] T4.2 Fresh live BLOCK proof for PR #1 after T3.
 - [ ] T4.3 Execute bounded real merge only for fresh PASS case if explicitly authorized.
 - [ ] T4.4 Prove challenged case cannot merge.
 - [ ] T4.5 Capture replay/demo evidence.
@@ -96,7 +99,7 @@ Status: DERIVED READY — subordinate to living PRD v0.1.
 ## UX / Benita
 
 - [x] Frontend data contract frozen.
-- [x] `feat/frontend-benita` created and synchronized to current main while it still had no unique remote commits.
+- [x] `feat/frontend-benita` created and synchronized while it had no unique remote commits.
 - [ ] Send brief + PRD PDF if not already sent.
 - [ ] Risk-tier presentation.
 - [ ] Live challenge-progress presentation.
@@ -127,6 +130,6 @@ After every passed/failed major gate:
 
 ## Reconciliation record
 
-Retry 002 was another useful fail-closed discovery: paid responses can still be evidentially empty or irrelevant even when the transport succeeds. PR #1 is no longer treated as clean. The clean fixture is PR #2 at Lodash `4.18.1`; v0.3 now uses exact external CVE identifiers to demand concrete, machine-checkable Telegraph records. The full v0.3 suite is now green **26/26** on the user's machine and PR #2 has been reverified unchanged. Product intent remains unchanged; this is execution/demo-fixture remediation.
+Run 003 proves the live Telegraph records themselves were sufficient: both exact CVEs were returned and both place `lodash@4.18.1` outside the affected range. The runtime `ESCALATE` exposed a normalizer-shape assumption rather than missing evidence. v0.4 fixes that assumption while retaining fail-closed behavior for empty or mismatched records. T2 now needs only local full tests plus deterministic replay of the already-paid run 003 evidence; no additional x402 spend is required for this gate. A fresh challenge remains mandatory later for T3 merge authorization.
 
-Exact next gate: `SKEPTARA_T2_V0_3_PR2_LIVE_SEEDED_CVE_AUDIT`.
+Exact next gate: `SKEPTARA_T2_V0_4_LOCAL_TEST_AND_RUN003_REPLAY`.
