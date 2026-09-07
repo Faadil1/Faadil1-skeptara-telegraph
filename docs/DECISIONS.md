@@ -97,3 +97,21 @@ Status: LOCKED
 Date: 2026-09-06
 
 Reason: live Telegraph evidence showed the selected `/cve` miner can require an explicit CVE identifier. Package/version-only actions therefore prefer package-compatible `FACT_CHECK`, `WEB_SEARCH`, `NEWS_SEARCH`, and `URL_SCAN` paths. Skeptara may still record an actual returned `CVE_LOOKUP` intent when Telegraph routes there; planned intent is not claimed intent.
+
+## D-017 — Relevance is part of completed coverage
+Status: LOCKED  
+Date: 2026-09-06
+
+Reason: retry 002 showed that an `unverified` fact-check with `evidence: null`, and a news-search response containing articles unrelated to the canonical dependency target, cannot count as meaningful required coverage. Request/query text echoing the target is not evidence relevance. Paid-but-unverified or substantively irrelevant evidence is fail-closed.
+
+## D-018 — Preserve PR #1 as challenged history; move clean fixture to current Lodash 4.18.1
+Status: LOCKED FOR DEMO  
+Date: 2026-09-06
+
+Reason: current advisory validation showed `lodash@4.17.21` is no longer a defensible clean target in 2026. PR #1 is preserved at its original head as a challenged candidate. Clean PR #2 targets `lodash@4.18.1`, preserving the evidence chain rather than rewriting history.
+
+## D-019 — Controlled exact-CVE seeds for reliable T2 demo evidence
+Status: LOCKED FOR T2/T4 DEMO  
+Date: 2026-09-06
+
+Reason: broad reassurance/search paths twice produced paid but inadequate evidence. For the bounded demo, deterministic external advisory identifiers seed exact `CVE_LOOKUP` paths. The reviewed coding agent does not choose these seeds. A seeded path counts only when Telegraph returns the exact CVE record and a machine-checkable affected-version range. This preserves real Telegraph paid intelligence while making evidence quality testable and fail-closed.
