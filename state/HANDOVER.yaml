@@ -7,9 +7,9 @@ handover:
   branch: main
 
   resume_rule: >-
-    Read state/CURRENT.yaml first, then this HANDOVER, product/PRD.md, spec-kit/tasks.md, docs/JUDGE-CLAIM-BOUNDARIES.md, docs/SUBMISSION-COMPLIANCE.md, docs/FRONTEND_DATA_CONTRACT.md, evidence/trace/FRONTEND-SETTLEMENT-MATRIX-CLARIFICATION.md, evidence/trace/PR3-TRACE-SOURCE-BEHAVIOR-AUDIT-001.md, evidence/trace/PR3-FINAL-BROWSER-TRACE-AND-MERGE-PASS.md, evidence/trace/FINAL-DEPLOYMENT-HANDOFF-NO-PUBLIC-SMOKE-DECISION.md, and evidence/trace/BENITA-X-SHOWCASE-VERIFIED.md. Repository truth outranks chat memory. Never force-move Benita's branch.
+    Read state/CURRENT.yaml first, then this HANDOVER, product/PRD.md, spec-kit/tasks.md, docs/JUDGE-CLAIM-BOUNDARIES.md, docs/SUBMISSION-COMPLIANCE.md, docs/FRONTEND_DATA_CONTRACT.md, evidence/trace/FRONTEND-SETTLEMENT-MATRIX-CLARIFICATION.md, evidence/trace/PR3-TRACE-SOURCE-BEHAVIOR-AUDIT-001.md, evidence/trace/PR3-FINAL-BROWSER-TRACE-AND-MERGE-PASS.md, evidence/trace/FINAL-DEPLOYMENT-HANDOFF-NO-PUBLIC-SMOKE-DECISION.md, evidence/trace/BENITA-X-SHOWCASE-VERIFIED.md, and evidence/submission/TELEGRAPH-TRACK3-SUBMISSION-HUMAN-ATTESTATION-2026-09-07.md. Repository truth outranks chat memory. Never force-move Benita's branch.
 
-  current_milestone: T0_THRU_T4_CLOSED__FINAL_FRONTEND_TRACE_PASS__PR3_MERGED__BENITA_X_SHOWCASE_VERIFIED__FAADIL_TRACK3_SUBMISSION_NOW
+  current_milestone: T0_THRU_T4_CLOSED__FINAL_FRONTEND_TRACE_PASS__PR3_MERGED__BENITA_X_SHOWCASE_VERIFIED__TRACK3_SUBMITTED
 
   project:
     public_name: Skeptara
@@ -48,7 +48,6 @@ handover:
     faadil_public_smoke_required: false
     smoke_gate_removed_by_owner_decision: true
     evidence: evidence/trace/FINAL-DEPLOYMENT-HANDOFF-NO-PUBLIC-SMOKE-DECISION.md
-    claim_boundary: DO_NOT_CLAIM_INDEPENDENT_FAADIL_OR_CHATGPT_PRODUCTION_SMOKE
 
   public_comms:
     benita_x_handle: '@0x_beni_'
@@ -59,18 +58,27 @@ handover:
       evidence: evidence/trace/BENITA-X-SHOWCASE-VERIFIED.md
     no_reach_or_impression_claim: true
 
+  submission:
+    portal: https://submissions.telegraphprotocol.com
+    track: TRACK_3_GITHUB_APP
+    status: SUBMITTED__VERIFIED_BY_HUMAN_ATTESTATION
+    before_deadline: true
+    repository_verified_in_portal: true
+    repository: https://github.com/Faadil1/skeptara-telegraph
+    live_app: https://skeptara.vercel.app/
+    submission_id: NOT_VISIBLE_IN_PROVIDED_EVIDENCE
+    evidence: evidence/submission/TELEGRAPH-TRACK3-SUBMISSION-HUMAN-ATTESTATION-2026-09-07.md
+
   finish_split:
     benita:
       - FINALIZE_OR_CONFIRM_VERCEL_PRODUCTION
-      - LEAD_DEMO_AND_PITCH
-      - PRIMARY_X_PROJECT_VOICE_AND_POSTS
-      - DISCORD_COMMUNITY_FINALIZATION_IF_NEEDED
-      - NO_CORE_IMPLEMENTATION_CHANGE_UNLESS_A_CONCRETE_PRODUCTION_REGRESSION_APPEARS
+      - KEEP_DEMO_AND_PITCH_READY
+      - PRIMARY_X_PROJECT_VOICE
+      - RESPOND_TO_ORGANIZER_OR_COMMUNITY_FOLLOWUPS_IF_NEEDED
     faadil:
-      - OFFICIAL_HACKATHON_SUBMISSION_SITE_ACTION
-      - TRACK3_FORM_VERIFICATION_AND_SUBMIT
-      - TECHNICAL_PROOF_AND_EVIDENCE_GOVERNANCE
-      - TECHNICAL_SUPPORT_FOR_DEMO
+      - PRESERVE_SUBMISSION_AND_TECHNICAL_EVIDENCE
+      - RESPOND_TO_ORGANIZER_REQUESTS_IF_ANY
+      - HANDLE_POST_SUBMISSION_PORTFOLIO_REUSE_OR_RESULTS_FOLLOWUP
 
   admin:
     registration: VERIFIED
@@ -78,9 +86,9 @@ handover:
     benita_discord: HUMAN_VERIFY
     benita_x_handle: VERIFIED__AT_0X_BENI_
     x_posts: BENITA_PRIMARY_SHOWCASE_VERIFIED
-    final_submission: NOT_SUBMITTED
+    final_submission: SUBMITTED__VERIFIED_BY_HUMAN_ATTESTATION
 
-  exact_next_gate: SKEPTARA_OFFICIAL_TRACK3_SUBMISSION
-  exact_next_owner: FAADIL
+  exact_next_gate: POST_SUBMISSION_ARCHIVE_AND_OPTIONAL_RESULTS_MONITORING
+  exact_next_owner: HUMAN_TEAM
   exact_next_action: >-
-    Benita's primary Skeptara X showcase is now verified at https://x.com/0x_beni_/status/2097099339449393652. Faadil should submit Track 3 immediately using the canonical project title, safe description, GitHub repository URL, and live app URL. No additional build, public smoke, or fresh Telegraph activity is required. Capture the submission confirmation screen or My Submissions entry immediately after signing/submitting and persist it as evidence.
+    Skeptara Track 3 was submitted before deadline by human attestation, with the canonical repository shown as verified in the Telegraph portal. No additional build, public smoke, or fresh Telegraph activity is required. Preserve the submission evidence and remain available only for organizer follow-up, concrete production regressions, results monitoring, or portfolio reuse.
