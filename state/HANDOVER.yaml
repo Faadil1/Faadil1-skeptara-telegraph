@@ -1,7 +1,7 @@
 handover:
   protocol_version: 1
   system: SKEPTARA_TELEGRAPH_TRACK3
-  date: 2026-09-06
+  date: 2026-09-07
   source_of_truth: GITHUB
   repository: Faadil1/Faadil1-skeptara-telegraph
   branch: main
@@ -9,8 +9,8 @@ handover:
   resume_rule: >-
     Read state/CURRENT.yaml first, then this HANDOVER, then product/PRD.md. The living PRD is canonical product intent; Spec Kit files are derived execution contracts. Repository truth outranks chat/runtime memory. After every major gate persist evidence and update BOTH CURRENT and HANDOVER.
 
-  current_milestone: T0_CLOSED_PASS__T1_PASS__T2_RUN_001_REJECTED__V0_2_REMEDIATED__RETRY_002_REJECTED__PR1_CHALLENGED__PR2_CLEAN_REBASED__SEEDED_CVE_V0_3_USER_TEST_26_OF_26_PASS__LIVE_PR2_AUDIT_NEXT
-  lifecycle_status: PRODUCT_CONTRACT_LOCKED__REAL_TELEGRAPH_PROVEN__TWO_FALSE_PASSES_CAUGHT_BY_EVIDENCE_REVIEW__MEANINGFUL_COVERAGE_RULE_STRENGTHENED__SEEDED_CVE_LOCAL_GATE_PASS
+  current_milestone: T0_CLOSED_PASS__T1_PASS__T2_RUN001_REJECTED__RUN002_REJECTED__PR1_CHALLENGED__PR2_CLEAN__RUN003_LIVE_EVIDENCE_CAPTURED__V03_NORMALIZER_FALSE_ESCALATE_EXPLAINED__V04_LOCAL_REPLAY_NEXT
+  lifecycle_status: PRODUCT_CONTRACT_LOCKED__REAL_TELEGRAPH_PROVEN__FAIL_CLOSED_REVIEW_CAUGHT_THREE_EVIDENCE_SHAPE_ISSUES__V04_NORMALIZER_REMEDIATED
 
   project:
     public_name: Skeptara
@@ -30,93 +30,92 @@ handover:
     t0:
       status: CLOSED_PASS
       evidence_root: evidence/t0-real-telegraph/attempt-008/
-      challenged_target: lodash@4.17.20
-      cve_id: CVE-2020-28500
-      materiality: BLOCKING
     t1:
       status: PASS
       implementation: src/policy.mjs
-      medium_contract: 2_paths__20000_atomic_USDC
 
   t2_current:
     gate: SKEPTARA_T2_INDEPENDENT_AUDITOR_PASS
-    status: SEEDED_CVE_V0_3_LOCAL_VALIDATION_PASS__PR2_LIVE_AUDIT_REQUIRED
-    contract: docs/T2_AUDITOR_CONTRACT.md
+    status: V0_4_IMPLEMENTED__LOCAL_TEST_AND_RUN003_REPLAY_REQUIRED
     generic_auditor: src/auditor.mjs
     seeded_auditor: src/seeded-cve-auditor.mjs
-    live_runner: scripts/t2-live-audit.mjs
-    secure_launcher: scripts/t2-from-clipboard.ps1
+    seeded_version: skeptara-auditor-v0.4-seeded-cve
+    replay_script: scripts/replay-t2-run003.mjs
 
-    run_001:
-      runtime_reported: PASS
-      accepted: false
-      corrected: ESCALATE
-      reason: PAID_CVE_PATH_INVALID_NO_MEANINGFUL_COVERAGE
-      evidence: evidence/t2/live-clean-run-001/REVIEW.md
+    prior_runs:
+      run_001:
+        runtime_reported: PASS
+        accepted: false
+        corrected: ESCALATE
+        evidence: evidence/t2/live-clean-run-001/REVIEW.md
+      run_002:
+        runtime_reported: PASS
+        accepted: false
+        corrected: ESCALATE
+        corrected_meaningful_coverage: 0_OF_2
+        evidence: evidence/t2/live-clean-retry-002/REVIEW.md
+      run_003:
+        runtime_reported: ESCALATE
+        spend_atomic: 20000
+        runtime_coverage: 1_OF_2
+        actual_intents: [CVE_LOOKUP, CVE_LOOKUP]
+        evidence_review: evidence/t2/live-pr2-seeded-run-003/REVIEW.md
+        replay_fixture: evidence/t2/live-pr2-seeded-run-003/replay-input.sanitized.json
+        raw_truth:
+          - CVE-2026-4800 exact record, affected before 4.18.0, target 4.18.1 => ADVISORY
+          - CVE-2026-2950 exact substantive record, fixed in 4.18.0, target 4.18.1 => ADVISORY
+        corrected_meaningful_coverage: 2_OF_2
+        corrected_evidence_interpretation: TWO_NON_BLOCKING_ADVISORIES
+        root_cause: v0.3 required miner-specific found/verdict and ignored fixed_versions as a range boundary
 
-    retry_002:
-      runtime_reported: PASS
-      accepted: false
-      corrected_meaningful_coverage: 0_OF_2
-      corrected: ESCALATE
-      spend_atomic: 20000
-      actual_intents: [FACT_CHECK, NEWS_SEARCH]
-      reason:
-        - FACT_CHECK_UNVERIFIED_EVIDENCE_NULL
-        - NEWS_SEARCH_RETURNED_IRRELEVANT_ARTICLES
-      evidence: evidence/t2/live-clean-retry-002/REVIEW.md
-
-    evidence_quality_rules:
-      - paid transport success does not equal completed evidence coverage
-      - unverified result with no evidence cannot count
-      - returned evidence must be substantively relevant to canonical target
-      - request/query echo cannot establish relevance
-      - seeded CVE path must return actual CVE_LOOKUP, exact requested CVE, found record and machine-checkable range
-
-    challenged_case:
-      pr_number: 1
-      branch: demo/clean-lodash-upgrade
-      head_sha: 73cf5bdd69163924228e3e21d67fa9f405d99904
-      target: lodash@4.17.21
-      role: CHALLENGED_CANDIDATE
-      action_file: demo/actions/challenged-pr.json
-      merge_authorized: false
+    v0_4_remediation:
+      - exact matching CVE plus substantive advisory fields can count without miner-specific found/verdict
+      - exact CVE id with no substantive record still fails closed
+      - lowest fixed_versions entry is an exclusive affected-range boundary
+      - X.Y.Z and earlier wording is machine-checkable
+      - two regression tests added from the live run 003 shape
 
     clean_case:
       pr_number: 2
       branch: demo/clean-lodash-4.18.1
       head_sha: d2aa0ea25daf1f84b6cfdd98861d3f05df584b7a
       target: lodash@4.18.1
-      role: CLEAN_CANDIDATE
-      action_file: demo/actions/clean-pr.json
       risk_tier: MEDIUM
       required_paths: 2
       spend_cap_atomic: 20000
       evidence_seeds: [CVE-2026-4800, CVE-2026-2950]
-      pr_open: true
-      pr_unmerged: true
-      pr_mergeable: true
       merge_authorized: false
 
-    seeded_v0_3:
-      version: skeptara-auditor-v0.3-seeded-cve
-      implementation_status: LOCAL_VALIDATION_PASS
-      user_machine_full_repo: 26_OF_26_PASS__0_FAIL
-      evidence: evidence/t2/LOCAL-USER-VALIDATION-V0.3-26-OF-26.md
-      clean_fixture_semantics: TWO_NON_BLOCKING_ADVISORY_PATHS_CAN_PASS_ONLY_IF_LIVE_RECORDS_VALIDATE_RANGE
-      challenged_fixture_semantics: AFFECTED_RANGE_CAUSES_EARLY_BLOCK
+    challenged_case:
+      pr_number: 1
+      branch: demo/clean-lodash-upgrade
+      head_sha: 73cf5bdd69163924228e3e21d67fa9f405d99904
+      target: lodash@4.17.21
+      merge_authorized: false
+
+    next_validation:
+      full_test_expected: 28
+      replay_command: npm run t2:replay:003
+      replay_expected:
+        coverage: 2_OF_2
+        spend: 20000_OF_20000_CAPTURED
+        materialities: [ADVISORY, ADVISORY]
+        outcome: PASS
+      new_payment_required: false
+
+  t3_boundary:
+    replay_can_close_t2_auditor_evidence_gate: true
+    replay_is_not_fresh_merge_authorization: true
+    fresh_unexpired_challenge_required_before_real_merge: true
 
   frontend_parallel:
     contract: docs/FRONTEND_DATA_CONTRACT.md
     branch: feat/frontend-benita
-    release_condition: SATISFIED
-    last_check: IDENTICAL_TO_MAIN_BEFORE_THIS_GATE_PERSISTENCE
     sync_policy: once Benita has unique commits, never force-move her branch; reconcile normally.
 
   security:
     prior_burner: COMPROMISED_DO_NOT_REUSE_OR_FUND
     fresh_burner: ACTIVE_BOUNDED_TESTNET_ONLY
-    fresh_private_key_printed_or_shared: false
     repository_secret_recorded: false
 
   next_gates_after_t2:
@@ -126,7 +125,7 @@ handover:
     - SKEPTARA_BUILD_CANDIDATE_READY
     - HUMAN_PROTECTED_FINAL_SUBMISSION
 
-  exact_next_gate: SKEPTARA_T2_V0_3_PR2_LIVE_SEEDED_CVE_AUDIT
+  exact_next_gate: SKEPTARA_T2_V0_4_LOCAL_TEST_AND_RUN003_REPLAY
   exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_REVIEW
   exact_next_action: >-
-    Run powershell -ExecutionPolicy Bypass -File .\scripts\t2-from-clipboard.ps1 using the fresh bounded Base Sepolia burner. The action file is bound to PR #2 exact head d2aa0ea25daf1f84b6cfdd98861d3f05df584b7a and exact CVE seeds CVE-2026-4800 and CVE-2026-2950. Maximum spend is 20000 atomic USDC. Return terminal output and the new sanitized 02-audit-result.json. Do not merge PR #1 or PR #2 before T3 and never force PASS.
+    Pull main. Run npm test, then npm run t2:replay:003. No private key and no new Telegraph payment are needed. Expected full test count is 28 if no unrelated test-count change. Replay must show 2/2 coverage, two ADVISORY items, captured spend 20000/20000 and PASS. Return both terminal outputs. Do not merge PR #1 or PR #2; T3 still requires a fresh unexpired challenge before any real merge.
