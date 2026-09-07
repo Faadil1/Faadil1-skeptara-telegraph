@@ -9,8 +9,8 @@ handover:
   resume_rule: >-
     Read state/CURRENT.yaml first, then this HANDOVER, then product/PRD.md. The living PRD is canonical product intent; Spec Kit files are derived execution contracts. Repository truth outranks chat/runtime memory. After every major gate persist evidence and update BOTH CURRENT and HANDOVER.
 
-  current_milestone: T0_CLOSED_PASS__T1_PASS__T2_RUN_001_PASS_REJECTED__AUDITOR_V0_2_REMEDIATED__USER_TEST_21_OF_21_PASS__LIVE_RETRY_002_RUNTIME_PASS__EVIDENCE_REVIEW_NEXT
-  lifecycle_status: PRODUCT_CONTRACT_LOCKED__REAL_TELEGRAPH_PROVEN__DETERMINISTIC_POLICY_PROVEN__FALSE_PASS_CAUGHT_AND_REMEDIATED__V0_2_LOCAL_GATE_PASS__RETRY_002_RUNTIME_PASS_REVIEW_REQUIRED
+  current_milestone: T0_CLOSED_PASS__T1_PASS__T2_RUN_001_REJECTED__V0_2_REMEDIATED__RETRY_002_REJECTED__PR1_CHALLENGED__PR2_CLEAN__SEEDED_CVE_V0_3_LOCAL_TEST_NEXT
+  lifecycle_status: PRODUCT_CONTRACT_LOCKED__REAL_TELEGRAPH_PROVEN__TWO_FALSE_PASSES_CAUGHT_BY_EVIDENCE_REVIEW__MEANINGFUL_COVERAGE_RULE_STRENGTHENED__CLEAN_FIXTURE_CORRECTED
 
   project:
     public_name: Skeptara
@@ -23,8 +23,8 @@ handover:
     current_revision: v0.1
     status: PRD_READY
     living_prd: true
-    product_intent_changed_by_t2_review: false
-    t2_review_classification: execution_detail
+    product_intent_changed: false
+    current_discovery_class: execution_detail
 
   closed_gates:
     t0:
@@ -40,67 +40,75 @@ handover:
 
   t2_current:
     gate: SKEPTARA_T2_INDEPENDENT_AUDITOR_PASS
-    status: V0_2_RETRY_002_RUNTIME_PASS__EVIDENCE_REVIEW_REQUIRED
-    auditor_version: skeptara-auditor-v0.2
+    status: SEEDED_CVE_V0_3_IMPLEMENTED__LOCAL_TEST_AND_PR2_LIVE_AUDIT_REQUIRED
     contract: docs/T2_AUDITOR_CONTRACT.md
-    run_001_review_evidence: evidence/t2/live-clean-run-001/REVIEW.md
-    v0_2_local_evidence: evidence/t2/LOCAL-USER-VALIDATION-V0.2-21-OF-21.md
-    retry_002_runtime_summary: evidence/t2/LIVE-CLEAN-RETRY-002-RUNTIME-PASS-PENDING-REVIEW.md
-    clean_case_binding:
-      repository: Faadil1/Faadil1-skeptara-telegraph
+    generic_auditor: src/auditor.mjs
+    seeded_auditor: src/seeded-cve-auditor.mjs
+    live_runner: scripts/t2-live-audit.mjs
+    secure_launcher: scripts/t2-from-clipboard.ps1
+
+    run_001:
+      runtime_reported: PASS
+      accepted: false
+      corrected: ESCALATE
+      reason: PAID_CVE_PATH_INVALID_NO_MEANINGFUL_COVERAGE
+      evidence: evidence/t2/live-clean-run-001/REVIEW.md
+
+    retry_002:
+      runtime_dir: evidence/t2-runtime/2026-09-06T23-47-29-348Z
+      runtime_reported: PASS
+      spend_atomic: 20000
+      actual_intents: [FACT_CHECK, NEWS_SEARCH]
+      accepted: false
+      corrected_meaningful_coverage: 0_OF_2
+      corrected: ESCALATE
+      reason:
+        - FACT_CHECK_UNVERIFIED_EVIDENCE_NULL
+        - NEWS_SEARCH_RETURNED_IRRELEVANT_ARTICLES
+      evidence: evidence/t2/live-clean-retry-002/REVIEW.md
+
+    evidence_quality_rules:
+      - paid transport success does not equal completed evidence coverage
+      - unverified result with no evidence cannot count
+      - returned evidence must be substantively relevant to canonical target
+      - request/query echo cannot establish relevance
+      - exact seeded CVE path must return actual CVE_LOOKUP + exact CVE id + found record + machine-checkable affected range
+
+    challenged_case:
       pr_number: 1
+      title_role: CHALLENGED_CANDIDATE
       branch: demo/clean-lodash-upgrade
       head_sha: 73cf5bdd69163924228e3e21d67fa9f405d99904
-      dependency_change: lodash_4_17_20_TO_4_17_21
+      target: lodash@4.17.21
+      action_file: demo/actions/challenged-pr.json
       merge_authorized: false
-    live_run_001:
-      runtime_reported_outcome: PASS
-      accepted_after_review: false
-      corrected_outcome: ESCALATE
-      defect: invalid paid CVE path was incorrectly counted as completed coverage
-    remediation_v0_2:
-      - paid response contributes spend but not automatically coverage
-      - invalid/missing evidence-path input becomes incomplete critical ambiguity
-      - incomplete paths do not increment completed coverage
-      - generic package-version audits avoid direct CVE_LOOKUP without explicit CVE identifier
-      - generic dependency preference is FACT_CHECK, WEB_SEARCH, NEWS_SEARCH, URL_SCAN
-    validation_v0_2:
-      user_machine_full_repo: 21_OF_21_PASS__0_FAIL
-      invalid_input_fail_closed_regression: PASS
-      paid_invalid_path_no_coverage_regression: PASS
-    live_retry_002:
-      runtime_dir: evidence/t2-runtime/2026-09-06T23-47-29-348Z
+
+    clean_case:
+      pr_number: 2
+      title_role: CLEAN_CANDIDATE
+      branch: demo/clean-lodash-4.18.1
+      head_sha: c40c5a3a15d6280005dfe7589ae7e2a960cc199c
+      target: lodash@4.18.1
+      action_file: demo/actions/clean-pr.json
       risk_tier: MEDIUM
-      completed_coverage_reported: 2
-      required_coverage: 2
-      spend_observed_atomic: 20000
+      required_paths: 2
       spend_cap_atomic: 20000
-      actual_evidence:
-        - intent: FACT_CHECK
-          materiality: AMBIGUOUS
-          reason_code: UNCLASSIFIED_EXTERNAL_EVIDENCE
-          cost_usd: 0.01
-        - intent: NEWS_SEARCH
-          materiality: AMBIGUOUS
-          reason_code: UNCLASSIFIED_EXTERNAL_EVIDENCE
-          cost_usd: 0.01
-      runtime_reported_outcome: PASS
-      runtime_reason: REQUIRED_COVERAGE_COMPLETE_NO_BLOCKING_EVIDENCE
-      accepted_after_review: false
-    review_boundary:
-      - do not run another paid audit yet
-      - inspect sanitized retry 002 02-audit-result.json
-      - confirm both paid paths actually performed meaningful investigation
-      - inspect raw results for material counter-evidence hidden by ambiguous normalization
-      - confirm critical flags and deterministic policy consistency
-      - persist final sanitized retry evidence
-      - close T2 only if review justifies PASS
+      evidence_seeds: [CVE-2026-4800, CVE-2026-2950]
+      merge_authorized: false
+
+    seeded_v0_3:
+      version: skeptara-auditor-v0.3-seeded-cve
+      implementation_status: IMPLEMENTED_LOCAL_VALIDATION_REQUIRED
+      tests: tests/seeded-cve-auditor.test.mjs
+      expected_full_test_count: 26
+      clean_expected_if_live_records_match_current_ranges: TWO_NON_BLOCKING_ADVISORY_PATHS
+      challenged_expected_if_live_records_match_current_ranges: EARLY_BLOCK_ON_AFFECTED_RANGE
 
   frontend_parallel:
     contract: docs/FRONTEND_DATA_CONTRACT.md
     branch: feat/frontend-benita
     release_condition: SATISFIED
-    sync_policy: safe fast-forward only while Benita has no unique commits; once she commits, reconcile normally and never force-move her work.
+    sync_policy: once Benita has unique commits, never force-move her branch; reconcile normally.
 
   security:
     prior_burner: COMPROMISED_DO_NOT_REUSE_OR_FUND
@@ -115,7 +123,7 @@ handover:
     - SKEPTARA_BUILD_CANDIDATE_READY
     - HUMAN_PROTECTED_FINAL_SUBMISSION
 
-  exact_next_gate: SKEPTARA_T2_V0_2_LIVE_RETRY_002_EVIDENCE_REVIEW
+  exact_next_gate: SKEPTARA_T2_V0_3_LOCAL_TEST_AND_PR2_LIVE_AUDIT
   exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_REVIEW
   exact_next_action: >-
-    Do not spend again. Return evidence/t2-runtime/2026-09-06T23-47-29-348Z/02-audit-result.json using the exact timestamp shown by the runner. ChatGPT reviews both AMBIGUOUS items, meaningful coverage, criticality/materiality and raw findings, then either closes T2 or remediates again. PR #1 remains unmerged and no merge is authorized.
+    Pull main and run npm test. Expected total is 26 tests if no unrelated test-count change. Do not spend again unless the suite is green. Then reverify PR #2 exact head c40c5a3a15d6280005dfe7589ae7e2a960cc199c and run scripts/t2-from-clipboard.ps1. The runner will automatically use SEEDED_CVE_COUNTER_EVIDENCE from demo/actions/clean-pr.json. Return terminal output and the new sanitized 02-audit-result.json. Never merge PR #1 or PR #2 before T3 and never force PASS.
