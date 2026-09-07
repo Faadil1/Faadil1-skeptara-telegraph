@@ -1,13 +1,13 @@
 canonical_state:
   protocol_version: 1
   system: SKEPTARA_TELEGRAPH_TRACK3
-  version: 0.9.6-discord-joined-network-guidance-applied
+  version: 0.9.7-fa-adil-discord-activity-verified-benita-comms-unsent
   date: 2026-09-07
   source_of_truth: GITHUB
   repository: Faadil1/Faadil1-skeptara-telegraph
   branch: main
 
-  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__WINNING_INTELLIGENCE_PREFLIGHT_PASS__NINE_SPOT_REMEDIATION_IMPLEMENTED__BENITA_PRIMARY_X_PROJECT_VOICE__FAADIL_DISCORD_JOIN_VERIFIED__ANTI_AUTOMATION_GUIDANCE_APPLIED__LOCAL_VALIDATION_AND_TRACE_VISUAL_REVIEW_NEXT
+  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__NINE_SPOT_REMEDIATION_IMPLEMENTED__FAADIL_DISCORD_ACTIVITY_VERIFIED__BENITA_X_DISCORD_BRIEF_NOT_SENT__LOCAL_VALIDATION_AND_TRACE_VISUAL_REVIEW_NEXT
 
   authority:
     product_intent_source: product/PRD.md
@@ -59,35 +59,17 @@ canonical_state:
       merge_commit_sha: c76c76e0c02dab28275d8e53d70da3f6f132e648
 
   winning_intelligence:
-    preflight:
-      status: PASS_WITH_PRIORITY_RISKS
-      evidence: evidence/winning-intelligence/WI-TRACE-PREFLIGHT-001.md
-    blind_spot_audit_002:
-      status: COMPLETE
-      evidence: evidence/winning-intelligence/WI-BLIND-SPOT-AUDIT-002.md
-      material_hidden_spots_found: true
+    preflight: { status: PASS_WITH_PRIORITY_RISKS, evidence: evidence/winning-intelligence/WI-TRACE-PREFLIGHT-001.md }
+    blind_spot_audit_002: { status: COMPLETE, evidence: evidence/winning-intelligence/WI-BLIND-SPOT-AUDIT-002.md }
     remediation_003:
       status: IMPLEMENTED_PENDING_VALIDATION
       evidence: evidence/winning-intelligence/WI-HIDDEN-SPOT-REMEDIATION-003.md
-      applied:
-        hs01_judge_surface: public/index.html
-        hs02_merge_runtime_claim_boundary: docs/JUDGE-CLAIM-BOUNDARIES.md
-        hs03_seeded_cve_disclosure: APPLIED
-        hs04_risk_scaling_live_vs_test_label: APPLIED
-        hs05_admin_compliance_checklist: docs/SUBMISSION-COMPLIANCE.md
-        hs06_telegraph_routing_flywheel_story: APPLIED
-        hs07_truthful_activity_ledger: evidence/activity/ACTIVITY-LEDGER-V0.1.md
-        hs08_readme_evidence_index_refresh: APPLIED
-        hs09_historical_replay_human_auth_reproducibility: APPLIED
       runnable_assets:
         judge_replay_command: npm run demo
         local_judge_surface_command: npm run demo:web
-      no_product_pivot: true
     discord_signal_004:
       status: ACTIONABLE_NO_PIVOT
       evidence: evidence/winning-intelligence/WI-DISCORD-COMPETITIVE-SIGNAL-004.md
-      collision_confirmed: VERIFIED_INTELLIGENCE_TO_DETERMINISTIC_GATE_IS_CROWDED
-      response: KEEP_ACTION_LEVEL_COUNTER_EVIDENCE_PLUS_RISK_PROPORTIONAL_SCRUTINY_PLUS_EXACT_EXECUTION_BINDING
       competitor_call_volume_strategy: DO_NOT_CHASE
 
   claim_boundaries:
@@ -97,7 +79,6 @@ canonical_state:
       medium: LIVE_FINAL_T4_PROVEN
       high: POLICY_TEST_PROVEN
     independence: CHALLENGE_TOPOLOGY_NOT_STATISTICAL_MINER_INDEPENDENCE
-    pricing: OBSERVED_TESTNET_PRICE_NOT_NETWORK_INVARIANT
     replay: HISTORICAL_REPLAY_NEVER_FRESH_EXECUTION_AUTHORIZATION
     merge_runtime: T3_CONTRACT_TEST_PROVEN_PLUS_T4_REAL_EXACT_HEAD_MERGE__NO_FULLY_DEPLOYED_REPO_ADAPTER_CLAIM
     human_authorization: EXTRA_REAL_WRITE_SAFETY_BOUNDARY__CANNOT_CONVERT_BLOCK_OR_ESCALATE_TO_PASS
@@ -116,16 +97,9 @@ canonical_state:
 
   network_guidance:
     evidence: evidence/admin/TELEGRAPH-DISCORD-JOIN-AND-NETWORK-GUIDANCE-VERIFIED.md
-    source: HUMAN_SCREENSHOTS_OFFICIAL_DISCORD_HACKATHONS_CHANNEL
-    staff_warning_observed: SCRIPTED_AUTOMATED_REQUEST_VOLUME_STRESSING_NETWORK_WILL_NOT_COUNT_FOR_JUDGING
-    organic_requests_counted_language_observed: true
-    payment_facilitator_issue_later_reported_fixed: true
-    effective_policy:
-      no_automated_request_volume_for_metrics: true
-      no_repeat_live_calls_for_optics: true
-      judge_demo_default: CAPTURED_LIVE_HISTORICAL_REPLAY
-      no_telegraph_auto_call_on_public_page_load_refresh_poll_timer_background: true
-      any_future_live_call: BOUNDED_HUMAN_TRIGGERED_AND_PRODUCT_NECESSARY_ONLY
+    staff_warning_observed: SCRIPTED_AUTOMATED_REQUEST_VOLUME_WILL_NOT_COUNT_FOR_JUDGING
+    judge_demo_default: CAPTURED_LIVE_HISTORICAL_REPLAY
+    no_telegraph_auto_call_on_public_page_load_refresh_poll_timer_background: true
 
   administrative_compliance:
     registration:
@@ -133,42 +107,36 @@ canonical_state:
       evidence: evidence/admin/TELEGRAPH-REGISTRATION-VERIFIED.md
     official_discord:
       invite: https://discord.gg/telegraphprotocol
-      faadil_join_access: VERIFIED_FROM_HUMAN_SCREENSHOTS
-      faadil_project_activity: HUMAN_VERIFY_NOT_YET_SHOWN
+      faadil_join_access: VERIFIED
+      faadil_project_activity: VERIFIED
+      faadil_project_activity_evidence: evidence/admin/TELEGRAPH-DISCORD-FAADIL-PROJECT-INTRO-VERIFIED.md
       benita_join_activity: HUMAN_VERIFY
     x_showcase:
       timing_context: REGISTERED_WITH_LESS_THAN_24_HOURS_REMAINING
       strategy: TRUTHFUL_COMPRESSED_SEQUENCE__NO_FAKE_HISTORY
       required_tag: '@Telegraphprotoc'
-      primary_project_voice: BENITA
-      primary_voice_reason: STRONGER_PITCHING_AND_STORYTELLING
+      intended_primary_project_voice: BENITA
+      intended_primary_voice_reason: STRONGER_PITCHING_AND_STORYTELLING
       benita_x_handle: HUMAN_VERIFY_NOT_YET_RECORDED
-      secondary_amplification_voice: FAADIL
       faadil_x_handle: '@roy1919875'
-      role_split: BENITA_MAIN_BUILD_AND_DEMO_POSTS__FAADIL_TECHNICAL_QUOTE_REPOSTS_AND_REPLIES
+      benita_comms_brief_sent: false
+      benita_acceptance_of_primary_x_role: NOT_YET_CONFIRMED
       build_proof_post: HUMAN_ACTION_REQUIRED
       demo_submission_post: HUMAN_ACTION_REQUIRED_AFTER_PUBLIC_DEPLOY
     final_submission: HUMAN_VERIFY_NOT_SUBMITTED
-    metric_gaming_forbidden: ACKNOWLEDGED_AND_REINFORCED_BY_DISCORD_GUIDANCE
 
   collaboration:
-    public_comms_owner_x: BENITA
+    frontend_contract: docs/FRONTEND_DATA_CONTRACT.md
+    frontend_branch: feat/frontend-benita
+    benita_x_discord_brief_status: NOT_SENT
+    intended_public_comms_owner_x: BENITA_PENDING_HUMAN_BRIEF_AND_CONFIRMATION
     technical_amplification_x: '@roy1919875'
     public_voice_does_not_change_product_authority: true
 
   current_surface:
     repo_judge_surface: IMPLEMENTED_PENDING_VISUAL_REVIEW
     public_deployment: NOT_YET_PROVEN
-    readme_current_to_t4: YES
-    evidence_index_current_to_t4: YES
     one_command_two_case_replay: IMPLEMENTED_PENDING_USER_MACHINE_VALIDATION
-    truthful_activity_ledger: BUILT
-
-  security_boundary:
-    prior_exposed_burner_status: COMPROMISED_DO_NOT_REUSE_OR_FUND
-    private_key_in_repo: false
-    payer_address_in_durable_evidence: false
-    protected_github_write_credential_in_browser_or_repo: false
 
   persistence_rule:
     after_every_major_gate: UPDATE_CURRENT_AND_HANDOVER
@@ -179,4 +147,4 @@ canonical_state:
   exact_next_gate: SKEPTARA_HIDDEN_SPOT_REMEDIATION_LOCAL_VALIDATION_AND_TRACE_VISUAL_REVIEW
   exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_TRACE_REVIEW
   exact_next_action: >-
-    Pull main and validate the remediation block with `npm test` then `npm run demo`. Do NOT run new live Telegraph calls for demo/activity volume. If both local commands pass, run `npm run demo:web`, open http://127.0.0.1:4173, and provide screenshots for TRACE visual review. Verify the public surface performs no Telegraph request on load/refresh. Preserve the split PR1 BLOCK/deny vs PR2 PASS/real merge story, historical replay labeling, exact-CVE seeded disclosure, MEDIUM-live vs LOW/HIGH-test distinction, Telegraph routing causality, and claim boundaries. Faadil Discord access is verified; substantive project activity and Benita Discord membership/activity remain human-verification items. Benita remains primary X project voice; Faadil @roy1919875 amplifies with technical/proof context.
+    First, do not assume Benita knows the Discord/X requirements or her intended primary-X role: the human owner explicitly clarified that this brief has NOT been sent yet. Faadil's own Discord access and substantive Skeptara project introduction are VERIFIED. Separately, pull main and run `npm test`, `npm run demo`, then `npm run demo:web`; provide screenshots of http://127.0.0.1:4173 for TRACE. Do not run fresh Telegraph calls for activity/demo volume. Benita Discord membership/activity, Benita X handle, X posts, public deployment smoke and final submission remain HUMAN_VERIFY.
