@@ -7,9 +7,9 @@ handover:
   branch: main
 
   resume_rule: >-
-    Read state/CURRENT.yaml first, then this HANDOVER, then product/PRD.md. Repository truth outranks chat memory. PRD is canonical product intent; Spec Kit is derived execution state. After every major gate and every protected execution boundary, persist evidence and update BOTH CURRENT and HANDOVER. HANDOVER must always preserve enough exact state, bindings, evidence paths, security boundaries, next gate, next owner and next action for a new conversation to take the lead without reconstructing history from chat.
+    Read state/CURRENT.yaml first, then this HANDOVER, then product/PRD.md, then spec-kit/tasks.md. Repository truth outranks chat memory. PRD is canonical product intent; Spec Kit is derived execution state. After every major gate and protected execution boundary, persist evidence and update BOTH CURRENT and HANDOVER. This HANDOVER must remain sufficient for a new conversation to take the lead without reconstructing history from chat.
 
-  current_milestone: T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_PR1_CHALLENGED_CASE_CLOSED__PR2_FRESH_PASS_ACCEPTED__EXACT_HEAD_REVALIDATED__HUMAN_AUTHORIZATION_NEXT
+  current_milestone: T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__TRACE_JUDGE_PATH_REVIEW_NEXT
 
   project:
     public_name: Skeptara
@@ -18,8 +18,12 @@ handover:
     one_line: Higher-risk autonomous code changes must survive deeper independent paid Telegraph counter-evidence before merge can execute.
 
   closed_gates:
-    t0: CLOSED_PASS
-    t1: PASS
+    t0:
+      status: CLOSED_PASS
+      key_evidence: evidence/t0-real-telegraph/attempt-008/
+    t1:
+      status: PASS
+      policy_version: skeptara-risk-v0.1
     t2:
       status: CLOSED_PASS
       auditor_version: skeptara-auditor-v0.4-seeded-cve
@@ -28,93 +32,80 @@ handover:
       status: CLOSED_PASS
       gate_version: skeptara-merge-gate-v0.1
       closure_evidence: evidence/t3/LOCAL-USER-VALIDATION-V0.1-41-OF-41-AND-12-OF-12.md
-
-  t4_current:
-    gate: SKEPTARA_T4_TWO_CASE_REAL_DEMO_PASS
-
-    challenged_pr1:
+    t4:
       status: CLOSED_PASS
+      conclusion: TWO_CASE_REAL_DEMO_PROVEN
+
+  t4_final:
+    challenged_pr1:
+      pr: 1
+      branch: demo/clean-lodash-upgrade
       head_sha: 73cf5bdd69163924228e3e21d67fa9f405d99904
       target: lodash@4.17.21
-      run_004:
-        challenge_id: 113cc2c4-94ff-4c47-bf48-66fabc7c9329
-        spend_atomic: 20000
-        outcome: BLOCK
-        blocking_path: CVE-2026-2950__LODASH_4_17_23_AND_EARLIER__FIXED_4_18_0__TARGET_4_17_21__BLOCKING
-        review: evidence/t4/pr1-block-run-004/REVIEW.md
-      denial_replay:
-        status: PASS
+      challenge_id: 113cc2c4-94ff-4c47-bf48-66fabc7c9329
+      outcome: BLOCK
+      blocking_evidence: CVE-2026-2950
+      normalized_reason: KNOWN_VULNERABILITY_AFFECTS_TARGET_DEPENDENCY_VERSION
+      merge_gate_replay:
         authorization: DENIED
         reason: CHALLENGE_NOT_PASS
         merge_adapter_calls: 0
         executed: false
         merged: false
-        evidence: evidence/t4/pr1-block-run-004/MERGE-DENIAL-REPLAY.md
-      conclusion: REAL_BLOCK_AND_ZERO_WRITE_DENIAL_PROVEN
-      merge_authorized: false
+      evidence:
+        - evidence/t4/pr1-block-run-004/REVIEW.md
+        - evidence/t4/pr1-block-run-004/MERGE-DENIAL-REPLAY.md
 
     clean_pr2:
-      action_file: demo/actions/clean-pr.json
-      target: lodash@4.18.1
+      pr: 2
       branch: demo/clean-lodash-4.18.1
-      previous_head_sha: d2aa0ea25daf1f84b6cfdd98861d3f05df584b7a
       head_sha: 528d730f9ebdcb433e01ba9c79dcc9a5f66ce1c7
-      reconciliation:
-        status: PASS
-        force_update_used: false
-        evidence: evidence/t4/PR2-CLEAN-BRANCH-RECONCILIATION.md
-      fresh_run_005:
-        status: ACCEPTED_PASS
-        source_runtime_dir: evidence/t2-runtime/2026-09-07T01-35-34-681Z
-        challenge_id: f4f075f3-1dbc-42ed-9843-dbec43de3430
-        auditor: skeptara-auditor-v0.4-seeded-cve
-        action_fingerprint: sha256:2f5852b5359d3c2d20525ec21904a737f0ee015194e9ea42d14bbca3fc92ad94
-        risk: MEDIUM
-        spend_atomic: 20000
-        coverage: 2_OF_2
-        actual_intents: [CVE_LOOKUP, CVE_LOOKUP]
-        evidence:
-          - CVE-2026-4800__ADVISORY__TARGET_4_18_1_OUTSIDE_AFFECTED_RANGE__COMPLETE
-          - CVE-2026-2950__ADVISORY__FIXED_4_18_0__TARGET_4_18_1__COMPLETE
-        outcome: PASS
-        reason: REQUIRED_COVERAGE_COMPLETE_NO_BLOCKING_EVIDENCE
-        runtime_errors: 0
-        started_at: 2026-09-07T01:35:36.716Z
-        completed_at: 2026-09-07T01:35:49.772Z
-        expires_at: 2026-09-07T01:50:49.772Z
-        review: evidence/t4/pr2-clean-run-005/REVIEW.md
-        fixture: evidence/t4/pr2-clean-run-005/reviewed-challenge.sanitized.json
-      live_revalidation_after_pass:
-        performed_while_fresh: true
+      target: lodash@4.18.1
+      challenge_id: f4f075f3-1dbc-42ed-9843-dbec43de3430
+      action_fingerprint: sha256:2f5852b5359d3c2d20525ec21904a737f0ee015194e9ea42d14bbca3fc92ad94
+      risk: MEDIUM
+      coverage: 2_OF_2
+      spend_atomic: 20000
+      actual_intents: [CVE_LOOKUP, CVE_LOOKUP]
+      findings:
+        - CVE-2026-4800__ADVISORY__TARGET_4_18_1_OUTSIDE_AFFECTED_RANGE
+        - CVE-2026-2950__ADVISORY__TARGET_4_18_1_OUTSIDE_AFFECTED_RANGE
+      outcome: PASS
+      runtime_errors: 0
+      expires_at: 2026-09-07T01:50:49.772Z
+      pre_merge_revalidation:
         state: open
         merged: false
-        head_sha: 528d730f9ebdcb433e01ba9c79dcc9a5f66ce1c7
         exact_head_match: true
         mergeable: true
         mergeable_state: clean
-        changed_files: 1
-      next_boundary:
-        explicit_human_bounded_authorization_required: true
-        exact_authorizable_pr: 2
-        exact_authorizable_repository: Faadil1/Faadil1-skeptara-telegraph
-        exact_authorizable_head_sha: 528d730f9ebdcb433e01ba9c79dcc9a5f66ce1c7
-        challenge_expiry: 2026-09-07T01:50:49.772Z
-        expected_head_sha_must_be_forwarded_to_merge_adapter: true
-        if_expired_or_head_changed: FAIL_CLOSED_AND_REQUIRE_NEW_FRESH_CHALLENGE
-        merge_authorized: false
+      human_bounded_authorization: EXPLICIT_PASS_FOR_PR2_EXACT_HEAD_ONLY
+      merge_execution:
+        expected_head_sha: 528d730f9ebdcb433e01ba9c79dcc9a5f66ce1c7
+        merged: true
+        merged_at: 2026-09-07T01:44:54Z
+        merge_commit_sha: c76c76e0c02dab28275d8e53d70da3f6f132e648
+        github_message: Pull Request successfully merged
+      evidence:
+        - evidence/t4/PR2-CLEAN-BRANCH-RECONCILIATION.md
+        - evidence/t4/pr2-clean-run-005/REVIEW.md
+        - evidence/t4/pr2-clean-run-005/reviewed-challenge.sanitized.json
+        - evidence/t4/pr2-clean-run-005/REAL-MERGE-EXECUTION.md
 
   security:
     prior_burner: COMPROMISED_DO_NOT_REUSE_OR_FUND
-    fresh_burner: ACTIVE_BOUNDED_TESTNET_ONLY
+    fresh_burner: TESTNET_ONLY
     private_key_in_repo: false
     payer_address_in_durable_evidence: false
     protected_github_write_credential_in_browser_or_repo: false
-    collaborator_frontend_has_write_secret: false
+    frontend_collaborator_has_wallet_or_protected_write_secret: false
 
   collaboration:
+    frontend_contract: docs/FRONTEND_DATA_CONTRACT.md
     frontend_branch: feat/frontend-benita
     branch_policy: FAST_FORWARD_ONLY_WHILE_NO_UNIQUE_COLLABORATOR_COMMITS
     once_unique_commits_exist: NEVER_FORCE_MOVE__RECONCILE_NORMALLY
+    benita_brief_status: NOT_CONFIRMED_SENT
 
   persistence_contract:
     update_current_after_every_major_gate: true
@@ -122,18 +113,18 @@ handover:
     update_both_after_every_execution_boundary: true
     handover_is_next_conversation_bootstrap: true
     include_exact_next_gate_owner_action: true
+    include_exact_bindings_and_evidence_paths: true
     evidence_before_pass_claim: true
     repository_truth_outranks_chat_memory: true
 
   next_gates:
-    - SKEPTARA_T4_PR2_HUMAN_BOUNDED_MERGE_AUTHORIZATION
-    - SKEPTARA_T4_PR2_REAL_MERGE_EXECUTION_IF_AUTHORIZED
-    - SKEPTARA_T4_TWO_CASE_REAL_DEMO_PASS
     - SKEPTARA_TRACE_JUDGE_PATH_REVIEW
+    - SKEPTARA_FRONTEND_INTEGRATION_AND_DEPLOYED_SMOKE
     - SKEPTARA_BUILD_CANDIDATE_READY
+    - SKEPTARA_PROJECT_FINISHER_TERMINAL_ASSURANCE
     - HUMAN_PROTECTED_FINAL_SUBMISSION
 
-  exact_next_gate: SKEPTARA_T4_PR2_HUMAN_BOUNDED_MERGE_AUTHORIZATION
-  exact_next_owner: HUMAN_PROJECT_OWNER
+  exact_next_gate: SKEPTARA_TRACE_JUDGE_PATH_REVIEW
+  exact_next_owner: CHATGPT_ORCHESTRATOR_WITH_HUMAN_VISUAL_REVIEW
   exact_next_action: >-
-    Ask the human whether they explicitly authorize merging exactly PR #2 in Faadil1/Faadil1-skeptara-telegraph at head 528d730f9ebdcb433e01ba9c79dcc9a5f66ce1c7 using the fresh PASS challenge f4f075f3-1dbc-42ed-9843-dbec43de3430. The challenge expires at 2026-09-07T01:50:49.772Z. If the human explicitly authorizes while the challenge is still fresh, immediately re-read PR #2, require open/unmerged/exact-head match/mergeable clean, then execute only through the protected merge adapter with expected_head_sha set to that exact SHA. If authorization arrives after expiry or the head changes, do not merge; obtain a new fresh challenge first.
+    Start from repository state, not chat. Inspect docs/FRONTEND_DATA_CONTRACT.md, current frontend implementation/branch, T4 evidence and README. Perform TRACE judge-path review so a judge can understand in one flow: PR proposed -> deterministic risk -> real paid Telegraph evidence -> PASS/BLOCK/ESCALATE -> protected action. Use the real PR #1 BLOCK/deny and PR #2 PASS/authorized real merge evidence. Do not invent fields. If Benita has unique commits, do not force-move her branch; reconcile normally. Persist TRACE findings, update CURRENT + HANDOVER, and advance to deployed frontend smoke only when the judge path is coherent.
