@@ -1,13 +1,13 @@
 canonical_state:
   protocol_version: 1
   system: SKEPTARA_TELEGRAPH_TRACK3
-  version: 0.12.2-benita-x-showcase-verified-faadil-submit-now
+  version: 0.13.0-track3-submitted-human-attested
   date: 2026-09-07
   source_of_truth: GITHUB
   repository: Faadil1/skeptara-telegraph
   branch: main
 
-  lifecycle_status: PRD_V0_1_LOCKED__T0_THRU_T4_CLOSED_PASS__FINAL_FRONTEND_TRACE_PASS__PR3_MERGED__BENITA_X_SHOWCASE_VERIFIED__FAADIL_SUBMISSION_NOW
+  lifecycle_status: PRD_V0_1_LOCKED__T0_THRU_T4_CLOSED_PASS__FINAL_FRONTEND_TRACE_PASS__PR3_MERGED__BENITA_X_SHOWCASE_VERIFIED__TRACK3_SUBMITTED
 
   product_core:
     public_name: Skeptara
@@ -76,20 +76,6 @@ canonical_state:
     decision_evidence: evidence/trace/FINAL-DEPLOYMENT-HANDOFF-NO-PUBLIC-SMOKE-DECISION.md
     claim_boundary: DO_NOT_CLAIM_FAADIL_OR_CHATGPT_INDEPENDENT_PRODUCTION_SMOKE
 
-  collaboration_finish_split:
-    benita:
-      - DEPLOY_OR_CONFIRM_PRODUCTION_FROM_MERGED_MAIN_ON_HER_VERCEL
-      - FINALIZE_DEMO_NARRATIVE_AND_PITCH
-      - PRIMARY_X_PROJECT_VOICE_AND_POSTS
-      - DISCORD_OR_COMMUNITY_FINALIZATION_IF_NEEDED
-      - PRESENTATION_POLISH_ONLY_UNLESS_A_CONCRETE_PRODUCTION_REGRESSION_IS_OBSERVED
-    faadil:
-      - OWN_FINAL_SUBMISSION_SITE_ACTION
-      - VERIFY_TRACK3_SUBMISSION_AND_COMPLETE_FORM
-      - OWN_TECHNICAL_PROOF_AND_EVIDENCE_GOVERNANCE
-      - SUPPORT_BENITA_WITH_TECHNICAL_FACTS
-    no_more_core_product_build_expected: true
-
   public_comms:
     benita_x_handle: '@0x_beni_'
     benita_x_handle_status: VERIFIED_BY_HUMAN_PROVIDED_EVIDENCE
@@ -98,6 +84,18 @@ canonical_state:
       url: https://x.com/0x_beni_/status/2097099339449393652
       evidence: evidence/trace/BENITA-X-SHOWCASE-VERIFIED.md
     analytics_or_reach_claim: NONE
+
+  submission:
+    portal: https://submissions.telegraphprotocol.com
+    track: TRACK_3_GITHUB_APP
+    status: SUBMITTED__VERIFIED_BY_HUMAN_ATTESTATION
+    submitted_before_deadline: true
+    deadline_utc: 2026-09-07T23:59:59Z
+    repository_verified_in_portal: true
+    repository: https://github.com/Faadil1/skeptara-telegraph
+    live_app: https://skeptara.vercel.app/
+    submission_id: NOT_VISIBLE_IN_PROVIDED_EVIDENCE
+    evidence: evidence/submission/TELEGRAPH-TRACK3-SUBMISSION-HUMAN-ATTESTATION-2026-09-07.md
 
   claim_boundaries:
     exact_cve_seeded_mode: CONTROLLED_HACKATHON_PROOF_NOT_AUTOMATIC_UNKNOWN_VULNERABILITY_DISCOVERY
@@ -114,14 +112,14 @@ canonical_state:
     benita_discord: HUMAN_VERIFY
     benita_x_handle: VERIFIED__AT_0X_BENI_
     x_posts: BENITA_PRIMARY_SHOWCASE_VERIFIED
-    final_submission: NOT_SUBMITTED
+    final_submission: SUBMITTED__VERIFIED_BY_HUMAN_ATTESTATION
 
   persistence_rule:
     after_every_major_gate: UPDATE_CURRENT_AND_HANDOVER
     after_every_execution_boundary: UPDATE_CURRENT_AND_HANDOVER
     handover_must_be_sufficient_for_next_conversation_to_take_lead: true
 
-  exact_next_gate: SKEPTARA_OFFICIAL_TRACK3_SUBMISSION
-  exact_next_owner: FAADIL
+  exact_next_gate: POST_SUBMISSION_ARCHIVE_AND_OPTIONAL_RESULTS_MONITORING
+  exact_next_owner: HUMAN_TEAM
   exact_next_action: >-
-    The final GitHub integration is merged and Benita's primary X showcase post is verified at https://x.com/0x_beni_/status/2097099339449393652. Faadil should now complete and sign the official Telegraph Track 3 submission form using the canonical title, description, repository URL, and live app URL. No further build, public smoke, or fresh Telegraph calls are required unless a concrete production regression is reported. Preserve submission confirmation evidence immediately after submit.
+    Track 3 submission is complete by human attestation and the canonical repository was shown as verified in the portal before deadline. Do not reopen implementation or generate fresh Telegraph activity unless a concrete production regression or organizer request appears. Preserve the submission evidence, Benita showcase post, final merge proof, and canonical state. Any future work is post-submission support, organizer response, results monitoring, or portfolio reuse.
