@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Skeptara — Independent challenge before autonomous merge</title>
+  <meta name="description" content="Skeptara buys Telegraph-routed external evidence to try to prove an autonomous dependency change unsafe before execution." />
+  <style>
+    :root{color-scheme:dark;--bg:#07090c;--panel:#0d1117;--panel2:#11161d;--text:#f5f7fa;--muted:#9aa6b2;--line:#26303b;--pass:#40d17a;--block:#ff5d64;--warn:#e9b949;--accent:#8ab4ff}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 15% 0%,#152034 0,transparent 28%),var(--bg);color:var(--text);font:15px/1.55 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.wrap{max-width:1160px;margin:auto;padding:42px 22px 70px}.eyebrow{font:700 12px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}h1{font-size:clamp(38px,7vw,78px);line-height:.98;letter-spacing:-.045em;margin:16px 0 20px;max-width:930px}.lede{max-width:800px;color:#c7d0d9;font-size:18px}.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:30px 0}.flow div{border:1px solid var(--line);background:rgba(13,17,23,.82);padding:13px;border-radius:12px;font:700 12px/1.35 ui-monospace,SFMono-Regular,Menlo,monospace}.banner{border:1px solid #584b23;background:#19160d;padding:14px 16px;border-radius:14px;color:#ead9a1;margin:24px 0 34px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.case{border:1px solid var(--line);border-radius:20px;background:linear-gradient(180deg,var(--panel2),var(--panel));overflow:hidden}.case header{padding:20px 22px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:14px}.pill{display:inline-flex;align-items:center;border-radius:999px;padding:7px 10px;font:800 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace}.pill.block{background:#35161a;color:#ff9ca0}.pill.pass{background:#0f2f1d;color:#7ae7a1}.body{padding:22px}.kicker{font:700 12px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}.target{font-size:25px;font-weight:800;margin:6px 0 16px}.rows{display:grid;gap:9px}.row{display:grid;grid-template-columns:145px 1fr;gap:14px;padding:10px 0;border-top:1px solid #1d2630}.row span:first-child{color:var(--muted)}code{font:12px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;color:#d5e1ef;word-break:break-all}.outcome{margin-top:18px;padding:17px;border-radius:14px;font-weight:800}.outcome.block{background:#271215;border:1px solid #673039;color:#ff9da2}.outcome.pass{background:#0d2818;border:1px solid #285f3d;color:#80e9a7}.section{margin-top:44px}.section h2{font-size:25px;margin:0 0 14px}.matrix{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.tier{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:17px}.tier strong{display:block;font-size:18px}.note{color:var(--muted);font-size:13px;margin-top:8px}.proof{display:grid;grid-template-columns:1.15fr .85fr;gap:18px}.proof>div{border:1px solid var(--line);border-radius:16px;background:var(--panel);padding:20px}.list{margin:0;padding-left:18px;color:#c9d3dd}.list li{margin:9px 0}.footer{margin-top:46px;border-top:1px solid var(--line);padding-top:22px;color:var(--muted);font-size:13px}.strong{color:var(--text);font-weight:700}@media(max-width:820px){.grid,.proof,.matrix{grid-template-columns:1fr}.flow{grid-template-columns:1fr}.row{grid-template-columns:1fr;gap:2px}}
+  </style>
+</head>
+<body>
+<main class="wrap">
+  <div class="eyebrow">Skeptara / Telegraph Track 3</div>
+  <h1>No autonomous merge without an independent challenge.</h1>
+  <p class="lede">Before an autonomous coding agent can merge a dependency change, Skeptara applies an external deterministic risk classification and buys Telegraph-routed counter-evidence. The action only becomes eligible for execution when the exact reviewed PR survives the required challenge.</p>
+  <div class="flow" aria-label="Skeptara flow"><div>01 · Proposed PR</div><div>02 · External risk</div><div>03 · Paid Telegraph challenge</div><div>04 · PASS / BLOCK / ESCALATE</div><div>05 · Exact protected action</div></div>
+  <div class="banner"><strong>CAPTURED LIVE EVIDENCE — HISTORICAL JUDGE REPLAY.</strong> The PASS below already expired and was used for a completed merge. This page does not represent a currently executable authorization.</div>
+
+  <section class="grid" aria-label="Two-case proof">
+    <article class="case">
+      <header><div><div class="kicker">PR #1 · challenged case</div><strong>Real counter-evidence found</strong></div><span class="pill block">BLOCK</span></header>
+      <div class="body">
+        <div class="target">lodash 4.17.20 → 4.17.21</div>
+        <div class="rows">
+          <div class="row"><span>Risk</span><strong>MEDIUM · dependency change</strong></div>
+          <div class="row"><span>Evidence mode</span><span>Controlled exact-CVE challenge</span></div>
+          <div class="row"><span>Telegraph intent</span><code>CVE_LOOKUP</code></div>
+          <div class="row"><span>Routed miner</span><span>SecWire CVE Lookup · 7336</span></div>
+          <div class="row"><span>Blocking record</span><strong>CVE-2026-2950</strong></div>
+          <div class="row"><span>Affected</span><span>Lodash 4.17.23 and earlier</span></div>
+          <div class="row"><span>Observed spend</span><span>$0.02 total challenge · Base Sepolia test USDC</span></div>
+          <div class="row"><span>Head binding</span><code>73cf5bdd69163924228e3e21d67fa9f405d99904</code></div>
+        </div>
+        <div class="outcome block">Execution consequence: MERGE DENIED · merge-adapter calls = 0</div>
+      </div>
+    </article>
+
+    <article class="case">
+      <header><div><div class="kicker">PR #2 · clean case</div><strong>Required coverage survived</strong></div><span class="pill pass">PASS</span></header>
+      <div class="body">
+        <div class="target">lodash 4.17.20 → 4.18.1</div>
+        <div class="rows">
+          <div class="row"><span>Risk</span><strong>MEDIUM · dependency change</strong></div>
+          <div class="row"><span>Coverage</span><strong>2 / 2 meaningful paths</strong></div>
+          <div class="row"><span>Telegraph routing</span><span>PREFLIGHT 20260828 + SecWire 7336</span></div>
+          <div class="row"><span>Evidence</span><span>CVE-2026-4800 + CVE-2026-2950 · target outside affected ranges</span></div>
+          <div class="row"><span>Observed spend</span><span>$0.02 total challenge · Base Sepolia test USDC</span></div>
+          <div class="row"><span>Head binding</span><code>528d730f9ebdcb433e01ba9c79dcc9a5f66ce1c7</code></div>
+          <div class="row"><span>Merge commit</span><code>c76c76e0c02dab28275d8e53d70da3f6f132e648</code></div>
+        </div>
+        <div class="outcome pass">Execution consequence: exact head revalidated → explicit bounded human authorization → REAL MERGE</div>
+      </div>
+    </article>
+  </section>
+
+  <section class="section">
+    <h2>Risk controls scrutiny</h2>
+    <div class="matrix">
+      <div class="tier"><strong>LOW · 1 path</strong><div>Demo cap: 10,000 atomic USDC</div><div class="note">Deterministic policy/test-proven. Not separately live-proven in T4.</div></div>
+      <div class="tier"><strong>MEDIUM · 2 paths</strong><div>Demo cap: 20,000 atomic USDC</div><div class="note">Live-proven in both final T4 cases.</div></div>
+      <div class="tier"><strong>HIGH · 3 paths</strong><div>Demo cap: 30,000 atomic USDC</div><div class="note">Deterministic policy/test-proven. Stronger ambiguity/cross-intent requirements where supported.</div></div>
+    </div>
+    <p class="note">These are Skeptara demo caps derived from observed testnet pricing, not a claim that Telegraph miner pricing is fixed network-wide.</p>
+  </section>
+
+  <section class="section proof">
+    <div>
+      <h2>Why Telegraph is necessary</h2>
+      <ul class="list">
+        <li>Skeptara declares an intelligence need; Telegraph's engine routes paid demand to live miners.</li>
+        <li>The clean case observed two different routed miners in the same challenge.</li>
+        <li>x402 makes each evidence path economically bounded and observable.</li>
+        <li>The product innovation is the <span class="strong">risk-proportional objection policy + exact execution gate</span>, not x402 by itself.</li>
+      </ul>
+    </div>
+    <div>
+      <h2>Claim boundaries</h2>
+      <ul class="list">
+        <li>“Independent challenge” means reviewer/topology separation, not proven statistical independence between miners.</li>
+        <li>The hackathon proof uses controlled exact CVE seeds; it proves evidence enforcement, not automatic unknown-vulnerability discovery.</li>
+        <li>The real merge used the same exact-head/freshness/human constraints proven by the repo gate; a fully deployed GitHub adapter runtime is not claimed.</li>
+        <li>Human authorization was an extra real-write safety boundary. A human could not turn BLOCK or ESCALATE into PASS.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Verified final-proof activity</h2>
+    <p class="lede">Minimum final-proof subset: <strong>3 real paid challenge runs</strong>, <strong>5 paid Telegraph evidence calls</strong>, <strong>2 observed miners</strong>, <strong>$0.05 observed testnet spend</strong>, <strong>1 protected denial</strong>, and <strong>1 real exact-head merge</strong>. Setup probes and discarded experiments are intentionally excluded from this judge-facing subset.</p>
+  </section>
+
+  <footer class="footer">Source of truth: repository evidence. No secret, payer address, private key, or protected GitHub credential is embedded in this page.</footer>
+</main>
+</body>
+</html>
