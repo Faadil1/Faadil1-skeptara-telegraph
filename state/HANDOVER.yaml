@@ -3,13 +3,17 @@ handover:
   system: SKEPTARA_TELEGRAPH_TRACK3
   date: 2026-09-07
   source_of_truth: GITHUB
-  repository: Faadil1/Faadil1-skeptara-telegraph
+  repository: Faadil1/skeptara-telegraph
+  repository_alias_history:
+    prior_full_name: Faadil1/Faadil1-skeptara-telegraph
+    current_full_name: Faadil1/skeptara-telegraph
+    historical_evidence_rule: DO_NOT_REWRITE_OLD_BOUND_REPOSITORY_NAMES__GITHUB_RENAME_REDIRECTS_PRESERVE_HISTORY
   branch: main
 
   resume_rule: >-
     Read state/CURRENT.yaml first, then this HANDOVER, product/PRD.md, spec-kit/tasks.md, docs/JUDGE-CLAIM-BOUNDARIES.md, docs/SUBMISSION-COMPLIANCE.md, and Winning Intelligence evidence. Repository truth outranks chat memory. Persist evidence plus CURRENT + HANDOVER after every major gate and execution boundary. Never infer that a collaborator received a brief unless the human explicitly confirms it.
 
-  current_milestone: T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__NINE_SPOT_REMEDIATION_IMPLEMENTED__FAADIL_DISCORD_ACTIVITY_VERIFIED__BENITA_X_DISCORD_BRIEF_NOT_SENT__LOCAL_VALIDATION_AND_TRACE_VISUAL_REVIEW_NEXT
+  current_milestone: T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__NINE_SPOT_REMEDIATION_IMPLEMENTED__FAADIL_DISCORD_ACTIVITY_AND_ORGANIC_ENGAGEMENT_VERIFIED__BENITA_X_DISCORD_BRIEF_NOT_SENT__LOCAL_VALIDATION_AND_TRACE_VISUAL_REVIEW_NEXT
 
   project:
     public_name: Skeptara
@@ -21,6 +25,8 @@ handover:
   closed_gates: { t0: CLOSED_PASS, t1: PASS, t2: CLOSED_PASS, t3: CLOSED_PASS, t4: CLOSED_PASS }
 
   t4_final:
+    historical_repository_name_at_proof_time: Faadil1/Faadil1-skeptara-telegraph
+    current_repository_name: Faadil1/skeptara-telegraph
     challenged_pr1:
       pr: 1
       head_sha: 73cf5bdd69163924228e3e21d67fa9f405d99904
@@ -71,16 +77,28 @@ handover:
     real_exact_head_merges: 1
     user_count_claim: NONE
     do_not_inflate_request_volume: true
+    discord_organic_engagement:
+      status: VERIFIED
+      evidence: evidence/admin/TELEGRAPH-DISCORD-ORGANIC-ENGAGEMENT-VERIFIED.md
+      fire_reactions_observed: 3
+      direct_telegraph_staff_positive_reply: true
+      adoption_metric: NO
 
   discord:
     official_invite: https://discord.gg/telegraphprotocol
     faadil_join_access: VERIFIED
     faadil_project_activity: VERIFIED
     faadil_project_activity_evidence: evidence/admin/TELEGRAPH-DISCORD-FAADIL-PROJECT-INTRO-VERIFIED.md
+    faadil_organic_engagement: VERIFIED
+    faadil_organic_engagement_evidence: evidence/admin/TELEGRAPH-DISCORD-ORGANIC-ENGAGEMENT-VERIFIED.md
     benita_join_activity: HUMAN_VERIFY
     staff_guidance_evidence: evidence/admin/TELEGRAPH-DISCORD-JOIN-AND-NETWORK-GUIDANCE-VERIFIED.md
     no_automated_metric_traffic: true
     default_judge_demo: CAPTURED_LIVE_HISTORICAL_REPLAY
+    submissions_platform_reference:
+      staff_reference_visible_in_screenshot: true
+      screenshot_url_is_truncated: true
+      do_not_canonicalize_exact_url_from_screenshot_alone: true
 
   public_comms:
     intended_primary_x_project_voice: BENITA
@@ -97,7 +115,6 @@ handover:
     frontend_branch: feat/frontend-benita
     frontend_branch_policy: FAST_FORWARD_ONLY_WHILE_NO_UNIQUE_COLLABORATOR_COMMITS
     once_unique_commits_exist: NEVER_FORCE_MOVE__RECONCILE_NORMALLY
-    latest_compare_before_sync: MAIN_AHEAD_5__BENITA_UNIQUE_0
 
   current_remaining_gaps:
     local_test_after_remediation: PENDING
@@ -114,4 +131,4 @@ handover:
   exact_next_gate: SKEPTARA_HIDDEN_SPOT_REMEDIATION_LOCAL_VALIDATION_AND_TRACE_VISUAL_REVIEW
   exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_TRACE_REVIEW
   exact_next_action: >-
-    Do not assume Benita has received any X/Discord instructions; she has not. Faadil's substantive Skeptara Discord intro is verified. Next, validate the remediation locally with `npm test` and `npm run demo`, then run `npm run demo:web` and send screenshots for TRACE. No fresh Telegraph calls for activity/demo volume. Separately, human may send Benita the prepared X/Discord brief and then provide her X handle/Discord status for canonical update.
+    Canonical repo is Faadil1/skeptara-telegraph; old proof artifacts may still name Faadil1/Faadil1-skeptara-telegraph and should remain untouched as historical bindings. Faadil's substantive Skeptara Discord intro now has verified organic engagement: 3 fire reactions plus a direct positive Telegraph staff reply. Treat this as community engagement only, not users/adoption. Benita still has not received the X/Discord brief. Next, run `npm test`, `npm run demo`, then `npm run demo:web` and send screenshots for TRACE. No fresh Telegraph calls for activity/demo volume. Public deployment, Benita Discord/X activity, X posts and final submission remain human-verification gates.
