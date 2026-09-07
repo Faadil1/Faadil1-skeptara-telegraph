@@ -1,13 +1,13 @@
 canonical_state:
   protocol_version: 1
   system: SKEPTARA_TELEGRAPH_TRACK3
-  version: 0.9.4-nine-hidden-spots-remediated-validation-next
+  version: 0.9.5-benita-primary-x-project-voice
   date: 2026-09-07
   source_of_truth: GITHUB
   repository: Faadil1/Faadil1-skeptara-telegraph
   branch: main
 
-  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__WINNING_INTELLIGENCE_PREFLIGHT_PASS__BLIND_SPOT_AUDIT_002_COMPLETE__NINE_SPOT_REMEDIATION_IMPLEMENTED__LOCAL_VALIDATION_AND_TRACE_VISUAL_REVIEW_NEXT
+  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__WINNING_INTELLIGENCE_PREFLIGHT_PASS__BLIND_SPOT_AUDIT_002_COMPLETE__NINE_SPOT_REMEDIATION_IMPLEMENTED__BENITA_PRIMARY_X_PROJECT_VOICE__LOCAL_VALIDATION_AND_TRACE_VISUAL_REVIEW_NEXT
 
   authority:
     product_intent_source: product/PRD.md
@@ -119,10 +119,21 @@ canonical_state:
       timing_context: REGISTERED_WITH_LESS_THAN_24_HOURS_REMAINING
       strategy: TRUTHFUL_COMPRESSED_SEQUENCE__NO_FAKE_HISTORY
       required_tag: '@Telegraphprotoc'
+      primary_project_voice: BENITA
+      primary_voice_reason: STRONGER_PITCHING_AND_STORYTELLING
+      benita_x_handle: HUMAN_VERIFY_NOT_YET_RECORDED
+      secondary_amplification_voice: FAADIL
+      faadil_x_handle: '@roy1919875'
+      role_split: BENITA_MAIN_BUILD_AND_DEMO_POSTS__FAADIL_TECHNICAL_QUOTE_REPOSTS_AND_REPLIES
       build_proof_post: HUMAN_ACTION_REQUIRED
       demo_submission_post: HUMAN_ACTION_REQUIRED_AFTER_PUBLIC_DEPLOY
     final_submission: HUMAN_VERIFY_NOT_SUBMITTED
     metric_gaming_forbidden: ACKNOWLEDGED
+
+  collaboration:
+    public_comms_owner_x: BENITA
+    technical_amplification_x: '@roy1919875'
+    public_voice_does_not_change_product_authority: true
 
   current_surface:
     repo_judge_surface: IMPLEMENTED_PENDING_VISUAL_REVIEW
@@ -147,4 +158,4 @@ canonical_state:
   exact_next_gate: SKEPTARA_HIDDEN_SPOT_REMEDIATION_LOCAL_VALIDATION_AND_TRACE_VISUAL_REVIEW
   exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_TRACE_REVIEW
   exact_next_action: >-
-    Pull main and validate the remediation block with `npm test` then `npm run demo`. If both pass, run `npm run demo:web`, open http://127.0.0.1:4173, and provide screenshots for TRACE human visual review. The surface must preserve the split PR1 BLOCK/deny vs PR2 PASS/real merge story, historical replay labeling, exact-CVE seeded disclosure, MEDIUM-live vs LOW/HIGH-test distinction, Telegraph routing causality, and claim boundaries. Discord join/activity, X posts, public deployment smoke, and final submission remain human-only gates and must not be marked complete without evidence.
+    Pull main and validate the remediation block with `npm test` then `npm run demo`. If both pass, run `npm run demo:web`, open http://127.0.0.1:4173, and provide screenshots for TRACE human visual review. The surface must preserve the split PR1 BLOCK/deny vs PR2 PASS/real merge story, historical replay labeling, exact-CVE seeded disclosure, MEDIUM-live vs LOW/HIGH-test distinction, Telegraph routing causality, and claim boundaries. Benita is the primary X project voice; Faadil @roy1919875 amplifies with technical/proof context. Discord join/activity, X posts, public deployment smoke, and final submission remain human-only gates and must not be marked complete without evidence.
