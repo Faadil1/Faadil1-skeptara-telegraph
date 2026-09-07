@@ -1,7 +1,7 @@
 canonical_state:
   protocol_version: 1
   system: SKEPTARA_TELEGRAPH_TRACK3
-  version: 0.9.9-discord-round-reward-and-track3-platform-guidance
+  version: 0.10.0-local-validation-pass-trace-visual-next
   date: 2026-09-07
   source_of_truth: GITHUB
   repository: Faadil1/skeptara-telegraph
@@ -11,7 +11,7 @@ canonical_state:
     note: GitHub repository rename/redirect preserves historical evidence references; do not rewrite old captured evidence bindings.
   branch: main
 
-  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__NINE_SPOT_REMEDIATION_IMPLEMENTED__FAADIL_DISCORD_ACTIVITY_AND_ORGANIC_ENGAGEMENT_VERIFIED__ROUND_REWARD_AND_TRACK3_PLATFORM_GUIDANCE_CAPTURED__BENITA_X_DISCORD_BRIEF_NOT_SENT__LOCAL_VALIDATION_AND_TRACE_VISUAL_REVIEW_NEXT
+  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__NINE_SPOT_REMEDIATION_IMPLEMENTED__LOCAL_VALIDATION_PASS__TRACE_VISUAL_REVIEW_NEXT
 
   authority:
     product_intent_source: product/PRD.md
@@ -37,6 +37,12 @@ canonical_state:
       challenged_case_denial: evidence/t4/pr1-block-run-004/MERGE-DENIAL-REPLAY.md
       clean_case_review: evidence/t4/pr2-clean-run-005/REVIEW.md
       clean_case_merge: evidence/t4/pr2-clean-run-005/REAL-MERGE-EXECUTION.md
+    hidden_spot_local_validation:
+      status: PASS
+      evidence: evidence/trace/LOCAL-VALIDATION-41-OF-41-AND-JUDGE-REPLAY-PASS.md
+      tests: 41_OF_41_PASS__0_FAIL
+      judge_replay: PASS__ZERO_PAYMENT__ZERO_EXTERNAL_WRITE
+      demo_web_startup: PASS_AT_HTTP_127_0_0_1_4173
 
   t4_two_case_truth:
     historical_repository_name_at_proof_time: Faadil1/Faadil1-skeptara-telegraph
@@ -62,8 +68,9 @@ canonical_state:
     preflight: { status: PASS_WITH_PRIORITY_RISKS, evidence: evidence/winning-intelligence/WI-TRACE-PREFLIGHT-001.md }
     blind_spot_audit_002: { status: COMPLETE, evidence: evidence/winning-intelligence/WI-BLIND-SPOT-AUDIT-002.md }
     remediation_003:
-      status: IMPLEMENTED_PENDING_VALIDATION
+      status: IMPLEMENTED_AND_LOCALLY_VALIDATED
       evidence: evidence/winning-intelligence/WI-HIDDEN-SPOT-REMEDIATION-003.md
+      local_validation: evidence/trace/LOCAL-VALIDATION-41-OF-41-AND-JUDGE-REPLAY-PASS.md
       runnable_assets: { judge_replay_command: npm run demo, local_judge_surface_command: npm run demo:web }
     discord_signal_004:
       status: ACTIONABLE_NO_PIVOT
@@ -149,9 +156,11 @@ canonical_state:
     public_voice_does_not_change_product_authority: true
 
   current_surface:
-    repo_judge_surface: IMPLEMENTED_PENDING_VISUAL_REVIEW
+    repo_judge_surface: LOCALLY_RUNNING__TRACE_VISUAL_REVIEW_PENDING
+    local_url: http://127.0.0.1:4173
     public_deployment: NOT_YET_PROVEN
-    one_command_two_case_replay: IMPLEMENTED_PENDING_USER_MACHINE_VALIDATION
+    one_command_two_case_replay: USER_MACHINE_VALIDATED_PASS
+    browser_network_behavior: NOT_YET_VISUALLY_OR_DEVTOOLS_VERIFIED
 
   persistence_rule:
     after_every_major_gate: UPDATE_CURRENT_AND_HANDOVER
@@ -159,7 +168,7 @@ canonical_state:
     handover_must_be_sufficient_for_next_conversation_to_take_lead: true
     evidence_before_pass_claim: REQUIRED
 
-  exact_next_gate: SKEPTARA_HIDDEN_SPOT_REMEDIATION_LOCAL_VALIDATION_AND_TRACE_VISUAL_REVIEW
-  exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_TRACE_REVIEW
+  exact_next_gate: SKEPTARA_TRACE_JUDGE_PATH_VISUAL_REVIEW
+  exact_next_owner: HUMAN_SCREENSHOT_WITH_CHATGPT_TRACE_REVIEW
   exact_next_action: >-
-    Canonical repo is Faadil1/skeptara-telegraph; historical proof bindings using Faadil1/Faadil1-skeptara-telegraph remain untouched. Discord staff guidance now also records a $5K current-round winner-only pool with no separate participation reward, plus a staff-acknowledged Track 3 platform visibility issue that was said to be updated soon. Treat $5K as round-level, not a Track-3-only breakdown. Final submission is still HUMAN_VERIFY. Next, pull main and run `npm test`, `npm run demo`, then `npm run demo:web`; provide screenshots for TRACE. No fresh Telegraph calls for activity/demo volume. Benita Discord/X status, public deployment smoke, X posts and final submission remain HUMAN_VERIFY.
+    Keep `npm run demo:web` running and open http://127.0.0.1:4173 in the browser. Provide one full-page desktop screenshot and, if practical, one narrower/mobile-width screenshot for TRACE. TRACE must verify 5-second judge comprehension, the primary PR1 BLOCK/deny vs PR2 PASS/real-merge contrast, historical replay labeling, exact-CVE seed disclosure, MEDIUM-live vs LOW/HIGH-test claim boundary, Telegraph routing causality, and that no visual treatment suggests fake fresh authorization. Do not generate any fresh Telegraph calls. After visual PASS or bounded remediation, persist TRACE findings and update CURRENT + HANDOVER before public deployment.
