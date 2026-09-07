@@ -17,10 +17,25 @@ This checklist tracks administrative and public-showcase requirements separately
   - evidence: `evidence/admin/TELEGRAPH-REGISTRATION-VERIFIED.md`
 - Real Telegraph miners: **PROVEN**
 - No mocked intelligence in final live T4 claims: **PROVEN**
-- Official Discord joined: **HUMAN ACTION REQUIRED**
-- Discord activity: **HUMAN ACTION REQUIRED**
+- Official Discord joined/accessed: **VERIFIED FROM HUMAN SCREENSHOTS**
+  - evidence: `evidence/admin/TELEGRAPH-DISCORD-JOIN-AND-NETWORK-GUIDANCE-VERIFIED.md`
+- Faadil Discord project activity: **HUMAN VERIFY — not shown in supplied screenshots**
+- Benita Discord membership/activity: **HUMAN VERIFY**
 - X showcase/update posts: **HUMAN ACTION REQUIRED**
 - Final submission form: **HUMAN VERIFY / NOT YET SUBMITTED**
+
+## Critical Discord network guidance
+
+Human-provided screenshots from the official `#hackathons` channel show a Telegraph staff/moderator warning that scripted/automated request volume was stressing network dependencies. The message states that hard-scripted automated calls will not count for judging and that only organic requests will be determined/counted. A later staff reply says the reported payment/facilitator issue should be fixed.
+
+Skeptara operating rule from this point forward:
+
+1. **Do not generate automated request volume for metrics.**
+2. **Do not re-run live Telegraph calls just to increase activity counts.**
+3. `npm run demo` is the default judge replay and performs no live Telegraph request/payment.
+4. The public judge surface must not auto-call Telegraph on page load, refresh, polling, timers, or background tasks.
+5. Any future live Telegraph request must be bounded, human-triggered, product-necessary, and never presented as organic usage volume unless it actually is organic use.
+6. Existing T0/T2/T4 live calls remain historical proof; do not repeat them for optics.
 
 ## Public communication ownership
 
@@ -71,13 +86,13 @@ Only if there is meaningful new information, such as the public activity ledger,
 
 ## Discord action
 
-1. Both official team participants should join `https://discord.gg/telegraphprotocol`.
-2. Use the same Discord handles supplied in registration where applicable.
-3. Find the hackathon / builders / Track 3 area if present.
-4. Benita can lead the project introduction/pitch; Faadil can add concise technical context or answer implementation questions.
-5. Respond naturally if there is relevant discussion.
-6. Do not spam or manufacture activity.
-7. Capture a screenshot or message link for human-verifiable evidence if practical.
+1. Faadil's access to the official Discord is now verified from screenshots.
+2. Benita should still join if she has not already done so.
+3. Use the same Discord handles supplied in registration where applicable.
+4. In the hackathon / builders / Track 3 area, post one substantive Skeptara introduction/update and respond naturally if relevant discussion occurs.
+5. Benita can lead the project pitch; Faadil can add concise technical context or answer implementation questions.
+6. Do not spam, manufacture activity, or generate request traffic for judging metrics.
+7. Capture a screenshot or message link for human-verifiable project-activity evidence if practical.
 
 ## Final submission gate
 
@@ -93,8 +108,9 @@ Before submission, verify:
 - Discord requirement satisfied for official team participants;
 - no private key, burner secret, payer address, or protected GitHub token exposed;
 - no fake user/adoption metrics;
+- no scripted request-volume inflation;
 - final submission confirmation captured.
 
 ## Hard rule
 
-Administrative completion cannot be inferred from code. `Discord`, `X`, and final submission remain HUMAN_VERIFY until evidence is explicitly supplied.
+Administrative completion cannot be inferred from code. Discord **join access for Faadil is verified**, but participant project activity, Benita membership/activity, X posts, and final submission remain HUMAN_VERIFY until explicit evidence is supplied.
