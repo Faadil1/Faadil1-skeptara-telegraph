@@ -9,8 +9,8 @@ handover:
   resume_rule: >-
     Read state/CURRENT.yaml first, then this HANDOVER, then product/PRD.md. The living PRD is canonical product intent; Spec Kit files are derived execution contracts. Repository truth outranks chat/runtime memory. After every major gate persist evidence and update BOTH CURRENT and HANDOVER.
 
-  current_milestone: T0_CLOSED_PASS__T1_PASS__T2_RUN001_REJECTED__RUN002_REJECTED__PR1_CHALLENGED__PR2_CLEAN__RUN003_LIVE_EVIDENCE_CAPTURED__V03_NORMALIZER_FALSE_ESCALATE_EXPLAINED__V04_LOCAL_REPLAY_NEXT
-  lifecycle_status: PRODUCT_CONTRACT_LOCKED__REAL_TELEGRAPH_PROVEN__FAIL_CLOSED_REVIEW_CAUGHT_THREE_EVIDENCE_SHAPE_ISSUES__V04_NORMALIZER_REMEDIATED
+  current_milestone: T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_V0_1_IMPLEMENTED__LOCAL_VALIDATION_NEXT
+  lifecycle_status: PRODUCT_CONTRACT_LOCKED__REAL_TELEGRAPH_PROVEN__AUDITOR_CLOSED_PASS__PROTECTED_MERGE_GATE_IMPLEMENTED
 
   project:
     public_name: Skeptara
@@ -33,80 +33,94 @@ handover:
     t1:
       status: PASS
       implementation: src/policy.mjs
+    t2:
+      status: CLOSED_PASS
+      auditor_version: skeptara-auditor-v0.4-seeded-cve
+      contract: docs/T2_AUDITOR_CONTRACT.md
+      closure_evidence: evidence/t2/LOCAL-USER-VALIDATION-V0.4-29-OF-29-AND-RUN003-REPLAY-PASS.md
+      user_machine_full_repo: 29_OF_29_PASS__0_FAIL
+      replay_command: npm run t2:replay:003
+      replay_result:
+        coverage: 2_OF_2
+        materialities: [ADVISORY, ADVISORY]
+        outcome: PASS
+        new_payment: false
+      replay_is_merge_authorization: false
 
-  t2_current:
-    gate: SKEPTARA_T2_INDEPENDENT_AUDITOR_PASS
-    status: V0_4_IMPLEMENTED__LOCAL_TEST_AND_RUN003_REPLAY_REQUIRED
-    generic_auditor: src/auditor.mjs
-    seeded_auditor: src/seeded-cve-auditor.mjs
-    seeded_version: skeptara-auditor-v0.4-seeded-cve
-    replay_script: scripts/replay-t2-run003.mjs
+  t2_evidence_history:
+    run_001:
+      runtime_reported: PASS
+      reviewed: ESCALATE
+      evidence: evidence/t2/live-clean-run-001/REVIEW.md
+    run_002:
+      runtime_reported: PASS
+      reviewed: ESCALATE
+      corrected_coverage: 0_OF_2
+      evidence: evidence/t2/live-clean-retry-002/REVIEW.md
+    run_003:
+      runtime_reported: ESCALATE
+      actual_intents: [CVE_LOOKUP, CVE_LOOKUP]
+      spend_atomic: 20000
+      reviewed_live_truth:
+        - CVE-2026-4800 exact record => target 4.18.1 outside affected range => ADVISORY
+        - CVE-2026-2950 exact substantive record, fixed in 4.18.0 => target 4.18.1 outside affected range => ADVISORY
+      corrected_coverage: 2_OF_2
+      root_cause: V03_MINER_SHAPE_SPECIFIC_NORMALIZER
+      v04_remediation: SEMANTIC_EXACT_CVE_NORMALIZATION
+      review: evidence/t2/live-pr2-seeded-run-003/REVIEW.md
 
-    prior_runs:
-      run_001:
-        runtime_reported: PASS
-        accepted: false
-        corrected: ESCALATE
-        evidence: evidence/t2/live-clean-run-001/REVIEW.md
-      run_002:
-        runtime_reported: PASS
-        accepted: false
-        corrected: ESCALATE
-        corrected_meaningful_coverage: 0_OF_2
-        evidence: evidence/t2/live-clean-retry-002/REVIEW.md
-      run_003:
-        runtime_reported: ESCALATE
-        spend_atomic: 20000
-        runtime_coverage: 1_OF_2
-        actual_intents: [CVE_LOOKUP, CVE_LOOKUP]
-        evidence_review: evidence/t2/live-pr2-seeded-run-003/REVIEW.md
-        replay_fixture: evidence/t2/live-pr2-seeded-run-003/replay-input.sanitized.json
-        raw_truth:
-          - CVE-2026-4800 exact record, affected before 4.18.0, target 4.18.1 => ADVISORY
-          - CVE-2026-2950 exact substantive record, fixed in 4.18.0, target 4.18.1 => ADVISORY
-        corrected_meaningful_coverage: 2_OF_2
-        corrected_evidence_interpretation: TWO_NON_BLOCKING_ADVISORIES
-        root_cause: v0.3 required miner-specific found/verdict and ignored fixed_versions as a range boundary
-
-    v0_4_remediation:
-      - exact matching CVE plus substantive advisory fields can count without miner-specific found/verdict
-      - exact CVE id with no substantive record still fails closed
-      - lowest fixed_versions entry is an exclusive affected-range boundary
-      - X.Y.Z and earlier wording is machine-checkable
-      - two regression tests added from the live run 003 shape
-
-    clean_case:
-      pr_number: 2
-      branch: demo/clean-lodash-4.18.1
-      head_sha: d2aa0ea25daf1f84b6cfdd98861d3f05df584b7a
-      target: lodash@4.18.1
-      risk_tier: MEDIUM
-      required_paths: 2
-      spend_cap_atomic: 20000
-      evidence_seeds: [CVE-2026-4800, CVE-2026-2950]
-      merge_authorized: false
-
-    challenged_case:
+  demo_cases:
+    challenged:
       pr_number: 1
       branch: demo/clean-lodash-upgrade
       head_sha: 73cf5bdd69163924228e3e21d67fa9f405d99904
       target: lodash@4.17.21
+      action_file: demo/actions/challenged-pr.json
+      merge_authorized: false
+    clean:
+      pr_number: 2
+      branch: demo/clean-lodash-4.18.1
+      head_sha: d2aa0ea25daf1f84b6cfdd98861d3f05df584b7a
+      target: lodash@4.18.1
+      action_file: demo/actions/clean-pr.json
       merge_authorized: false
 
+  t3_current:
+    gate: SKEPTARA_T3_FAIL_CLOSED_MERGE_GATE_PASS
+    status: V0_1_IMPLEMENTED__USER_LOCAL_VALIDATION_REQUIRED
+    version: skeptara-merge-gate-v0.1
+    implementation: src/merge-gate.mjs
+    tests: tests/merge-gate.test.mjs
+    contract: docs/T3_MERGE_GATE_CONTRACT.md
+    implemented_rules:
+      - allow-listed repository and PR required
+      - explicit human bounded authorization required
+      - challenge outcome must be PASS
+      - repository PR head SHA and action fingerprint must match challenge
+      - completed_at and expires_at must be valid; expired challenge denied
+      - live PR must still be open unmerged and on exact challenged head
+      - BLOCK and ESCALATE denied
+      - changed head denied
+      - non-allow-listed target denied
+      - denied authorization never invokes merge adapter
+      - authorized executor forwards exact expected_head_sha to server-side adapter
+    credential_boundary:
+      merge_gate_accepts_token: false
+      browser_write_credential: forbidden
+      protected_write_adapter: server_side_injected_only
     next_validation:
-      full_test_expected: 28
-      replay_command: npm run t2:replay:003
-      replay_expected:
-        coverage: 2_OF_2
-        spend: 20000_OF_20000_CAPTURED
-        materialities: [ADVISORY, ADVISORY]
-        outcome: PASS
-      new_payment_required: false
+      full_repo_command: npm test
+      expected_full_test_count: 41
+      focused_command: npm run test:merge-gate
+      new_telegraph_payment_required: false
+      real_merge_required: false
+    real_merge_authorized: false
 
-  t3_boundary:
-    replay_can_close_t2_auditor_evidence_gate: true
-    replay_is_not_fresh_merge_authorization: true
-    fresh_unexpired_challenge_required_before_real_merge: true
+  t4_after_t3:
+    clean_case: fresh live PASS required for PR #2
+    challenged_case: fresh live BLOCK required for PR #1
+    real_clean_merge: requires explicit human bounded authorization plus fresh unexpired exact-head PASS
+    challenged_merge: must be denied
 
   frontend_parallel:
     contract: docs/FRONTEND_DATA_CONTRACT.md
@@ -117,15 +131,16 @@ handover:
     prior_burner: COMPROMISED_DO_NOT_REUSE_OR_FUND
     fresh_burner: ACTIVE_BOUNDED_TESTNET_ONLY
     repository_secret_recorded: false
+    protected_github_write_credential_in_browser_or_repo: false
 
-  next_gates_after_t2:
+  next_gates:
     - SKEPTARA_T3_FAIL_CLOSED_MERGE_GATE_PASS
     - SKEPTARA_T4_TWO_CASE_REAL_DEMO_PASS
     - SKEPTARA_TRACE_JUDGE_PATH_REVIEW
     - SKEPTARA_BUILD_CANDIDATE_READY
     - HUMAN_PROTECTED_FINAL_SUBMISSION
 
-  exact_next_gate: SKEPTARA_T2_V0_4_LOCAL_TEST_AND_RUN003_REPLAY
+  exact_next_gate: SKEPTARA_T3_V0_1_LOCAL_VALIDATION
   exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_REVIEW
   exact_next_action: >-
-    Pull main. Run npm test, then npm run t2:replay:003. No private key and no new Telegraph payment are needed. Expected full test count is 28 if no unrelated test-count change. Replay must show 2/2 coverage, two ADVISORY items, captured spend 20000/20000 and PASS. Return both terminal outputs. Do not merge PR #1 or PR #2; T3 still requires a fresh unexpired challenge before any real merge.
+    Pull main, run npm test, then npm run test:merge-gate. No private key, Telegraph payment, or GitHub merge is needed. Expected full test count is 41 if no unrelated count change. Return both terminal outputs. Do not merge PR #1 or PR #2. T4 can begin only after T3 local validation closes, and any real merge must use a fresh unexpired exact-head PASS plus explicit human authorization.
