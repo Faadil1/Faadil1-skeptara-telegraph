@@ -60,8 +60,21 @@ Status: DERIVED READY — subordinate to living PRD v0.1.
   - first path `CVE-2026-4800` => `AMBIGUOUS`, range not machine-verifiable;
   - second path `CVE-2026-2950` => `BLOCKING`;
   - final runtime outcome `BLOCK`, reason `MATERIAL_COUNTER_EVIDENCE_FOUND`.
-- [ ] T4.2 Review sanitized `02-audit-result.json` for challenged run 004 and persist exact CVE/range/binding evidence.
-- [ ] T4.3 Prove `skeptara-merge-gate-v0.1` denies the captured BLOCK and never invokes merge adapter.
+- [x] T4.2 Review challenged run 004 sanitized JSON and persist exact binding/evidence.
+  - challenge `113cc2c4-94ff-4c47-bf48-66fabc7c9329` is bound to PR #1 exact head `73cf5bdd69163924228e3e21d67fa9f405d99904` and action fingerprint `sha256:0260dfd07c6e070bb92c341472834052e72923528d9b53c5c72ed333d9a95867`;
+  - spend stays within MEDIUM cap `20000` atomic USDC;
+  - `CVE-2026-2950` says Lodash `4.17.23 and earlier` affected, fixed `4.18.0`; target `4.17.21` therefore normalizes `BLOCKING`;
+  - settlement succeeded on `eip155:84532`;
+  - review: `evidence/t4/pr1-block-run-004/REVIEW.md`;
+  - fixture: `evidence/t4/pr1-block-run-004/reviewed-challenge.sanitized.json`.
+- [ ] T4.3 Run zero-write `npm run t4:replay:block`.
+  - allow-list satisfied;
+  - humanAuthorization deliberately true to isolate challenge outcome;
+  - replay time inside original freshness window;
+  - expected authorization `DENIED` with `CHALLENGE_NOT_PASS`;
+  - expected merge-adapter calls `0`;
+  - expected execution `executed=false`, `merged=false`;
+  - no private key, no Telegraph spend, no GitHub write.
 - [ ] T4.4 Obtain fresh live PASS for clean PR #2 using `demo/actions/clean-pr.json`.
   - require exact current head;
   - require 2/2 meaningful non-blocking coverage;
@@ -106,8 +119,8 @@ After every passed/failed major gate:
 
 ## Reconciliation record
 
-T0–T3 are closed. The first T4 real challenged run has now produced a fresh `BLOCK`. It consumed the full MEDIUM budget because the first seeded path was ambiguous and the material blocking evidence arrived on the second path; this remains within contract and demonstrates fail-closed continuation rather than a forced early outcome.
+T0–T3 are closed. T4 challenged PR #1 now has reviewed real Telegraph BLOCK evidence: the second exact CVE path establishes that target `lodash@4.17.21` lies inside an affected range ending before the `4.18.0` fix. The first path remained ambiguous and safely forced continuation; full MEDIUM spend remained within cap.
 
-The exact next gate is evidence review, not another paid call. Once the run004 sanitized JSON confirms the blocking CVE record and bindings, Skeptara must prove the T3 merge gate denies execution without invoking the merge adapter. Then T4 proceeds to the clean PR #2 fresh PASS and, only after exact-head revalidation, explicit human merge authorization.
+The next step is not another paid call. It is a deterministic zero-write replay of the captured BLOCK through the already-closed T3 gate, with allow-list and human authorization satisfied and replay time inside the original freshness window. This isolates `CHALLENGE_NOT_PASS` and must prove the merge adapter is called zero times. Only then does T4 move to PR #2 fresh PASS.
 
-Exact next gate: `SKEPTARA_T4_PR1_BLOCK_JSON_AND_MERGE_GATE_DENIAL_REVIEW`.
+Exact next gate: `SKEPTARA_T4_PR1_ZERO_WRITE_MERGE_DENIAL_REPLAY`.
