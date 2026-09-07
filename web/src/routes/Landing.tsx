@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { challengedCase, cleanCase } from "../data/cases";
+import { challengedCase, cleanCase, demoCases, atomicToUsd } from "../data/cases";
 import { VerdictBadge } from "../components/VerdictBadge";
 import "./Landing.css";
 
@@ -10,6 +10,24 @@ const HERO_LINES = [
   { cmd: false, text: "finding: CVE-2026-2950 · lodash <4.18.0 · BLOCKING" },
   { cmd: false, text: "verdict: BLOCK · merge denied · 0 write calls", verdict: "block" as const },
 ];
+
+const totalSpendUsd = demoCases.reduce(
+  (sum, c) => sum + (c.challengeResult.spend_observed_atomic != null ? atomicToUsd(c.challengeResult.spend_observed_atomic) : 0),
+  0,
+);
+const totalEvidenceCalls = demoCases.reduce((sum, c) => sum + c.evidenceItems.length, 0);
+const blockCount = demoCases.filter((c) => c.challengeResult.outcome === "BLOCK").length;
+const passCount = demoCases.filter((c) => c.challengeResult.outcome === "PASS").length;
+
+function TickerStat({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="ticker-stat">
+      <span className="ticker-stat__dot" aria-hidden="true" />
+      <span className="ticker-stat__label mono">{label}</span>
+      <span className="ticker-stat__value mono">{value}</span>
+    </div>
+  );
+}
 
 function CaseCard({
   to,
@@ -43,15 +61,17 @@ export function Landing() {
   return (
     <div className="landing">
       <div className="landing__hero">
-        <p className="landing__thesis">
-          Higher-risk autonomous code changes must survive deeper, independently paid counter-evidence
-          before a merge can execute.
-        </p>
+        <p className="landing__eyebrow mono">telegraph protocol · track 3 · two real closed runs below</p>
+        <h1 className="landing__thesis">
+          Higher-risk autonomous changes must survive deeper, independently paid
+          counter-evidence before a merge can execute.
+        </h1>
         <div className="terminal">
           <div className="terminal__bar">
             <span className="terminal__dot" />
             <span className="terminal__dot" />
             <span className="terminal__dot" />
+            <span className="terminal__bar-title mono">skeptara — independent challenge</span>
           </div>
           <div className="terminal__body mono">
             {HERO_LINES.map((line, i) => (
@@ -66,6 +86,13 @@ export function Landing() {
               </div>
             ))}
           </div>
+        </div>
+
+        <div className="ticker">
+          <TickerStat label="real spend observed" value={`$${totalSpendUsd.toFixed(2)}`} />
+          <TickerStat label="real telegraph calls" value={String(totalEvidenceCalls)} />
+          <TickerStat label="closed runs" value={`${blockCount} block · ${passCount} pass`} />
+          <TickerStat label="network" value="base sepolia" />
         </div>
       </div>
 

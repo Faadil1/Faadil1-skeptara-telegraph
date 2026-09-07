@@ -31,9 +31,11 @@
   --pending: #888c99;
   --pending-bg: rgba(108, 114, 128, 0.1);
 
-  /* Type */
+  /* Type — mono carries the terminal/data identity, display carries authority
+     on the hero and page titles, sans stays for comfortable body reading. */
   --font-mono: ui-monospace, "SF Mono", "IBM Plex Mono", Menlo, Consolas, "Liberation Mono", monospace;
   --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-display: "Fraunces", ui-serif, Georgia, "Times New Roman", serif;
 
   --text-xs: 0.75rem;
   --text-sm: 0.8125rem;
@@ -42,6 +44,7 @@
   --text-lg: 1.375rem;
   --text-xl: 1.875rem;
   --text-2xl: 2.5rem;
+  --text-3xl: 3.25rem;
 
   --leading-tight: 1.2;
   --leading-normal: 1.5;

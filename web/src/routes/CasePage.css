@@ -14,9 +14,10 @@
 }
 
 .case-page__title {
+  font-family: var(--font-display);
   margin: 0;
   font-size: var(--text-xl);
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .case-page__header-right {
