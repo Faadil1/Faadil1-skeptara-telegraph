@@ -1,7 +1,7 @@
 {
   "repository": "Faadil1/Faadil1-skeptara-telegraph",
   "pr_number": 2,
-  "head_sha": "c40c5a3a15d6280005dfe7589ae7e2a960cc199c",
+  "head_sha": "d2aa0ea25daf1f84b6cfdd98861d3f05df584b7a",
   "base_branch": "main",
   "changed_files": [
     "demo/controlled-clean/package.json"
