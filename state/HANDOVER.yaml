@@ -7,9 +7,9 @@ handover:
   branch: main
 
   resume_rule: >-
-    Read state/CURRENT.yaml first, then this HANDOVER, product/PRD.md, spec-kit/tasks.md, docs/JUDGE-CLAIM-BOUNDARIES.md, docs/SUBMISSION-COMPLIANCE.md, docs/FRONTEND_DATA_CONTRACT.md, evidence/trace/FRONTEND-SETTLEMENT-MATRIX-CLARIFICATION.md, evidence/trace/PR3-TRACE-SOURCE-BEHAVIOR-AUDIT-001.md, and evidence/trace/PR3-FINAL-BROWSER-TRACE-AND-MERGE-PASS.md. Repository truth outranks chat memory. Never force-move Benita's branch.
+    Read state/CURRENT.yaml first, then this HANDOVER, product/PRD.md, spec-kit/tasks.md, docs/JUDGE-CLAIM-BOUNDARIES.md, docs/SUBMISSION-COMPLIANCE.md, docs/FRONTEND_DATA_CONTRACT.md, evidence/trace/FRONTEND-SETTLEMENT-MATRIX-CLARIFICATION.md, evidence/trace/PR3-TRACE-SOURCE-BEHAVIOR-AUDIT-001.md, evidence/trace/PR3-FINAL-BROWSER-TRACE-AND-MERGE-PASS.md, and evidence/trace/FINAL-DEPLOYMENT-HANDOFF-NO-PUBLIC-SMOKE-DECISION.md. Repository truth outranks chat memory. Never force-move Benita's branch.
 
-  current_milestone: T0_THRU_T4_CLOSED__FINAL_FRONTEND_TRACE_PASS__PR3_MERGED__BENITA_VERCEL_DEPLOY_NEXT
+  current_milestone: T0_THRU_T4_CLOSED__FINAL_FRONTEND_TRACE_PASS__PR3_MERGED__BENITA_FINALIZATION_AND_FAADIL_SUBMISSION_IN_PARALLEL
 
   project:
     public_name: Skeptara
@@ -23,10 +23,6 @@ handover:
     web_build: PASS
     source_trace: PASS
     browser_trace: PASS_BY_HUMAN_ATTESTATION
-    evidence:
-      - evidence/trace/PR3-CLEAN-LINT-BUILD-RERUN-PASS.md
-      - evidence/trace/PR3-TRACE-SOURCE-BEHAVIOR-AUDIT-001.md
-      - evidence/trace/PR3-FINAL-BROWSER-TRACE-AND-MERGE-PASS.md
 
   final_integration:
     branch: integration/frontend-final-v2
@@ -44,21 +40,24 @@ handover:
     settlement_calls: 4
     settlement_transactions: 4
 
-  deployment:
+  deployment_handoff:
     public_url: https://skeptara.vercel.app/
     project_owner: BENITA_SIDE
     faadil_connected_vercel_project_present: false
-    current_status: PENDING_DEPLOY_OR_AUTO_DEPLOY_CONFIRMATION_FROM_MERGED_MAIN
-    smoke_test: PENDING
-    note: >-
-      The connected Vercel account available in this chat does not contain the Skeptara project. Do not claim production deployment complete. Benita must deploy/redeploy main or confirm her Git integration auto-deployed the final merged commit, then the public URL must be smoke-tested.
+    final_main_merge_complete: true
+    benita_production_finalization: AUTHORIZED_TO_PROCEED
+    faadil_public_smoke_required: false
+    smoke_gate_removed_by_owner_decision: true
+    evidence: evidence/trace/FINAL-DEPLOYMENT-HANDOFF-NO-PUBLIC-SMOKE-DECISION.md
+    claim_boundary: DO_NOT_CLAIM_INDEPENDENT_FAADIL_OR_CHATGPT_PRODUCTION_SMOKE
 
   finish_split:
     benita:
-      - DEPLOY_OR_CONFIRM_AUTO_DEPLOY_ON_HER_VERCEL
-      - LEAD_DEMO_AND_PITCH
+      - DEPLOY_OR_CONFIRM_PRODUCTION_FROM_MERGED_MAIN_ON_HER_VERCEL
+      - FINALIZE_DEMO_AND_PITCH
       - PRIMARY_X_PROJECT_VOICE_AND_POSTS
       - DISCORD_COMMUNITY_FINALIZATION_IF_NEEDED
+      - NO_CORE_IMPLEMENTATION_CHANGE_UNLESS_A_CONCRETE_PRODUCTION_REGRESSION_APPEARS
     faadil:
       - OFFICIAL_HACKATHON_SUBMISSION_SITE_ACTION
       - TRACK3_FORM_VERIFICATION_AND_SUBMIT
@@ -73,7 +72,7 @@ handover:
     x_posts: PENDING_HUMAN
     final_submission: NOT_SUBMITTED
 
-  exact_next_gate: SKEPTARA_PRODUCTION_DEPLOY_FROM_MERGED_MAIN_AND_SMOKE
-  exact_next_owner: BENITA_VERCEL_WITH_FAADIL_PUBLIC_SMOKE_VERIFICATION
+  exact_next_gate: SKEPTARA_FINALIZATION_AND_SUBMISSION_SPLIT
+  exact_next_owner: BENITA_PRODUCTION_DEMO_COMMS__FAADIL_OFFICIAL_SUBMISSION
   exact_next_action: >-
-    Ask Benita to deploy or confirm automatic production deployment of merged main containing PR #3. The final integration is already merged; no more coding is requested. Once https://skeptara.vercel.app/ reflects the merged frontend, smoke-test landing, /case/pr1, /case/pr2, settlement links, historical merge link, and replay-only network behavior. Then Benita can proceed with demo/pitch/X while Faadil completes the official submission.
+    No public smoke gate is required from Faadil. Benita can finalize the Vercel production deployment and immediately continue with demo, pitch, X, and community tasks. Faadil should proceed in parallel with the official Telegraph submission platform, verify Track 3 selection, complete the final form, and preserve the exact technical claim boundaries. Reopen implementation only for a concrete observed production regression.
