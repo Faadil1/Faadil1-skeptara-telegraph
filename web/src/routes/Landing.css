@@ -1,0 +1,118 @@
+.landing__hero {
+  margin-bottom: var(--space-8);
+}
+
+.landing__thesis {
+  font-size: var(--text-lg);
+  line-height: var(--leading-tight);
+  color: var(--text-primary);
+  max-width: 640px;
+  margin: 0 0 var(--space-6);
+}
+
+.terminal {
+  background: #050506;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.terminal__bar {
+  display: flex;
+  gap: 6px;
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-raised);
+}
+
+.terminal__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-full);
+  background: var(--border-strong);
+}
+
+.terminal__body {
+  padding: var(--space-5);
+  font-size: var(--text-sm);
+  line-height: 1.9;
+}
+
+.terminal__line {
+  color: var(--text-secondary);
+  white-space: pre-wrap;
+}
+
+.terminal__line--cmd {
+  color: var(--text-primary);
+}
+
+.terminal__prompt {
+  color: var(--accent);
+}
+
+.terminal__line--block {
+  color: var(--block);
+}
+
+.landing__section-title {
+  font-size: var(--text-lg);
+  margin: 0 0 var(--space-2);
+}
+
+.landing__section-note {
+  color: var(--text-secondary);
+  max-width: 640px;
+  margin: 0 0 var(--space-5);
+}
+
+.landing__case-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-4);
+}
+
+.case-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+  transition: border-color 0.15s ease;
+}
+
+.case-card:hover {
+  border-color: var(--accent-dim);
+}
+
+.case-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-3);
+}
+
+.case-card__eyebrow {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+
+.case-card__title {
+  margin: 0 0 var(--space-2);
+  font-size: var(--text-md);
+  font-weight: 600;
+}
+
+.case-card__target {
+  font-size: var(--text-sm);
+  color: var(--accent);
+  margin: 0 0 var(--space-3);
+}
+
+.case-card__summary {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin: 0;
+}
