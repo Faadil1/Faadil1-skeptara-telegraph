@@ -115,3 +115,9 @@ Status: LOCKED FOR T2/T4 DEMO
 Date: 2026-09-06
 
 Reason: broad reassurance/search paths twice produced paid but inadequate evidence. For the bounded demo, deterministic external advisory identifiers seed exact `CVE_LOOKUP` paths. The reviewed coding agent does not choose these seeds. A seeded path counts only when Telegraph returns the exact CVE record and a machine-checkable affected-version range. This preserves real Telegraph paid intelligence while making evidence quality testable and fail-closed.
+
+## D-020 — Exact CVE truth is semantic, not miner-shape-specific
+Status: LOCKED  
+Date: 2026-09-07
+
+Reason: live run 003 showed two Telegraph CVE miners can return materially different response shapes. One used `found/verdict/affected_versions`; another returned the exact CVE plus product, description, source/reference and `fixed_versions` without `found/verdict`. Skeptara must validate the semantic evidence contract—exact requested CVE, substantive advisory data and a machine-checkable version boundary—rather than require one miner-specific schema. Empty/echo-only records and mismatches remain fail-closed.
