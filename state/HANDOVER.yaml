@@ -92,6 +92,13 @@ handover:
     critical_correction: >-
       The prior ChatGPT message was only a draft suggestion. The human explicitly clarified that nothing about the Discord/X requirement or primary-X role had actually been sent to Benita yet. Do not describe Benita as informed or committed until the human confirms the message was sent and, ideally, her response/handle is captured.
 
+  collaboration:
+    frontend_contract: docs/FRONTEND_DATA_CONTRACT.md
+    frontend_branch: feat/frontend-benita
+    frontend_branch_policy: FAST_FORWARD_ONLY_WHILE_NO_UNIQUE_COLLABORATOR_COMMITS
+    once_unique_commits_exist: NEVER_FORCE_MOVE__RECONCILE_NORMALLY
+    latest_compare_before_sync: MAIN_AHEAD_5__BENITA_UNIQUE_0
+
   current_remaining_gaps:
     local_test_after_remediation: PENDING
     demo_replay_user_machine_validation: PENDING
