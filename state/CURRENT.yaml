@@ -1,13 +1,13 @@
 canonical_state:
   protocol_version: 1
   system: SKEPTARA_TELEGRAPH_TRACK3
-  version: 0.8.0-t3-closed-pass-t4-fresh-two-case-proof-next
+  version: 0.8.1-t4-pr1-fresh-block-json-review-next
   date: 2026-09-07
   source_of_truth: GITHUB
   repository: Faadil1/Faadil1-skeptara-telegraph
   branch: main
 
-  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_FRESH_TWO_CASE_REAL_PROOF_NEXT
+  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_PR1_FRESH_BLOCK_OBSERVED__JSON_AND_GATE_DENIAL_REVIEW_NEXT
 
   authority:
     product_intent_source: product/PRD.md
@@ -22,7 +22,7 @@ canonical_state:
     living: true
     approval_state: HUMAN_LOCK_PASS
     product_intent_changed: false
-    current_discovery_class: execution_detail
+    discovery_class: execution_detail
 
   product_core:
     public_name: Skeptara
@@ -42,20 +42,10 @@ canonical_state:
       implementation: src/policy.mjs
     t2:
       status: CLOSED_PASS
-      generic_auditor_version: skeptara-auditor-v0.2
       seeded_auditor_version: skeptara-auditor-v0.4-seeded-cve
-      contract: docs/T2_AUDITOR_CONTRACT.md
       closure_evidence: evidence/t2/LOCAL-USER-VALIDATION-V0.4-29-OF-29-AND-RUN003-REPLAY-PASS.md
       user_machine_tests: 29_OF_29_PASS__0_FAIL
-      run003_replay:
-        source_live_run: 2026-09-07T00-43-44-168Z
-        coverage: 2_OF_2
-        captured_spend_atomic_usdc: 20000
-        new_replay_spend_atomic_usdc: 0
-        evidence:
-          - { cve_id: CVE-2026-4800, materiality: ADVISORY, coverage_complete: true }
-          - { cve_id: CVE-2026-2950, materiality: ADVISORY, coverage_complete: true }
-        outcome: PASS
+      run003_replay: 2_OF_2_ADVISORY__PASS__ZERO_NEW_SPEND
       replay_is_merge_authorization: false
     t3:
       status: CLOSED_PASS
@@ -66,40 +56,7 @@ canonical_state:
       validation:
         full_repository: 41_OF_41_PASS__0_FAIL
         focused_merge_gate: 12_OF_12_PASS__0_FAIL
-      guarantees:
-        allowlist_required: true
-        human_bounded_authorization_required: true
-        challenge_outcome_must_be_pass: true
-        exact_repository_binding: true
-        exact_pr_binding: true
-        exact_head_sha_binding: true
-        exact_action_fingerprint_binding: true
-        challenge_freshness_required: true
-        live_pr_revalidation_required: true
-        changed_head_denied: true
-        block_or_escalate_denied: true
-        denied_path_never_calls_merge_adapter: true
-        expected_head_sha_forwarded_to_server_adapter: true
       real_merge_performed_during_t3: false
-
-  evidence_quality_history:
-    run_001:
-      runtime_reported: PASS
-      reviewed_outcome: ESCALATE
-      reason: INVALID_CVE_INPUT_DID_NOT_COMPLETE_INVESTIGATION
-      evidence: evidence/t2/live-clean-run-001/REVIEW.md
-    run_002:
-      runtime_reported: PASS
-      reviewed_outcome: ESCALATE
-      corrected_coverage: 0_OF_2
-      reason: UNVERIFIED_AND_IRRELEVANT_EVIDENCE
-      evidence: evidence/t2/live-clean-retry-002/REVIEW.md
-    run_003:
-      runtime_reported: ESCALATE
-      live_truth: TWO_EXACT_NON_BLOCKING_CVE_RECORDS
-      root_cause: MINER_SHAPE_SPECIFIC_V03_NORMALIZER
-      remediation: V04_SEMANTIC_EXACT_CVE_NORMALIZATION
-      evidence: evidence/t2/live-pr2-seeded-run-003/REVIEW.md
 
   demo_cases:
     challenged:
@@ -109,7 +66,6 @@ canonical_state:
       head_sha: 73cf5bdd69163924228e3e21d67fa9f405d99904
       target: lodash@4.17.21
       action_file: demo/actions/challenged-pr.json
-      expected_fresh_t4_result: BLOCK
       merge_authorized: false
     clean:
       repository: Faadil1/Faadil1-skeptara-telegraph
@@ -118,29 +74,37 @@ canonical_state:
       head_sha: d2aa0ea25daf1f84b6cfdd98861d3f05df584b7a
       target: lodash@4.18.1
       action_file: demo/actions/clean-pr.json
-      expected_fresh_t4_result: PASS_IF_LIVE_RECORDS_REMAIN_NON_BLOCKING
       merge_authorized: false
 
   t4_contract:
     gate: SKEPTARA_T4_TWO_CASE_REAL_DEMO_PASS
-    status: FRESH_LIVE_PROOFS_REQUIRED
+    status: PR1_FRESH_BLOCK_CAPTURED__SANITIZED_JSON_AND_MERGE_GATE_DENIAL_REVIEW_REQUIRED
     challenged_case:
-      required: true
       action_file: demo/actions/challenged-pr.json
-      expected_behavior: FRESH_BLOCK_THEN_MERGE_GATE_DENY
-      maximum_expected_spend_atomic_usdc: 10000
+      run_004:
+        runtime_dir: evidence/t2-runtime/2026-09-07T01-11-00-634Z
+        auditor_version: skeptara-auditor-v0.4-seeded-cve
+        risk_tier: MEDIUM
+        spend_atomic_usdc: 20000
+        runtime_coverage: 1_OF_2
+        evidence_terminal_summary:
+          - { seed: CVE-2026-4800, intent: CVE_LOOKUP, materiality: AMBIGUOUS, reason: KNOWN_VULNERABILITY_RANGE_NOT_MACHINE_VERIFIABLE }
+          - { seed: CVE-2026-2950, intent: CVE_LOOKUP, materiality: BLOCKING, reason: KNOWN_VULNERABILITY_AFFECTS_TARGET_DEPENDENCY_VERSION }
+        runtime_outcome: BLOCK
+        runtime_reason: MATERIAL_COUNTER_EVIDENCE_FOUND
+        pending_review: SANITIZED_JSON_PLUS_T3_DENIAL_PROOF
+        evidence: evidence/t4/PR1-FRESH-BLOCK-RUN-004-PENDING-JSON-REVIEW.md
+      current_pr_revalidation:
+        state: open
+        merged: false
+        head_sha: 73cf5bdd69163924228e3e21d67fa9f405d99904
+      merge_authorized: false
     clean_case:
       required: true
       action_file: demo/actions/clean-pr.json
       expected_behavior: FRESH_PASS_THEN_EXACT_HEAD_REVALIDATION
-      maximum_expected_spend_atomic_usdc: 20000
+      maximum_spend_atomic_usdc: 20000
       real_merge_requires_explicit_human_authorization: true
-    ordering:
-      preferred_first: CHALLENGED_PR_1
-      reason: PROVE_DENIAL_FIRST_WITHOUT_RISKING_CLEAN_CASE_FRESHNESS_WINDOW
-    freshness:
-      fresh_unexpired_challenge_required_for_execution: true
-      t2_replay_not_sufficient_for_merge: true
     real_merge_authorized_now: false
 
   security_boundary:
@@ -161,7 +125,7 @@ canonical_state:
     t1_deterministic_risk_scorer: PASS
     t2_independent_auditor: CLOSED_PASS
     t3_fail_closed_merge_gate: CLOSED_PASS
-    t4_two_case_real_demo: FRESH_LIVE_PROOFS_REQUIRED
+    t4_two_case_real_demo: PR1_FRESH_BLOCK_REVIEW_PENDING
     trace_design_review: NOT_STARTED
     project_finisher: NOT_STARTED
     final_submission: PROTECTED_NOT_AUTHORIZED
@@ -171,7 +135,7 @@ canonical_state:
     evidence_before_pass_claim: REQUIRED
     repository_truth_outranks_chat_memory: true
 
-  exact_next_gate: SKEPTARA_T4_CHALLENGED_PR1_FRESH_BLOCK_PROOF
+  exact_next_gate: SKEPTARA_T4_PR1_BLOCK_JSON_AND_MERGE_GATE_DENIAL_REVIEW
   exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_REVIEW
   exact_next_action: >-
-    Pull main if needed, then run the hardened T2 launcher against demo/actions/challenged-pr.json using SKEPTARA_T2_ACTION_FILE in the current PowerShell session. Use the fresh bounded Base Sepolia burner and never paste or print its private key. Expected risk is MEDIUM, seeded CVE mode is active, and a material affected-range match should BLOCK early after the first paid path (normally 10000 atomic USDC). Return the full terminal output and sanitized 02-audit-result.json. Do not merge PR #1 or PR #2. After the challenged denial proof is reviewed, obtain a fresh live PASS for PR #2 and ask for explicit human bounded authorization before any real merge.
+    Return the sanitized evidence/t2-runtime/2026-09-07T01-11-00-634Z/02-audit-result.json from the already-completed fresh challenged PR #1 run. Do not make another paid Telegraph call. Review exact CVE records, challenge/action binding, timestamps and spend. Then prove skeptara-merge-gate-v0.1 denies this BLOCK result without invoking the merge adapter. Only after this proof is persisted proceed to the clean PR #2 fresh PASS run. Do not merge PR #1 or PR #2 yet.
