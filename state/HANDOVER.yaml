@@ -13,7 +13,7 @@ handover:
   resume_rule: >-
     Read state/CURRENT.yaml first, then this HANDOVER, product/PRD.md, spec-kit/tasks.md, docs/JUDGE-CLAIM-BOUNDARIES.md, docs/SUBMISSION-COMPLIANCE.md, and Winning Intelligence evidence. Repository truth outranks chat memory. Persist evidence plus CURRENT + HANDOVER after every major gate and execution boundary. Never infer collaborator communication or administrative completion without human evidence.
 
-  current_milestone: T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__NINE_SPOT_REMEDIATION_IMPLEMENTED__FAADIL_DISCORD_ACTIVITY_AND_ORGANIC_ENGAGEMENT_VERIFIED__ROUND_REWARD_AND_TRACK3_PLATFORM_GUIDANCE_CAPTURED__BENITA_X_DISCORD_BRIEF_NOT_SENT__LOCAL_VALIDATION_AND_TRACE_VISUAL_REVIEW_NEXT
+  current_milestone: T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__NINE_SPOT_REMEDIATION_IMPLEMENTED__LOCAL_VALIDATION_PASS__TRACE_VISUAL_REVIEW_NEXT
 
   project:
     public_name: Skeptara
@@ -22,7 +22,40 @@ handover:
     safe_public_promise: Before an autonomous agent can merge code, Skeptara buys Telegraph-routed external evidence to try to prove the change unsafe.
     mechanism: EXTERNAL_DETERMINISTIC_RISK_TO_RISK_PROPORTIONAL_PAID_TELEGRAPH_COUNTER_EVIDENCE_TO_PASS_BLOCK_ESCALATE_TO_EXACT_PROTECTED_EXECUTION
 
-  closed_gates: { t0: CLOSED_PASS, t1: PASS, t2: CLOSED_PASS, t3: CLOSED_PASS, t4: CLOSED_PASS }
+  closed_gates:
+    t0: CLOSED_PASS
+    t1: PASS
+    t2: CLOSED_PASS
+    t3: CLOSED_PASS
+    t4: CLOSED_PASS
+    hidden_spot_local_validation: PASS
+
+  local_validation:
+    evidence: evidence/trace/LOCAL-VALIDATION-41-OF-41-AND-JUDGE-REPLAY-PASS.md
+    npm_test:
+      tests: 41
+      pass: 41
+      fail: 0
+      cancelled: 0
+      skipped: 0
+      todo: 0
+    npm_run_demo:
+      status: PASS
+      telegraph_payment: NONE
+      external_write: NONE
+      challenged_case: PR1__LODASH_4_17_21__BLOCK__MERGE_DENIED__0_MERGE_CALLS
+      clean_case: PR2__LODASH_4_18_1__PASS__2_OF_2__HISTORICAL_REAL_MERGE
+      risk_boundary: LOW_HIGH_POLICY_TEST_PROVEN__MEDIUM_LIVE_PROVEN
+      seeded_cve_disclosure: VISIBLE
+      historical_pass_fresh_authorization: FALSE
+    npm_run_demo_web:
+      startup: PASS
+      local_url: http://127.0.0.1:4173
+      static_captured_live_evidence_only: true
+      wallet_required: false
+      github_write_credential_required: false
+      visual_review: PENDING
+      browser_network_behavior_verification: PENDING
 
   t4_final:
     historical_repository_name_at_proof_time: Faadil1/Faadil1-skeptara-telegraph
@@ -49,7 +82,7 @@ handover:
   winning_intelligence:
     preflight: { status: PASS_WITH_PRIORITY_RISKS, packet: evidence/winning-intelligence/WI-TRACE-PREFLIGHT-001.md }
     blind_spot_audit_002: { status: COMPLETE, packet: evidence/winning-intelligence/WI-BLIND-SPOT-AUDIT-002.md }
-    remediation_003: { status: IMPLEMENTED_PENDING_VALIDATION, packet: evidence/winning-intelligence/WI-HIDDEN-SPOT-REMEDIATION-003.md }
+    remediation_003: { status: IMPLEMENTED_AND_LOCALLY_VALIDATED, packet: evidence/winning-intelligence/WI-HIDDEN-SPOT-REMEDIATION-003.md }
     discord_signal_004: { decision: NO_PIVOT__DIFFERENTIATION_REINFORCED__NO_VOLUME_CHASING, packet: evidence/winning-intelligence/WI-DISCORD-COMPETITIVE-SIGNAL-004.md }
 
   judge_assets:
@@ -57,6 +90,7 @@ handover:
     claim_boundaries: docs/JUDGE-CLAIM-BOUNDARIES.md
     compliance: docs/SUBMISSION-COMPLIANCE.md
     activity_ledger: evidence/activity/ACTIVITY-LEDGER-V0.1.md
+    local_validation: evidence/trace/LOCAL-VALIDATION-41-OF-41-AND-JUDGE-REPLAY-PASS.md
     commands:
       replay: npm run demo
       local_web: npm run demo:web
@@ -88,11 +122,8 @@ handover:
     official_invite: https://discord.gg/telegraphprotocol
     faadil_join_access: VERIFIED
     faadil_project_activity: VERIFIED
-    faadil_project_activity_evidence: evidence/admin/TELEGRAPH-DISCORD-FAADIL-PROJECT-INTRO-VERIFIED.md
     faadil_organic_engagement: VERIFIED
-    faadil_organic_engagement_evidence: evidence/admin/TELEGRAPH-DISCORD-ORGANIC-ENGAGEMENT-VERIFIED.md
     benita_join_activity: HUMAN_VERIFY
-    staff_guidance_evidence: evidence/admin/TELEGRAPH-DISCORD-JOIN-AND-NETWORK-GUIDANCE-VERIFIED.md
     no_automated_metric_traffic: true
     default_judge_demo: CAPTURED_LIVE_HISTORICAL_REPLAY
     round_reward_and_platform_guidance:
@@ -101,9 +132,6 @@ handover:
       separate_participation_reward: NONE_FOR_THIS_ROUND
       scope_boundary: ROUND_LEVEL_NOT_TRACK3_ONLY
       h2_reward_pool_staff_statement_usd: 10000
-      h3_reward_statement: OWN_REWARDS_EXPECTED
-      nov_dec_bigger_opportunities_statement: OBSERVED
-      mainnet_rewards_once_token_live_statement: OBSERVED
       track3_platform_visibility_issue: STAFF_ACKNOWLEDGED
       staff_status: WILL_BE_UPDATED_SOON
       final_submission_completion: NOT_PROVEN
@@ -115,8 +143,6 @@ handover:
     faadil_x_handle: '@roy1919875'
     benita_x_discord_brief_sent: false
     benita_acceptance_of_primary_x_role: NOT_YET_CONFIRMED
-    critical_correction: >-
-      The human explicitly clarified that nothing about the Discord/X requirement or primary-X role has been sent to Benita yet. Do not describe Benita as informed or committed until confirmed.
 
   collaboration:
     frontend_contract: docs/FRONTEND_DATA_CONTRACT.md
@@ -125,9 +151,8 @@ handover:
     once_unique_commits_exist: NEVER_FORCE_MOVE__RECONCILE_NORMALLY
 
   current_remaining_gaps:
-    local_test_after_remediation: PENDING
-    demo_replay_user_machine_validation: PENDING
     trace_human_visual_review: PENDING
+    browser_network_behavior_check: PENDING
     public_deployment_smoke: PENDING
     benita_x_discord_brief_send: PENDING_HUMAN
     benita_discord_join_activity: PENDING_HUMAN
@@ -137,7 +162,7 @@ handover:
     final_submission: PENDING_HUMAN
     project_finisher: NOT_STARTED
 
-  exact_next_gate: SKEPTARA_HIDDEN_SPOT_REMEDIATION_LOCAL_VALIDATION_AND_TRACE_VISUAL_REVIEW
-  exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_TRACE_REVIEW
+  exact_next_gate: SKEPTARA_TRACE_JUDGE_PATH_VISUAL_REVIEW
+  exact_next_owner: HUMAN_SCREENSHOT_WITH_CHATGPT_TRACE_REVIEW
   exact_next_action: >-
-    Canonical repo is Faadil1/skeptara-telegraph; historical proof bindings using the old repo name remain untouched. Discord staff guidance now includes a $5K current-round winner-only pool with no separate participation reward and a Track 3 platform-visibility issue that staff said would be updated soon. Treat the $5K figure as round-level only, not a Track-3-only or per-place prize breakdown. Final submission remains unproven. Next, run `npm test`, `npm run demo`, then `npm run demo:web` and send screenshots for TRACE. Do not generate fresh Telegraph traffic for activity/demo volume. Before final submission, re-check actual Track 3 visibility on the submission platform.
+    Keep the local static judge surface running with `npm run demo:web`. Open http://127.0.0.1:4173 and provide a full-page desktop screenshot; if practical also provide a narrow/mobile-width screenshot. TRACE must judge 5-second comprehension, PR1 BLOCK/deny vs PR2 PASS/real merge, proof hierarchy, historical labeling, exact-CVE seed disclosure, MEDIUM-live vs LOW/HIGH-test claim boundary, Telegraph routing causality, and absence of visual cues that imply a fresh executable PASS. Do not generate fresh Telegraph calls. After TRACE PASS or bounded remediation, persist findings plus CURRENT + HANDOVER, then move to public deployment/smoke.
