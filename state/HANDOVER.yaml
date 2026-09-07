@@ -11,9 +11,9 @@ handover:
   branch: main
 
   resume_rule: >-
-    Read state/CURRENT.yaml first, then this HANDOVER, product/PRD.md, spec-kit/tasks.md, docs/JUDGE-CLAIM-BOUNDARIES.md, docs/SUBMISSION-COMPLIANCE.md, and Winning Intelligence evidence. Repository truth outranks chat memory. Persist evidence plus CURRENT + HANDOVER after every major gate and execution boundary. Never infer collaborator communication or administrative completion without human evidence.
+    Read state/CURRENT.yaml first, then this HANDOVER, product/PRD.md, spec-kit/tasks.md, docs/JUDGE-CLAIM-BOUNDARIES.md, docs/SUBMISSION-COMPLIANCE.md, docs/FRONTEND_DATA_CONTRACT.md, and Winning Intelligence evidence. Repository truth outranks chat memory. Persist evidence plus CURRENT + HANDOVER after every major gate and execution boundary. Never infer collaborator communication or administrative completion without human evidence.
 
-  current_milestone: T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__NINE_SPOT_REMEDIATION_IMPLEMENTED__LOCAL_VALIDATION_PASS__TRACE_VISUAL_REVIEW_NEXT
+  current_milestone: T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__NINE_SPOT_REMEDIATION_IMPLEMENTED__LOCAL_VALIDATION_PASS__BENITA_SETTLEMENT_DATA_SHAPING_QUESTION_RESOLVED__TRACE_VISUAL_REVIEW_NEXT
 
   project:
     public_name: Skeptara
@@ -32,30 +32,18 @@ handover:
 
   local_validation:
     evidence: evidence/trace/LOCAL-VALIDATION-41-OF-41-AND-JUDGE-REPLAY-PASS.md
-    npm_test:
-      tests: 41
-      pass: 41
-      fail: 0
-      cancelled: 0
-      skipped: 0
-      todo: 0
+    npm_test: { tests: 41, pass: 41, fail: 0 }
     npm_run_demo:
       status: PASS
       telegraph_payment: NONE
       external_write: NONE
       challenged_case: PR1__LODASH_4_17_21__BLOCK__MERGE_DENIED__0_MERGE_CALLS
       clean_case: PR2__LODASH_4_18_1__PASS__2_OF_2__HISTORICAL_REAL_MERGE
-      risk_boundary: LOW_HIGH_POLICY_TEST_PROVEN__MEDIUM_LIVE_PROVEN
-      seeded_cve_disclosure: VISIBLE
-      historical_pass_fresh_authorization: FALSE
     npm_run_demo_web:
       startup: PASS
       local_url: http://127.0.0.1:4173
       static_captured_live_evidence_only: true
-      wallet_required: false
-      github_write_credential_required: false
       visual_review: PENDING
-      browser_network_behavior_verification: PENDING
 
   t4_final:
     historical_repository_name_at_proof_time: Faadil1/Faadil1-skeptara-telegraph
@@ -79,6 +67,24 @@ handover:
       human_bounded_authorization: EXPLICIT_PASS_FOR_EXACT_HEAD_ONLY
       merge_commit_sha: c76c76e0c02dab28275d8e53d70da3f6f132e648
 
+  frontend_settlement_clarification:
+    status: VERIFIED
+    trigger: BENITA_QUESTION_ON_ONE_VISIBLE_SETTLEMENT_TRANSACTION_ACROSS_FOUR_ITEMS
+    evidence: evidence/trace/FRONTEND-SETTLEMENT-MATRIX-CLARIFICATION.md
+    contract: docs/FRONTEND_DATA_CONTRACT.md
+    answer: >-
+      In the final T4 proof there were four separate paid evidence calls, not one paid call producing four findings. Each of the four captured evidence items has its own successful x402 settlement transaction. The reduced reviewed fixtures omitted three transaction hashes during sanitization/data shaping. This is not Telegraph protocol behavior.
+    matrix:
+      pr1_cve_2026_4800: 0x07ef1d9a4d44409832c99a02c89b26f665fab7fe07040e7573ab2b81a1fa8b57
+      pr1_cve_2026_2950: 0x171e2fc64a0d33b9726a31e3a45654aa47b2ce94b89f83d74d30fe3b327f5020
+      pr2_cve_2026_4800: 0x66bd41892d411b9be502759fc4259d2bec8821fd818385cc5eabb950589ab2a2
+      pr2_cve_2026_2950: 0x95e44b463cb6cafd4b1c56a9889930c1180d084a5e709ccf410296ca465d1e1b
+    frontend_rule:
+      generic_transaction_field: OPTIONAL_NULLABLE
+      final_t4_display: MAY_SHOW_ALL_FOUR_VERIFIED_TX_HASHES
+      never_attach_one_tx_to_multiple_items: true
+      never_infer_missing_future_tx: true
+
   winning_intelligence:
     preflight: { status: PASS_WITH_PRIORITY_RISKS, packet: evidence/winning-intelligence/WI-TRACE-PREFLIGHT-001.md }
     blind_spot_audit_002: { status: COMPLETE, packet: evidence/winning-intelligence/WI-BLIND-SPOT-AUDIT-002.md }
@@ -88,12 +94,11 @@ handover:
   judge_assets:
     challenge_dossier: public/index.html
     claim_boundaries: docs/JUDGE-CLAIM-BOUNDARIES.md
+    frontend_contract: docs/FRONTEND_DATA_CONTRACT.md
+    settlement_matrix: evidence/trace/FRONTEND-SETTLEMENT-MATRIX-CLARIFICATION.md
     compliance: docs/SUBMISSION-COMPLIANCE.md
     activity_ledger: evidence/activity/ACTIVITY-LEDGER-V0.1.md
     local_validation: evidence/trace/LOCAL-VALIDATION-41-OF-41-AND-JUDGE-REPLAY-PASS.md
-    commands:
-      replay: npm run demo
-      local_web: npm run demo:web
 
   claim_boundaries:
     exact_cve_seeded: CONTROLLED_PROOF_NOT_AUTOMATIC_UNKNOWN_VULNERABILITY_DISCOVERY
@@ -111,12 +116,6 @@ handover:
     real_exact_head_merges: 1
     user_count_claim: NONE
     do_not_inflate_request_volume: true
-    discord_organic_engagement:
-      status: VERIFIED
-      evidence: evidence/admin/TELEGRAPH-DISCORD-ORGANIC-ENGAGEMENT-VERIFIED.md
-      fire_reactions_observed: 3
-      direct_telegraph_staff_positive_reply: true
-      adoption_metric: NO
 
   discord:
     official_invite: https://discord.gg/telegraphprotocol
@@ -126,15 +125,6 @@ handover:
     benita_join_activity: HUMAN_VERIFY
     no_automated_metric_traffic: true
     default_judge_demo: CAPTURED_LIVE_HISTORICAL_REPLAY
-    round_reward_and_platform_guidance:
-      evidence: evidence/admin/TELEGRAPH-DISCORD-ROUND-REWARD-AND-SUBMISSION-STATUS-VERIFIED.md
-      current_round_reward_pool_staff_statement_usd: 5000
-      separate_participation_reward: NONE_FOR_THIS_ROUND
-      scope_boundary: ROUND_LEVEL_NOT_TRACK3_ONLY
-      h2_reward_pool_staff_statement_usd: 10000
-      track3_platform_visibility_issue: STAFF_ACKNOWLEDGED
-      staff_status: WILL_BE_UPDATED_SOON
-      final_submission_completion: NOT_PROVEN
 
   public_comms:
     intended_primary_x_project_voice: BENITA
@@ -165,4 +155,4 @@ handover:
   exact_next_gate: SKEPTARA_TRACE_JUDGE_PATH_VISUAL_REVIEW
   exact_next_owner: HUMAN_SCREENSHOT_WITH_CHATGPT_TRACE_REVIEW
   exact_next_action: >-
-    Keep the local static judge surface running with `npm run demo:web`. Open http://127.0.0.1:4173 and provide a full-page desktop screenshot; if practical also provide a narrow/mobile-width screenshot. TRACE must judge 5-second comprehension, PR1 BLOCK/deny vs PR2 PASS/real merge, proof hierarchy, historical labeling, exact-CVE seed disclosure, MEDIUM-live vs LOW/HIGH-test claim boundary, Telegraph routing causality, and absence of visual cues that imply a fresh executable PASS. Do not generate fresh Telegraph calls. After TRACE PASS or bounded remediation, persist findings plus CURRENT + HANDOVER, then move to public deployment/smoke.
+    Benita's settlement question is resolved and should not block frontend work. For final T4, each evidence item was a distinct paid Telegraph call with its own successful settlement transaction; use the settlement matrix evidence and updated frontend contract. Do not infer the reduced fixture omission as one-call-multiple-findings semantics. Continue waiting for Benita's frontend/pitch contribution if desired, then perform final TRACE visual review and public deployment without fresh Telegraph activity calls.
