@@ -64,21 +64,28 @@ Status: DERIVED READY — subordinate to living PRD v0.1.
 - [x] Reconcile clean PR #2 branch with current main before final paid PASS proof.
   - old head `d2aa0ea25daf1f84b6cfdd98861d3f05df584b7a`;
   - reconciled head `528d730f9ebdcb433e01ba9c79dcc9a5f66ce1c7`;
-  - diff remains only `demo/controlled-clean/package.json`, `lodash 4.17.20 -> 4.18.1`;
   - no force update used;
-  - `demo/actions/clean-pr.json` rebound to reconciled exact head;
   - evidence: `evidence/t4/PR2-CLEAN-BRANCH-RECONCILIATION.md`.
-- [ ] T4.4 Obtain fresh live PASS for clean PR #2 using `demo/actions/clean-pr.json`.
-  - require exact current head `528d730f9ebdcb433e01ba9c79dcc9a5f66ce1c7`;
-  - require MEDIUM risk;
-  - require `2/2` meaningful non-blocking coverage;
-  - max spend `20000` atomic USDC.
-- [ ] T4.5 Review and persist fresh PR #2 result.
-- [ ] T4.6 Immediately revalidate PR #2 live state/head while PASS is fresh.
-- [ ] T4.7 Ask human for explicit bounded authorization to merge exactly PR #2 at the challenged head.
-- [ ] T4.8 If authorized, execute real merge with exact `expected_head_sha`; otherwise preserve PASS evidence without merge.
-- [ ] T4.9 Capture durable two-case replay/demo evidence.
-- [ ] `SKEPTARA_T4_TWO_CASE_REAL_DEMO_PASS`.
+- [x] T4.4 Fresh live PASS for clean PR #2.
+  - exact head `528d730f9ebdcb433e01ba9c79dcc9a5f66ce1c7`;
+  - MEDIUM risk;
+  - `2/2` meaningful non-blocking exact-CVE coverage;
+  - spend `20000/20000` atomic USDC;
+  - outcome `PASS`;
+  - challenge `f4f075f3-1dbc-42ed-9843-dbec43de3430`.
+- [x] T4.5 Review and persist fresh PR #2 result.
+  - `evidence/t4/pr2-clean-run-005/REVIEW.md`;
+  - `evidence/t4/pr2-clean-run-005/reviewed-challenge.sanitized.json`.
+- [x] T4.6 Revalidate PR #2 while PASS fresh.
+  - open, unmerged, exact-head match;
+  - `mergeable:true`, `mergeable_state:clean`.
+- [x] T4.7 Human explicitly authorized exactly PR #2 at head `528d730f9ebdcb433e01ba9c79dcc9a5f66ce1c7`.
+- [x] T4.8 Execute real protected merge with exact `expected_head_sha`.
+  - merged at `2026-09-07T01:44:54Z`;
+  - merge commit `c76c76e0c02dab28275d8e53d70da3f6f132e648`;
+  - evidence: `evidence/t4/pr2-clean-run-005/REAL-MERGE-EXECUTION.md`.
+- [x] T4.9 Durable two-case proof captured.
+- [x] `SKEPTARA_T4_TWO_CASE_REAL_DEMO_PASS = CLOSED_PASS`.
 
 ## UX / Benita
 
@@ -106,16 +113,14 @@ Status: DERIVED READY — subordinate to living PRD v0.1.
 
 ## Operating rule
 
-After every passed/failed major gate:
+After every passed/failed major gate or protected execution boundary:
 1. persist evidence;
 2. update `state/CURRENT.yaml` + exact next gate;
-3. update `state/HANDOVER.yaml`;
+3. update `state/HANDOVER.yaml` so a new conversation can take the lead;
 4. reconcile PRD/spec/plan/tasks only if discovery class requires it.
 
 ## Reconciliation record
 
-The challenged half of T4 is closed. Before spending on the clean half, PR #2 was reconciled with current `main` because its branch had diverged materially. The historical clean head is preserved in evidence, while the final T4 challenge must bind to the new exact head `528d730f9ebdcb433e01ba9c79dcc9a5f66ce1c7`.
+T0 through T4 are now closed. T4 proves both sides of the core Skeptara claim with real artifacts: PR #1 produced paid Telegraph counter-evidence and a deterministic BLOCK that could not reach execution; PR #2 produced a fresh real PASS, was revalidated at the exact challenged head, received explicit human bounded authorization, and merged successfully with `expected_head_sha` enforced.
 
-No paid call or merge occurred during this reconciliation. The exact next gate is now the fresh PR #2 PASS proof. Any real merge remains prohibited until that fresh result is reviewed, the exact head is revalidated, and the human explicitly authorizes the bounded action.
-
-Exact next gate: `SKEPTARA_T4_PR2_FRESH_PASS_PROOF`.
+The next execution gate is no longer backend correctness. It is `SKEPTARA_TRACE_JUDGE_PATH_REVIEW`: make the real proof legible in the UI/demo without inventing runtime fields, then proceed to deployed smoke and Project Finisher.
