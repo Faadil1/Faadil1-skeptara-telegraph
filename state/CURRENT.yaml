@@ -1,17 +1,13 @@
 canonical_state:
   protocol_version: 1
   system: SKEPTARA_TELEGRAPH_TRACK3
-  version: 0.10.3-benita-frontend-source-review-hold-bounded-fixes
+  version: 0.10.4-benita-review-sent-demo-submit-ready
   date: 2026-09-07
   source_of_truth: GITHUB
   repository: Faadil1/skeptara-telegraph
-  repository_alias_history:
-    prior_full_name: Faadil1/Faadil1-skeptara-telegraph
-    current_full_name: Faadil1/skeptara-telegraph
-    note: GitHub repository rename/redirect preserves historical evidence references; do not rewrite old captured evidence bindings.
   branch: main
 
-  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__LOCAL_VALIDATION_PASS__BENITA_FRONTEND_SOURCE_REVIEW_HOLD_BOUNDED_FIXES__RECONCILE_THEN_TRACE_VISUAL
+  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__LOCAL_VALIDATION_PASS__BENITA_FRONTEND_SOURCE_REVIEW_HOLD_BOUNDED_FIXES__REVIEW_SENT__BENITA_READY_FOR_DEMO_AND_SUBMISSION_AFTER_FIXES__WAIT_FOR_PUSH_THEN_RECONCILE_AND_TRACE
 
   authority:
     product_intent_source: product/PRD.md
@@ -27,38 +23,31 @@ canonical_state:
     fail_closed: true
 
   closed_gates:
-    t0: { status: CLOSED_PASS, evidence: evidence/t0-real-telegraph/attempt-008/ }
-    t1: { status: PASS, policy_version: skeptara-risk-v0.1 }
-    t2: { status: CLOSED_PASS, auditor_version: skeptara-auditor-v0.4-seeded-cve }
-    t3: { status: CLOSED_PASS, gate_version: skeptara-merge-gate-v0.1 }
-    t4: { status: CLOSED_PASS }
+    t0: CLOSED_PASS
+    t1: PASS
+    t2: CLOSED_PASS
+    t3: CLOSED_PASS
+    t4: CLOSED_PASS
     hidden_spot_local_validation:
       status: PASS
       evidence: evidence/trace/LOCAL-VALIDATION-41-OF-41-AND-JUDGE-REPLAY-PASS.md
       tests: 41_OF_41_PASS__0_FAIL
       judge_replay: PASS__ZERO_PAYMENT__ZERO_EXTERNAL_WRITE
 
-  frontend_settlement_clarification:
+  settlement_truth:
     status: VERIFIED
     evidence: evidence/trace/FRONTEND-SETTLEMENT-MATRIX-CLARIFICATION.md
-    contract: docs/FRONTEND_DATA_CONTRACT.md
     final_t4_paid_evidence_items: 4
     final_t4_distinct_settlement_transactions: 4
-    semantics: ONE_FINAL_T4_EVIDENCE_ITEM_EQUALS_ONE_SEPARATE_PAID_TELEGRAPH_PATH_CALL
-    reduced_fixture_asymmetry: DATA_SHAPING_OMISSION_NOT_PROTOCOL_BEHAVIOR
+    semantics: ONE_FINAL_T4_EVIDENCE_ITEM_EQUALS_ONE_SEPARATE_PAID_TELEGRAPH_CALL
 
   benita_frontend_source_review:
     status: HOLD_BOUNDED_FIXES
     evidence: evidence/trace/BENITA-FRONTEND-SOURCE-REVIEW-001.md
     deployed_url_human_supplied: https://skeptara.vercel.app/
-    live_fetch_pixel_review: NOT_PROVEN_BY_AVAILABLE_FETCH_PATH
-    source_branch_reviewed: feat/frontend-benita
-    strengths:
-      - CLEAR_JUDGE_PATH
-      - REAL_PROOF_IDENTIFIERS
-      - CLOSED_RUN_REPLAY_LABELING_PRESENT
-      - PASS_BLOCK_ESCALATE_SURFACES
-      - EXACT_HEAD_AND_REAL_MERGE_PROOF_VISIBLE
+    source_branch: feat/frontend-benita
+    communication_status: REVIEW_SENT_TO_BENITA__HUMAN_SCREENSHOT_VERIFIED
+    benita_response: READY_TO_MAKE_DEMO_AND_SUBMIT_AFTER_COORDINATION
     p0_fixes:
       - PR1_ACTUAL_CHRONOLOGY_AMBIGUOUS_FIRST_THEN_BLOCKING_SECOND__FULL_0_02_SPENT
       - RESTORE_ALL_FOUR_T4_SETTLEMENT_TRANSACTIONS_AND_ACTUAL_PR1_ITEM_ORDER
@@ -74,13 +63,12 @@ canonical_state:
     frontend_contract: docs/FRONTEND_DATA_CONTRACT.md
     frontend_branch: feat/frontend-benita
     frontend_branch_status: DIVERGED
-    latest_compare:
-      main_ahead_by: 6
-      benita_unique_commits: 11
-      merge_base: 69dcbd087b974c6443664af7e57fa7c00f39d8da
     branch_policy: NEVER_FORCE_MOVE_NOW__RECONCILE_NORMALLY
-    benita_x_discord_brief_status: NOT_SENT
-    intended_public_comms_owner_x: BENITA_PENDING_HUMAN_BRIEF_AND_CONFIRMATION
+    last_observed_unique_commits: 11
+    demo_owner_candidate: BENITA
+    submission_pitch_owner_candidate: BENITA
+    demo_submission_readiness: ACKNOWLEDGED_BY_BENITA
+    intended_public_comms_owner_x: BENITA_PENDING_HUMAN_CONFIRMATION
     technical_amplification_x: '@roy1919875'
 
   claim_boundaries:
@@ -91,7 +79,6 @@ canonical_state:
     merge_runtime: T3_CONTRACT_TEST_PROVEN_PLUS_T4_REAL_EXACT_HEAD_MERGE__NO_FULLY_DEPLOYED_REPO_ADAPTER_CLAIM
 
   activity:
-    ledger: evidence/activity/ACTIVITY-LEDGER-V0.1.md
     real_paid_challenge_runs: 3
     real_paid_evidence_calls: 5
     observed_unique_miners: 2
@@ -107,7 +94,7 @@ canonical_state:
     faadil_discord_project_activity: VERIFIED
     faadil_discord_organic_engagement: VERIFIED
     benita_discord: HUMAN_VERIFY
-    x_primary_voice: BENITA_PENDING_HUMAN_CONFIRMATION
+    benita_x_handle: HUMAN_VERIFY
     x_posts: HUMAN_ACTION_REQUIRED
     final_submission: HUMAN_VERIFY_NOT_SUBMITTED
 
@@ -117,7 +104,7 @@ canonical_state:
     handover_must_be_sufficient_for_next_conversation_to_take_lead: true
     evidence_before_pass_claim: REQUIRED
 
-  exact_next_gate: SKEPTARA_BENITA_P0_FRONTEND_FIXES_AND_NORMAL_RECONCILIATION
+  exact_next_gate: SKEPTARA_BENITA_P0_FRONTEND_FIX_PUSH_REVIEW
   exact_next_owner: BENITA_FRONTEND_WITH_CHATGPT_ORCHESTRATOR_REVIEW
   exact_next_action: >-
-    Send Benita the bounded frontend review. Do not force-move feat/frontend-benita. She should correct PR1 chronology/coverage wording, restore the four verified settlement transactions and actual execution order, replace the false 'no real ESCALATE yet' claim with a final-T4-only statement, and tighten independence wording to the documented topology boundary. Then reconcile her unique commits normally with current main and run final desktop/mobile TRACE visual review before public submission. No fresh Telegraph calls for optics.
+    Wait for Benita to push the bounded P0 fixes on feat/frontend-benita. Do not force-move or overwrite her branch. Once pushed, compare the branch against main, verify the four correctness fixes and P1 judge-clarity refinements, reconcile normally, run full tests/build, then perform final desktop/mobile TRACE visual review. If TRACE passes, Benita can lead demo/pitch while Faadil handles technical proof support; then smoke the public deployment, publish showcase posts, run Project Finisher, and submit. No fresh Telegraph calls for optics.
