@@ -9,7 +9,7 @@ handover:
   resume_rule: >-
     Read state/CURRENT.yaml first, then this HANDOVER, product/PRD.md, spec-kit/tasks.md, docs/JUDGE-CLAIM-BOUNDARIES.md, and the Winning Intelligence evidence. Repository truth outranks chat memory. After every major gate and protected execution boundary, persist evidence and update BOTH CURRENT and HANDOVER. This file must remain sufficient for a new conversation to take the lead.
 
-  current_milestone: T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__WINNING_INTELLIGENCE_BLIND_SPOTS_FOUND__NINE_SPOT_REMEDIATION_IMPLEMENTED__LOCAL_VALIDATION_AND_TRACE_VISUAL_REVIEW_NEXT
+  current_milestone: T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__NINE_SPOT_REMEDIATION_IMPLEMENTED__BENITA_PRIMARY_X_PROJECT_VOICE__LOCAL_VALIDATION_AND_TRACE_VISUAL_REVIEW_NEXT
 
   project:
     public_name: Skeptara
@@ -111,9 +111,22 @@ handover:
       context: REGISTERED_WITH_LESS_THAN_24_HOURS_REMAINING
       required_tag: '@Telegraphprotoc'
       policy: NO_FABRICATED_HISTORY__USE_SUBSTANTIVE_COMPRESSED_SEQUENCE
+      primary_project_voice: BENITA
+      primary_voice_reason: STRONGER_PITCHING_AND_STORYTELLING
+      benita_x_handle: HUMAN_VERIFY_NOT_YET_RECORDED
+      secondary_voice: FAADIL
+      faadil_handle: '@roy1919875'
+      operating_pattern: BENITA_MAIN_BUILD_AND_FINAL_DEMO_POSTS__FAADIL_QUOTE_REPOSTS_WITH_TECHNICAL_PROOF_CONTEXT
       post_1_build_proof: HUMAN_ACTION_REQUIRED
       post_2_demo_submission: HUMAN_ACTION_REQUIRED_AFTER_PUBLIC_DEPLOY
     final_submission: HUMAN_VERIFY_NOT_SUBMITTED
+
+  public_comms_decision:
+    primary_x_project_voice: BENITA
+    secondary_x_voice: '@roy1919875'
+    duplicate_posting: AVOID
+    public_voice_changes_product_authority: false
+    canonical_truth_remains_repo: true
 
   current_remaining_gaps:
     local_test_after_remediation: PENDING
@@ -122,6 +135,7 @@ handover:
     public_deployment_smoke: PENDING
     discord_join_activity: PENDING_HUMAN
     x_showcase_posts: PENDING_HUMAN
+    benita_x_handle_capture: PENDING_HUMAN
     final_submission: PENDING_HUMAN
     project_finisher: NOT_STARTED
 
@@ -148,4 +162,4 @@ handover:
   exact_next_gate: SKEPTARA_HIDDEN_SPOT_REMEDIATION_LOCAL_VALIDATION_AND_TRACE_VISUAL_REVIEW
   exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_TRACE_REVIEW
   exact_next_action: >-
-    Pull main. Run `npm test` and `npm run demo`. If both pass, run `npm run demo:web`, open http://127.0.0.1:4173, and provide screenshots. TRACE must verify 5-second judge comprehension, the PR1 BLOCK/deny vs PR2 PASS/real merge split, controlled exact-CVE disclosure, MEDIUM-live vs LOW/HIGH-test distinction, historical replay labels, Telegraph routing causality, and human-authorization explanation. Do not mark public deployment, Discord activity, X posts, or final submission complete without human evidence.
+    Pull main. Run `npm test` and `npm run demo`. If both pass, run `npm run demo:web`, open http://127.0.0.1:4173, and provide screenshots. TRACE must verify 5-second judge comprehension, the PR1 BLOCK/deny vs PR2 PASS/real merge split, controlled exact-CVE disclosure, MEDIUM-live vs LOW/HIGH-test distinction, historical replay labels, Telegraph routing causality, and human-authorization explanation. Benita is the primary X project voice because of stronger pitching; Faadil @roy1919875 is the complementary technical/proof amplification voice. Capture Benita's X handle when available. Do not mark public deployment, Discord activity, X posts, or final submission complete without human evidence.
