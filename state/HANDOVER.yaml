@@ -9,8 +9,8 @@ handover:
   resume_rule: >-
     Read state/CURRENT.yaml first, then this HANDOVER, then product/PRD.md. The living PRD is canonical product intent; Spec Kit files are derived execution contracts. Repository truth outranks chat/runtime memory. After every major gate persist evidence and update BOTH CURRENT and HANDOVER.
 
-  current_milestone: T0_CLOSED_PASS__T1_PASS__T2_RUN_001_REJECTED__V0_2_REMEDIATED__RETRY_002_REJECTED__PR1_CHALLENGED__PR2_CLEAN_REBASED__SEEDED_CVE_V0_3_LOCAL_TEST_NEXT
-  lifecycle_status: PRODUCT_CONTRACT_LOCKED__REAL_TELEGRAPH_PROVEN__TWO_FALSE_PASSES_CAUGHT_BY_EVIDENCE_REVIEW__MEANINGFUL_COVERAGE_RULE_STRENGTHENED__CLEAN_FIXTURE_CORRECTED
+  current_milestone: T0_CLOSED_PASS__T1_PASS__T2_RUN_001_REJECTED__V0_2_REMEDIATED__RETRY_002_REJECTED__PR1_CHALLENGED__PR2_CLEAN_REBASED__SEEDED_CVE_V0_3_USER_TEST_26_OF_26_PASS__LIVE_PR2_AUDIT_NEXT
+  lifecycle_status: PRODUCT_CONTRACT_LOCKED__REAL_TELEGRAPH_PROVEN__TWO_FALSE_PASSES_CAUGHT_BY_EVIDENCE_REVIEW__MEANINGFUL_COVERAGE_RULE_STRENGTHENED__SEEDED_CVE_LOCAL_GATE_PASS
 
   project:
     public_name: Skeptara
@@ -40,7 +40,7 @@ handover:
 
   t2_current:
     gate: SKEPTARA_T2_INDEPENDENT_AUDITOR_PASS
-    status: SEEDED_CVE_V0_3_IMPLEMENTED__LOCAL_TEST_AND_PR2_LIVE_AUDIT_REQUIRED
+    status: SEEDED_CVE_V0_3_LOCAL_VALIDATION_PASS__PR2_LIVE_AUDIT_REQUIRED
     contract: docs/T2_AUDITOR_CONTRACT.md
     generic_auditor: src/auditor.mjs
     seeded_auditor: src/seeded-cve-auditor.mjs
@@ -55,13 +55,12 @@ handover:
       evidence: evidence/t2/live-clean-run-001/REVIEW.md
 
     retry_002:
-      runtime_dir: evidence/t2-runtime/2026-09-06T23-47-29-348Z
       runtime_reported: PASS
-      spend_atomic: 20000
-      actual_intents: [FACT_CHECK, NEWS_SEARCH]
       accepted: false
       corrected_meaningful_coverage: 0_OF_2
       corrected: ESCALATE
+      spend_atomic: 20000
+      actual_intents: [FACT_CHECK, NEWS_SEARCH]
       reason:
         - FACT_CHECK_UNVERIFIED_EVIDENCE_NULL
         - NEWS_SEARCH_RETURNED_IRRELEVANT_ARTICLES
@@ -72,42 +71,46 @@ handover:
       - unverified result with no evidence cannot count
       - returned evidence must be substantively relevant to canonical target
       - request/query echo cannot establish relevance
-      - exact seeded CVE path must return actual CVE_LOOKUP + exact CVE id + found record + machine-checkable affected range
+      - seeded CVE path must return actual CVE_LOOKUP, exact requested CVE, found record and machine-checkable range
 
     challenged_case:
       pr_number: 1
-      title_role: CHALLENGED_CANDIDATE
       branch: demo/clean-lodash-upgrade
       head_sha: 73cf5bdd69163924228e3e21d67fa9f405d99904
       target: lodash@4.17.21
+      role: CHALLENGED_CANDIDATE
       action_file: demo/actions/challenged-pr.json
       merge_authorized: false
 
     clean_case:
       pr_number: 2
-      title_role: CLEAN_CANDIDATE
       branch: demo/clean-lodash-4.18.1
       head_sha: d2aa0ea25daf1f84b6cfdd98861d3f05df584b7a
       target: lodash@4.18.1
+      role: CLEAN_CANDIDATE
       action_file: demo/actions/clean-pr.json
       risk_tier: MEDIUM
       required_paths: 2
       spend_cap_atomic: 20000
       evidence_seeds: [CVE-2026-4800, CVE-2026-2950]
+      pr_open: true
+      pr_unmerged: true
+      pr_mergeable: true
       merge_authorized: false
 
     seeded_v0_3:
       version: skeptara-auditor-v0.3-seeded-cve
-      implementation_status: IMPLEMENTED_LOCAL_VALIDATION_REQUIRED
-      tests: tests/seeded-cve-auditor.test.mjs
-      expected_full_test_count: 26
-      clean_expected_if_live_records_match_current_ranges: TWO_NON_BLOCKING_ADVISORY_PATHS
-      challenged_expected_if_live_records_match_current_ranges: EARLY_BLOCK_ON_AFFECTED_RANGE
+      implementation_status: LOCAL_VALIDATION_PASS
+      user_machine_full_repo: 26_OF_26_PASS__0_FAIL
+      evidence: evidence/t2/LOCAL-USER-VALIDATION-V0.3-26-OF-26.md
+      clean_fixture_semantics: TWO_NON_BLOCKING_ADVISORY_PATHS_CAN_PASS_ONLY_IF_LIVE_RECORDS_VALIDATE_RANGE
+      challenged_fixture_semantics: AFFECTED_RANGE_CAUSES_EARLY_BLOCK
 
   frontend_parallel:
     contract: docs/FRONTEND_DATA_CONTRACT.md
     branch: feat/frontend-benita
     release_condition: SATISFIED
+    last_check: IDENTICAL_TO_MAIN_BEFORE_THIS_GATE_PERSISTENCE
     sync_policy: once Benita has unique commits, never force-move her branch; reconcile normally.
 
   security:
@@ -123,7 +126,7 @@ handover:
     - SKEPTARA_BUILD_CANDIDATE_READY
     - HUMAN_PROTECTED_FINAL_SUBMISSION
 
-  exact_next_gate: SKEPTARA_T2_V0_3_LOCAL_TEST_AND_PR2_LIVE_AUDIT
+  exact_next_gate: SKEPTARA_T2_V0_3_PR2_LIVE_SEEDED_CVE_AUDIT
   exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_REVIEW
   exact_next_action: >-
-    Pull main and run npm test. Expected total is 26 tests if no unrelated test-count change. Do not spend again unless the suite is green. Then reverify PR #2 exact head d2aa0ea25daf1f84b6cfdd98861d3f05df584b7a and run scripts/t2-from-clipboard.ps1. The runner will automatically use SEEDED_CVE_COUNTER_EVIDENCE from demo/actions/clean-pr.json. Return terminal output and the new sanitized 02-audit-result.json. Never merge PR #1 or PR #2 before T3 and never force PASS.
+    Run powershell -ExecutionPolicy Bypass -File .\scripts\t2-from-clipboard.ps1 using the fresh bounded Base Sepolia burner. The action file is bound to PR #2 exact head d2aa0ea25daf1f84b6cfdd98861d3f05df584b7a and exact CVE seeds CVE-2026-4800 and CVE-2026-2950. Maximum spend is 20000 atomic USDC. Return terminal output and the new sanitized 02-audit-result.json. Do not merge PR #1 or PR #2 before T3 and never force PASS.
