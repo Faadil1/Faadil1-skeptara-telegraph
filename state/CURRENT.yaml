@@ -1,23 +1,25 @@
 canonical_state:
   protocol_version: 1
   system: SKEPTARA_TELEGRAPH_TRACK3
-  version: 0.9.0-t4-two-case-real-demo-closed-trace-next
+  version: 0.9.1-t4-closed-winning-intelligence-preflight-pass-trace-next
   date: 2026-09-07
   source_of_truth: GITHUB
   repository: Faadil1/Faadil1-skeptara-telegraph
   branch: main
 
-  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__TRACE_JUDGE_PATH_REVIEW_NEXT
+  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__WINNING_INTELLIGENCE_PREFLIGHT_PASS_WITH_PRIORITY_RISKS__TRACE_JUDGE_PATH_REVIEW_NEXT
 
   authority:
     product_intent_source: product/PRD.md
     product_source_owner: HUMAN_PROJECT_OWNER
     protected_external_action: HUMAN_BOUNDED_AUTHORIZATION
+    repository_truth_outranks_chat_memory: true
 
   product_core:
     public_name: Skeptara
     vertical: AUTONOMOUS_GITHUB_DEPENDENCY_MERGE
     mechanism: RISK_PROPORTIONAL_INDEPENDENT_COUNTER_EVIDENCE_BEFORE_EXECUTION
+    one_line: Independent counter-evidence before autonomous execution.
     fail_closed: true
 
   closed_gates:
@@ -81,6 +83,37 @@ canonical_state:
     real_x402_spend_observed: true
     protected_execution_boundary_proven: true
 
+  winning_intelligence:
+    status: PASS_WITH_PRIORITY_RISKS
+    evidence: evidence/winning-intelligence/WI-TRACE-PREFLIGHT-001.md
+    product_pivot_required: false
+    new_core_feature_required: false
+    protected_public_positioning:
+      promise: Before an autonomous agent can merge code, Skeptara pays independent Telegraph miners to try to prove the change unsafe.
+      judge_memory: Skeptara turns Telegraph into a paid objection layer; risky autonomous actions must survive independent counter-evidence before they execute.
+      hero: No autonomous merge without an independent challenge.
+    competitive_collision:
+      status: MATERIAL_BUT_NON_BLOCKING
+      observed_pattern: VERIFIED_INTELLIGENCE_TO_GOVERNED_ACTION_WITH_CONFIDENCE_AND_BUDGET_GATING
+      response: LEAD_WITH_ACTION_LEVEL_COUNTER_EVIDENCE__EXTERNAL_RISK_TO_EVIDENCE_DEPTH_AND_SPEND__EXACT_EXECUTION_BINDING
+    strengths:
+      - REAL_MINER_AND_X402_PROOF
+      - RISK_PROPORTIONAL_COUNTER_EVIDENCE
+      - FAIL_CLOSED_PASS_BLOCK_ESCALATE
+      - EXACT_PR_HEAD_FINGERPRINT_FRESHNESS_BINDING
+      - REAL_TWO_CASE_BLOCK_DENY_AND_PASS_MERGE_PROOF
+    priority_risks:
+      - LIMITED_VISIBLE_EXTERNAL_USER_ADOPTION
+      - FRONTEND_JUDGE_PATH_NOT_YET_PROVEN
+      - README_STALE_RELATIVE_TO_T4_CLOSURE
+      - PUBLIC_ENGAGEMENT_AND_SHOWCASE_EVIDENCE_URGENT
+    anti_drift:
+      no_new_core_agent: true
+      no_new_sponsor_integration: true
+      no_fake_usage_counters: true
+      no_generic_verified_intelligence_positioning: true
+      x402_is_infrastructure_not_product_innovation: true
+
   security_boundary:
     prior_exposed_burner_status: COMPROMISED_DO_NOT_REUSE_OR_FUND
     fresh_burner_status: TESTNET_ONLY
@@ -88,11 +121,11 @@ canonical_state:
     payer_address_in_durable_evidence: false
     protected_github_write_credential_in_browser_or_repo: false
 
-  branches:
-    main: CURRENT
-    feat_frontend_benita: FAST_FORWARD_ONLY_WHILE_NO_UNIQUE_COMMITS
-    demo_clean_lodash_upgrade: FROZEN_CHALLENGED_PR_1
-    demo_clean_lodash_4_18_1: MERGED_PR_2_SOURCE_HEAD_528D730
+  collaboration:
+    frontend_contract: docs/FRONTEND_DATA_CONTRACT.md
+    frontend_branch: feat/frontend-benita
+    frontend_branch_policy: FAST_FORWARD_ONLY_WHILE_NO_UNIQUE_COLLABORATOR_COMMITS
+    once_unique_commits_exist: NEVER_FORCE_MOVE__RECONCILE_NORMALLY
 
   build_gates:
     prd_v0_1_human_lock: PASS
@@ -101,7 +134,9 @@ canonical_state:
     t2_independent_auditor: CLOSED_PASS
     t3_fail_closed_merge_gate: CLOSED_PASS
     t4_two_case_real_demo: CLOSED_PASS
+    winning_intelligence_preflight: PASS_WITH_PRIORITY_RISKS
     trace_design_review: NOT_STARTED
+    frontend_integration_and_deployed_smoke: NOT_STARTED
     project_finisher: NOT_STARTED
     final_submission: PROTECTED_NOT_AUTHORIZED
 
@@ -116,4 +151,4 @@ canonical_state:
   exact_next_gate: SKEPTARA_TRACE_JUDGE_PATH_REVIEW
   exact_next_owner: CHATGPT_ORCHESTRATOR_WITH_HUMAN_VISUAL_REVIEW
   exact_next_action: >-
-    Treat T0 through T4 as closed. Read the frozen frontend contract and current frontend branch state, then perform TRACE judge-path review for the end-to-end story: proposed dependency PR -> deterministic risk -> real Telegraph/x402 evidence -> PASS/BLOCK/ESCALATE -> protected execution. Validate that the UI makes the real challenged PR #1 BLOCK/deny proof and clean PR #2 PASS/authorized merge proof legible without inventing runtime fields. Reconcile Benita's branch without force if she has unique commits. Persist TRACE findings and advance only when the judge path is demo-ready.
+    Consume evidence/winning-intelligence/WI-TRACE-PREFLIGHT-001.md as the strategic judge packet, then inspect docs/FRONTEND_DATA_CONTRACT.md, the current frontend branch, T4 evidence and README. Run TRACE specifically against the winning distinction: external risk -> risk-proportional paid Telegraph counter-evidence -> PASS/BLOCK/ESCALATE -> exact protected execution. The primary judge moment must make real PR #1 BLOCK/deny and PR #2 PASS/authorized merge immediately legible. Do not add new core features or generic governance framing. Persist TRACE findings and update CURRENT + HANDOVER before advancing to frontend/deployed smoke.
