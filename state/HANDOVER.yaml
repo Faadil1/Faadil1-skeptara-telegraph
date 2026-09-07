@@ -9,7 +9,7 @@ handover:
   resume_rule: >-
     Read state/CURRENT.yaml first, then this HANDOVER, then product/PRD.md. The living PRD is canonical product intent; Spec Kit files are derived execution contracts. Repository truth outranks chat/runtime memory. After every major gate persist evidence and update BOTH CURRENT and HANDOVER.
 
-  current_milestone: T0_CLOSED_PASS__T1_PASS__T2_RUN_001_REJECTED__V0_2_REMEDIATED__RETRY_002_REJECTED__PR1_CHALLENGED__PR2_CLEAN__SEEDED_CVE_V0_3_LOCAL_TEST_NEXT
+  current_milestone: T0_CLOSED_PASS__T1_PASS__T2_RUN_001_REJECTED__V0_2_REMEDIATED__RETRY_002_REJECTED__PR1_CHALLENGED__PR2_CLEAN_REBASED__SEEDED_CVE_V0_3_LOCAL_TEST_NEXT
   lifecycle_status: PRODUCT_CONTRACT_LOCKED__REAL_TELEGRAPH_PROVEN__TWO_FALSE_PASSES_CAUGHT_BY_EVIDENCE_REVIEW__MEANINGFUL_COVERAGE_RULE_STRENGTHENED__CLEAN_FIXTURE_CORRECTED
 
   project:
@@ -87,7 +87,7 @@ handover:
       pr_number: 2
       title_role: CLEAN_CANDIDATE
       branch: demo/clean-lodash-4.18.1
-      head_sha: c40c5a3a15d6280005dfe7589ae7e2a960cc199c
+      head_sha: d2aa0ea25daf1f84b6cfdd98861d3f05df584b7a
       target: lodash@4.18.1
       action_file: demo/actions/clean-pr.json
       risk_tier: MEDIUM
@@ -126,4 +126,4 @@ handover:
   exact_next_gate: SKEPTARA_T2_V0_3_LOCAL_TEST_AND_PR2_LIVE_AUDIT
   exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_REVIEW
   exact_next_action: >-
-    Pull main and run npm test. Expected total is 26 tests if no unrelated test-count change. Do not spend again unless the suite is green. Then reverify PR #2 exact head c40c5a3a15d6280005dfe7589ae7e2a960cc199c and run scripts/t2-from-clipboard.ps1. The runner will automatically use SEEDED_CVE_COUNTER_EVIDENCE from demo/actions/clean-pr.json. Return terminal output and the new sanitized 02-audit-result.json. Never merge PR #1 or PR #2 before T3 and never force PASS.
+    Pull main and run npm test. Expected total is 26 tests if no unrelated test-count change. Do not spend again unless the suite is green. Then reverify PR #2 exact head d2aa0ea25daf1f84b6cfdd98861d3f05df584b7a and run scripts/t2-from-clipboard.ps1. The runner will automatically use SEEDED_CVE_COUNTER_EVIDENCE from demo/actions/clean-pr.json. Return terminal output and the new sanitized 02-audit-result.json. Never merge PR #1 or PR #2 before T3 and never force PASS.
