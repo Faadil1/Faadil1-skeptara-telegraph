@@ -1,13 +1,13 @@
 canonical_state:
   protocol_version: 1
   system: SKEPTARA_TELEGRAPH_TRACK3
-  version: 0.9.3-registration-verified-trace-next
+  version: 0.9.4-nine-hidden-spots-remediated-validation-next
   date: 2026-09-07
   source_of_truth: GITHUB
   repository: Faadil1/Faadil1-skeptara-telegraph
   branch: main
 
-  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__WINNING_INTELLIGENCE_PREFLIGHT_PASS__BLIND_SPOT_AUDIT_002_COMPLETE__TELEGRAPH_REGISTRATION_VERIFIED__TRACE_JUDGE_PATH_REVIEW_NEXT
+  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__WINNING_INTELLIGENCE_PREFLIGHT_PASS__BLIND_SPOT_AUDIT_002_COMPLETE__NINE_SPOT_REMEDIATION_IMPLEMENTED__LOCAL_VALIDATION_AND_TRACE_VISUAL_REVIEW_NEXT
 
   authority:
     product_intent_source: product/PRD.md
@@ -19,7 +19,7 @@ canonical_state:
     public_name: Skeptara
     vertical: AUTONOMOUS_GITHUB_DEPENDENCY_MERGE
     mechanism: RISK_PROPORTIONAL_INDEPENDENT_COUNTER_EVIDENCE_BEFORE_EXECUTION
-    one_line: Independent counter-evidence before autonomous execution.
+    safe_public_promise: Before an autonomous agent can merge code, Skeptara buys Telegraph-routed external evidence to try to prove the change unsafe.
     fail_closed: true
 
   closed_gates:
@@ -27,14 +27,12 @@ canonical_state:
     t1: { status: PASS, policy_version: skeptara-risk-v0.1 }
     t2:
       status: CLOSED_PASS
-      seeded_auditor_version: skeptara-auditor-v0.4-seeded-cve
+      auditor_version: skeptara-auditor-v0.4-seeded-cve
       closure_evidence: evidence/t2/LOCAL-USER-VALIDATION-V0.4-29-OF-29-AND-RUN003-REPLAY-PASS.md
-      user_machine_tests: 29_OF_29_PASS__0_FAIL
     t3:
       status: CLOSED_PASS
-      version: skeptara-merge-gate-v0.1
+      gate_version: skeptara-merge-gate-v0.1
       closure_evidence: evidence/t3/LOCAL-USER-VALIDATION-V0.1-41-OF-41-AND-12-OF-12.md
-      validation: 41_OF_41_FULL__12_OF_12_FOCUSED__0_FAIL
     t4:
       status: CLOSED_PASS
       challenged_case_review: evidence/t4/pr1-block-run-004/REVIEW.md
@@ -42,120 +40,111 @@ canonical_state:
       clean_case_review: evidence/t4/pr2-clean-run-005/REVIEW.md
       clean_case_merge: evidence/t4/pr2-clean-run-005/REAL-MERGE-EXECUTION.md
 
-  demo_cases:
-    challenged:
-      pr_number: 1
+  t4_two_case_truth:
+    challenged_pr1:
       head_sha: 73cf5bdd69163924228e3e21d67fa9f405d99904
       target: lodash@4.17.21
       outcome: BLOCK
       blocking_evidence: CVE-2026-2950
-      merge_gate_authorization: DENIED
+      merge_gate: DENIED
       merge_adapter_calls: 0
-      merged: false
-    clean:
-      pr_number: 2
+    clean_pr2:
       head_sha: 528d730f9ebdcb433e01ba9c79dcc9a5f66ce1c7
       target: lodash@4.18.1
       outcome: PASS
-      challenge_id: f4f075f3-1dbc-42ed-9843-dbec43de3430
-      human_bounded_authorization: EXPLICIT_PASS
-      expected_head_sha_enforced: true
+      coverage: 2_OF_2
+      observed_miners: [20260828, 7336]
+      bounded_human_authorization: EXPLICIT_PASS
       merged: true
-      merged_at: 2026-09-07T01:44:54Z
       merge_commit_sha: c76c76e0c02dab28275d8e53d70da3f6f132e648
 
   winning_intelligence:
     preflight:
       status: PASS_WITH_PRIORITY_RISKS
       evidence: evidence/winning-intelligence/WI-TRACE-PREFLIGHT-001.md
-      product_pivot_required: false
-      new_core_feature_required: false
     blind_spot_audit_002:
       status: COMPLETE
       evidence: evidence/winning-intelligence/WI-BLIND-SPOT-AUDIT-002.md
-      product_pivot_required: false
       material_hidden_spots_found: true
-      p0:
-        - NO_REAL_FRONTEND_OR_PUBLIC_JUDGE_SURFACE_IN_REPO
-        - LIVE_MERGE_PROOF_NOT_PRODUCTIZED_AS_SINGLE_REPO_RUNTIME_ADAPTER_PATH
-        - CONTROLLED_EXACT_CVE_SEEDS_CAN_LOOK_CHERRY_PICKED
-        - RISK_PROPORTIONAL_THESIS_ONLY_LIVE_PROVEN_AT_MEDIUM_TIER
-        - REGISTRATION_DISCORD_X_AND_FINAL_SUBMISSION_COMPLIANCE_NOT_REPO_VERIFIABLE
-      p1:
-        - TELEGRAPH_QUALITY_FLYWHEEL_AND_ROUTING_STORY_UNDERUSED
-        - REAL_ACTIVITY_EXISTS_BUT_NOT_AGGREGATED
-        - README_AND_EVIDENCE_INDEX_STALE
-        - CAPTURED_LIVE_REPLAY_NEEDS_FRESHNESS_LABELING
-        - HUMAN_AUTHORIZATION_CAN_CONFUSE_AUTONOMY_STORY
-      claim_corrections_applied:
-        independent_miners_wording: REPLACED_WITH_TELEGRAPH_ROUTED_EXTERNAL_EVIDENCE
-        downside_scoring_wording: REPLACED_WITH_EXTERNAL_DETERMINISTIC_RISK_CLASSIFICATION
-      non_negotiable_claim_boundaries:
-        - DO_NOT_CLAIM_STATISTICAL_MINER_INDEPENDENCE
-        - DO_NOT_CLAIM_AUTOMATIC_UNKNOWN_VULNERABILITY_DISCOVERY
-        - DO_NOT_CLAIM_LOW_HIGH_LIVE_ECONOMIC_SCALING_WHEN_ONLY_MEDIUM_IS_LIVE_PROVEN
-        - DO_NOT_PRESENT_HISTORICAL_REPLAY_AS_FRESH_EXECUTABLE_PASS
-        - DO_NOT_CLAIM_FULLY_DEPLOYED_REPO_GITHUB_ADAPTER_IF_NOT_PRESENT
-    protected_public_positioning:
-      promise: Before an autonomous agent can merge code, Skeptara buys Telegraph-routed external evidence to try to prove the change unsafe.
-      judge_memory: Skeptara turns Telegraph into a paid objection layer; risky autonomous actions must survive Telegraph-routed counter-evidence before they execute.
-      hero: No autonomous merge without an independent challenge.
+    remediation_003:
+      status: IMPLEMENTED_PENDING_VALIDATION
+      evidence: evidence/winning-intelligence/WI-HIDDEN-SPOT-REMEDIATION-003.md
+      applied:
+        hs01_judge_surface: public/index.html
+        hs02_merge_runtime_claim_boundary: docs/JUDGE-CLAIM-BOUNDARIES.md
+        hs03_seeded_cve_disclosure: APPLIED
+        hs04_risk_scaling_live_vs_test_label: APPLIED
+        hs05_admin_compliance_checklist: docs/SUBMISSION-COMPLIANCE.md
+        hs06_telegraph_routing_flywheel_story: APPLIED
+        hs07_truthful_activity_ledger: evidence/activity/ACTIVITY-LEDGER-V0.1.md
+        hs08_readme_evidence_index_refresh: APPLIED
+        hs09_historical_replay_human_auth_reproducibility: APPLIED
+      runnable_assets:
+        judge_replay_command: npm run demo
+        local_judge_surface_command: npm run demo:web
+      no_product_pivot: true
 
-  sponsor_fit:
-    official_quality_flywheel_story_must_be_visible: true
-    engine_auto_route_proven: true
-    clean_run_observed_miners:
-      - { id: 20260828, name: PREFLIGHT Infrastructure Signals }
-      - { id: 7336, name: SecWire CVE Lookup }
-    do_not_claim_miner_statistical_independence: true
+  claim_boundaries:
+    exact_cve_seeded_mode: CONTROLLED_HACKATHON_PROOF_NOT_AUTOMATIC_UNKNOWN_VULNERABILITY_DISCOVERY
+    risk_scaling:
+      low: POLICY_TEST_PROVEN
+      medium: LIVE_FINAL_T4_PROVEN
+      high: POLICY_TEST_PROVEN
+    independence: CHALLENGE_TOPOLOGY_NOT_STATISTICAL_MINER_INDEPENDENCE
+    pricing: OBSERVED_TESTNET_PRICE_NOT_NETWORK_INVARIANT
+    replay: HISTORICAL_REPLAY_NEVER_FRESH_EXECUTION_AUTHORIZATION
+    merge_runtime: T3_CONTRACT_TEST_PROVEN_PLUS_T4_REAL_EXACT_HEAD_MERGE__NO_FULLY_DEPLOYED_REPO_ADAPTER_CLAIM
+    human_authorization: EXTRA_REAL_WRITE_SAFETY_BOUNDARY__CANNOT_CONVERT_BLOCK_OR_ESCALATE_TO_PASS
+
+  activity:
+    ledger: evidence/activity/ACTIVITY-LEDGER-V0.1.md
+    scope: CONSERVATIVE_FINAL_PROOF_SUBSET
+    real_paid_challenge_runs: 3
+    real_paid_evidence_calls: 5
+    observed_unique_miners: 2
+    observed_testnet_spend_usd: 0.05
+    protected_denials: 1
+    real_exact_head_merges: 1
+    user_count_claim: NONE
 
   administrative_compliance:
     registration:
       status: VERIFIED
       evidence: evidence/admin/TELEGRAPH-REGISTRATION-VERIFIED.md
-      confirmation_source: HUMAN_PROVIDED_OFFICIAL_SITE_SCREENSHOT
-    official_discord_joined_and_active: HUMAN_VERIFY
-    public_x_updates_tagged: HUMAN_VERIFY
-    final_submission_form_requirements: HUMAN_VERIFY
-    final_submission_completed: false
+    official_discord:
+      invite: https://discord.gg/telegraphprotocol
+      source: TELEGRAPH_OWNED_DEVELOPER_CONSOLE_AND_GUIDE
+      joined_and_active: HUMAN_ACTION_REQUIRED
+    x_showcase:
+      timing_context: REGISTERED_WITH_LESS_THAN_24_HOURS_REMAINING
+      strategy: TRUTHFUL_COMPRESSED_SEQUENCE__NO_FAKE_HISTORY
+      required_tag: '@Telegraphprotoc'
+      build_proof_post: HUMAN_ACTION_REQUIRED
+      demo_submission_post: HUMAN_ACTION_REQUIRED_AFTER_PUBLIC_DEPLOY
+    final_submission: HUMAN_VERIFY_NOT_SUBMITTED
     metric_gaming_forbidden: ACKNOWLEDGED
+
+  current_surface:
+    repo_judge_surface: IMPLEMENTED_PENDING_VISUAL_REVIEW
+    public_deployment: NOT_YET_PROVEN
+    readme_current_to_t4: YES
+    evidence_index_current_to_t4: YES
+    one_command_two_case_replay: IMPLEMENTED_PENDING_USER_MACHINE_VALIDATION
+    truthful_activity_ledger: BUILT
 
   security_boundary:
     prior_exposed_burner_status: COMPROMISED_DO_NOT_REUSE_OR_FUND
-    fresh_burner_status: TESTNET_ONLY
     private_key_in_repo: false
     payer_address_in_durable_evidence: false
     protected_github_write_credential_in_browser_or_repo: false
 
-  collaboration:
-    frontend_contract: docs/FRONTEND_DATA_CONTRACT.md
-    frontend_branch: feat/frontend-benita
-    frontend_branch_policy: FAST_FORWARD_ONLY_WHILE_NO_UNIQUE_COLLABORATOR_COMMITS
-    once_unique_commits_exist: NEVER_FORCE_MOVE__RECONCILE_NORMALLY
-
-  build_gates:
-    prd_v0_1_human_lock: PASS
-    t0_real_telegraph_challenge: CLOSED_PASS
-    t1_deterministic_risk_scorer: PASS
-    t2_independent_auditor: CLOSED_PASS
-    t3_fail_closed_merge_gate: CLOSED_PASS
-    t4_two_case_real_demo: CLOSED_PASS
-    winning_intelligence_preflight: PASS_WITH_PRIORITY_RISKS
-    winning_intelligence_blind_spot_audit_002: COMPLETE
-    telegraph_registration: VERIFIED
-    trace_design_review: NOT_STARTED
-    frontend_integration_and_deployed_smoke: NOT_STARTED
-    project_finisher: NOT_STARTED
-    final_submission: PROTECTED_NOT_AUTHORIZED
-
-  state_persistence_rule:
+  persistence_rule:
     after_every_major_gate: UPDATE_CURRENT_AND_HANDOVER
     after_every_execution_boundary: UPDATE_CURRENT_AND_HANDOVER
-    handover_must_contain_exact_next_gate_owner_action: true
     handover_must_be_sufficient_for_next_conversation_to_take_lead: true
     evidence_before_pass_claim: REQUIRED
 
-  exact_next_gate: SKEPTARA_TRACE_JUDGE_PATH_REVIEW
-  exact_next_owner: CHATGPT_ORCHESTRATOR_WITH_HUMAN_VISUAL_REVIEW
+  exact_next_gate: SKEPTARA_HIDDEN_SPOT_REMEDIATION_LOCAL_VALIDATION_AND_TRACE_VISUAL_REVIEW
+  exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_TRACE_REVIEW
   exact_next_action: >-
-    Read both Winning Intelligence packets before TRACE: WI-TRACE-PREFLIGHT-001.md and WI-BLIND-SPOT-AUDIT-002.md. TRACE must absorb the P0/P1 findings without expanding the product. The primary judge surface must be a challenge dossier, not a generic dashboard, and must clearly separate controlled exact-CVE seeded proof from open-ended discovery, deterministic policy/test-proven LOW/HIGH behavior from live-proven MEDIUM behavior, and captured-live historical replay from fresh executable state. Make Telegraph auto-routing/real-demand causality visible. Registration is now verified; Discord participation, X showcase/tagging, and final submission remain separate human-verification gates. Persist TRACE findings and update CURRENT + HANDOVER before advancing to frontend implementation/deployed smoke.
+    Pull main and validate the remediation block with `npm test` then `npm run demo`. If both pass, run `npm run demo:web`, open http://127.0.0.1:4173, and provide screenshots for TRACE human visual review. The surface must preserve the split PR1 BLOCK/deny vs PR2 PASS/real merge story, historical replay labeling, exact-CVE seeded disclosure, MEDIUM-live vs LOW/HIGH-test distinction, Telegraph routing causality, and claim boundaries. Discord join/activity, X posts, public deployment smoke, and final submission remain human-only gates and must not be marked complete without evidence.
