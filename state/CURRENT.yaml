@@ -1,13 +1,13 @@
 canonical_state:
   protocol_version: 1
   system: SKEPTARA_TELEGRAPH_TRACK3
-  version: 0.10.4-benita-review-sent-demo-submit-ready
+  version: 0.10.5-benita-holistic-review-hold-bounded-fixes
   date: 2026-09-07
   source_of_truth: GITHUB
   repository: Faadil1/skeptara-telegraph
   branch: main
 
-  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__LOCAL_VALIDATION_PASS__BENITA_FRONTEND_SOURCE_REVIEW_HOLD_BOUNDED_FIXES__REVIEW_SENT__BENITA_READY_FOR_DEMO_AND_SUBMISSION_AFTER_FIXES__WAIT_FOR_PUSH_THEN_RECONCILE_AND_TRACE
+  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__LOCAL_VALIDATION_PASS__BENITA_FRONTEND_SOURCE_AND_HOLISTIC_REVIEW_HOLD_BOUNDED_FIXES__WAIT_FOR_PUSH_THEN_RECONCILE_TRACE_RELEASE
 
   authority:
     product_intent_source: product/PRD.md
@@ -41,9 +41,33 @@ canonical_state:
     final_t4_distinct_settlement_transactions: 4
     semantics: ONE_FINAL_T4_EVIDENCE_ITEM_EQUALS_ONE_SEPARATE_PAID_TELEGRAPH_CALL
 
+  benita_frontend_reviews:
+    source_review:
+      status: HOLD_BOUNDED_FIXES
+      evidence: evidence/trace/BENITA-FRONTEND-SOURCE-REVIEW-001.md
+    holistic_review:
+      status: HOLD_BOUNDED_FIXES
+      evidence: evidence/trace/BENITA-FRONTEND-HOLISTIC-REVIEW-002.md
+      scope:
+        - COPY_ANTI_AI_SLOP
+        - CLAIM_AND_DATA_ACCURACY
+        - FUNCTIONAL_REPLAY_BEHAVIOR
+        - ACCESSIBILITY_AND_REDUCED_MOTION
+        - SECURITY_AND_TRUST_BOUNDARIES
+        - SOCIAL_SHARE_METADATA
+        - RELEASE_VALIDATION
+      anti_slop_rule: >-
+        Avoid repeated em-dash contrast patterns, slogan triples, defensive copy, and synthetic 'not X but Y' prose. Keep hyphens only where technically meaningful such as risk-proportional, exact-head, fail-closed, dependency-change, CVE identifiers and x402. Prefer short declarative evidence-dossier prose.
+      newly_found_non_ui_fixes:
+        - SIMPLIFY_USE_CASE_REPLAY_TIMER_ARITHMETIC
+        - HONOR_PREFERS_REDUCED_MOTION_IN_REPLAY_AND_HASH_SCROLL
+        - ADD_SAFE_NOT_FOUND_ROUTE
+        - ADD_META_DESCRIPTION_CANONICAL_OPEN_GRAPH_X_CARD_AND_SOCIAL_PREVIEW
+        - VERIFY_DIRECT_ROUTES_SETTLEMENT_LINKS_MERGE_LINK_AND_NO_NETWORK_CALLS
+        - RUN_FRONTEND_BUILD_LINT_AND_ROOT_TESTS_AFTER_RECONCILIATION
+      ci_status_at_reviewed_benita_head: NO_GITHUB_STATUS_CHECKS_EXPOSED
+
   benita_frontend_source_review:
-    status: HOLD_BOUNDED_FIXES
-    evidence: evidence/trace/BENITA-FRONTEND-SOURCE-REVIEW-001.md
     deployed_url_human_supplied: https://skeptara.vercel.app/
     source_branch: feat/frontend-benita
     communication_status: REVIEW_SENT_TO_BENITA__HUMAN_SCREENSHOT_VERIFIED
@@ -64,7 +88,7 @@ canonical_state:
     frontend_branch: feat/frontend-benita
     frontend_branch_status: DIVERGED
     branch_policy: NEVER_FORCE_MOVE_NOW__RECONCILE_NORMALLY
-    last_observed_unique_commits: 11
+    last_reviewed_branch_head: b9981d74cfd2e5f7581ab1a72df5e6b3bde0691a
     demo_owner_candidate: BENITA
     submission_pitch_owner_candidate: BENITA
     demo_submission_readiness: ACKNOWLEDGED_BY_BENITA
@@ -104,7 +128,7 @@ canonical_state:
     handover_must_be_sufficient_for_next_conversation_to_take_lead: true
     evidence_before_pass_claim: REQUIRED
 
-  exact_next_gate: SKEPTARA_BENITA_P0_FRONTEND_FIX_PUSH_REVIEW
+  exact_next_gate: SKEPTARA_BENITA_HOLISTIC_FIX_PUSH_REVIEW_AND_NORMAL_RECONCILIATION
   exact_next_owner: BENITA_FRONTEND_WITH_CHATGPT_ORCHESTRATOR_REVIEW
   exact_next_action: >-
-    Wait for Benita to push the bounded P0 fixes on feat/frontend-benita. Do not force-move or overwrite her branch. Once pushed, compare the branch against main, verify the four correctness fixes and P1 judge-clarity refinements, reconcile normally, run full tests/build, then perform final desktop/mobile TRACE visual review. If TRACE passes, Benita can lead demo/pitch while Faadil handles technical proof support; then smoke the public deployment, publish showcase posts, run Project Finisher, and submit. No fresh Telegraph calls for optics.
+    Wait for Benita to push the bounded P0/P1 correctness fixes plus the holistic copy/accessibility/release fixes from BENITA-FRONTEND-HOLISTIC-REVIEW-002. Do not force-move or overwrite her branch. Once pushed, compare against main, verify evidence chronology/settlements/ESCALATE/independence wording, remove AI-slop punctuation/copy patterns, verify replay timing and reduced motion, add social metadata and safe routing, then reconcile normally. Run frontend build/lint, root npm test and zero-payment demo, followed by desktop/mobile TRACE, network smoke, link verification and public deployment validation before X/demo/submission.
