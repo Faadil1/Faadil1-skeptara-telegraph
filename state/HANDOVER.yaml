@@ -7,9 +7,9 @@ handover:
   branch: main
 
   resume_rule: >-
-    Read state/CURRENT.yaml first, then this HANDOVER, product/PRD.md, spec-kit/tasks.md, docs/JUDGE-CLAIM-BOUNDARIES.md, docs/SUBMISSION-COMPLIANCE.md, docs/FRONTEND_DATA_CONTRACT.md, evidence/trace/FRONTEND-SETTLEMENT-MATRIX-CLARIFICATION.md, evidence/trace/BENITA-FRONTEND-SOURCE-REVIEW-001.md, and evidence/trace/BENITA-FRONTEND-HOLISTIC-REVIEW-002.md. Repository truth outranks chat memory. Never force-move Benita's branch now that unique commits exist.
+    Read state/CURRENT.yaml first, then this HANDOVER, product/PRD.md, spec-kit/tasks.md, docs/JUDGE-CLAIM-BOUNDARIES.md, docs/SUBMISSION-COMPLIANCE.md, docs/FRONTEND_DATA_CONTRACT.md, evidence/trace/FRONTEND-SETTLEMENT-MATRIX-CLARIFICATION.md, evidence/trace/BENITA-FRONTEND-SOURCE-REVIEW-001.md, evidence/trace/BENITA-FRONTEND-HOLISTIC-REVIEW-002.md, and evidence/trace/OWNER-FRONTEND-INTEGRATION-001.md. Repository truth outranks chat memory. Never force-move Benita's branch.
 
-  current_milestone: T0_THRU_T4_CLOSED__LOCAL_VALIDATION_PASS__BENITA_FRONTEND_SOURCE_AND_HOLISTIC_REVIEW_HOLD_BOUNDED_FIXES__WAIT_FOR_FIX_PUSH_RECONCILE_TRACE_RELEASE
+  current_milestone: T0_THRU_T4_CLOSED__LOCAL_VALIDATION_PASS__BENITA_LATEST_FRONTEND_FIXES_CAPTURED__OWNER_INTEGRATION_PR3_DRAFT_OPEN__LOCAL_VALIDATION_THEN_TRACE
 
   project:
     public_name: Skeptara
@@ -30,8 +30,8 @@ handover:
       target: lodash@4.17.21
       outcome: BLOCK
       paid_calls: 2
-      spend_atomic: 20000
       completed_coverage: 1
+      spend_atomic: 20000
       actual_order:
         - CVE-2026-4800__AMBIGUOUS__NOT_COVERAGE
         - CVE-2026-2950__BLOCKING
@@ -51,50 +51,49 @@ handover:
   benita_frontend:
     live_url_human_supplied: https://skeptara.vercel.app/
     branch: feat/frontend-benita
-    branch_status: DIVERGED
-    last_reviewed_head: b9981d74cfd2e5f7581ab1a72df5e6b3bde0691a
+    latest_head_used: a7c366f6cd5f4f268ecab958dbaeb0e46a00cc67
     never_force_move: true
-    source_review: HOLD_BOUNDED_FIXES
-    source_review_evidence: evidence/trace/BENITA-FRONTEND-SOURCE-REVIEW-001.md
-    holistic_review: HOLD_BOUNDED_FIXES
-    holistic_review_evidence: evidence/trace/BENITA-FRONTEND-HOLISTIC-REVIEW-002.md
-    review_sent_to_benita: VERIFIED_BY_HUMAN_WHATSAPP_SCREENSHOT
-    benita_response: READY_TO_MAKE_DEMO_AND_SUBMIT_AFTER_COORDINATION
-    p0_required_fixes:
-      - actual PR1 chronology and full $0.02 spend
-      - restore all four final T4 settlement txs and true PR1 evidence order
-      - correct ESCALATE historical claim
-      - tighten independence wording to topology/component separation
-    holistic_required_fixes:
-      - >-
-        Copy cleanup: avoid repeated em-dash contrast patterns, synthetic 'not X but Y' constructions, slogan triples and defensive prose. Preserve only technically meaningful hyphens such as risk-proportional, exact-head, fail-closed, dependency-change, CVE identifiers and x402.
-      - simplify useCaseReplay timer arithmetic
-      - honor prefers-reduced-motion in replay pacing and smooth hash scrolling
-      - add safe catch-all/not-found route
-      - add meta description, canonical URL, Open Graph and X/Twitter card metadata plus stable social preview image
-      - verify direct routes, settlement links, real merge link and zero Telegraph network activity during replay
-      - run frontend build/lint plus root test/demo after reconciliation
-    p1_judge_impact:
-      - put BLOCK-vs-PASS contrast nearer above fold
-      - evidence paths should read as numbered paid-call timeline
-      - persistent CAPTURED LIVE / HISTORICAL REPLAY strip
-      - keep MEDIUM live vs LOW/HIGH test boundary visible
-      - reduce generic terminal/security visual motifs where they do not communicate Skeptara-specific semantics
-    release_note: >-
-      GitHub exposed no CI status checks for Benita branch head at holistic review time. A collaborator commit message stating production build is clean is not treated as independent CI proof.
+    latest_branch_fixes_already_present:
+      - PR1 real evidence order
+      - full PR1 $0.02 spend wording
+      - four final T4 settlement transactions
+      - corrected final-T4 ESCALATE language
+
+  owner_integration:
+    authorization: HUMAN_OWNER_EXPLICITLY_ALLOWED_OWNER_SIDE_FIXES
+    evidence: evidence/trace/OWNER-FRONTEND-INTEGRATION-001.md
+    stale_first_branch: integration/frontend-final
+    stale_first_branch_rule: DO_NOT_MERGE
+    candidate_branch: integration/frontend-final-v2
+    base_for_candidate: feat/frontend-benita@a7c366f6cd5f4f268ecab958dbaeb0e46a00cc67
+    draft_pr: 3
+    pr_url: https://github.com/Faadil1/skeptara-telegraph/pull/3
+    candidate_head: 88fcb4570b713745084efc405a4149c4f69fd110
+    github_mergeable: true
+    merged: false
+    bounded_changes:
+      - AI-slop copy cleanup; preserve technical hyphens only when meaningful
+      - BLOCK/PASS split proof above fold
+      - final-T4 call/spend scope labels
+      - numbered paid-call evidence timeline and coverage qualification labels
+      - persistent historical replay notice on case routes
+      - historical-expiry and proof-time repository labels
+      - simpler replay timer logic
+      - reduced-motion behavior for replay and anchor scrolling
+      - safe 404 route
+      - canonical, Open Graph and X/Twitter metadata
+      - replay-only network/write boundary unchanged
 
   security_and_trust:
     frontend_private_key: NONE_OBSERVED
     protected_github_write_credential: NONE_OBSERVED
     public_page_mode: HISTORICAL_PROOF_REPLAY_ONLY
-    automatic_telegraph_request_on_load_or_replay: MUST_REMAIN_NONE
-    live_merge_button_with_browser_credentials: PROHIBITED
-    basescan_explorer_mapping: ALLOWLISTED_FOR_EIP155_84532_ONLY
+    no_automatic_telegraph_request_on_load_replay: REQUIRED
+    no_browser_live_merge_secret: REQUIRED
 
   collaboration:
     demo_owner_candidate: BENITA
     pitch_owner_candidate: BENITA
-    demo_submission_readiness: ACKNOWLEDGED
     faadil_role: TECHNICAL_PROOF_SUPPORT_AND_FINAL_GOVERNANCE
     intended_primary_x_voice: BENITA_PENDING_EXPLICIT_CONFIRMATION
     faadil_x_handle: '@roy1919875'
@@ -114,7 +113,7 @@ handover:
     no_repeat_live_calls_for_optics: true
     default_judge_demo: CAPTURED_LIVE_HISTORICAL_REPLAY
 
-  exact_next_gate: SKEPTARA_BENITA_HOLISTIC_FIX_PUSH_REVIEW_AND_NORMAL_RECONCILIATION
-  exact_next_owner: BENITA_FRONTEND_WITH_CHATGPT_ORCHESTRATOR_REVIEW
+  exact_next_gate: SKEPTARA_PR3_LOCAL_VALIDATION_AND_TRACE
+  exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_REVIEW
   exact_next_action: >-
-    Wait for Benita to push the source-review and holistic-review fixes. Do not reset or force-update her branch. After the push, inspect the diff against main. Verify all data/claim corrections, copy anti-slop cleanup, replay timing and reduced-motion behavior, social metadata and routing. Reconcile normally, run frontend build/lint, root tests and zero-payment demo, then run desktop/mobile TRACE, check DevTools/network for zero Telegraph calls, smoke direct routes and verification links, and only then mark the public frontend final for X/demo/submission.
+    Do not merge PR #3 yet. On the user machine fetch integration/frontend-final-v2 and run root npm test. Then cd web, npm ci, npm run build, npm run lint, and run the local app. Check desktop/mobile, /case/pr1, /case/pr2, invalid route, all four settlement links, real merge link, prefers-reduced-motion, and DevTools network for zero Telegraph requests on load/replay. Send outputs/screenshots back to ChatGPT. If all pass, persist final TRACE evidence, merge PR #3 normally into main, smoke https://skeptara.vercel.app, publish X showcase, run Project Finisher, and submit before deadline.
