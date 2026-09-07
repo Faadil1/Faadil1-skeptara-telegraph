@@ -29,7 +29,7 @@ The remaining winning work is presentation, judge comprehension, proof visibilit
 
 ### Biggest strength
 
-Skeptara is not merely a "verified intelligence" consumer and not merely a confidence threshold around an action. Its distinctive mechanism is **paid adversarial counter-evidence whose depth and budget scale with externally assigned downside, with fail-closed execution binding to the exact action artifact.**
+Skeptara is not merely a "verified intelligence" consumer and not merely a confidence threshold around an action. Its distinctive mechanism is **paid adversarial counter-evidence whose depth and budget scale with an externally assigned deterministic risk tier, with fail-closed execution binding to the exact action artifact.**
 
 ### Biggest strategic risk
 
@@ -39,8 +39,8 @@ The generic story "verified intelligence -> governed action" is now crowded enou
 
 Lead with the mechanism competitors do not visibly match:
 
-1. **External downside scoring** — the reviewed agent cannot shrink its own scrutiny.
-2. **Risk -> evidence depth + spend** — LOW/MEDIUM/HIGH determines how much independent evidence must be bought.
+1. **External deterministic risk classification** — the reviewed agent cannot shrink its own scrutiny.
+2. **Risk -> evidence depth + spend** — LOW/MEDIUM/HIGH determines how much external evidence must be bought.
 3. **Counter-evidence, not confirmation** — Telegraph is used to actively seek reasons the proposed action should *not* execute.
 4. **Asymmetric stopping** — one material finding can BLOCK immediately; incomplete evidence never becomes PASS.
 5. **Exact execution binding** — PASS is bound to repository, PR, head SHA, action fingerprint and freshness.
@@ -63,7 +63,7 @@ Public Telegraph material describes:
 
 **Skeptara counter-position:**
 
-> Cognivern governs a signal after it arrives. Skeptara challenges the *action itself* before it can execute, and makes the required amount of independent counter-evidence scale with downside.
+> Generic governed-action systems govern a signal after it arrives. Skeptara challenges the *action itself* before it can execute, and makes the required amount of Telegraph-routed counter-evidence scale with deterministic risk.
 
 Do not mention a competitor by name in the public submission unless useful. Use this only to sharpen the product claim.
 
@@ -71,24 +71,24 @@ Do not mention a competitor by name in the public submission unless useful. Use 
 
 ### 1. One-line promise
 
-**Before an autonomous agent can merge code, Skeptara pays independent Telegraph miners to try to prove the change unsafe.**
+**Before an autonomous agent can merge code, Skeptara buys Telegraph-routed external evidence to try to prove the change unsafe.**
 
 ### 2. Problem tension
 
-A coding agent can propose a change and sound confident about it, but letting the same agent decide how risky its own action is — or letting one "verified" answer directly unlock execution — creates a self-approval failure mode. The higher the downside, the stronger the independent objection process should be.
+A coding agent can propose a change and sound confident about it, but letting the same agent decide how risky its own action is — or letting one "verified" answer directly unlock execution — creates a self-approval failure mode. The higher the risk tier, the stronger the external objection process should be.
 
 ### 3. Judge memory sentence
 
-**Skeptara turns Telegraph into a paid objection layer: risky autonomous actions must survive independent counter-evidence before they execute.**
+**Skeptara turns Telegraph into a paid objection layer: risky autonomous actions must survive Telegraph-routed counter-evidence before they execute.**
 
 ### 4. X post
 
-Built **Skeptara** for @Telegraphprotoc Track 3: before an autonomous coding agent can merge a dependency PR, an external risk policy decides how much paid Telegraph counter-evidence it must survive. We proved both sides live: a vulnerable PR was BLOCKED; a clean PR PASSed and merged only after exact-head revalidation + explicit authorization. Real miners. Real x402 settlement. No mocked intelligence.
+Built **Skeptara** for @Telegraphprotoc Track 3: before an autonomous coding agent can merge a dependency PR, an external deterministic risk policy decides how much paid Telegraph counter-evidence it must survive. We proved both sides live: a vulnerable PR was BLOCKED; a clean PR PASSed and merged only after exact-head revalidation + explicit authorization. Real miners. Real x402 settlement. No mocked intelligence.
 
 ### 5. Discord / community post
 
 **Skeptara — independent counter-evidence before autonomous execution.**  
-A coding agent proposes a dependency PR. Skeptara assigns risk externally, buys risk-proportional evidence from real Telegraph miners, and deterministically returns PASS / BLOCK / ESCALATE. Only a fresh PASS bound to the exact PR head can reach the protected merge executor. We now have a real two-case proof: PR #1 was blocked by concrete CVE evidence and generated zero merge calls; PR #2 received two clean CVE checks and was merged only after exact-head revalidation and explicit bounded authorization.
+A coding agent proposes a dependency PR. Skeptara assigns risk outside the reviewed agent, buys risk-proportional evidence through Telegraph, and deterministically returns PASS / BLOCK / ESCALATE. Only a fresh PASS bound to the exact PR head can reach the protected merge executor. We now have a real two-case proof: PR #1 was blocked by concrete CVE evidence and generated zero merge calls; PR #2 received two clean CVE checks and was merged only after exact-head revalidation and explicit bounded authorization.
 
 ### 6. Hero headline
 
@@ -134,15 +134,15 @@ Do not lead with raw JSON or long hashes. Hashes are proof details, not the stor
 Within five seconds, a judge should be able to answer:
 
 1. What is prevented? **Unsafe autonomous execution.**
-2. What is unique? **Risk-proportional independent counter-evidence.**
-3. Why Telegraph? **Real paid miners provide the objection evidence Skeptara cannot manufacture itself.**
+2. What is unique? **Risk-proportional external counter-evidence before action.**
+3. Why Telegraph? **Telegraph routes real paid demand to miner evidence Skeptara cannot manufacture itself.**
 4. What was proven? **One real BLOCK/deny and one real PASS/merge.**
 
 ## Sponsor causality
 
 Telegraph is not decorative infrastructure here.
 
-Without Telegraph, Skeptara loses the independent paid evidence market that creates the challenge layer. x402 settlement makes each evidence path economically bounded, while live miner routing supplies concrete external evidence. The product-level innovation is the **risk-proportional challenge policy and execution gate**, not x402 by itself.
+Without Telegraph, Skeptara loses the paid routed evidence network that creates the challenge layer. x402 settlement makes each evidence path economically bounded, while Telegraph routing supplies concrete external miner evidence. The product-level innovation is the **risk-proportional challenge policy and execution gate**, not x402 by itself.
 
 ## Track 3 rubric mapping
 
@@ -152,7 +152,7 @@ Real paid miners, real intents, real settlement and signal hashes are already pr
 
 ### Creativity / usefulness — STRONG
 
-The use of Telegraph as a counter-evidence market before autonomous code execution is more distinctive than a generic lookup or confidence-threshold consumer.
+The use of Telegraph as a counter-evidence layer before autonomous code execution is more distinctive than a generic lookup or confidence-threshold consumer.
 
 ### Usage / adoption — CURRENT WEAKNESS
 
@@ -178,7 +178,7 @@ Do **not** add:
 - fake usage counters;
 - decorative crypto animations;
 - architecture-first landing copy;
-- claims of statistical/model independence not proven by the evidence;
+- claims of statistical/model/miner independence not proven by the evidence;
 - claims that x402 itself is Skeptara's innovation.
 
 ## UI direction for TRACE
