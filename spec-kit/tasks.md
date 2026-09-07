@@ -9,7 +9,7 @@ Status: DERIVED READY — subordinate to living PRD v0.1.
 - [x] P0.3 Human-lock PRD v0.1.
 - [x] P0.4 Freeze frontend data contract.
 - [x] P0.5 Create `feat/frontend-benita`.
-- [ ] P0.6 Send Benita final-product-only brief + PRD PDF + repo/branch details.
+- [ ] P0.6 Send Benita final-product-only brief + PRD PDF + repo/branch details if not already done.
 
 ## T0 — Real Telegraph challenge
 
@@ -51,74 +51,77 @@ Status: DERIVED READY — subordinate to living PRD v0.1.
 
 ## T4 — Real two-case proof
 
-- [x] Challenged candidate PR #1: `lodash@4.17.21`.
-- [x] Clean candidate PR #2: `lodash@4.18.1`.
-- [x] Fresh real PR #1 Telegraph challenge => `BLOCK`.
-- [x] `CVE-2026-2950` machine-verifiable as blocking for PR #1.
-- [x] Zero-write merge replay => `DENIED`, `CHALLENGE_NOT_PASS`, merge-adapter calls `0`.
-- [x] Reconcile clean PR #2 branch with current main without force.
-- [x] Fresh real PR #2 Telegraph challenge => `PASS`, 2/2 meaningful non-blocking coverage, 20000/20000 atomic USDC.
-- [x] Review and persist fresh PR #2 result.
-- [x] Revalidate PR #2 live while challenge fresh: open, unmerged, exact-head match, mergeable clean.
-- [x] Obtain explicit human bounded authorization for PR #2 exact head `528d730f9ebdcb433e01ba9c79dcc9a5f66ce1c7`.
-- [x] Execute real GitHub merge with exact `expected_head_sha`.
-  - merge commit `c76c76e0c02dab28275d8e53d70da3f6f132e648`.
-  - merged at `2026-09-07T01:44:54Z`.
-- [x] Persist real merge execution evidence.
+- [x] PR #1 challenged case → fresh real Telegraph `BLOCK`.
+- [x] Blocking record `CVE-2026-2950` machine-verifiable for `lodash@4.17.21`.
+- [x] Merge replay → `DENIED`, `CHALLENGE_NOT_PASS`, merge-adapter calls `0`.
+- [x] PR #2 clean case → fresh real Telegraph `PASS`, 2/2 meaningful coverage.
+- [x] Exact head revalidated while fresh.
+- [x] Explicit bounded human authorization obtained for exact PR #2 head.
+- [x] Real GitHub merge executed with `expected_head_sha`.
+- [x] Merge commit `c76c76e0c02dab28275d8e53d70da3f6f132e648`.
 - [x] `SKEPTARA_T4_TWO_CASE_REAL_DEMO_PASS = CLOSED_PASS`.
 
-## Winning Intelligence preflight
+## Winning Intelligence
 
-- [x] Apply judge-winning / Winning Intelligence layer after T4 and before TRACE.
-- [x] Persist `evidence/winning-intelligence/WI-TRACE-PREFLIGHT-001.md`.
-- [x] Run bounded collision scan.
-- [x] Freeze winning distinction around external deterministic risk → risk-proportional paid counter-evidence → exact protected execution.
-- [x] Persist `evidence/winning-intelligence/WI-BLIND-SPOT-AUDIT-002.md`.
+- [x] Persist `WI-TRACE-PREFLIGHT-001.md`.
+- [x] Persist `WI-BLIND-SPOT-AUDIT-002.md`.
+- [x] Freeze winning distinction around external deterministic risk → risk-proportional Telegraph-routed counter-evidence → exact protected execution.
 - [x] Lock claim boundaries: no automatic unknown-vulnerability discovery, no statistical miner-independence claim, no LOW/HIGH live-scaling overclaim.
-- [x] `WINNING_INTELLIGENCE_PREFLIGHT = PASS_WITH_PRIORITY_RISKS`.
-- [x] `WINNING_INTELLIGENCE_BLIND_SPOT_AUDIT_002 = COMPLETE`.
+- [x] Telegraph registration verified.
+
+## Hidden-spot remediation block
+
+- [x] HS-01 Add minimum judge-facing challenge dossier in `public/index.html`.
+- [x] HS-02 Document real merge/runtime boundary precisely; no fully deployed GitHub adapter overclaim.
+- [x] HS-03 Make controlled exact-CVE seeded mode explicit in judge copy/demo.
+- [x] HS-04 Show LOW/MEDIUM/HIGH policy matrix with MEDIUM clearly labeled live-proven and LOW/HIGH test-proven.
+- [x] HS-05 Convert admin compliance into explicit checklist; registration verified, official Discord URL captured, X/final submission remain human actions.
+- [x] HS-06 Surface Telegraph routing / quality-flywheel causality in README and judge dossier.
+- [x] HS-07 Add conservative verified activity ledger: `evidence/activity/ACTIVITY-LEDGER-V0.1.md`.
+- [x] HS-08 Refresh stale README and evidence index through T4.
+- [x] HS-09 Add explicit historical/freshness labeling + human-authorization explanation + one-command secret-free judge replay.
+- [x] Add `docs/JUDGE-CLAIM-BOUNDARIES.md`.
+- [x] Add `docs/SUBMISSION-COMPLIANCE.md`.
+- [x] Add `npm run demo` captured-live two-case replay.
+- [x] Add `npm run demo:web` local static judge surface.
+- [ ] Human-machine validation: `npm test` + `npm run demo`.
+- [ ] Human visual TRACE review of `npm run demo:web`.
+- [ ] Public deployment + smoke proof.
 
 ## TRACE / judge path
 
-- [ ] Read both Winning Intelligence packets before any visual changes.
-- [ ] Make the split real outcome the primary judge moment:
-  - PR #1 `BLOCK` + merge denied + 0 merge-adapter calls;
-  - PR #2 `PASS` + exact-head revalidation + human-authorized real merge.
-- [ ] Ensure 5-second comprehension: what is prevented, what is unique, why Telegraph is necessary, what was proven.
-- [ ] Present proposed PR → external risk → required scrutiny → challenge progress → evidence → PASS/BLOCK/ESCALATE → execution consequence.
-- [ ] Treat UI as challenge dossier, not generic SaaS analytics dashboard.
-- [ ] Clearly label exact-CVE seeded proof, MEDIUM live proof vs LOW/HIGH test proof, and historical captured-live replay vs fresh state.
-- [ ] Keep Telegraph auto-routing / real-demand causality visible.
-- [ ] Human visual review.
-- [ ] Persist TRACE findings and update CURRENT + HANDOVER.
+- [x] Winning Intelligence and hidden spots have been incorporated into the draft judge surface.
+- [x] Split real outcome is primary moment: PR #1 BLOCK/deny vs PR #2 PASS/real merge.
+- [x] Exact-CVE seeded proof labeled honestly.
+- [x] MEDIUM live proof distinguished from LOW/HIGH policy/test proof.
+- [x] Historical captured-live replay distinguished from fresh executable state.
+- [x] Telegraph auto-routing / real-demand causality included.
+- [ ] Run local validation and visual review.
+- [ ] Persist TRACE findings / screenshots and update CURRENT + HANDOVER.
 - [ ] `SKEPTARA_TRACE_JUDGE_PATH_REVIEW = PASS`.
 
 ## UX / Benita
 
 - [x] Frontend data contract frozen.
-- [x] `feat/frontend-benita` created and synchronized while it had no unique remote commits.
-- [ ] Send brief + PRD PDF if not already sent.
-- [ ] Risk-tier presentation.
-- [ ] Live challenge-progress presentation.
-- [ ] Evidence/provenance presentation.
-- [ ] PASS/BLOCK/ESCALATE states.
+- [x] `feat/frontend-benita` maintained without force while no unique collaborator commits exist.
+- [ ] Confirm Benita brief/PRD delivery.
+- [ ] Reconcile any unique Benita UI commits normally if they appear.
 - [ ] Deployed frontend smoke.
 
 ## README / showcase / submission
 
-- [x] Telegraph hackathon registration verified from official-site confirmation screenshot.
-  - evidence: `evidence/admin/TELEGRAPH-REGISTRATION-VERIFIED.md`.
-- [ ] Verify official Discord membership/activity.
-- [ ] Publish/verify X update(s) with required Telegraph tagging.
-- [ ] Verify final submission form requirements and final submission state.
-- [ ] Replace stale early-T0 README framing only after TRACE judge-path lock.
-- [ ] Put one-line promise + real two-case proof near top of README.
-- [ ] Map every strong claim to real evidence paths.
-- [ ] Prepare hero screenshot showing result + evidence state.
+- [x] Telegraph hackathon registration verified.
+- [x] Official Discord invite identified from Telegraph-owned surfaces: `https://discord.gg/telegraphprotocol`.
+- [x] Late-entry X strategy documented: no fabricated history; publish substantive build proof + demo/submission update with `@Telegraphprotoc`.
+- [ ] Human joins official Discord and provides membership/activity confirmation.
+- [ ] Human publishes X build/proof post.
+- [ ] Human publishes public-demo/submission X update once deployed.
+- [ ] Verify final submission form requirements and submission state.
+- [x] README aligned to T4 proof and claim boundaries.
+- [x] Evidence index aligned to T4 proof.
+- [x] Truthful final-proof activity ledger created.
 - [ ] Public demo smoke.
-- [ ] Truthful users/activity/usage evidence; never fabricate counters.
-- [ ] Sponsor-native necessity and real-miner proof review.
-- [ ] Demo script/video.
+- [ ] Hero screenshot / demo video.
 - [ ] Clean-room replay.
 - [ ] Project Finisher terminal assurance.
 - [ ] Human-protected final submission.
@@ -131,4 +134,4 @@ After every passed/failed major gate and every protected execution boundary:
 3. update `state/HANDOVER.yaml` so a new conversation can take the lead;
 4. reconcile PRD/spec/plan/tasks only if discovery class requires it.
 
-Exact next gate: `SKEPTARA_TRACE_JUDGE_PATH_REVIEW`.
+Exact next gate: `SKEPTARA_HIDDEN_SPOT_REMEDIATION_LOCAL_VALIDATION_AND_TRACE_VISUAL_REVIEW`.
