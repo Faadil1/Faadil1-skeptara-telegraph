@@ -1,13 +1,13 @@
 canonical_state:
   protocol_version: 1
   system: SKEPTARA_TELEGRAPH_TRACK3
-  version: 0.9.2-t4-closed-winning-intelligence-blindspot-audit-complete-trace-next
+  version: 0.9.3-registration-verified-trace-next
   date: 2026-09-07
   source_of_truth: GITHUB
   repository: Faadil1/Faadil1-skeptara-telegraph
   branch: main
 
-  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__WINNING_INTELLIGENCE_PREFLIGHT_PASS__BLIND_SPOT_AUDIT_002_COMPLETE__TRACE_JUDGE_PATH_REVIEW_NEXT
+  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__WINNING_INTELLIGENCE_PREFLIGHT_PASS__BLIND_SPOT_AUDIT_002_COMPLETE__TELEGRAPH_REGISTRATION_VERIFIED__TRACE_JUDGE_PATH_REVIEW_NEXT
 
   authority:
     product_intent_source: product/PRD.md
@@ -109,6 +109,17 @@ canonical_state:
       - { id: 7336, name: SecWire CVE Lookup }
     do_not_claim_miner_statistical_independence: true
 
+  administrative_compliance:
+    registration:
+      status: VERIFIED
+      evidence: evidence/admin/TELEGRAPH-REGISTRATION-VERIFIED.md
+      confirmation_source: HUMAN_PROVIDED_OFFICIAL_SITE_SCREENSHOT
+    official_discord_joined_and_active: HUMAN_VERIFY
+    public_x_updates_tagged: HUMAN_VERIFY
+    final_submission_form_requirements: HUMAN_VERIFY
+    final_submission_completed: false
+    metric_gaming_forbidden: ACKNOWLEDGED
+
   security_boundary:
     prior_exposed_burner_status: COMPROMISED_DO_NOT_REUSE_OR_FUND
     fresh_burner_status: TESTNET_ONLY
@@ -131,6 +142,7 @@ canonical_state:
     t4_two_case_real_demo: CLOSED_PASS
     winning_intelligence_preflight: PASS_WITH_PRIORITY_RISKS
     winning_intelligence_blind_spot_audit_002: COMPLETE
+    telegraph_registration: VERIFIED
     trace_design_review: NOT_STARTED
     frontend_integration_and_deployed_smoke: NOT_STARTED
     project_finisher: NOT_STARTED
@@ -146,4 +158,4 @@ canonical_state:
   exact_next_gate: SKEPTARA_TRACE_JUDGE_PATH_REVIEW
   exact_next_owner: CHATGPT_ORCHESTRATOR_WITH_HUMAN_VISUAL_REVIEW
   exact_next_action: >-
-    Read both Winning Intelligence packets before TRACE: WI-TRACE-PREFLIGHT-001.md and WI-BLIND-SPOT-AUDIT-002.md. TRACE must absorb the P0/P1 findings without expanding the product. The primary judge surface must be a challenge dossier, not a generic dashboard, and must clearly separate controlled exact-CVE seeded proof from open-ended discovery, deterministic policy/test-proven LOW/HIGH behavior from live-proven MEDIUM behavior, and captured-live historical replay from fresh executable state. Make Telegraph auto-routing/real-demand causality visible. Persist TRACE findings and update CURRENT + HANDOVER before advancing to frontend implementation/deployed smoke.
+    Read both Winning Intelligence packets before TRACE: WI-TRACE-PREFLIGHT-001.md and WI-BLIND-SPOT-AUDIT-002.md. TRACE must absorb the P0/P1 findings without expanding the product. The primary judge surface must be a challenge dossier, not a generic dashboard, and must clearly separate controlled exact-CVE seeded proof from open-ended discovery, deterministic policy/test-proven LOW/HIGH behavior from live-proven MEDIUM behavior, and captured-live historical replay from fresh executable state. Make Telegraph auto-routing/real-demand causality visible. Registration is now verified; Discord participation, X showcase/tagging, and final submission remain separate human-verification gates. Persist TRACE findings and update CURRENT + HANDOVER before advancing to frontend implementation/deployed smoke.
