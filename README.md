@@ -175,6 +175,8 @@ See `state/CURRENT.yaml` for the exact authoritative next gate. Repository truth
 
 The judge replay above (`npm run demo:web`) serves the lightweight static dossier at `public/index.html`. There is also a full Vite + React + TypeScript app at `web/` rendering the same judge path (risk → challenge → verdict) as a richer, componentized UI. See `docs/DESIGN.md` for its visual system and `demo/JUDGE_WALKTHROUGH.md` for a judge-facing walkthrough with screenshots.
 
+**Live:** https://skeptara.vercel.app
+
 ```
 cd web && npm install && npm run dev
 ```

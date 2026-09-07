@@ -9,7 +9,7 @@ Higher-risk autonomous code changes must survive deeper, independently paid coun
 
 ## Start here
 
-`web/` is the frontend (`npm install && npm run dev` from `web/`). Landing page:
+Live: **https://skeptara.vercel.app** — or run locally with `npm install && npm run dev` from `web/`. Landing page:
 
 ![Landing](screenshots/01-landing.png)
 
