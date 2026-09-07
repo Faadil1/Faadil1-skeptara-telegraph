@@ -1,29 +1,31 @@
 /* Skeptara design tokens — single source of truth for color, type, spacing, radii.
-   Distinct identity from BitSentry (green terminal): Skeptara uses a copper/amber
-   accent on a near-black terminal ground. Verdict colors are semantic, not brand. */
+   Visual system matched to BitSentry's terminal-green identity per explicit
+   direction: green accent, radial glow, dot-grid ground, italic display
+   wordmark. Content, copy and data stay entirely Skeptara's own. */
 
 :root {
   /* Surfaces */
-  --bg: #0a0b0d;
-  --bg-raised: #121317;
-  --surface: #16171c;
-  --surface-hover: #1b1c22;
-  --border: #262832;
-  --border-strong: #363948;
+  --bg: #070b09;
+  --bg-raised: #0d130f;
+  --surface: #101711;
+  --surface-hover: #141c16;
+  --border: #1e2b21;
+  --border-strong: #2c4032;
 
   /* Text */
-  --text-primary: #e9e8e4;
-  --text-secondary: #a3a5b0;
-  --text-muted: #82858f;
+  --text-primary: #eef1ec;
+  --text-secondary: #a7b3ac;
+  --text-muted: #7d8a82;
 
-  /* Brand accent — copper/amber. Not BitSentry's green, not purple. */
-  --accent: #d98a4a;
-  --accent-dim: #8a5a34;
-  --accent-on: #0a0b0d;
+  /* Brand accent — matched to BitSentry's green identity, per direction. */
+  --accent: #35d07a;
+  --accent-dim: #1f7a49;
+  --accent-on: #06120a;
+  --accent-glow: rgba(53, 208, 122, 0.28);
 
   /* Semantic verdict colors */
-  --pass: #4caf7d;
-  --pass-bg: rgba(76, 175, 125, 0.1);
+  --pass: #35d07a;
+  --pass-bg: rgba(53, 208, 122, 0.12);
   --block: #e0685a;
   --block-bg: rgba(224, 104, 90, 0.1);
   --escalate: #d9b34a;
@@ -35,7 +37,8 @@
      on the hero and page titles, sans stays for comfortable body reading. */
   --font-mono: ui-monospace, "SF Mono", "IBM Plex Mono", Menlo, Consolas, "Liberation Mono", monospace;
   --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-  --font-display: "Fraunces", ui-serif, Georgia, "Times New Roman", serif;
+  --font-display: "Playfair Display", ui-serif, Georgia, "Times New Roman", serif;
+  --font-headline: "Space Grotesk", var(--font-sans);
 
   --text-xs: 0.75rem;
   --text-sm: 0.8125rem;
@@ -64,6 +67,7 @@
   --radius-md: 6px;   /* cards, buttons, panels */
   --radius-full: 999px; /* pills only (status dot wrappers) */
 
-  /* Borders / shadows kept minimal, no glow */
+  /* Card shadow stays flat; the glow is reserved for the hero mark only. */
   --shadow-card: 0 1px 0 rgba(0, 0, 0, 0.4);
+  --shadow-glow: 0 0 120px 40px var(--accent-glow);
 }

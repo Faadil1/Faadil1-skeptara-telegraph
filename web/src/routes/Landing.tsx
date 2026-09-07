@@ -19,12 +19,29 @@ const totalEvidenceCalls = demoCases.reduce((sum, c) => sum + c.evidenceItems.le
 const blockCount = demoCases.filter((c) => c.challengeResult.outcome === "BLOCK").length;
 const passCount = demoCases.filter((c) => c.challengeResult.outcome === "PASS").length;
 
-function TickerStat({ label, value }: { label: string; value: string }) {
+// Real identifiers pulled from the closed runs — miners, intents, policy/auditor
+// versions actually used. Not a decorative filler list.
+const marqueeItems = Array.from(
+  new Set([
+    ...demoCases.flatMap((c) => c.evidenceItems.map((e) => e.miner_name).filter(Boolean)),
+    ...demoCases.flatMap((c) => c.evidenceItems.map((e) => e.intent)),
+    challengedCase.riskAssessment.policy_version,
+    "skeptara-auditor-v0.4-seeded-cve",
+    "eip155:84532",
+    "PR #1 · BLOCK",
+    "PR #2 · PASS",
+  ]),
+) as string[];
+
+function StatColumn({ label, value, hint }: { label: string; value: string; hint?: string }) {
   return (
-    <div className="ticker-stat">
-      <span className="ticker-stat__dot" aria-hidden="true" />
-      <span className="ticker-stat__label mono">{label}</span>
-      <span className="ticker-stat__value mono">{value}</span>
+    <div className="stat-col">
+      <span className="stat-col__label mono">
+        <span className="stat-col__dot" aria-hidden="true" />
+        {label}
+      </span>
+      <span className="stat-col__value mono">{value}</span>
+      {hint && <span className="stat-col__hint mono">{hint}</span>}
     </div>
   );
 }
@@ -61,11 +78,15 @@ export function Landing() {
   return (
     <div className="landing">
       <div className="landing__hero">
+        <div className="landing__glow" aria-hidden="true" />
         <p className="landing__eyebrow mono">telegraph protocol · track 3 · two real closed runs below</p>
-        <h1 className="landing__thesis">
+        <h1 className="landing__wordmark">Skeptara</h1>
+        <p className="landing__tagline">Independent Counter-Evidence, Before Merge</p>
+        <p className="landing__thesis">
           Higher-risk autonomous changes must survive deeper, independently paid
           counter-evidence before a merge can execute.
-        </h1>
+        </p>
+
         <div className="terminal">
           <div className="terminal__bar">
             <span className="terminal__dot" />
@@ -88,11 +109,20 @@ export function Landing() {
           </div>
         </div>
 
-        <div className="ticker">
-          <TickerStat label="real spend observed" value={`$${totalSpendUsd.toFixed(2)}`} />
-          <TickerStat label="real telegraph calls" value={String(totalEvidenceCalls)} />
-          <TickerStat label="closed runs" value={`${blockCount} block · ${passCount} pass`} />
-          <TickerStat label="network" value="base sepolia" />
+        <div className="stat-row-3">
+          <StatColumn label="real spend observed" value={`$${totalSpendUsd.toFixed(2)}`} hint="USDC · base sepolia" />
+          <StatColumn label="real telegraph calls" value={String(totalEvidenceCalls)} hint="CVE_LOOKUP" />
+          <StatColumn label="closed runs" value={`${blockCount} block · ${passCount} pass`} hint="0 escalate (yet)" />
+        </div>
+      </div>
+
+      <div className="marquee" aria-hidden="true">
+        <div className="marquee__track">
+          {[...marqueeItems, ...marqueeItems].map((item, i) => (
+            <span key={i} className="marquee__item">
+              {item}
+            </span>
+          ))}
         </div>
       </div>
 

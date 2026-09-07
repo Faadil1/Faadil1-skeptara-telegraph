@@ -1,30 +1,75 @@
 .landing__hero {
-  margin-bottom: var(--space-8);
+  position: relative;
+  text-align: center;
+  padding-top: var(--space-6);
+  margin-bottom: var(--space-2);
+}
+
+.landing__glow {
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 560px;
+  height: 360px;
+  background: radial-gradient(closest-side, var(--accent-glow), transparent 72%);
+  filter: blur(10px);
+  pointer-events: none;
+  z-index: 0;
 }
 
 .landing__eyebrow {
+  position: relative;
+  z-index: 1;
   font-size: var(--text-sm);
   color: var(--accent);
-  margin: 0 0 var(--space-3);
+  margin: 0 0 var(--space-4);
+}
+
+.landing__wordmark {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 900;
+  font-size: clamp(3rem, 2rem + 5vw, 6rem);
+  line-height: 1;
+  color: var(--accent);
+  margin: 0;
+  text-shadow: 0 0 60px var(--accent-glow);
+}
+
+.landing__tagline {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-headline);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 1.1rem + 2vw, 2.5rem);
+  color: var(--text-primary);
+  margin: var(--space-2) 0 var(--space-5);
 }
 
 .landing__thesis {
-  font-family: var(--font-display);
-  font-optical-sizing: auto;
-  font-weight: 600;
-  font-size: clamp(1.75rem, 1.1rem + 3.2vw, var(--text-3xl));
-  line-height: 1.12;
-  letter-spacing: -0.01em;
-  color: var(--text-primary);
-  max-width: 780px;
-  margin: 0 0 var(--space-6);
+  position: relative;
+  z-index: 1;
+  font-size: var(--text-md);
+  line-height: var(--leading-normal);
+  color: var(--text-secondary);
+  max-width: 640px;
+  margin: 0 auto var(--space-7);
 }
 
 .terminal {
-  background: #050506;
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: left;
+  background: #050a06;
   border: 1px solid var(--border-strong);
   border-radius: var(--radius-md);
   overflow: hidden;
+  box-shadow: 0 40px 100px -40px rgba(0, 0, 0, 0.6);
 }
 
 .terminal__bar {
@@ -37,7 +82,7 @@
 }
 
 .terminal__bar-title {
-  margin-left: var(--space-3);
+  margin-left: auto;
   font-size: var(--text-xs);
   color: var(--text-muted);
   white-space: nowrap;
@@ -50,6 +95,16 @@
   height: 10px;
   border-radius: var(--radius-full);
   background: var(--border-strong);
+}
+
+.terminal__dot:nth-child(1) {
+  background: #e0685a;
+}
+.terminal__dot:nth-child(2) {
+  background: #d9b34a;
+}
+.terminal__dot:nth-child(3) {
+  background: var(--accent);
 }
 
 .terminal__body {
@@ -75,43 +130,102 @@
   color: var(--block);
 }
 
-.ticker {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-6);
-  margin-top: var(--space-5);
-  padding-top: var(--space-5);
-  border-top: 1px solid var(--border);
+/* 3-up stat row, BitSentry ticker grammar — real numbers only */
+.stat-row-3 {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+  max-width: 640px;
+  margin: var(--space-6) auto 0;
 }
 
-.ticker-stat {
+.stat-col {
   display: flex;
-  align-items: baseline;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-1);
+  text-align: left;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+}
+
+.stat-col__label {
+  display: inline-flex;
+  align-items: center;
   gap: var(--space-2);
-}
-
-.ticker-stat__dot {
-  width: 6px;
-  height: 6px;
-  border-radius: var(--radius-full);
-  background: var(--accent);
-  flex-shrink: 0;
-}
-
-.ticker-stat__label {
   font-size: var(--text-xs);
   color: var(--text-muted);
 }
 
-.ticker-stat__value {
-  font-size: var(--text-sm);
+.stat-col__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: var(--accent);
+}
+
+.stat-col__value {
+  font-size: var(--text-lg);
+  font-weight: 700;
   color: var(--text-primary);
-  font-weight: 600;
+}
+
+.stat-col__hint {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+
+/* Diagonal marquee band — real miner/intent/case identifiers only */
+.marquee {
+  overflow: hidden;
+  transform: rotate(-2.5deg);
+  margin: var(--space-8) calc(var(--space-6) * -1) var(--space-7);
+  background: var(--accent);
+}
+
+.marquee__track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 32s linear infinite;
+}
+
+.marquee__item {
+  font-family: var(--font-headline);
+  font-weight: 700;
+  font-size: var(--text-sm);
+  color: var(--accent-on);
+  white-space: nowrap;
+  padding: var(--space-3) var(--space-5);
+}
+
+.marquee__item::after {
+  content: "•";
+  margin-left: var(--space-5);
+  opacity: 0.5;
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee__track {
+    animation: none;
+  }
 }
 
 .landing__section-title {
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 700;
   font-size: var(--text-xl);
   margin: 0 0 var(--space-2);
 }
@@ -195,4 +309,13 @@
 .landing__escalate .landing__section-note {
   margin: 0;
   max-width: none;
+}
+
+@media (max-width: 640px) {
+  .stat-row-3 {
+    grid-template-columns: 1fr;
+  }
+  .marquee {
+    margin: var(--space-7) calc(var(--space-4) * -1) var(--space-6);
+  }
 }

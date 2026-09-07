@@ -5,36 +5,41 @@
 - **Case page** (`/case/:id`): Operate — a judge scanning risk → evidence → verdict, state-driven.
 
 ## Visual thesis
-A terminal that makes an independent challenge legible in real time. Confident, factual,
-slightly editorial — closer to an incident report than a product marketing page. Influences:
-BitSentry's terminal-card grammar and stat ticker, Telegraph's confident display type and
-prize/stat-box treatment — reinterpreted in Skeptara's own copper/near-black identity, not a
-reskin of either. No purple, no decorative gradients, no fabricated data anywhere the ticker
-or evidence log could instead show a real number from a closed run.
+Matched to BitSentry's terminal-green identity by explicit direction: italic display
+wordmark with a soft radial glow, dot-grid ground, terminal-card chrome with colored
+traffic-light dots, a 3-up real-data stat row, and a diagonal marquee band — the same
+structural grammar as BitSentry (bitsentry.vercel.app) and, for type confidence, the
+Telegraph Protocol hackathon page. Content, copy, product name and every number stay
+entirely Skeptara's own — nothing here claims to be BitSentry or reuses its assets.
 
 ## Typography
-- **Display** (`Fraunces`, serif, variable): hero thesis, section titles, case page `h1`.
-  One role only — the moment the page needs authority, not decoration.
-- **Mono** (system stack): all data — SHAs, hashes, stats, nav, panel eyebrows, the wordmark.
-  This is the "terminal" identity; it should never feel decorative, only factual.
-- **Sans** (system stack): body copy, paragraph explanations.
+- **Display** (`Playfair Display`, italic 900 for the wordmark, upright 600/700 for
+  section/page titles): the one deliberately decorative role, reserved for the hero mark
+  and headings.
+- **Headline sans** (`Space Grotesk`, 700): the bold tagline under the wordmark and the
+  nav wordmark/CTA — mirrors BitSentry's heavy sans pairing against the italic script.
+- **Mono** (system stack): all data — SHAs, hashes, stats, nav links, panel eyebrows,
+  terminal body. This is the factual/terminal register; never decorative.
+- **Sans** (system stack): body paragraphs.
 
 ## Color
-Near-black ground (`--bg #0a0b0d`), copper/amber brand accent (`--accent #d98a4a`) — distinct
-from BitSentry's green. Verdict colors are semantic, not brand: `--pass` (muted green),
-`--block` (muted red), `--escalate` (amber), `--pending` (grey). 3 radii total (`sm` chips,
-`md` cards, `full` pills).
+Near-black green-tinted ground (`--bg #070b09`), one accent green (`--accent #35d07a`)
+matched to BitSentry's brand green and reused as the semantic PASS color (mirrors
+BitSentry's own approved/green-everywhere treatment). BLOCK stays red, ESCALATE stays
+amber — the only colors that must read as distinct from the brand accent. Radial glow
+(`--accent-glow`) is reserved for the hero wordmark only, not used elsewhere as decoration.
 
 ## Components
-- `Panel` — numbered section container (`1 · proposed action`, etc.) — the numbering is real
-  sequence, not decoration.
+- `Panel` — numbered section container (`1 · proposed action`, etc.) — real sequence.
 - `VerdictBadge` — PASS/BLOCK/ESCALATE/PENDING, color + dot, never color alone.
-- `EvidenceLog` — real per-item evidence with an explicit "stopped early" vs "incomplete"
-  distinction depending on why coverage fell short.
-- `Skeleton` — real loading state for every async-shaped moment (paced replay of a closed run).
-- Landing ticker strip — BitSentry-style stat row, but every number is computed live from the
-  real closed-case fixtures (`total spend`, `evidence calls`, `block/pass count`), never
-  hardcoded market-style filler.
+- `EvidenceLog` — explicit "stopped early" vs "incomplete" framing for partial coverage.
+- Terminal card — traffic-light dots (red/amber/green), title-bar label, command + output.
+- 3-up stat row — BitSentry's ticker grammar, but every value is computed live from the
+  real closed-case fixtures (total spend, evidence calls, block/pass count) — never
+  fabricated market-style filler.
+- Diagonal marquee band — BitSentry's scrolling-strip grammar, populated only with real
+  identifiers actually present in the closed runs (miner names, Telegraph intents, policy/
+  auditor versions, case outcomes). No invented agent/module names.
 
 ## States
 Each case page runs a real phase sequence: `reading action → assessing risk → challenging
@@ -42,17 +47,11 @@ Each case page runs a real phase sequence: `reading action → assessing risk �
 as such, with a `replay` control — never presented as a live call in progress.
 
 ## Responsive
-Hero headline uses `clamp()` to stay legible at 375px; case-page header wraps to two rows on
-mobile without overlap; nothing scrolls horizontally.
-
-## Anti-patterns avoided
-No purple/blue gradients, no glow, no glassmorphism, no cards-inside-cards, no ALL-CAPS
-tracked eyebrows (labels stay lowercase mono, matching the terminal identity), no fabricated
-evidence/metrics, no decorative marquee of invented data (BitSentry's scrolling agent-name
-ticker was deliberately not copied — Skeptara has no equivalent real data to fill it with).
+Wordmark and tagline use `clamp()` to stay legible at 375px; 3-up stat row and marquee
+collapse/adjust on mobile; nothing scrolls horizontally.
 
 ## References
-- BitSentry (bitsentry.vercel.app) — terminal-card chrome, stat ticker structure.
-- Telegraph Protocol hackathon page — display type confidence, stat/prize-box treatment,
-  eyebrow-label rhythm (adapted to lowercase mono, not tracked-out caps).
+- BitSentry (bitsentry.vercel.app) — primary visual reference by explicit direction:
+  green identity, glow, dot-grid, terminal card, stat ticker, diagonal marquee.
+- Telegraph Protocol hackathon page — display type confidence, stat/prize-box treatment.
 - `docs/FRONTEND_DATA_CONTRACT.md` — the only source for what a screen may render.

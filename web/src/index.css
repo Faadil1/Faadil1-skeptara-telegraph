@@ -10,7 +10,9 @@ html, body {
 }
 
 body {
-  background: var(--bg);
+  background:
+    radial-gradient(circle at 1px 1px, rgba(53, 208, 122, 0.09) 1px, transparent 0) 0 0 / 26px 26px,
+    var(--bg);
   color: var(--text-primary);
   font-family: var(--font-sans);
   font-size: var(--text-base);
