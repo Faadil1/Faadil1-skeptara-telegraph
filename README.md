@@ -2,9 +2,37 @@
 
 > **No autonomous merge without an independent challenge.**
 
-Skeptara is a pre-execution safety layer for autonomous coding agents. Before a dependency-change pull request can become execution-eligible, Skeptara applies an **external deterministic risk classification** and buys **Telegraph-routed counter-evidence** under a bounded spend contract.
+Skeptara is a pre-execution safety layer for autonomous coding agents. Before a dependency-change pull request can become execution-eligible, Skeptara applies an **external deterministic risk classification** and obtains **Telegraph-routed counter-evidence** under a bounded spend contract.
 
-The reviewed coding agent does **not** score its own risk and does **not** audit itself. Missing coverage, critical ambiguity, stale bindings, or material counter-evidence fail closed.
+The proposing agent does **not** score its own risk and does **not** audit itself. Missing coverage, critical ambiguity, stale bindings, or material counter-evidence fail closed.
+
+## Portfolio snapshot
+
+| | |
+| --- | --- |
+| **Problem** | An autonomous coding agent should not be allowed to propose a risky dependency change, assess its own risk, and then authorize its own merge. |
+| **Mechanism** | External deterministic risk tier → risk-proportional paid challenge → PASS / BLOCK / ESCALATE → exact-head protected execution. |
+| **Live proof** | One challenged dependency change was blocked with **0 merge-adapter calls**; one clean case passed with **2/2 Telegraph coverage** and completed a real exact-head merge. |
+| **Economic boundary** | Challenge spend is bounded by policy; the verified activity subset records real testnet USDC challenge calls and observed spend. |
+| **My role** | Product mechanism · risk policy · execution-gate architecture · Telegraph/x402 integration · negative-path testing · evidence/claim-boundary design. |
+| **Themes** | AI-agent governance · independent challenge · fail-closed execution · software supply-chain risk · bounded paid evidence · GitHub automation. |
+
+## Why this project matters
+
+Autonomy becomes dangerous when the same agent can be **proposer, evaluator, and executor**.
+
+Skeptara breaks that loop. It forces a meaningful external objection path before protected execution and binds any eventual merge to the exact reviewed head. Human authorization can add another safety boundary, but it cannot turn a `BLOCK` or `ESCALATE` into a `PASS`.
+
+The core product pattern is:
+
+```text
+agent proposes change
+→ external deterministic risk classification
+→ risk-proportional independent challenge
+→ PASS / BLOCK / ESCALATE
+→ exact-head revalidation
+→ protected execution only if still eligible
+```
 
 ## What was proven live
 
@@ -19,6 +47,7 @@ The reviewed coding agent does **not** score its own risk and does **not** audit
 - merge-adapter calls: `0`
 
 Evidence:
+
 - `evidence/t4/pr1-block-run-004/REVIEW.md`
 - `evidence/t4/pr1-block-run-004/MERGE-DENIAL-REPLAY.md`
 
@@ -35,9 +64,20 @@ Evidence:
 - real merge commit: `c76c76e0c02dab28275d8e53d70da3f6f132e648`
 
 Evidence:
+
 - `evidence/t4/pr2-clean-run-005/REVIEW.md`
 - `evidence/t4/pr2-clean-run-005/reviewed-challenge.sanitized.json`
 - `evidence/t4/pr2-clean-run-005/REAL-MERGE-EXECUTION.md`
+
+## What I owned
+
+- defined the product mechanism around independent challenge before protected autonomous execution;
+- separated proposer behavior from deterministic risk authority;
+- designed the risk-proportional scrutiny policy and fail-closed outcomes;
+- integrated Telegraph-routed evidence and bounded x402 spend into the challenge path;
+- bound execution eligibility to the exact reviewed PR head;
+- built negative-path and clean-path evidence showing both denied and permitted execution;
+- documented claim boundaries so the project does not overstate what the live proof demonstrates.
 
 ## Core mechanism
 
