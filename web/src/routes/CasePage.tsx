@@ -23,7 +23,7 @@ export function CasePage() {
   if (!demoCase) {
     return (
       <Panel title="Case not found">
-        <p>No demo case matches &ldquo;{caseId}&rdquo;.</p>
+        <p>No captured case matches &ldquo;{caseId}&rdquo;.</p>
         <Link to="/">Back to overview</Link>
       </Panel>
     );
@@ -40,17 +40,21 @@ export function CasePage() {
   const verdictReady = phase === "done";
   const headerOutcome = verdictReady ? challengeResult.outcome : "PENDING";
   const phaseLabel =
-    phase === "action" ? "reading proposed action…"
-    : phase === "risk" ? "assessing risk…"
-    : phase === "challenging" ? "challenging…"
+    phase === "action" ? "reading captured action"
+    : phase === "risk" ? "replaying risk classification"
+    : phase === "challenging" ? "replaying captured evidence"
     : null;
 
   return (
     <div className="case-page">
+      <div className="case-page__replay-banner mono" role="note">
+        CAPTURED LIVE · HISTORICAL REPLAY · NO NEW TELEGRAPH CALL OR GITHUB WRITE
+      </div>
+
       <div className="case-page__header">
         <div>
           <div className="case-page__eyebrow mono">
-            {actionSnapshot.repository} · PR #{actionSnapshot.pr_number}
+            proof-time repo: {actionSnapshot.repository} · PR #{actionSnapshot.pr_number}
           </div>
           <h1 className="case-page__title">{demoCase.label}</h1>
         </div>
@@ -61,9 +65,9 @@ export function CasePage() {
             type="button"
             className="case-page__replay"
             onClick={replay}
-            aria-label="Replay this case's evidence log from the start"
+            aria-label="Replay this captured case from the start"
           >
-            replay
+            replay captured run
           </button>
         </div>
       </div>
@@ -102,13 +106,16 @@ export function CasePage() {
             <p className="case-page__field-note">
               reason: {riskAssessment.reason_codes.length > 0 ? riskAssessment.reason_codes.join(", ") : "not exposed"}
             </p>
+            <p className="case-page__field-note">
+              MEDIUM is live-proven in both final T4 cases. LOW and HIGH are policy and test proven.
+            </p>
           </>
         ) : (
           <SkeletonLines count={2} />
         )}
       </Panel>
 
-      <Panel eyebrow="3 · independent counter-evidence" title="Challenge">
+      <Panel eyebrow="3 · Telegraph-routed counter-evidence" title="Challenge">
         {challengeStarted ? (
           <>
             <EvidenceLog
@@ -119,7 +126,7 @@ export function CasePage() {
               awaitingNext={!verdictReady}
             />
             <div className="case-page__spend">
-              real spend observed: <span className="mono">{spendUsd != null ? `$${spendUsd.toFixed(2)}` : "not exposed"}</span>
+              captured spend: <span className="mono">{spendUsd != null ? `$${spendUsd.toFixed(2)}` : "not exposed"}</span>
               {" "}of <span className="mono">${capUsd.toFixed(2)}</span> cap
             </div>
           </>
@@ -134,20 +141,19 @@ export function CasePage() {
             <StatRow>
               <Stat label="outcome" value={<VerdictBadge outcome={challengeResult.outcome} />} />
               <Stat
-                label="expires"
+                label="historical expiry"
                 value={challengeResult.expires_at ? new Date(challengeResult.expires_at).toLocaleTimeString() : "n/a"}
               />
-              <Stat label="merge" value={mergeOutcome.merge_authorized ? "authorized" : "denied"} />
+              <Stat label="merge gate" value={mergeOutcome.merge_authorized ? "authorized" : "denied"} />
             </StatRow>
             <p className="case-page__field-note">
               reason: {challengeResult.reason_codes.length > 0 ? challengeResult.reason_codes.join(", ") : "not exposed"}
             </p>
             {mergeOutcome.merged ? (
               <p className="case-page__merge-proof">
-                Real merge executed under human-bounded authorization ({mergeOutcome.human_bounded_authorization ?? "unspecified"}).
-                Commit{" "}
+                This closed case reached a real merge after exact-head revalidation and explicit bounded human authorization. Commit{" "}
                 <a
-                  href={`https://github.com/${actionSnapshot.repository}/commit/${mergeOutcome.merge_commit_sha}`}
+                  href={`https://github.com/Faadil1/skeptara-telegraph/commit/${mergeOutcome.merge_commit_sha}`}
                   target="_blank"
                   rel="noreferrer"
                   className="mono"
@@ -158,18 +164,18 @@ export function CasePage() {
               </p>
             ) : (
               <p className="case-page__merge-proof case-page__merge-proof--denied">
-                Merge executor was not authorized to run.
-                {mergeOutcome.merge_adapter_calls != null && ` ${mergeOutcome.merge_adapter_calls} merge-adapter calls were made.`}
+                The merge executor was not authorized to run.
+                {mergeOutcome.merge_adapter_calls != null && ` Merge-adapter calls: ${mergeOutcome.merge_adapter_calls}.`}
               </p>
             )}
           </>
         ) : (
-          <p className="case-page__field-note">verdict pending — challenge in progress</p>
+          <p className="case-page__field-note">verdict pending in replay</p>
         )}
       </Panel>
 
       <p className="case-page__source mono">
-        source: {demoCase.sourceEvidencePath} (real closed run, replayed above for legibility)
+        source: {demoCase.sourceEvidencePath} · captured final T4 evidence · replayed locally for legibility
       </p>
     </div>
   );
