@@ -54,7 +54,7 @@ Status: DERIVED READY — subordinate to living PRD v0.1.
 
 - [x] Reclassify PR #1 (`lodash 4.17.20 -> 4.17.21`) as challenged candidate; preserve original head/history.
 - [x] Create clean PR #2: `lodash 4.17.20 -> 4.18.1` on `demo/clean-lodash-4.18.1`.
-- [x] Bind clean action file to PR #2 head `c40c5a3a15d6280005dfe7589ae7e2a960cc199c`.
+- [x] Rebase controlled PR #2 branch onto current `main` before live evidence and bind clean action file to exact head `d2aa0ea25daf1f84b6cfdd98861d3f05df584b7a`.
 - [x] Persist `demo/actions/challenged-pr.json` for PR #1.
 
 ### Auditor v0.3 seeded exact-CVE mode
@@ -96,7 +96,7 @@ Status: DERIVED READY — subordinate to living PRD v0.1.
 ## UX / Benita
 
 - [x] Frontend data contract frozen.
-- [x] `feat/frontend-benita` created and previously synchronized before collaborator work.
+- [x] `feat/frontend-benita` created and synchronized to current main while it still had no unique remote commits.
 - [ ] Send brief + PRD PDF if not already sent.
 - [ ] Risk-tier presentation.
 - [ ] Live challenge-progress presentation.
