@@ -1,13 +1,13 @@
 canonical_state:
   protocol_version: 1
   system: SKEPTARA_TELEGRAPH_TRACK3
-  version: 0.9.5-benita-primary-x-project-voice
+  version: 0.9.6-discord-joined-network-guidance-applied
   date: 2026-09-07
   source_of_truth: GITHUB
   repository: Faadil1/Faadil1-skeptara-telegraph
   branch: main
 
-  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__WINNING_INTELLIGENCE_PREFLIGHT_PASS__BLIND_SPOT_AUDIT_002_COMPLETE__NINE_SPOT_REMEDIATION_IMPLEMENTED__BENITA_PRIMARY_X_PROJECT_VOICE__LOCAL_VALIDATION_AND_TRACE_VISUAL_REVIEW_NEXT
+  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__WINNING_INTELLIGENCE_PREFLIGHT_PASS__NINE_SPOT_REMEDIATION_IMPLEMENTED__BENITA_PRIMARY_X_PROJECT_VOICE__FAADIL_DISCORD_JOIN_VERIFIED__ANTI_AUTOMATION_GUIDANCE_APPLIED__LOCAL_VALIDATION_AND_TRACE_VISUAL_REVIEW_NEXT
 
   authority:
     product_intent_source: product/PRD.md
@@ -83,6 +83,12 @@ canonical_state:
         judge_replay_command: npm run demo
         local_judge_surface_command: npm run demo:web
       no_product_pivot: true
+    discord_signal_004:
+      status: ACTIONABLE_NO_PIVOT
+      evidence: evidence/winning-intelligence/WI-DISCORD-COMPETITIVE-SIGNAL-004.md
+      collision_confirmed: VERIFIED_INTELLIGENCE_TO_DETERMINISTIC_GATE_IS_CROWDED
+      response: KEEP_ACTION_LEVEL_COUNTER_EVIDENCE_PLUS_RISK_PROPORTIONAL_SCRUTINY_PLUS_EXACT_EXECUTION_BINDING
+      competitor_call_volume_strategy: DO_NOT_CHASE
 
   claim_boundaries:
     exact_cve_seeded_mode: CONTROLLED_HACKATHON_PROOF_NOT_AUTOMATIC_UNKNOWN_VULNERABILITY_DISCOVERY
@@ -106,6 +112,20 @@ canonical_state:
     protected_denials: 1
     real_exact_head_merges: 1
     user_count_claim: NONE
+    no_volume_inflation: true
+
+  network_guidance:
+    evidence: evidence/admin/TELEGRAPH-DISCORD-JOIN-AND-NETWORK-GUIDANCE-VERIFIED.md
+    source: HUMAN_SCREENSHOTS_OFFICIAL_DISCORD_HACKATHONS_CHANNEL
+    staff_warning_observed: SCRIPTED_AUTOMATED_REQUEST_VOLUME_STRESSING_NETWORK_WILL_NOT_COUNT_FOR_JUDGING
+    organic_requests_counted_language_observed: true
+    payment_facilitator_issue_later_reported_fixed: true
+    effective_policy:
+      no_automated_request_volume_for_metrics: true
+      no_repeat_live_calls_for_optics: true
+      judge_demo_default: CAPTURED_LIVE_HISTORICAL_REPLAY
+      no_telegraph_auto_call_on_public_page_load_refresh_poll_timer_background: true
+      any_future_live_call: BOUNDED_HUMAN_TRIGGERED_AND_PRODUCT_NECESSARY_ONLY
 
   administrative_compliance:
     registration:
@@ -113,8 +133,9 @@ canonical_state:
       evidence: evidence/admin/TELEGRAPH-REGISTRATION-VERIFIED.md
     official_discord:
       invite: https://discord.gg/telegraphprotocol
-      source: TELEGRAPH_OWNED_DEVELOPER_CONSOLE_AND_GUIDE
-      joined_and_active: HUMAN_ACTION_REQUIRED
+      faadil_join_access: VERIFIED_FROM_HUMAN_SCREENSHOTS
+      faadil_project_activity: HUMAN_VERIFY_NOT_YET_SHOWN
+      benita_join_activity: HUMAN_VERIFY
     x_showcase:
       timing_context: REGISTERED_WITH_LESS_THAN_24_HOURS_REMAINING
       strategy: TRUTHFUL_COMPRESSED_SEQUENCE__NO_FAKE_HISTORY
@@ -128,7 +149,7 @@ canonical_state:
       build_proof_post: HUMAN_ACTION_REQUIRED
       demo_submission_post: HUMAN_ACTION_REQUIRED_AFTER_PUBLIC_DEPLOY
     final_submission: HUMAN_VERIFY_NOT_SUBMITTED
-    metric_gaming_forbidden: ACKNOWLEDGED
+    metric_gaming_forbidden: ACKNOWLEDGED_AND_REINFORCED_BY_DISCORD_GUIDANCE
 
   collaboration:
     public_comms_owner_x: BENITA
@@ -158,4 +179,4 @@ canonical_state:
   exact_next_gate: SKEPTARA_HIDDEN_SPOT_REMEDIATION_LOCAL_VALIDATION_AND_TRACE_VISUAL_REVIEW
   exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_TRACE_REVIEW
   exact_next_action: >-
-    Pull main and validate the remediation block with `npm test` then `npm run demo`. If both pass, run `npm run demo:web`, open http://127.0.0.1:4173, and provide screenshots for TRACE human visual review. The surface must preserve the split PR1 BLOCK/deny vs PR2 PASS/real merge story, historical replay labeling, exact-CVE seeded disclosure, MEDIUM-live vs LOW/HIGH-test distinction, Telegraph routing causality, and claim boundaries. Benita is the primary X project voice; Faadil @roy1919875 amplifies with technical/proof context. Discord join/activity, X posts, public deployment smoke, and final submission remain human-only gates and must not be marked complete without evidence.
+    Pull main and validate the remediation block with `npm test` then `npm run demo`. Do NOT run new live Telegraph calls for demo/activity volume. If both local commands pass, run `npm run demo:web`, open http://127.0.0.1:4173, and provide screenshots for TRACE visual review. Verify the public surface performs no Telegraph request on load/refresh. Preserve the split PR1 BLOCK/deny vs PR2 PASS/real merge story, historical replay labeling, exact-CVE seeded disclosure, MEDIUM-live vs LOW/HIGH-test distinction, Telegraph routing causality, and claim boundaries. Faadil Discord access is verified; substantive project activity and Benita Discord membership/activity remain human-verification items. Benita remains primary X project voice; Faadil @roy1919875 amplifies with technical/proof context.
