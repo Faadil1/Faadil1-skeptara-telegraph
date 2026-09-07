@@ -9,7 +9,7 @@ handover:
   resume_rule: >-
     Read state/CURRENT.yaml first, then this HANDOVER, product/PRD.md, spec-kit/tasks.md, docs/JUDGE-CLAIM-BOUNDARIES.md, docs/SUBMISSION-COMPLIANCE.md, docs/FRONTEND_DATA_CONTRACT.md, evidence/trace/FRONTEND-SETTLEMENT-MATRIX-CLARIFICATION.md, and evidence/trace/BENITA-FRONTEND-SOURCE-REVIEW-001.md. Repository truth outranks chat memory. Never force-move Benita's branch now that unique commits exist.
 
-  current_milestone: T0_THRU_T4_CLOSED__LOCAL_VALIDATION_PASS__BENITA_FRONTEND_SOURCE_REVIEW_HOLD_BOUNDED_FIXES__RECONCILE_THEN_TRACE
+  current_milestone: T0_THRU_T4_CLOSED__LOCAL_VALIDATION_PASS__BENITA_FRONTEND_SOURCE_REVIEW_HOLD_BOUNDED_FIXES__REVIEW_SENT__BENITA_READY_FOR_DEMO_AND_SUBMIT__WAIT_FOR_FIX_PUSH
 
   project:
     public_name: Skeptara
@@ -25,70 +25,57 @@ handover:
     t4: CLOSED_PASS
     hidden_spot_local_validation: PASS
 
-  local_validation:
-    evidence: evidence/trace/LOCAL-VALIDATION-41-OF-41-AND-JUDGE-REPLAY-PASS.md
-    npm_test: 41_OF_41_PASS
-    npm_run_demo: PASS__ZERO_PAYMENT__ZERO_EXTERNAL_WRITE
-
-  t4_final:
-    challenged_pr1:
-      head_sha: 73cf5bdd69163924228e3e21d67fa9f405d99904
+  t4_truth:
+    pr1:
       target: lodash@4.17.21
       outcome: BLOCK
-      runtime_paid_calls: 2
+      paid_calls: 2
       spend_atomic: 20000
       completed_coverage: 1
       actual_order:
-        - CVE_2026_4800__AMBIGUOUS__NOT_COVERAGE
-        - CVE_2026_2950__BLOCKING__MATERIAL_COUNTER_EVIDENCE
-      merge_gate: DENIED
+        - CVE-2026-4800__AMBIGUOUS__NOT_COVERAGE
+        - CVE-2026-2950__BLOCKING
       merge_adapter_calls: 0
-    clean_pr2:
-      head_sha: 528d730f9ebdcb433e01ba9c79dcc9a5f66ce1c7
+    pr2:
       target: lodash@4.18.1
       outcome: PASS
+      paid_calls: 2
       completed_coverage: 2
-      runtime_paid_calls: 2
       merge_commit_sha: c76c76e0c02dab28275d8e53d70da3f6f132e648
 
   settlement_matrix:
-    status: VERIFIED
     evidence: evidence/trace/FRONTEND-SETTLEMENT-MATRIX-CLARIFICATION.md
     final_t4_calls: 4
-    distinct_txs: 4
-    pr1_cve_2026_4800: 0x07ef1d9a4d44409832c99a02c89b26f665fab7fe07040e7573ab2b81a1fa8b57
-    pr1_cve_2026_2950: 0x171e2fc64a0d33b9726a31e3a45654aa47b2ce94b89f83d74d30fe3b327f5020
-    pr2_cve_2026_4800: 0x66bd41892d411b9be502759fc4259d2bec8821fd818385cc5eabb950589ab2a2
-    pr2_cve_2026_2950: 0x95e44b463cb6cafd4b1c56a9889930c1180d084a5e709ccf410296ca465d1e1b
+    distinct_transactions: 4
 
   benita_frontend:
-    deployed_url_human_supplied: https://skeptara.vercel.app/
+    live_url_human_supplied: https://skeptara.vercel.app/
     branch: feat/frontend-benita
     branch_status: DIVERGED
-    unique_commits_observed: 11
+    unique_commits_last_observed: 11
     never_force_move: true
     source_review: HOLD_BOUNDED_FIXES
     review_evidence: evidence/trace/BENITA-FRONTEND-SOURCE-REVIEW-001.md
-    strengths:
-      - clear judge path
-      - real identifiers and proof links
-      - historical replay framing exists
-      - PASS/BLOCK/ESCALATE represented
-      - exact-head and real merge proof represented
+    review_sent_to_benita: VERIFIED_BY_HUMAN_WHATSAPP_SCREENSHOT
+    benita_response: READY_TO_MAKE_DEMO_AND_SUBMIT_AFTER_COORDINATION
     p0_required_fixes:
-      - >-
-        PR1 chronology: actual order was ambiguous CVE-2026-4800 first, blocking CVE-2026-2950 second; full $0.02 was spent. Do not say blocking was first or that budget remained unspent.
-      - >-
-        Restore all four final T4 settlement transactions and real PR1 evidence order in web/src/data/cases.ts.
-      - >-
-        Replace 'No real Skeptara run has hit ESCALATE yet' with 'Neither final T4 case resolved to ESCALATE'; earlier development runs did exercise ESCALATE.
-      - >-
-        Tighten independence language: topology/component separation and Telegraph-routed external evidence, not statistical/miner independence.
+      - actual PR1 chronology and full $0.02 spend
+      - restore all four final T4 settlement txs and true PR1 evidence order
+      - correct ESCALATE historical claim
+      - tighten independence wording to topology/component separation
     p1_recommended:
-      - label $0.04 and 4 calls as final T4 two-case proof scope
-      - mark hero CVE-2950 as triggering evidence or show both PR1 paths
-      - keep MEDIUM live vs LOW/HIGH test boundary visible
-      - persistent CAPTURED LIVE / HISTORICAL REPLAY label on case routes
+      - label $0.04/4 calls as final T4 two-case scope
+      - hero triggering evidence should not imply first/only call
+      - MEDIUM live vs LOW/HIGH test boundary visible
+      - persistent CAPTURED LIVE / HISTORICAL REPLAY label
+
+  collaboration:
+    demo_owner_candidate: BENITA
+    pitch_owner_candidate: BENITA
+    demo_submission_readiness: ACKNOWLEDGED
+    faadil_role: TECHNICAL_PROOF_SUPPORT_AND_FINAL_GOVERNANCE
+    intended_primary_x_voice: BENITA_PENDING_EXPLICIT_CONFIRMATION
+    faadil_x_handle: '@roy1919875'
 
   admin:
     registration: VERIFIED
@@ -97,8 +84,6 @@ handover:
     faadil_discord_organic_engagement: VERIFIED
     benita_discord: HUMAN_VERIFY
     benita_x_handle: HUMAN_VERIFY
-    intended_primary_x_voice: BENITA_PENDING_HUMAN_CONFIRMATION
-    faadil_x_handle: '@roy1919875'
     x_posts: HUMAN_ACTION_REQUIRED
     final_submission: NOT_SUBMITTED
 
@@ -107,7 +92,7 @@ handover:
     no_repeat_live_calls_for_optics: true
     default_judge_demo: CAPTURED_LIVE_HISTORICAL_REPLAY
 
-  exact_next_gate: SKEPTARA_BENITA_P0_FRONTEND_FIXES_AND_NORMAL_RECONCILIATION
+  exact_next_gate: SKEPTARA_BENITA_P0_FRONTEND_FIX_PUSH_REVIEW
   exact_next_owner: BENITA_FRONTEND_WITH_CHATGPT_ORCHESTRATOR_REVIEW
   exact_next_action: >-
-    Share the bounded review with Benita. She should make the four P0 claim/data corrections on her branch. Do not force-move or overwrite her unique commits. After she pushes, compare/review the branch, reconcile normally with current main, then perform final visual TRACE on desktop and mobile before deploy/submission.
+    Wait for Benita to push her bounded frontend fixes. Do not reset or force-update her branch. Once pushed, inspect the diff, verify all four P0 fixes and the judge-clarity P1 items, reconcile normally with main, run tests/build, then run final TRACE visual review on desktop and mobile. If PASS, let Benita lead the demo/pitch, keep Faadil on technical proof/support, smoke the public deployment, publish X showcase posts, run Project Finisher, and submit before the deadline.
