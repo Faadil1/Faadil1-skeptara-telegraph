@@ -24,6 +24,24 @@
   height: 7px;
   border-radius: var(--radius-full);
   background: currentColor;
+  animation: status-breathe 2.8s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+@keyframes status-breathe {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 0 0 currentColor;
+  }
+  50% {
+    opacity: 0.45;
+    box-shadow: 0 0 4px 0 currentColor;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .verdict-badge__dot {
+    animation: none;
+  }
 }
 
 .verdict-badge--pass {

@@ -1,7 +1,7 @@
 /* Skeptara design tokens — single source of truth for color, type, spacing, radii.
    Visual system matched to BitSentry's terminal-green identity per explicit
-   direction: green accent, radial glow, dot-grid ground, italic display
-   wordmark. Content, copy and data stay entirely Skeptara's own. */
+   direction: green accent, soft radial-glow ground (no dot-grid), italic
+   display wordmark. Content, copy and data stay entirely Skeptara's own. */
 
 :root {
   /* Surfaces */
@@ -22,6 +22,17 @@
   --accent-dim: #1f7a49;
   --accent-on: #06120a;
   --accent-glow: rgba(53, 208, 122, 0.28);
+
+  /* Site-wide ambient background glow — the base "dark fading into soft
+     glow" ground used everywhere, replacing the old dot-grid texture.
+     Much fainter than --accent-glow, which stays reserved for the
+     concentrated hero-wordmark glow. */
+  --ambient-glow: rgba(53, 208, 122, 0.10);
+  --ambient-glow-dim: rgba(53, 208, 122, 0.05);
+
+  /* Cursor-reactive ambient spotlight — deliberately restrained per the
+     no-glowing-hovers rule: low opacity, large soft radius. */
+  --cursor-glow: rgba(53, 208, 122, 0.07);
 
   /* Semantic verdict colors */
   --pass: #35d07a;

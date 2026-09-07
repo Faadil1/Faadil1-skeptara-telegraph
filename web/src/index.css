@@ -11,8 +11,11 @@ html, body {
 
 body {
   background:
-    radial-gradient(circle at 1px 1px, rgba(53, 208, 122, 0.09) 1px, transparent 0) 0 0 / 26px 26px,
+    radial-gradient(ellipse 900px 560px at 50% -8%, var(--ambient-glow) 0%, transparent 62%),
+    radial-gradient(ellipse 700px 500px at 100% 60%, var(--ambient-glow-dim) 0%, transparent 60%),
+    radial-gradient(ellipse 700px 500px at 0% 100%, var(--ambient-glow-dim) 0%, transparent 60%),
     var(--bg);
+  background-attachment: fixed;
   color: var(--text-primary);
   font-family: var(--font-sans);
   font-size: var(--text-base);

@@ -1,10 +1,12 @@
 import { Link, Outlet } from "react-router-dom";
 import { Footer } from "./Footer";
+import { CursorGlow } from "./CursorGlow";
 import "./Layout.css";
 
 export function Layout() {
   return (
     <div className="layout">
+      <CursorGlow />
       <header className="layout__header">
         <Link to="/" className="layout__brand">
           <span className="layout__brand-badge" aria-hidden="true">
