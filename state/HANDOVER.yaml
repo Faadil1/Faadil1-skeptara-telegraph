@@ -7,9 +7,9 @@ handover:
   branch: main
 
   resume_rule: >-
-    Read state/CURRENT.yaml first, then this HANDOVER, product/PRD.md, spec-kit/tasks.md, docs/JUDGE-CLAIM-BOUNDARIES.md, docs/SUBMISSION-COMPLIANCE.md, docs/FRONTEND_DATA_CONTRACT.md, evidence/trace/FRONTEND-SETTLEMENT-MATRIX-CLARIFICATION.md, evidence/trace/PR3-TRACE-SOURCE-BEHAVIOR-AUDIT-001.md, evidence/trace/PR3-FINAL-BROWSER-TRACE-AND-MERGE-PASS.md, and evidence/trace/FINAL-DEPLOYMENT-HANDOFF-NO-PUBLIC-SMOKE-DECISION.md. Repository truth outranks chat memory. Never force-move Benita's branch.
+    Read state/CURRENT.yaml first, then this HANDOVER, product/PRD.md, spec-kit/tasks.md, docs/JUDGE-CLAIM-BOUNDARIES.md, docs/SUBMISSION-COMPLIANCE.md, docs/FRONTEND_DATA_CONTRACT.md, evidence/trace/FRONTEND-SETTLEMENT-MATRIX-CLARIFICATION.md, evidence/trace/PR3-TRACE-SOURCE-BEHAVIOR-AUDIT-001.md, evidence/trace/PR3-FINAL-BROWSER-TRACE-AND-MERGE-PASS.md, evidence/trace/FINAL-DEPLOYMENT-HANDOFF-NO-PUBLIC-SMOKE-DECISION.md, and evidence/trace/BENITA-X-SHOWCASE-VERIFIED.md. Repository truth outranks chat memory. Never force-move Benita's branch.
 
-  current_milestone: T0_THRU_T4_CLOSED__FINAL_FRONTEND_TRACE_PASS__PR3_MERGED__BENITA_FINALIZATION_AND_FAADIL_SUBMISSION_IN_PARALLEL
+  current_milestone: T0_THRU_T4_CLOSED__FINAL_FRONTEND_TRACE_PASS__PR3_MERGED__BENITA_X_SHOWCASE_VERIFIED__FAADIL_TRACK3_SUBMISSION_NOW
 
   project:
     public_name: Skeptara
@@ -43,7 +43,6 @@ handover:
   deployment_handoff:
     public_url: https://skeptara.vercel.app/
     project_owner: BENITA_SIDE
-    faadil_connected_vercel_project_present: false
     final_main_merge_complete: true
     benita_production_finalization: AUTHORIZED_TO_PROCEED
     faadil_public_smoke_required: false
@@ -51,10 +50,19 @@ handover:
     evidence: evidence/trace/FINAL-DEPLOYMENT-HANDOFF-NO-PUBLIC-SMOKE-DECISION.md
     claim_boundary: DO_NOT_CLAIM_INDEPENDENT_FAADIL_OR_CHATGPT_PRODUCTION_SMOKE
 
+  public_comms:
+    benita_x_handle: '@0x_beni_'
+    handle_status: VERIFIED_BY_HUMAN_PROVIDED_EVIDENCE
+    primary_showcase_post:
+      status: VERIFIED_PUBLISHED
+      url: https://x.com/0x_beni_/status/2097099339449393652
+      evidence: evidence/trace/BENITA-X-SHOWCASE-VERIFIED.md
+    no_reach_or_impression_claim: true
+
   finish_split:
     benita:
-      - DEPLOY_OR_CONFIRM_PRODUCTION_FROM_MERGED_MAIN_ON_HER_VERCEL
-      - FINALIZE_DEMO_AND_PITCH
+      - FINALIZE_OR_CONFIRM_VERCEL_PRODUCTION
+      - LEAD_DEMO_AND_PITCH
       - PRIMARY_X_PROJECT_VOICE_AND_POSTS
       - DISCORD_COMMUNITY_FINALIZATION_IF_NEEDED
       - NO_CORE_IMPLEMENTATION_CHANGE_UNLESS_A_CONCRETE_PRODUCTION_REGRESSION_APPEARS
@@ -68,11 +76,11 @@ handover:
     registration: VERIFIED
     faadil_discord: VERIFIED_WITH_PROJECT_ACTIVITY_AND_ORGANIC_ENGAGEMENT
     benita_discord: HUMAN_VERIFY
-    benita_x_handle: HUMAN_VERIFY
-    x_posts: PENDING_HUMAN
+    benita_x_handle: VERIFIED__AT_0X_BENI_
+    x_posts: BENITA_PRIMARY_SHOWCASE_VERIFIED
     final_submission: NOT_SUBMITTED
 
-  exact_next_gate: SKEPTARA_FINALIZATION_AND_SUBMISSION_SPLIT
-  exact_next_owner: BENITA_PRODUCTION_DEMO_COMMS__FAADIL_OFFICIAL_SUBMISSION
+  exact_next_gate: SKEPTARA_OFFICIAL_TRACK3_SUBMISSION
+  exact_next_owner: FAADIL
   exact_next_action: >-
-    No public smoke gate is required from Faadil. Benita can finalize the Vercel production deployment and immediately continue with demo, pitch, X, and community tasks. Faadil should proceed in parallel with the official Telegraph submission platform, verify Track 3 selection, complete the final form, and preserve the exact technical claim boundaries. Reopen implementation only for a concrete observed production regression.
+    Benita's primary Skeptara X showcase is now verified at https://x.com/0x_beni_/status/2097099339449393652. Faadil should submit Track 3 immediately using the canonical project title, safe description, GitHub repository URL, and live app URL. No additional build, public smoke, or fresh Telegraph activity is required. Capture the submission confirmation screen or My Submissions entry immediately after signing/submitting and persist it as evidence.
