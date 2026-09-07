@@ -1,13 +1,13 @@
 canonical_state:
   protocol_version: 1
   system: SKEPTARA_TELEGRAPH_TRACK3
-  version: 0.6.0-t2-retry-002-rejected-pr2-clean-seeded-v0-3-local-test-next
+  version: 0.6.1-t2-retry-002-rejected-pr2-rebased-seeded-v0-3-local-test-next
   date: 2026-09-06
   source_of_truth: GITHUB
   repository: Faadil1/Faadil1-skeptara-telegraph
   branch: main
 
-  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_RUN_001_REJECTED__V0_2_REMEDIATED__RETRY_002_REJECTED__PR1_RECLASSIFIED_CHALLENGED__PR2_CLEAN_CREATED__SEEDED_CVE_V0_3_IMPLEMENTED__LOCAL_TEST_REQUIRED
+  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_RUN_001_REJECTED__V0_2_REMEDIATED__RETRY_002_REJECTED__PR1_RECLASSIFIED_CHALLENGED__PR2_CLEAN_REBASED_AND_BOUND__SEEDED_CVE_V0_3_IMPLEMENTED__LOCAL_TEST_REQUIRED
 
   authority:
     product_intent_source: product/PRD.md
@@ -73,10 +73,10 @@ canonical_state:
       role: CHALLENGED_CANDIDATE
       merge_authorized: false
     - id: SKEPTARA_PR_2_CLEAN_CANDIDATE
-      status: CREATED_LIVE_AUDIT_NOT_YET_RUN
+      status: CREATED_REBASED_TO_CURRENT_MAIN_LIVE_AUDIT_NOT_YET_RUN
       pr_number: 2
       branch: demo/clean-lodash-4.18.1
-      head_sha: c40c5a3a15d6280005dfe7589ae7e2a960cc199c
+      head_sha: d2aa0ea25daf1f84b6cfdd98861d3f05df584b7a
       target: lodash@4.18.1
       role: CLEAN_CANDIDATE
       merge_authorized: false
@@ -120,7 +120,7 @@ canonical_state:
       repository: Faadil1/Faadil1-skeptara-telegraph
       pr_number: 2
       branch: demo/clean-lodash-4.18.1
-      head_sha: c40c5a3a15d6280005dfe7589ae7e2a960cc199c
+      head_sha: d2aa0ea25daf1f84b6cfdd98861d3f05df584b7a
       dependency_change: lodash_4_17_20_TO_4_18_1
       risk_tier: MEDIUM
       required_evidence_paths: 2
@@ -154,7 +154,7 @@ canonical_state:
 
   branches:
     main: CURRENT
-    feat_frontend_benita: COLLABORATOR_BRANCH__DO_NOT_FORCE_MOVE_ONCE_UNIQUE_COMMITS_EXIST
+    feat_frontend_benita: COLLABORATOR_BRANCH__FAST_FORWARD_ONLY_WHILE_NO_UNIQUE_COMMITS
     demo_clean_lodash_upgrade: FROZEN_CHALLENGED_PR_1
     demo_clean_lodash_4_18_1: FROZEN_CLEAN_PR_2_PENDING_T2
 
@@ -182,4 +182,4 @@ canonical_state:
   exact_next_gate: SKEPTARA_T2_V0_3_LOCAL_TEST_AND_PR2_LIVE_AUDIT
   exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_REVIEW
   exact_next_action: >-
-    Pull main and run npm test. Do not run another paid audit unless the full v0.3 suite passes. Expected total is 26 tests if no unrelated count change. After green tests, reverify PR #2 is still open at exact head c40c5a3a15d6280005dfe7589ae7e2a960cc199c, then run scripts/t2-from-clipboard.ps1. The action file now targets PR #2 lodash@4.18.1 and exact CVE seeds CVE-2026-4800 and CVE-2026-2950. Return terminal output plus sanitized 02-audit-result.json. Never merge PR #1 or #2 before T3 and never force a PASS.
+    Pull main and run npm test. Do not run another paid audit unless the full v0.3 suite passes. Expected total is 26 tests if no unrelated count change. After green tests, reverify PR #2 is still open at exact head d2aa0ea25daf1f84b6cfdd98861d3f05df584b7a, then run scripts/t2-from-clipboard.ps1. The action file now targets PR #2 lodash@4.18.1 and exact CVE seeds CVE-2026-4800 and CVE-2026-2950. Return terminal output plus sanitized 02-audit-result.json. Never merge PR #1 or #2 before T3 and never force a PASS.
