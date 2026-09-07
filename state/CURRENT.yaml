@@ -1,13 +1,13 @@
 canonical_state:
   protocol_version: 1
   system: SKEPTARA_TELEGRAPH_TRACK3
-  version: 0.10.9-pr3-clean-lint-build-pass-trace-next
+  version: 0.11.0-pr3-source-trace-pass-browser-trace-next
   date: 2026-09-07
   source_of_truth: GITHUB
   repository: Faadil1/skeptara-telegraph
   branch: main
 
-  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__BENITA_FRONTEND_CAPTURED__OWNER_INTEGRATION_V2_CURRENT__BENITA_README_RECONCILED__ROOT_41_OF_41_PASS__WEB_CLEAN_LINT_BUILD_PASS__TRACE_NEXT
+  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__BENITA_FRONTEND_AND_README_RECONCILED__OWNER_INTEGRATION_V2__ROOT_41_OF_41_PASS__WEB_CLEAN_LINT_BUILD_PASS__SOURCE_CLAIM_BEHAVIOR_TRACE_PASS__BROWSER_VISUAL_NETWORK_TRACE_NEXT
 
   authority:
     product_intent_source: product/PRD.md
@@ -31,12 +31,20 @@ canonical_state:
     pr3_clean_lint_build:
       status: PASS
       evidence: evidence/trace/PR3-CLEAN-LINT-BUILD-RERUN-PASS.md
-      candidate_head: 1244294ee96c747c7220a7159de0652d9b04e019
+      validated_web_head: 1244294ee96c747c7220a7159de0652d9b04e019
       lint: 0_WARNINGS__0_ERRORS
       build: PASS
+    pr3_source_claim_behavior_trace:
+      status: PASS
+      evidence: evidence/trace/PR3-TRACE-SOURCE-BEHAVIOR-AUDIT-001.md
+      candidate_head: 4687cf37a8dd284b5079e709de326de9b01ef182
+      parent_validated_web_head: 1244294ee96c747c7220a7159de0652d9b04e019
+      latest_change_scope: DOCS_ONLY__DEMO_JUDGE_WALKTHROUGH
+      web_tree_changed_since_clean_validation: false
 
   t4_truth:
     pr1:
+      historical_repository: Faadil1/Faadil1-skeptara-telegraph
       target: lodash@4.17.21
       outcome: BLOCK
       paid_calls: 2
@@ -47,10 +55,12 @@ canonical_state:
         - CVE-2026-2950__BLOCKING
       merge_adapter_calls: 0
     pr2:
+      historical_repository: Faadil1/Faadil1-skeptara-telegraph
       target: lodash@4.18.1
       outcome: PASS
       paid_calls: 2
       completed_coverage: 2
+      exact_head: 528d730f9ebdcb433e01ba9c79dcc9a5f66ce1c7
       merge_commit_sha: c76c76e0c02dab28275d8e53d70da3f6f132e648
 
   settlement_truth:
@@ -67,61 +77,52 @@ canonical_state:
       sha: 68dfc2b103dcc88ec821a3cc1f50f4f568074400
       scope: README_ONLY
       web_changed: false
+    correctness_fixes_absorbed: true
+    latest_readme_reconciled: true
     never_force_move: true
 
   owner_frontend_integration:
-    status: CLEAN_LOCAL_LINT_BUILD_PASS__TRACE_PENDING
-    evidence:
-      integration: evidence/trace/OWNER-FRONTEND-INTEGRATION-001.md
-      first_local_validation: evidence/trace/PR3-LOCAL-VALIDATION-001.md
-      clean_rerun: evidence/trace/PR3-CLEAN-LINT-BUILD-RERUN-PASS.md
+    status: SOURCE_TRACE_PASS__BROWSER_TRACE_PENDING
     stale_branch: integration/frontend-final
     stale_branch_rule: DO_NOT_USE_OR_MERGE
     candidate_branch: integration/frontend-final-v2
-    candidate_branch_rule: CURRENT_ONLY_INTEGRATION_CANDIDATE
+    candidate_branch_rule: ONLY_CURRENT_INTEGRATION_CANDIDATE
     draft_pr: 3
     pr_url: https://github.com/Faadil1/skeptara-telegraph/pull/3
-    candidate_head: 1244294ee96c747c7220a7159de0652d9b04e019
+    current_candidate_head: 4687cf37a8dd284b5079e709de326de9b01ef182
+    current_candidate_parent: 1244294ee96c747c7220a7159de0652d9b04e019
+    latest_head_change: DOCS_ONLY__JUDGE_WALKTHROUGH_CLAIM_TIGHTENING
     merged: false
-    github_mergeable_latest_observation: false
-    mergeability_rule: RECONCILE_WITH_LATEST_MAIN_AFTER_TRACE_BEFORE_MERGE
-    benita_readme_reconciliation:
-      source_commit: 68dfc2b103dcc88ec821a3cc1f50f4f568074400
-      integration_commit: 1244294ee96c747c7220a7159de0652d9b04e019
-      result: CONTENT_RECONCILED_WITH_CANONICAL_CORRECTIONS
-    validated_on_candidate_head_1244294:
+    github_mergeable_last_observation: false
+    mergeability_rule: RECONCILE_WITH_LATEST_MAIN_AFTER_BROWSER_TRACE_BEFORE_MERGE
+    evidence:
+      integration: evidence/trace/OWNER-FRONTEND-INTEGRATION-001.md
+      first_validation: evidence/trace/PR3-LOCAL-VALIDATION-001.md
+      clean_rerun: evidence/trace/PR3-CLEAN-LINT-BUILD-RERUN-PASS.md
+      source_trace: evidence/trace/PR3-TRACE-SOURCE-BEHAVIOR-AUDIT-001.md
+    validated_web_tree:
+      root_tests: 41_OF_41_PASS__0_FAIL
+      web_npm_ci: PASS__0_VULNERABILITIES_AT_OBSERVATION
       web_lint: 0_WARNINGS__0_ERRORS
       web_build: PASS
-      build_modules: 48
-      build_duration_ms: 476
-    previously_validated_on_integration_line:
-      root_tests: 41_OF_41_PASS__0_FAIL
-      web_npm_ci: PASS__0_VULNERABILITIES
-      web_dev_server: PASS__HTTP_127_0_0_1_5173
-    bounded_changes:
-      - COPY_ANTI_AI_SLOP_CLEANUP
-      - ABOVE_FOLD_BLOCK_PASS_SPLIT
-      - FINAL_T4_SCOPE_LABELS
-      - PAID_CALL_NUMBERING_AND_COVERAGE_LABELS
-      - PERSISTENT_HISTORICAL_REPLAY_NOTICE
-      - SIMPLIFIED_REPLAY_TIMERS
-      - REDUCED_MOTION_REPLAY_AND_HASH_SCROLL
-      - SAFE_NOT_FOUND_ROUTE
-      - CANONICAL_OG_X_METADATA
-      - BENITA_JUDGE_FIRST_README_RESTRUCTURE
-      - REPLAY_ONLY_NO_NETWORK_OR_WRITE_BOUNDARY_PRESERVED
-
-  local_workspace_note:
-    observed_untracked_paths:
-      - evidence/t0-real-telegraph/runtime/
-      - evidence/t2-runtime/
-      - package-lock.json
-    rule: DO_NOT_GIT_ADD_ALL__DO_NOT_COMMIT_RUNTIME_SECRET_BEARING_OR_UNREVIEWED_FILES
+      dev_server: PASS__HTTP_127_0_0_1_5173
+    source_trace_findings:
+      five_second_comprehension: PASS
+      t4_claim_correctness: PASS
+      settlement_semantics: PASS
+      historical_replay_boundary: PASS
+      reduced_motion_source_behavior: PASS
+      routing_and_safe_404: PASS
+      responsive_source_rules: PASS_PENDING_BROWSER_RENDER
+      social_metadata: PASS
+      anti_ai_slop_copy: PASS
+      no_frontend_private_key_or_protected_write_credential: PASS
+      no_telegraph_or_github_write_path_in_replay_source: PASS
 
   claim_boundaries:
     exact_cve_seeded_mode: CONTROLLED_HACKATHON_PROOF_NOT_AUTOMATIC_UNKNOWN_VULNERABILITY_DISCOVERY
     risk_scaling: { low: POLICY_TEST_PROVEN, medium: LIVE_FINAL_T4_PROVEN, high: POLICY_TEST_PROVEN }
-    independence: CHALLENGE_TOPOLOGY_NOT_STATISTICAL_MINER_INDEPENDENCE
+    independence: CHALLENGE_TOPOLOGY_NOT_STATISTICAL_OR_MODEL_LEVEL_MINER_INDEPENDENCE
     replay: HISTORICAL_REPLAY_NEVER_FRESH_EXECUTION_AUTHORIZATION
     merge_runtime: T3_CONTRACT_TEST_PROVEN_PLUS_T4_REAL_EXACT_HEAD_MERGE__NO_FULLY_DEPLOYED_REPO_ADAPTER_CLAIM
 
@@ -131,6 +132,21 @@ canonical_state:
     public_page_mode: HISTORICAL_PROOF_REPLAY_ONLY
     automatic_telegraph_request_on_load_or_replay: MUST_REMAIN_NONE
     live_merge_button_with_browser_credentials: PROHIBITED
+    no_fresh_telegraph_calls_for_optics: true
+
+  collaboration_and_finish_split:
+    reply_to_benita_before_browser_trace: HOLD
+    reason: FINISH_BROWSER_TRACE_FIRST_SO_BENITA_RECEIVES_ONLY_FINALIZATION_WORK
+    benita_after_trace:
+      - FINAL_DEMO_NARRATIVE_AND_PITCH
+      - PRIMARY_X_PROJECT_VOICE_AND_POSTS
+      - DISCORD_OR_COMMUNITY_FINALIZATION_IF_NEEDED
+      - PRESENTATION_POLISH_ONLY_UNLESS_TRACE_FINDS_CONCRETE_REGRESSION
+    faadil_after_trace:
+      - TECHNICAL_PROOF_AND_EVIDENCE_GOVERNANCE
+      - FINAL_SUBMISSION_SITE_ACTION
+      - SUBMISSION_FORM_AND_FINAL_VERIFICATION
+    no_more_core_product_build_expected: true
 
   administrative_compliance:
     registration: VERIFIED
@@ -142,13 +158,20 @@ canonical_state:
     x_posts: HUMAN_ACTION_REQUIRED
     final_submission: HUMAN_VERIFY_NOT_SUBMITTED
 
+  local_workspace_note:
+    observed_untracked_paths:
+      - evidence/t0-real-telegraph/runtime/
+      - evidence/t2-runtime/
+      - package-lock.json
+    rule: DO_NOT_GIT_ADD_ALL__DO_NOT_COMMIT_RUNTIME_SECRET_BEARING_OR_UNREVIEWED_FILES
+
   persistence_rule:
     after_every_major_gate: UPDATE_CURRENT_AND_HANDOVER
     after_every_execution_boundary: UPDATE_CURRENT_AND_HANDOVER
     handover_must_be_sufficient_for_next_conversation_to_take_lead: true
     evidence_before_pass_claim: REQUIRED
 
-  exact_next_gate: SKEPTARA_PR3_FINAL_TRACE_VISUAL_NETWORK_REVIEW
+  exact_next_gate: SKEPTARA_PR3_BROWSER_VISUAL_NETWORK_TRACE
   exact_next_owner: HUMAN_BROWSER_WITH_CHATGPT_TRACE_REVIEW
   exact_next_action: >-
-    Keep integration/frontend-final-v2 at validated head 1244294ee96c747c7220a7159de0652d9b04e019 and do not merge PR #3 yet. Run the Vite dev server, then perform desktop and mobile/narrow TRACE review on landing, /case/pr1, /case/pr2, and an invalid route. Verify all four settlement links and the historical real-merge link. In DevTools Network, confirm page load and Replay generate no Telegraph requests and no GitHub write requests. Capture screenshots/evidence. After TRACE passes, reconcile the draft PR with latest main because GitHub currently reports mergeable=false, rerun the bounded checks if reconciliation changes web code, persist TRACE, then merge/smoke/X/demo/submission. No fresh Telegraph calls for optics.
+    On integration/frontend-final-v2 pull current candidate head 4687cf37a8dd284b5079e709de326de9b01ef182. The only change after validated web head 1244294 is demo/JUDGE_WALKTHROUGH.md, so the clean web lint/build evidence still applies. Run the Vite dev server and capture desktop landing, narrow/mobile landing, /case/pr1 after replay, /case/pr2 after replay, and an invalid route. In DevTools Network, capture page load and Replay showing no Telegraph request and no GitHub write request. Manually verify all four Base Sepolia settlement links and the historical real-merge commit link. Do not reply to Benita yet and do not merge PR #3. After browser TRACE PASS, reconcile PR #3 with latest main, rerun bounded checks only if web code changes, persist final TRACE, merge/smoke public deployment, then tell Benita to finish demo/pitch/X while Faadil handles the submission site.
