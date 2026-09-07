@@ -9,7 +9,7 @@ handover:
   resume_rule: >-
     Read state/CURRENT.yaml first, then this HANDOVER, then product/PRD.md. Repository truth outranks chat memory. PRD is canonical product intent; Spec Kit is derived execution state. Persist evidence and update CURRENT + HANDOVER after each major gate.
 
-  current_milestone: T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_PR1_CHALLENGED_CASE_CLOSED__PR2_FRESH_PASS_NEXT
+  current_milestone: T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_PR1_CHALLENGED_CASE_CLOSED__PR2_RECONCILED__FRESH_PASS_NEXT
 
   project:
     public_name: Skeptara
@@ -34,49 +34,40 @@ handover:
 
     challenged_pr1:
       status: CLOSED_PASS
-      action_file: demo/actions/challenged-pr.json
       head_sha: 73cf5bdd69163924228e3e21d67fa9f405d99904
       target: lodash@4.17.21
       run_004:
-        runtime_dir: evidence/t2-runtime/2026-09-07T01-11-00-634Z
         challenge_id: 113cc2c4-94ff-4c47-bf48-66fabc7c9329
-        actual_intents: [CVE_LOOKUP, CVE_LOOKUP]
         spend_atomic: 20000
-        coverage: 1_OF_2
         outcome: BLOCK
-        reason: MATERIAL_COUNTER_EVIDENCE_FOUND
-        first_path: CVE-2026-4800__AMBIGUOUS__RANGE_NOT_MACHINE_VERIFIABLE__SAFE_CONTINUE
         blocking_path: CVE-2026-2950__LODASH_4_17_23_AND_EARLIER__FIXED_4_18_0__TARGET_4_17_21__BLOCKING
-        action_binding_valid: true
-        settlement_network: eip155:84532
         review: evidence/t4/pr1-block-run-004/REVIEW.md
-        fixture: evidence/t4/pr1-block-run-004/reviewed-challenge.sanitized.json
       denial_replay:
-        command: npm run t4:replay:block
         status: PASS
         authorization: DENIED
         reason: CHALLENGE_NOT_PASS
         merge_adapter_calls: 0
         executed: false
         merged: false
-        new_payment: false
-        github_write: false
         evidence: evidence/t4/pr1-block-run-004/MERGE-DENIAL-REPLAY.md
       conclusion: REAL_BLOCK_AND_ZERO_WRITE_DENIAL_PROVEN
       merge_authorized: false
 
     clean_pr2:
       action_file: demo/actions/clean-pr.json
-      head_sha: d2aa0ea25daf1f84b6cfdd98861d3f05df584b7a
       target: lodash@4.18.1
-      current_github_revalidation:
-        state: open
-        merged: false
-        exact_head_match: true
+      previous_head_sha: d2aa0ea25daf1f84b6cfdd98861d3f05df584b7a
+      head_sha: 528d730f9ebdcb433e01ba9c79dcc9a5f66ce1c7
+      branch: demo/clean-lodash-4.18.1
+      reconciliation:
+        status: PASS
+        force_update_used: false
+        reason: PREVENT_FRESH_PASS_ON_STALE_DIVERGED_EXECUTION_TARGET
+        evidence: evidence/t4/PR2-CLEAN-BRANCH-RECONCILIATION.md
       status: FRESH_LIVE_PASS_NEXT
       required_coverage: 2_OF_2
       spend_cap_atomic: 20000
-      expected_materiality: TWO_NON_BLOCKING_ADVISORIES_IF_LIVE_RECORDS_REMAIN_CURRENT
+      evidence_seeds: [CVE-2026-4800, CVE-2026-2950]
       real_merge_requires_explicit_human_authorization: true
       merge_authorized: false
 
@@ -97,4 +88,4 @@ handover:
   exact_next_gate: SKEPTARA_T4_PR2_FRESH_PASS_PROOF
   exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_REVIEW
   exact_next_action: >-
-    Pull main if needed. Make sure SKEPTARA_T2_ACTION_FILE is unset or set to demo/actions/clean-pr.json, then run powershell -ExecutionPolicy Bypass -File .\scripts\t2-from-clipboard.ps1 with the fresh bounded Base Sepolia burner. Do not paste or print the key. Require PR #2 exact head d2aa0ea25daf1f84b6cfdd98861d3f05df584b7a, MEDIUM risk, seeded-CVE mode, spend <=20000 atomic USDC, 2/2 meaningful non-blocking coverage and outcome PASS. Return terminal output and the new sanitized 02-audit-result.json. Do not merge PR #2 yet; after review we must revalidate its exact head and ask the human for explicit bounded authorization.
+    Pull main. Ensure SKEPTARA_T2_ACTION_FILE is unset or set to demo/actions/clean-pr.json, then run powershell -ExecutionPolicy Bypass -File .\scripts\t2-from-clipboard.ps1 with the fresh bounded Base Sepolia burner. Do not paste or print the key. Require PR #2 exact reconciled head 528d730f9ebdcb433e01ba9c79dcc9a5f66ce1c7, MEDIUM risk, seeded-CVE mode, spend <=20000 atomic USDC, 2/2 meaningful non-blocking coverage and outcome PASS. Return terminal output and the new sanitized 02-audit-result.json. Do not merge PR #2 yet; after review we must revalidate its exact head and ask the human for explicit bounded authorization.
