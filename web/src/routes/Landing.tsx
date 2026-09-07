@@ -8,8 +8,8 @@ import "./Landing.css";
 const HERO_LINES = [
   { cmd: true, text: "skeptara check --pr 1 --repo Faadil1/Faadil1-skeptara-telegraph" },
   { cmd: false, text: "risk_tier: MEDIUM  required_evidence_paths: 2" },
-  { cmd: false, text: "path 1: CVE_LOOKUP → SecWire CVE Lookup ($0.01, settled) → CVE-2026-4800 · AMBIGUOUS" },
-  { cmd: false, text: "path 2: CVE_LOOKUP → SecWire CVE Lookup ($0.01, settled) → CVE-2026-2950 · lodash <4.18.0 · BLOCKING" },
+  { cmd: false, text: "call_01: CVE-2026-4800 · AMBIGUOUS · $0.01 · settled" },
+  { cmd: false, text: "call_02: CVE-2026-2950 · BLOCKING · $0.01 · settled" },
   { cmd: false, text: "verdict: BLOCK · merge denied · 0 write calls", verdict: "block" as const },
 ];
 
@@ -22,8 +22,6 @@ const blockCount = demoCases.filter((c) => c.challengeResult.outcome === "BLOCK"
 const passCount = demoCases.filter((c) => c.challengeResult.outcome === "PASS").length;
 const maxRequiredPaths = Math.max(...riskTierPolicy.map((p) => p.requiredPaths));
 
-// Real identifiers pulled from the closed runs — miners, intents, policy/auditor
-// versions actually used. Not a decorative filler list.
 const marqueeItems = Array.from(
   new Set([
     ...demoCases.flatMap((c) => c.evidenceItems.map((e) => e.miner_name).filter(Boolean)),
@@ -81,22 +79,22 @@ const HOW_IT_WORKS_STEPS = [
   {
     n: 1,
     title: "PR proposed",
-    body: "A coding agent opens a pull request that changes a dependency. Skeptara canonicalizes the exact change — repo, head SHA, base branch, what actually moved.",
+    body: "A coding agent opens a pull request that changes a dependency. Skeptara records the repo, head SHA, base branch, changed files, and dependency diff.",
   },
   {
     n: 2,
-    title: "Risk assessed",
-    body: "A deterministic rubric, external to the reviewed agent, assigns LOW / MEDIUM / HIGH. The agent cannot set its own risk tier.",
+    title: "Risk classified",
+    body: "A deterministic rubric outside the reviewed agent assigns LOW, MEDIUM, or HIGH. The reviewed agent cannot set its own tier.",
   },
   {
     n: 3,
-    title: "Independent challenge",
-    body: "A separate auditor pays real Telegraph miners for counter-evidence. Required coverage scales with risk tier — the riskier the change, the deeper the evidence it has to survive.",
+    title: "Counter-evidence bought",
+    body: "A separate auditor pays Telegraph-routed miners for external evidence. The required number of evidence paths and the spend cap come from the risk tier.",
   },
   {
     n: 4,
-    title: "Verdict + merge gate",
-    body: "PASS, BLOCK, or ESCALATE. Only a fresh PASS — bound to the exact reviewed head — unlocks the merge gate.",
+    title: "Gate decides",
+    body: "The result is PASS, BLOCK, or ESCALATE. A merge can proceed only from a fresh PASS bound to the exact reviewed head.",
   },
 ];
 
@@ -117,6 +115,9 @@ function TierDiagram() {
           <div className="tier-diagram__meta mono">
             {p.requiredPaths} path{p.requiredPaths > 1 ? "s" : ""} · ${p.spendCapUsd.toFixed(2)} cap
           </div>
+          <div className="tier-diagram__meta mono">
+            {p.tier === "MEDIUM" ? "live proven" : "policy + tests"}
+          </div>
         </div>
       ))}
     </div>
@@ -125,20 +126,24 @@ function TierDiagram() {
 
 const FAQ_ITEMS = [
   {
-    q: "Is this using real Telegraph calls, or simulated?",
-    a: "Real. Both closed cases below made real, paid calls to real Telegraph miners on Base Sepolia — real signal hashes, real x402 settlements. Nothing about the evidence itself is simulated.",
+    q: "Are the Telegraph calls real?",
+    a: "Yes. The two final T4 cases used paid Telegraph calls on Base Sepolia. The page you are viewing replays captured results, so loading or replaying the page does not make a new payment or network request.",
   },
   {
-    q: "Why does the PR #1 evidence log stop at 1 of 2 coverage?",
-    a: "It made both required calls and spent the full $0.02 cap. The first (CVE-2026-4800) came back ambiguous and didn't count toward coverage; the second (CVE-2026-2950) found blocking evidence. \"1 of 2\" means one path counted as material — not that only one call was made.",
+    q: "Why is PR #1 coverage only 1 of 2 after two paid calls?",
+    a: "Coverage counts qualifying evidence paths, not payments. Call 01 returned a substantive but machine-ambiguous record, so it did not count. Call 02 returned material blocking evidence. Both calls were paid and settled. The final outcome is BLOCK.",
   },
   {
-    q: "What happens on ESCALATE, and has it actually been triggered in this demo?",
-    a: "ESCALATE is a real, fully supported outcome — it fires when required coverage can't be completed, a source is unavailable, or a finding is too ambiguous to resolve automatically. Neither of the two closed cases below has triggered it. We say so directly rather than fabricating a third case to look complete.",
+    q: "What does ESCALATE mean?",
+    a: "ESCALATE is the fail-closed outcome for incomplete coverage, unavailable sources, budget exhaustion, or critical ambiguity. Earlier development runs exercised ESCALATE. Neither of the two final T4 cases ended there.",
   },
   {
-    q: "Is the demo live right now, or replayed from closed runs?",
-    a: "The two cases below are real data from two closed T4 challenge runs (Telegraph Protocol Track 3) — not generated live at request time. Each case page replays that recorded evidence with paced loading states for legibility, and says so explicitly. That's a deliberate difference from a team whose check runs fresh per request, not a shortcut we're hiding.",
+    q: "Does Skeptara discover unknown vulnerabilities automatically?",
+    a: "No. This hackathon proof uses controlled exact CVE seeds so the auditor can normalize concrete advisory records and version ranges. The proof is about challenge enforcement and evidence handling, not automatic discovery of unknown vulnerabilities.",
+  },
+  {
+    q: "What kind of independence is proven here?",
+    a: "The proposing agent, risk policy, auditor, and merge gate are separate components. Telegraph provides externally routed evidence. We do not claim statistical or model-level independence between miners.",
   },
 ];
 
@@ -149,7 +154,9 @@ export function Landing() {
     if (!location.hash) return;
     const id = location.hash.slice(1);
     const el = document.getElementById(id);
-    el?.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (!el) return;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    el.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
   }, [location.hash]);
 
   return (
@@ -157,10 +164,9 @@ export function Landing() {
       <div className="landing__hero">
         <div className="landing__glow" aria-hidden="true" />
         <h1 className="landing__wordmark">Skeptara</h1>
-        <p className="landing__tagline">Independent Counter-Evidence, Before Merge</p>
+        <p className="landing__tagline">Challenge the action before it can merge.</p>
         <p className="landing__thesis">
-          Higher-risk autonomous changes must survive deeper, independently paid
-          counter-evidence before a merge can execute.
+          A coding agent can propose a dependency change. Skeptara decides how much Telegraph-routed counter-evidence that exact change must survive before execution is allowed.
         </p>
 
         <div className="terminal">
@@ -168,7 +174,7 @@ export function Landing() {
             <span className="terminal__dot" />
             <span className="terminal__dot" />
             <span className="terminal__dot" />
-            <span className="terminal__bar-title mono">skeptara — independent challenge</span>
+            <span className="terminal__bar-title mono">captured T4 run · historical replay</span>
           </div>
           <div className="terminal__body mono">
             {HERO_LINES.map((line, i) => (
@@ -185,11 +191,24 @@ export function Landing() {
           </div>
         </div>
 
+        <div className="landing__proof-split" aria-label="Two final T4 outcomes">
+          <Link to="/case/pr1" className="proof-split proof-split--block">
+            <span className="proof-split__label mono">PR #1 · lodash 4.17.21</span>
+            <strong>BLOCK</strong>
+            <span>2 paid calls · 1 qualifying path · 0 merge calls</span>
+          </Link>
+          <Link to="/case/pr2" className="proof-split proof-split--pass">
+            <span className="proof-split__label mono">PR #2 · lodash 4.18.1</span>
+            <strong>PASS</strong>
+            <span>2 of 2 qualifying paths · exact-head merge executed</span>
+          </Link>
+        </div>
+
         <div className="stat-row-3 stat-row-4">
           <div className="stat-col stat-col--policy">
             <span className="stat-col__label mono">
               <span className="stat-col__dot" aria-hidden="true" />
-              coverage scales with risk
+              risk policy
             </span>
             <div className="stat-col__policy-rows mono">
               {riskTierPolicy.map((p) => (
@@ -201,9 +220,9 @@ export function Landing() {
               ))}
             </div>
           </div>
-          <StatColumn label="real spend observed" value={`$${totalSpendUsd.toFixed(2)}`} hint="USDC · base sepolia" />
-          <StatColumn label="real telegraph calls" value={String(totalEvidenceCalls)} hint="CVE_LOOKUP" />
-          <StatColumn label="closed runs" value={`${blockCount} block · ${passCount} pass`} hint="0 escalate (yet)" />
+          <StatColumn label="final T4 spend" value={`$${totalSpendUsd.toFixed(2)}`} hint="4 paid calls · Base Sepolia" />
+          <StatColumn label="final T4 calls" value={String(totalEvidenceCalls)} hint="CVE_LOOKUP" />
+          <StatColumn label="final T4 outcomes" value={`${blockCount} block · ${passCount} pass`} hint="2 closed cases" />
         </div>
       </div>
 
@@ -231,7 +250,7 @@ export function Landing() {
           ))}
         </div>
         <p className="landing__section-note how-tier-note">
-          Required evidence scales with risk tier — the rubric decides this, not the reviewed agent:
+          The risk rubric sets the required evidence depth and spend cap. MEDIUM is proven live in the two final T4 cases. LOW and HIGH are policy and test proven.
         </p>
         <TierDiagram />
       </section>
@@ -239,52 +258,45 @@ export function Landing() {
       <section id="why-skeptara" className="landing__why">
         <h2 className="landing__section-title">Why Skeptara</h2>
         <p className="landing__section-note">
-          Autonomy gets dangerous when the same agent proposes a change, grades its own risk, and
-          authorizes its own merge. Skeptara breaks that loop by construction:
+          The failure mode is simple: an agent should not be able to propose a change, grade its own risk, and unlock its own execution path.
         </p>
         <ul className="why-list">
           <li>
-            <strong>The constructor and the auditor are separate components.</strong> The agent
-            proposing the change never runs the challenge against itself.
+            <strong>The proposer and auditor are separate components.</strong> The proposing agent does not run the challenge against itself.
           </li>
           <li>
-            <strong>The auditor doesn't see the agent's justification.</strong> It gets the
-            canonical action facts — repo, SHA, dependency diff — not a persuasive case for why
-            the change is fine.
+            <strong>The auditor receives canonical action facts.</strong> It gets the repo, SHA, dependency diff, and other bounded facts rather than the proposing agent&apos;s persuasive reasoning.
           </li>
           <li>
-            <strong>Risk tier is assigned outside the reviewed agent</strong>, by a deterministic
-            rubric it cannot edit at runtime.
+            <strong>Risk is assigned outside the reviewed agent.</strong> The deterministic rubric cannot be edited by the proposer at runtime.
           </li>
           <li>
-            <strong>PASS/BLOCK/ESCALATE is deterministic</strong> around required coverage and
-            material findings — not a vote, not a second opinion from the same model.
+            <strong>The gate is deterministic.</strong> Material evidence blocks. Incomplete required coverage escalates. Only a fresh exact PASS can reach merge authorization.
           </li>
         </ul>
       </section>
 
       <section className="landing__cases">
-        <h2 className="landing__section-title">Two real closed runs</h2>
+        <h2 className="landing__section-title">Two captured final T4 cases</h2>
         <p className="landing__section-note">
-          Both cases below ran against real Telegraph miners on Base Sepolia. Nothing here is
-          simulated to fit the story — the challenged case really blocked, the clean case really merged.
+          Both cases used real Telegraph-routed evidence on Base Sepolia. The challenged case blocked. The clean case passed and was merged after exact-head revalidation and explicit bounded authorization.
         </p>
         <div className="landing__case-grid">
           <CaseCard
             to="/case/pr1"
             eyebrow="PR #1 · challenged"
-            title="lodash upgrade with a known vulnerability"
+            title="lodash upgrade still inside the affected range"
             target="4.17.20 → 4.17.21"
             outcome={challengedCase.challengeResult.outcome as "BLOCK"}
-            summary="Both required evidence calls ran; the second found blocking counter-evidence — merge stayed denied."
+            summary="Call 01 was ambiguous and did not count toward coverage. Call 02 returned blocking CVE evidence. The merge gate stayed denied."
           />
           <CaseCard
             to="/case/pr2"
             eyebrow="PR #2 · clean"
-            title="lodash upgrade past the vulnerable range"
+            title="lodash upgrade beyond the affected range"
             target="4.17.20 → 4.18.1"
             outcome={cleanCase.challengeResult.outcome as "PASS"}
-            summary="Required coverage completed with no blocking evidence — merge was authorized and actually executed."
+            summary="Both required evidence paths qualified with no blocking finding. The exact reviewed head was revalidated, authorized, and merged."
           />
         </div>
       </section>
@@ -292,16 +304,10 @@ export function Landing() {
       <section className="landing__escalate">
         <div className="landing__escalate-top">
           <VerdictBadge outcome="ESCALATE" />
-          <h2 className="landing__section-title landing__escalate-title">A third outcome exists — it just hasn't fired yet</h2>
+          <h2 className="landing__section-title landing__escalate-title">ESCALATE is the fail-closed third outcome</h2>
         </div>
         <p className="landing__section-note">
-          <span className="mono">ESCALATE</span> fires when required coverage can't be completed — budget
-          exhausted, a source unavailable, or a critical finding too ambiguous to resolve automatically.
-          Both demo runs happened to resolve cleanly into a real <span className="mono">BLOCK</span> or{" "}
-          <span className="mono">PASS</span>. Neither of the two final T4 cases resolved to{" "}
-          <span className="mono">ESCALATE</span> — earlier development runs did exercise it, but they
-          aren't part of this two-case demo, so there is no ESCALATE case card here. Showing one from
-          the final proof would mean inventing a run that never happened.
+          <span className="mono">ESCALATE</span> applies when required coverage cannot be completed, a source is unavailable, the spend cap is exhausted before enough qualifying evidence is collected, or critical ambiguity remains. Earlier development runs exercised this path. Neither final T4 case ended in ESCALATE.
         </p>
       </section>
 
