@@ -1,0 +1,67 @@
+{
+  "challenge_id": "f4f075f3-1dbc-42ed-9843-dbec43de3430",
+  "auditor_version": "skeptara-auditor-v0.4-seeded-cve",
+  "mode": "SEEDED_CVE_COUNTER_EVIDENCE",
+  "repository": "Faadil1/Faadil1-skeptara-telegraph",
+  "pr_number": 2,
+  "head_sha": "528d730f9ebdcb433e01ba9c79dcc9a5f66ce1c7",
+  "action_fingerprint": "sha256:2f5852b5359d3c2d20525ec21904a737f0ee015194e9ea42d14bbca3fc92ad94",
+  "risk_tier": "MEDIUM",
+  "required_coverage": 2,
+  "completed_coverage": 2,
+  "spend_cap_atomic": 20000,
+  "spend_observed_atomic": 20000,
+  "spend_asset": "USDC",
+  "spend_network": "eip155:84532",
+  "outcome": "PASS",
+  "reason_codes": [
+    "REQUIRED_COVERAGE_COMPLETE_NO_BLOCKING_EVIDENCE"
+  ],
+  "evidence_items": [
+    {
+      "seed_cve_id": "CVE-2026-4800",
+      "intent": "CVE_LOOKUP",
+      "miner_id": "20260828",
+      "miner_name": "PREFLIGHT Infrastructure Signals",
+      "signal_hash": "0x6fb03bd05e93fe05b34a1494266f36111b41ce0dea02371e39432ce5bb3e9f91",
+      "cost_usd": 0.01,
+      "settlement_success": true,
+      "settlement_network": "eip155:84532",
+      "materiality": "ADVISORY",
+      "reason_code": "KNOWN_VULNERABILITY_DOES_NOT_MATCH_TARGET_VERSION_RANGE",
+      "coverage_complete": true,
+      "range_summary": "lodash 4.0.0 through versions before 4.18.0",
+      "target_version": "4.18.1"
+    },
+    {
+      "seed_cve_id": "CVE-2026-2950",
+      "intent": "CVE_LOOKUP",
+      "miner_id": "7336",
+      "miner_name": "SecWire CVE Lookup",
+      "signal_hash": "0x5bd2f188ac778197f05b479af272cabe493b425c040d96a69c336555a83ffee6",
+      "cost_usd": 0.01,
+      "settlement_success": true,
+      "settlement_network": "eip155:84532",
+      "materiality": "ADVISORY",
+      "reason_code": "KNOWN_VULNERABILITY_DOES_NOT_MATCH_TARGET_VERSION_RANGE",
+      "coverage_complete": true,
+      "range_summary": "lodash 4.17.23 and earlier; fixed in 4.18.0",
+      "target_version": "4.18.1"
+    }
+  ],
+  "runtime_errors": [],
+  "started_at": "2026-09-07T01:35:36.716Z",
+  "completed_at": "2026-09-07T01:35:49.772Z",
+  "expires_at": "2026-09-07T01:50:49.772Z",
+  "live_revalidation": {
+    "state": "open",
+    "merged": false,
+    "head_sha": "528d730f9ebdcb433e01ba9c79dcc9a5f66ce1c7",
+    "mergeable": true,
+    "mergeable_state": "clean",
+    "changed_files": 1
+  },
+  "merge_authorized": false,
+  "private_key_persisted": false,
+  "payer_address_persisted": false
+}
