@@ -9,7 +9,7 @@ handover:
   resume_rule: >-
     Read state/CURRENT.yaml first, then this HANDOVER, then product/PRD.md. Repository truth outranks chat memory. PRD is canonical product intent; Spec Kit is derived execution state. Persist evidence and update CURRENT + HANDOVER after each major gate.
 
-  current_milestone: T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_PR1_FRESH_BLOCK_ACCEPTED__ZERO_WRITE_DENIAL_REPLAY_NEXT
+  current_milestone: T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_PR1_CHALLENGED_CASE_CLOSED__PR2_FRESH_PASS_NEXT
 
   project:
     public_name: Skeptara
@@ -33,6 +33,7 @@ handover:
     gate: SKEPTARA_T4_TWO_CASE_REAL_DEMO_PASS
 
     challenged_pr1:
+      status: CLOSED_PASS
       action_file: demo/actions/challenged-pr.json
       head_sha: 73cf5bdd69163924228e3e21d67fa9f405d99904
       target: lodash@4.17.21
@@ -48,34 +49,34 @@ handover:
         blocking_path: CVE-2026-2950__LODASH_4_17_23_AND_EARLIER__FIXED_4_18_0__TARGET_4_17_21__BLOCKING
         action_binding_valid: true
         settlement_network: eip155:84532
-        reviewed: true
         review: evidence/t4/pr1-block-run-004/REVIEW.md
         fixture: evidence/t4/pr1-block-run-004/reviewed-challenge.sanitized.json
-      current_pr_state:
-        open: true
-        merged: false
-        exact_head_match: true
-      merge_authorized: false
-      next_proof:
+      denial_replay:
         command: npm run t4:replay:block
-        script: scripts/replay-t4-pr1-block-denial.mjs
-        purpose: ISOLATE_BLOCK_AS_DENIAL_REASON_AND_PROVE_ZERO_MERGE_ADAPTER_CALLS
-        expected:
-          authorization: DENIED
-          reason: CHALLENGE_NOT_PASS
-          merge_adapter_calls: 0
-          executed: false
-          merged: false
+        status: PASS
+        authorization: DENIED
+        reason: CHALLENGE_NOT_PASS
+        merge_adapter_calls: 0
+        executed: false
+        merged: false
         new_payment: false
         github_write: false
+        evidence: evidence/t4/pr1-block-run-004/MERGE-DENIAL-REPLAY.md
+      conclusion: REAL_BLOCK_AND_ZERO_WRITE_DENIAL_PROVEN
+      merge_authorized: false
 
     clean_pr2:
       action_file: demo/actions/clean-pr.json
       head_sha: d2aa0ea25daf1f84b6cfdd98861d3f05df584b7a
       target: lodash@4.18.1
-      status: WAITING_FOR_PR1_DENIAL_REPLAY
-      next_after_pr1: FRESH_LIVE_PASS
+      current_github_revalidation:
+        state: open
+        merged: false
+        exact_head_match: true
+      status: FRESH_LIVE_PASS_NEXT
+      required_coverage: 2_OF_2
       spend_cap_atomic: 20000
+      expected_materiality: TWO_NON_BLOCKING_ADVISORIES_IF_LIVE_RECORDS_REMAIN_CURRENT
       real_merge_requires_explicit_human_authorization: true
       merge_authorized: false
 
@@ -86,14 +87,14 @@ handover:
     protected_github_write_credential_in_browser_or_repo: false
 
   next_gates:
-    - SKEPTARA_T4_PR1_ZERO_WRITE_MERGE_DENIAL_REPLAY
     - SKEPTARA_T4_PR2_FRESH_PASS_PROOF
+    - SKEPTARA_T4_PR2_EXACT_HEAD_REVALIDATION
     - SKEPTARA_T4_PR2_HUMAN_AUTHORIZATION_AND_OPTIONAL_REAL_MERGE
     - SKEPTARA_TRACE_JUDGE_PATH_REVIEW
     - SKEPTARA_BUILD_CANDIDATE_READY
     - HUMAN_PROTECTED_FINAL_SUBMISSION
 
-  exact_next_gate: SKEPTARA_T4_PR1_ZERO_WRITE_MERGE_DENIAL_REPLAY
+  exact_next_gate: SKEPTARA_T4_PR2_FRESH_PASS_PROOF
   exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_REVIEW
   exact_next_action: >-
-    Pull main and run npm run t4:replay:block. This is deterministic and zero-write: no private key, no Telegraph spend and no GitHub merge. It replays the accepted PR #1 BLOCK inside the original freshness window with allow-list and humanAuthorization=true, so the expected isolated denial reason is CHALLENGE_NOT_PASS. Require merge-adapter calls 0. Return the terminal output. Then proceed immediately to PR #2 fresh PASS if green.
+    Pull main if needed. Make sure SKEPTARA_T2_ACTION_FILE is unset or set to demo/actions/clean-pr.json, then run powershell -ExecutionPolicy Bypass -File .\scripts\t2-from-clipboard.ps1 with the fresh bounded Base Sepolia burner. Do not paste or print the key. Require PR #2 exact head d2aa0ea25daf1f84b6cfdd98861d3f05df584b7a, MEDIUM risk, seeded-CVE mode, spend <=20000 atomic USDC, 2/2 meaningful non-blocking coverage and outcome PASS. Return terminal output and the new sanitized 02-audit-result.json. Do not merge PR #2 yet; after review we must revalidate its exact head and ask the human for explicit bounded authorization.
