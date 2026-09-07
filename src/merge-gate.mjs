@@ -55,7 +55,8 @@ export function authorizeMerge({
 
   const expiresAtMs = asIsoMs(challengeResult.expires_at);
   const completedAtMs = asIsoMs(challengeResult.completed_at);
-  const nowMs = now() instanceof Date ? now().getTime() : new Date(now()).getTime();
+  const nowValue = now();
+  const nowMs = nowValue instanceof Date ? nowValue.getTime() : new Date(nowValue).getTime();
   if (!Number.isFinite(nowMs)) throw new TypeError("valid now required");
   if (expiresAtMs == null) reasons.push("CHALLENGE_EXPIRY_MISSING_OR_INVALID");
   else if (nowMs >= expiresAtMs) reasons.push("CHALLENGE_EXPIRED");
