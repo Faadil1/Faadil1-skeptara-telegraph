@@ -1,13 +1,13 @@
 canonical_state:
   protocol_version: 1
   system: SKEPTARA_TELEGRAPH_TRACK3
-  version: 0.10.5-benita-holistic-review-hold-bounded-fixes
+  version: 0.10.6-owner-frontend-integration-pr3-validation-next
   date: 2026-09-07
   source_of_truth: GITHUB
   repository: Faadil1/skeptara-telegraph
   branch: main
 
-  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__LOCAL_VALIDATION_PASS__BENITA_FRONTEND_SOURCE_AND_HOLISTIC_REVIEW_HOLD_BOUNDED_FIXES__WAIT_FOR_PUSH_THEN_RECONCILE_TRACE_RELEASE
+  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__LOCAL_VALIDATION_PASS__BENITA_LATEST_FRONTEND_FIXES_CAPTURED__OWNER_INTEGRATION_PR3_OPEN_DRAFT__VALIDATION_THEN_TRACE
 
   authority:
     product_intent_source: product/PRD.md
@@ -18,7 +18,6 @@ canonical_state:
   product_core:
     public_name: Skeptara
     vertical: AUTONOMOUS_GITHUB_DEPENDENCY_MERGE
-    mechanism: RISK_PROPORTIONAL_INDEPENDENT_COUNTER_EVIDENCE_BEFORE_EXECUTION
     safe_public_promise: Before an autonomous agent can merge code, Skeptara buys Telegraph-routed external evidence to try to prove the change unsafe.
     fail_closed: true
 
@@ -34,66 +33,63 @@ canonical_state:
       tests: 41_OF_41_PASS__0_FAIL
       judge_replay: PASS__ZERO_PAYMENT__ZERO_EXTERNAL_WRITE
 
+  t4_truth:
+    pr1:
+      target: lodash@4.17.21
+      outcome: BLOCK
+      paid_calls: 2
+      completed_coverage: 1
+      spend_atomic: 20000
+      actual_order:
+        - CVE-2026-4800__AMBIGUOUS__NOT_COVERAGE
+        - CVE-2026-2950__BLOCKING
+      merge_adapter_calls: 0
+    pr2:
+      target: lodash@4.18.1
+      outcome: PASS
+      paid_calls: 2
+      completed_coverage: 2
+      merge_commit_sha: c76c76e0c02dab28275d8e53d70da3f6f132e648
+
   settlement_truth:
     status: VERIFIED
     evidence: evidence/trace/FRONTEND-SETTLEMENT-MATRIX-CLARIFICATION.md
     final_t4_paid_evidence_items: 4
     final_t4_distinct_settlement_transactions: 4
-    semantics: ONE_FINAL_T4_EVIDENCE_ITEM_EQUALS_ONE_SEPARATE_PAID_TELEGRAPH_CALL
 
-  benita_frontend_reviews:
-    source_review:
-      status: HOLD_BOUNDED_FIXES
-      evidence: evidence/trace/BENITA-FRONTEND-SOURCE-REVIEW-001.md
-    holistic_review:
-      status: HOLD_BOUNDED_FIXES
-      evidence: evidence/trace/BENITA-FRONTEND-HOLISTIC-REVIEW-002.md
-      scope:
-        - COPY_ANTI_AI_SLOP
-        - CLAIM_AND_DATA_ACCURACY
-        - FUNCTIONAL_REPLAY_BEHAVIOR
-        - ACCESSIBILITY_AND_REDUCED_MOTION
-        - SECURITY_AND_TRUST_BOUNDARIES
-        - SOCIAL_SHARE_METADATA
-        - RELEASE_VALIDATION
-      anti_slop_rule: >-
-        Avoid repeated em-dash contrast patterns, slogan triples, defensive copy, and synthetic 'not X but Y' prose. Keep hyphens only where technically meaningful such as risk-proportional, exact-head, fail-closed, dependency-change, CVE identifiers and x402. Prefer short declarative evidence-dossier prose.
-      newly_found_non_ui_fixes:
-        - SIMPLIFY_USE_CASE_REPLAY_TIMER_ARITHMETIC
-        - HONOR_PREFERS_REDUCED_MOTION_IN_REPLAY_AND_HASH_SCROLL
-        - ADD_SAFE_NOT_FOUND_ROUTE
-        - ADD_META_DESCRIPTION_CANONICAL_OPEN_GRAPH_X_CARD_AND_SOCIAL_PREVIEW
-        - VERIFY_DIRECT_ROUTES_SETTLEMENT_LINKS_MERGE_LINK_AND_NO_NETWORK_CALLS
-        - RUN_FRONTEND_BUILD_LINT_AND_ROOT_TESTS_AFTER_RECONCILIATION
-      ci_status_at_reviewed_benita_head: NO_GITHUB_STATUS_CHECKS_EXPOSED
+  benita_frontend:
+    live_url_human_supplied: https://skeptara.vercel.app/
+    branch: feat/frontend-benita
+    latest_head_used_for_owner_integration: a7c366f6cd5f4f268ecab958dbaeb0e46a00cc67
+    never_force_move: true
+    latest_branch_already_fixed:
+      - PR1_CHRONOLOGY
+      - PR1_FULL_0_02_SPEND_WORDING
+      - ALL_FOUR_FINAL_T4_SETTLEMENT_TRANSACTIONS
+      - FINAL_T4_ESCALATE_WORDING
 
-  benita_frontend_source_review:
-    deployed_url_human_supplied: https://skeptara.vercel.app/
-    source_branch: feat/frontend-benita
-    communication_status: REVIEW_SENT_TO_BENITA__HUMAN_SCREENSHOT_VERIFIED
-    benita_response: READY_TO_MAKE_DEMO_AND_SUBMIT_AFTER_COORDINATION
-    p0_fixes:
-      - PR1_ACTUAL_CHRONOLOGY_AMBIGUOUS_FIRST_THEN_BLOCKING_SECOND__FULL_0_02_SPENT
-      - RESTORE_ALL_FOUR_T4_SETTLEMENT_TRANSACTIONS_AND_ACTUAL_PR1_ITEM_ORDER
-      - REPLACE_FALSE_NO_REAL_ESCALATE_YET_CLAIM_WITH_NO_FINAL_T4_ESCALATE
-      - TIGHTEN_INDEPENDENCE_WORDING_TO_TOPOLOGY_EXTERNAL_ROUTED_EVIDENCE_BOUNDARY
-    p1_fixes:
-      - LABEL_0_04_AND_4_CALLS_AS_FINAL_T4_TWO_CASE_SCOPE
-      - HERO_TRIGGERING_EVIDENCE_MUST_NOT_IMPLY_ONLY_OR_FIRST_PR1_CALL
-      - KEEP_MEDIUM_LIVE_LOW_HIGH_TEST_BOUNDARY_VISIBLE
-      - PERSISTENT_CAPTURED_LIVE_HISTORICAL_REPLAY_LABEL_ON_CASE_ROUTES
-
-  collaboration:
-    frontend_contract: docs/FRONTEND_DATA_CONTRACT.md
-    frontend_branch: feat/frontend-benita
-    frontend_branch_status: DIVERGED
-    branch_policy: NEVER_FORCE_MOVE_NOW__RECONCILE_NORMALLY
-    last_reviewed_branch_head: b9981d74cfd2e5f7581ab1a72df5e6b3bde0691a
-    demo_owner_candidate: BENITA
-    submission_pitch_owner_candidate: BENITA
-    demo_submission_readiness: ACKNOWLEDGED_BY_BENITA
-    intended_public_comms_owner_x: BENITA_PENDING_HUMAN_CONFIRMATION
-    technical_amplification_x: '@roy1919875'
+  owner_frontend_integration:
+    status: IMPLEMENTED_PENDING_VALIDATION
+    evidence: evidence/trace/OWNER-FRONTEND-INTEGRATION-001.md
+    stale_branch_not_candidate: integration/frontend-final
+    candidate_branch: integration/frontend-final-v2
+    draft_pr: 3
+    pr_url: https://github.com/Faadil1/skeptara-telegraph/pull/3
+    candidate_head: 88fcb4570b713745084efc405a4149c4f69fd110
+    mergeable_after_github_recompute: true
+    merged: false
+    changes:
+      - COPY_ANTI_AI_SLOP_CLEANUP
+      - ABOVE_FOLD_BLOCK_PASS_SPLIT
+      - FINAL_T4_SCOPE_LABELS
+      - PAID_CALL_NUMBERING_AND_COVERAGE_LABELS
+      - PERSISTENT_HISTORICAL_REPLAY_NOTICE
+      - HISTORICAL_EXPIRY_AND_PROOF_TIME_REPO_LABELS
+      - SIMPLIFIED_REPLAY_TIMERS
+      - REDUCED_MOTION_REPLAY_AND_HASH_SCROLL
+      - SAFE_NOT_FOUND_ROUTE
+      - CANONICAL_OG_X_METADATA
+      - REPLAY_ONLY_NO_NETWORK_OR_WRITE_BOUNDARY_PRESERVED
 
   claim_boundaries:
     exact_cve_seeded_mode: CONTROLLED_HACKATHON_PROOF_NOT_AUTOMATIC_UNKNOWN_VULNERABILITY_DISCOVERY
@@ -101,6 +97,13 @@ canonical_state:
     independence: CHALLENGE_TOPOLOGY_NOT_STATISTICAL_MINER_INDEPENDENCE
     replay: HISTORICAL_REPLAY_NEVER_FRESH_EXECUTION_AUTHORIZATION
     merge_runtime: T3_CONTRACT_TEST_PROVEN_PLUS_T4_REAL_EXACT_HEAD_MERGE__NO_FULLY_DEPLOYED_REPO_ADAPTER_CLAIM
+
+  security_and_trust:
+    frontend_private_key: NONE_OBSERVED
+    protected_github_write_credential: NONE_OBSERVED
+    public_page_mode: HISTORICAL_PROOF_REPLAY_ONLY
+    automatic_telegraph_request_on_load_or_replay: MUST_REMAIN_NONE
+    live_merge_button_with_browser_credentials: PROHIBITED
 
   activity:
     real_paid_challenge_runs: 3
@@ -128,7 +131,7 @@ canonical_state:
     handover_must_be_sufficient_for_next_conversation_to_take_lead: true
     evidence_before_pass_claim: REQUIRED
 
-  exact_next_gate: SKEPTARA_BENITA_HOLISTIC_FIX_PUSH_REVIEW_AND_NORMAL_RECONCILIATION
-  exact_next_owner: BENITA_FRONTEND_WITH_CHATGPT_ORCHESTRATOR_REVIEW
+  exact_next_gate: SKEPTARA_PR3_LOCAL_VALIDATION_AND_TRACE
+  exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_REVIEW
   exact_next_action: >-
-    Wait for Benita to push the bounded P0/P1 correctness fixes plus the holistic copy/accessibility/release fixes from BENITA-FRONTEND-HOLISTIC-REVIEW-002. Do not force-move or overwrite her branch. Once pushed, compare against main, verify evidence chronology/settlements/ESCALATE/independence wording, remove AI-slop punctuation/copy patterns, verify replay timing and reduced motion, add social metadata and safe routing, then reconcile normally. Run frontend build/lint, root npm test and zero-payment demo, followed by desktop/mobile TRACE, network smoke, link verification and public deployment validation before X/demo/submission.
+    Validate draft PR #3 from integration/frontend-final-v2. Do not merge yet. On the user machine, fetch the branch, run root npm test, then cd web and run npm ci, npm run build, and npm run lint. Start the frontend and inspect desktop/mobile. Verify direct /case/pr1 and /case/pr2 routes, all four settlement links, the real merge link, reduced-motion behavior, not-found route, and DevTools network showing no Telegraph request on page load or replay. If all pass, persist TRACE evidence, merge PR #3 normally into main, smoke the deployment, then proceed to X/demo/submission. No fresh Telegraph calls for optics.
