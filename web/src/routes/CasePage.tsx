@@ -139,7 +139,7 @@ export function CasePage() {
               <Stat label="merge" value={mergeOutcome.merge_authorized ? "authorized" : "denied"} />
             </StatRow>
             <p className="case-page__field-note">
-              reason: {challengeResult.reason_codes.join(", ")}
+              reason: {challengeResult.reason_codes.length > 0 ? challengeResult.reason_codes.join(", ") : "not exposed"}
             </p>
             {mergeOutcome.merged ? (
               <p className="case-page__merge-proof">
