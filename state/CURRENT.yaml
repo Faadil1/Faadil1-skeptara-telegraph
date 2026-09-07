@@ -1,13 +1,13 @@
 canonical_state:
   protocol_version: 1
   system: SKEPTARA_TELEGRAPH_TRACK3
-  version: 0.10.8-benita-readme-reconciled-v2-clean-rerun-next
+  version: 0.10.9-pr3-clean-lint-build-pass-trace-next
   date: 2026-09-07
   source_of_truth: GITHUB
   repository: Faadil1/skeptara-telegraph
   branch: main
 
-  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__BENITA_FRONTEND_CAPTURED__OWNER_INTEGRATION_V2_CURRENT__BENITA_README_RECONCILED__ROOT_41_OF_41_PASS__WEB_BUILD_PASS__LINT_FIX_AND_README_RERUN_NEXT
+  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__BENITA_FRONTEND_CAPTURED__OWNER_INTEGRATION_V2_CURRENT__BENITA_README_RECONCILED__ROOT_41_OF_41_PASS__WEB_CLEAN_LINT_BUILD_PASS__TRACE_NEXT
 
   authority:
     product_intent_source: product/PRD.md
@@ -28,6 +28,12 @@ canonical_state:
     t3: CLOSED_PASS
     t4: CLOSED_PASS
     hidden_spot_local_validation: PASS
+    pr3_clean_lint_build:
+      status: PASS
+      evidence: evidence/trace/PR3-CLEAN-LINT-BUILD-RERUN-PASS.md
+      candidate_head: 1244294ee96c747c7220a7159de0652d9b04e019
+      lint: 0_WARNINGS__0_ERRORS
+      build: PASS
 
   t4_truth:
     pr1:
@@ -64,10 +70,11 @@ canonical_state:
     never_force_move: true
 
   owner_frontend_integration:
-    status: BENITA_LATEST_README_RECONCILED__LOCAL_CLEAN_RERUN_PENDING
+    status: CLEAN_LOCAL_LINT_BUILD_PASS__TRACE_PENDING
     evidence:
       integration: evidence/trace/OWNER-FRONTEND-INTEGRATION-001.md
-      local_validation: evidence/trace/PR3-LOCAL-VALIDATION-001.md
+      first_local_validation: evidence/trace/PR3-LOCAL-VALIDATION-001.md
+      clean_rerun: evidence/trace/PR3-CLEAN-LINT-BUILD-RERUN-PASS.md
     stale_branch: integration/frontend-final
     stale_branch_rule: DO_NOT_USE_OR_MERGE
     candidate_branch: integration/frontend-final-v2
@@ -76,26 +83,21 @@ canonical_state:
     pr_url: https://github.com/Faadil1/skeptara-telegraph/pull/3
     candidate_head: 1244294ee96c747c7220a7159de0652d9b04e019
     merged: false
+    github_mergeable_latest_observation: false
+    mergeability_rule: RECONCILE_WITH_LATEST_MAIN_AFTER_TRACE_BEFORE_MERGE
     benita_readme_reconciliation:
       source_commit: 68dfc2b103dcc88ec821a3cc1f50f4f568074400
       integration_commit: 1244294ee96c747c7220a7159de0652d9b04e019
       result: CONTENT_RECONCILED_WITH_CANONICAL_CORRECTIONS
-      extra_corrections:
-        - PROOF_TABLE_SHOWS_ALL_FOUR_T4_SETTLEMENTS
-        - PR1_AMBIGUOUS_THEN_BLOCKING_ORDER_EXPLICIT
-        - DISCORD_STATUS_UPDATED_TO_VERIFIED_FOR_FAADIL
-        - COPY_TIGHTENED_TO_AVOID_OVERCLAIMED_INDEPENDENCE_AND_AI_SLOP
-    validated_before_latest_head:
+    validated_on_candidate_head_1244294:
+      web_lint: 0_WARNINGS__0_ERRORS
+      web_build: PASS
+      build_modules: 48
+      build_duration_ms: 476
+    previously_validated_on_integration_line:
       root_tests: 41_OF_41_PASS__0_FAIL
       web_npm_ci: PASS__0_VULNERABILITIES
-      web_build: PASS
-      web_lint: 0_ERRORS__1_WARNING_REACT_SET_STATE_IN_EFFECT
       web_dev_server: PASS__HTTP_127_0_0_1_5173
-    lint_warning_fix:
-      prior_commit: afffa7bb28b556192a25116a18924148b2314590
-      purpose: REMOVE_SYNC_SET_STATE_IN_EFFECT_WARNING_WHILE_PRESERVING_REDUCED_MOTION
-      clean_lint_rerun: PENDING_HUMAN_ON_1244294
-      build_rerun: PENDING_HUMAN_ON_1244294
     bounded_changes:
       - COPY_ANTI_AI_SLOP_CLEANUP
       - ABOVE_FOLD_BLOCK_PASS_SPLIT
@@ -146,7 +148,7 @@ canonical_state:
     handover_must_be_sufficient_for_next_conversation_to_take_lead: true
     evidence_before_pass_claim: REQUIRED
 
-  exact_next_gate: SKEPTARA_PR3_CLEAN_LINT_BUILD_RERUN_THEN_TRACE
-  exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_REVIEW
+  exact_next_gate: SKEPTARA_PR3_FINAL_TRACE_VISUAL_NETWORK_REVIEW
+  exact_next_owner: HUMAN_BROWSER_WITH_CHATGPT_TRACE_REVIEW
   exact_next_action: >-
-    Keep integration/frontend-final-v2 as the only integration candidate; ignore integration/frontend-final. Pull origin so local HEAD becomes 1244294ee96c747c7220a7159de0652d9b04e019, which includes the lint fix plus Benita's README restructuring reconciled with canonical proof corrections. In web run npm run lint and require 0 warnings/0 errors, then npm run build. Do not merge PR #3 yet. If clean, perform desktop/mobile TRACE, direct /case/pr1, /case/pr2 and invalid-route checks, verify all four settlement links and the historical real-merge link, and confirm DevTools network shows no Telegraph request on page load or replay. Then reconcile PR #3 with latest main if needed, persist final TRACE evidence, and only then merge/smoke/publish/submit. No fresh Telegraph calls for optics.
+    Keep integration/frontend-final-v2 at validated head 1244294ee96c747c7220a7159de0652d9b04e019 and do not merge PR #3 yet. Run the Vite dev server, then perform desktop and mobile/narrow TRACE review on landing, /case/pr1, /case/pr2, and an invalid route. Verify all four settlement links and the historical real-merge link. In DevTools Network, confirm page load and Replay generate no Telegraph requests and no GitHub write requests. Capture screenshots/evidence. After TRACE passes, reconcile the draft PR with latest main because GitHub currently reports mergeable=false, rerun the bounded checks if reconciliation changes web code, persist TRACE, then merge/smoke/X/demo/submission. No fresh Telegraph calls for optics.
