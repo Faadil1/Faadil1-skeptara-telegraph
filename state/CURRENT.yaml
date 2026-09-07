@@ -1,13 +1,13 @@
 canonical_state:
   protocol_version: 1
   system: SKEPTARA_TELEGRAPH_TRACK3
-  version: 0.12.0-final-trace-pass-pr3-merged-deploy-benita-next
+  version: 0.12.1-pr3-merged-benita-finalization-faadil-submission-next
   date: 2026-09-07
   source_of_truth: GITHUB
   repository: Faadil1/skeptara-telegraph
   branch: main
 
-  lifecycle_status: PRD_V0_1_LOCKED__T0_THRU_T4_CLOSED_PASS__FINAL_FRONTEND_TRACE_PASS__PR3_MERGED__PRODUCTION_DEPLOYMENT_ON_BENITA_VERCEL_PENDING_VERIFICATION
+  lifecycle_status: PRD_V0_1_LOCKED__T0_THRU_T4_CLOSED_PASS__FINAL_FRONTEND_TRACE_PASS__PR3_MERGED__BENITA_PRODUCTION_FINALIZATION__FAADIL_SUBMISSION_NEXT
 
   product_core:
     public_name: Skeptara
@@ -34,6 +34,16 @@ canonical_state:
         - evidence/trace/PR3-TRACE-SOURCE-BEHAVIOR-AUDIT-001.md
         - evidence/trace/PR3-FINAL-BROWSER-TRACE-AND-MERGE-PASS.md
 
+  final_frontend_integration:
+    benita_branch: feat/frontend-benita
+    benita_branch_never_force_move: true
+    integration_branch: integration/frontend-final-v2
+    integration_head: 4687cf37a8dd284b5079e709de326de9b01ef182
+    pr: 3
+    pr_status: MERGED
+    merge_commit_sha: 0ce2211125f87aa1612c68f316a940b126963261
+    merge_exact_head_protected: true
+
   t4_truth:
     pr1:
       historical_repository: Faadil1/Faadil1-skeptara-telegraph
@@ -53,23 +63,32 @@ canonical_state:
       completed_coverage: 2
       exact_head: 528d730f9ebdcb433e01ba9c79dcc9a5f66ce1c7
       historical_merge_commit_sha: c76c76e0c02dab28275d8e53d70da3f6f132e648
+    settlement_calls: 4
+    settlement_transactions: 4
 
-  settlement_truth:
-    status: VERIFIED
-    evidence: evidence/trace/FRONTEND-SETTLEMENT-MATRIX-CLARIFICATION.md
-    final_t4_paid_evidence_items: 4
-    final_t4_distinct_settlement_transactions: 4
+  deployment:
+    public_url: https://skeptara.vercel.app/
+    vercel_owner: BENITA_SIDE
+    github_final_merge_complete: true
+    production_finalization_owner: BENITA
+    faadil_public_smoke_required: false
+    public_smoke_gate_removed_by_human_owner: true
+    decision_evidence: evidence/trace/FINAL-DEPLOYMENT-HANDOFF-NO-PUBLIC-SMOKE-DECISION.md
+    claim_boundary: DO_NOT_CLAIM_FAADIL_OR_CHATGPT_INDEPENDENT_PRODUCTION_SMOKE
 
-  final_frontend_integration:
-    benita_branch: feat/frontend-benita
-    benita_branch_never_force_move: true
-    integration_branch: integration/frontend-final-v2
-    integration_head: 4687cf37a8dd284b5079e709de326de9b01ef182
-    pr: 3
-    pr_status: MERGED
-    merge_commit_sha: 0ce2211125f87aa1612c68f316a940b126963261
-    merge_exact_head_protected: true
-    evidence: evidence/trace/PR3-FINAL-BROWSER-TRACE-AND-MERGE-PASS.md
+  collaboration_finish_split:
+    benita:
+      - DEPLOY_OR_CONFIRM_PRODUCTION_FROM_MERGED_MAIN_ON_HER_VERCEL
+      - FINALIZE_DEMO_NARRATIVE_AND_PITCH
+      - PRIMARY_X_PROJECT_VOICE_AND_POSTS
+      - DISCORD_OR_COMMUNITY_FINALIZATION_IF_NEEDED
+      - PRESENTATION_POLISH_ONLY_UNLESS_A_CONCRETE_PRODUCTION_REGRESSION_IS_OBSERVED
+    faadil:
+      - OWN_FINAL_SUBMISSION_SITE_ACTION
+      - VERIFY_TRACK3_SUBMISSION_AND_COMPLETE_FORM
+      - OWN_TECHNICAL_PROOF_AND_EVIDENCE_GOVERNANCE
+      - SUPPORT_BENITA_WITH_TECHNICAL_FACTS
+    no_more_core_product_build_expected: true
 
   claim_boundaries:
     exact_cve_seeded_mode: CONTROLLED_HACKATHON_PROOF_NOT_AUTOMATIC_UNKNOWN_VULNERABILITY_DISCOVERY
@@ -77,28 +96,6 @@ canonical_state:
     independence: CHALLENGE_TOPOLOGY_NOT_STATISTICAL_OR_MODEL_LEVEL_MINER_INDEPENDENCE
     replay: HISTORICAL_REPLAY_NEVER_FRESH_EXECUTION_AUTHORIZATION
     no_fresh_telegraph_calls_for_optics: true
-
-  deployment:
-    public_url: https://skeptara.vercel.app/
-    vercel_owner: BENITA_SIDE
-    faadil_connected_vercel_project_present: false
-    github_final_merge_complete: true
-    production_deploy_from_merged_main: PENDING_BENITA_SIDE_OR_AUTO_DEPLOY_VERIFICATION
-    production_smoke: PENDING
-    rule: DO_NOT_CLAIM_DEPLOY_COMPLETE_UNTIL_PUBLIC_URL_OR_BENITA_VERCEL_CONFIRMS_MERGED_MAIN
-
-  collaboration_finish_split:
-    benita:
-      - DEPLOY_OR_CONFIRM_AUTO_DEPLOY_OF_MERGED_MAIN_ON_HER_VERCEL
-      - LEAD_FINAL_DEMO_NARRATIVE_AND_PITCH
-      - PRIMARY_X_PROJECT_VOICE_AND_POSTS
-      - DISCORD_OR_COMMUNITY_FINALIZATION_IF_NEEDED
-    faadil:
-      - OWN_FINAL_SUBMISSION_SITE_ACTION
-      - VERIFY_TRACK3_SUBMISSION_AND_COMPLETE_FORM
-      - OWN_TECHNICAL_PROOF_AND_EVIDENCE_GOVERNANCE
-      - SUPPORT_BENITA_WITH_TECHNICAL_FACTS
-    no_more_core_product_build_expected: true
 
   administrative_compliance:
     registration: VERIFIED
@@ -115,7 +112,7 @@ canonical_state:
     after_every_execution_boundary: UPDATE_CURRENT_AND_HANDOVER
     handover_must_be_sufficient_for_next_conversation_to_take_lead: true
 
-  exact_next_gate: SKEPTARA_PRODUCTION_DEPLOY_FROM_MERGED_MAIN_AND_SMOKE
-  exact_next_owner: BENITA_VERCEL_WITH_FAADIL_PUBLIC_SMOKE_VERIFICATION
+  exact_next_gate: SKEPTARA_FINALIZATION_AND_SUBMISSION_SPLIT
+  exact_next_owner: BENITA_PRODUCTION_DEMO_COMMS__FAADIL_OFFICIAL_SUBMISSION
   exact_next_action: >-
-    PR #3 is merged at merge commit 0ce2211125f87aa1612c68f316a940b126963261 after final TRACE PASS. The production Vercel project belongs to Benita's side and is not present in Faadil's connected Vercel account. Benita must deploy/redeploy merged main, or confirm that her Git integration auto-deployed it. Then smoke-test https://skeptara.vercel.app/ against the final merged frontend. No more implementation changes unless the production smoke test exposes a concrete regression. After deploy PASS, Benita leads demo/pitch/X while Faadil completes the official hackathon submission.
+    PR #3 is merged and final frontend TRACE is closed. No additional Faadil-side public smoke gate is required by owner decision. Benita can finalize production on her Vercel project and proceed with demo, pitch, X, and community work. Faadil should proceed with the official Telegraph submission workflow, verify Track 3 selection and form contents, and preserve evidence/claim correctness. Only reopen implementation if a concrete production regression is observed.
