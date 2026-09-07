@@ -27,76 +27,67 @@ Status: DERIVED READY — subordinate to living PRD v0.1.
 
 ## T2 — Independent auditor
 
-### Core + first remediation
-
-- [x] Implement generic auditor + Telegraph adapter + secure launcher.
-- [x] Implement bounded spend/coverage tracking and fail-closed negative paths.
-- [x] Full user-machine suite v0.1: **19/19 PASS**.
-- [x] Live run 001 against PR #1.
-- [x] Reject runtime PASS after review: paid CVE path was invalid and could not count as coverage.
-- [x] Implement auditor v0.2: paid response != automatic coverage; invalid path is incomplete/critical.
-- [x] Full user-machine suite v0.2: **21/21 PASS, 0 fail**.
-
-### Retry 002 evidence review
-
-- [x] Run live retry 002 against PR #1 at head `73cf5bdd69163924228e3e21d67fa9f405d99904`.
-  - spend `20000/20000` atomic USDC;
-  - actual intents `FACT_CHECK`, `NEWS_SEARCH`;
-  - runtime reported `PASS`.
-- [x] Review retry 002 and **reject runtime PASS**.
-  - FACT_CHECK returned `unverified`, confidence `0.2`, `evidence:null`;
-  - requested WEB_SEARCH routed to NEWS_SEARCH and returned articles unrelated to Lodash/package security;
-  - corrected meaningful coverage `0/2`;
-  - corrected fail-closed outcome `ESCALATE`;
-  - evidence: `evidence/t2/live-clean-retry-002/REVIEW.md`.
-
-### Demo-fixture correction
-
-- [x] Reclassify PR #1 (`lodash 4.17.20 -> 4.17.21`) as challenged candidate; preserve original head/history.
-- [x] Create clean PR #2: `lodash 4.17.20 -> 4.18.1` on `demo/clean-lodash-4.18.1`.
-- [x] Bind clean action file to PR #2 head `c40c5a3a15d6280005dfe7589ae7e2a960cc199c`.
-- [x] Persist `demo/actions/challenged-pr.json` for PR #1.
-
-### Auditor v0.3 seeded exact-CVE mode
-
-- [x] Add `src/seeded-cve-auditor.mjs`.
-- [x] Seed clean PR #2 with exact advisory IDs `CVE-2026-4800` and `CVE-2026-2950`.
-- [x] Require exact `CVE_LOOKUP` return, exact CVE ID match, found record, and machine-checkable affected-version range before coverage counts.
-- [x] Target inside returned affected range => BLOCKING; target outside range => ADVISORY.
-- [x] Add deterministic seeded-CVE tests including clean PASS, challenged BLOCK, and wrong-route ESCALATE.
-- [x] Update live runner to select seeded-CVE mode when action file contains `evidence_seeds.cve_ids`.
-- [ ] T2.24 Pull latest main and run full repository `npm test` after v0.3 addition. Expected total: **26 tests** if no unrelated count change.
-- [ ] T2.25 Re-verify PR #2 exact head/open state after local tests.
-- [ ] T2.26 Run one bounded live PR #2 MEDIUM seeded-CVE audit through hardened launcher; max `20000` atomic USDC.
-- [ ] T2.27 Review exact returned CVE records/ranges/spend/outcome and persist sanitized evidence.
-- [ ] T2.28 Promote `SKEPTARA_T2_INDEPENDENT_AUDITOR_PASS` only if the reviewed live evidence truly satisfies the gate.
+- [x] Generic auditor + Telegraph adapter + secure launcher.
+- [x] Evidence-quality hardening through v0.4 semantic exact-CVE normalization.
+- [x] User-machine v0.4 suite: **29/29 PASS, 0 fail**.
+- [x] Zero-spend run003 replay: **2/2**, `[ADVISORY, ADVISORY]`, **PASS**.
+- [x] Closure evidence persisted.
+- [x] `SKEPTARA_T2_INDEPENDENT_AUDITOR_PASS = CLOSED_PASS`.
 
 ## T3 — Protected merge gate
 
-- [ ] T3.1 Define allow-listed demo repo/PR scope.
-- [ ] T3.2 Keep GitHub write credential server-side.
-- [ ] T3.3 Bind PASS to repo + PR + exact head SHA + action fingerprint.
-- [ ] T3.4 Enforce freshness/expiry.
-- [ ] T3.5 Implement bounded merge executor.
-- [ ] T3.6 Changed head => deny.
-- [ ] T3.7 Expired challenge => deny.
-- [ ] T3.8 BLOCK/ESCALATE => deny.
-- [ ] T3.9 Non-allow-listed target => deny.
+- [x] Allow-list contract.
+- [x] Server-side injected merge adapter boundary.
+- [x] Exact repository + PR + head SHA + action fingerprint binding.
+- [x] Freshness/expiry enforcement.
+- [x] BLOCK/ESCALATE deny.
+- [x] Changed head deny.
+- [x] Explicit human bounded authorization required.
+- [x] Denied authorization never invokes merge adapter.
+- [x] Authorized executor forwards exact `expected_head_sha`.
+- [x] Full repository suite: **41/41 PASS, 0 fail**.
+- [x] Focused merge-gate suite: **12/12 PASS, 0 fail**.
+- [x] `SKEPTARA_T3_FAIL_CLOSED_MERGE_GATE_PASS = CLOSED_PASS`.
 
 ## T4 — Real two-case proof
 
-- [x] Challenged candidate exists: PR #1 (`4.17.21`).
-- [x] Clean candidate exists: PR #2 (`4.18.1`).
-- [ ] T4.1 Obtain reviewed live PASS evidence for PR #2.
-- [ ] T4.2 Obtain reviewed live BLOCK evidence for PR #1 using controlled seeded CVE path.
-- [ ] T4.3 Execute bounded real merge only for fresh PASS case if explicitly authorized.
-- [ ] T4.4 Prove challenged case cannot merge.
-- [ ] T4.5 Capture replay/demo evidence.
+- [x] Challenged candidate exists: PR #1 (`lodash@4.17.21`).
+- [x] Clean candidate exists: PR #2 (`lodash@4.18.1`).
+- [x] T4.1 Execute fresh live challenged PR #1 run with real Telegraph/x402.
+  - runtime directory: `evidence/t2-runtime/2026-09-07T01-11-00-634Z`;
+  - risk `MEDIUM`;
+  - spend `20000/20000` atomic USDC;
+  - first path `CVE-2026-4800` => `AMBIGUOUS`, range not machine-verifiable;
+  - second path `CVE-2026-2950` => `BLOCKING`;
+  - final runtime outcome `BLOCK`, reason `MATERIAL_COUNTER_EVIDENCE_FOUND`.
+- [x] T4.2 Review challenged run 004 sanitized JSON and persist exact binding/evidence.
+  - challenge `113cc2c4-94ff-4c47-bf48-66fabc7c9329` bound to PR #1 exact head `73cf5bdd69163924228e3e21d67fa9f405d99904`;
+  - `CVE-2026-2950`: Lodash `4.17.23 and earlier` affected, fixed `4.18.0`; target `4.17.21` => `BLOCKING`;
+  - review: `evidence/t4/pr1-block-run-004/REVIEW.md`.
+- [x] T4.3 Zero-write `npm run t4:replay:block` PASS.
+  - authorization `DENIED`;
+  - isolated reason `CHALLENGE_NOT_PASS`;
+  - merge-adapter calls `0`;
+  - execution `executed=false`, `merged=false`;
+  - no private key, Telegraph spend or GitHub write;
+  - evidence: `evidence/t4/pr1-block-run-004/MERGE-DENIAL-REPLAY.md`.
+- [x] Challenged half conclusion: **REAL BLOCK + ZERO-WRITE EXECUTION DENIAL PROVEN**.
+- [ ] T4.4 Obtain fresh live PASS for clean PR #2 using `demo/actions/clean-pr.json`.
+  - require exact current head `d2aa0ea25daf1f84b6cfdd98861d3f05df584b7a`;
+  - require MEDIUM risk;
+  - require `2/2` meaningful non-blocking coverage;
+  - max spend `20000` atomic USDC.
+- [ ] T4.5 Review and persist fresh PR #2 result.
+- [ ] T4.6 Immediately revalidate PR #2 live state/head while PASS is fresh.
+- [ ] T4.7 Ask human for explicit bounded authorization to merge exactly PR #2 at the challenged head.
+- [ ] T4.8 If authorized, execute real merge with exact `expected_head_sha`; otherwise preserve PASS evidence without merge.
+- [ ] T4.9 Capture durable two-case replay/demo evidence.
+- [ ] `SKEPTARA_T4_TWO_CASE_REAL_DEMO_PASS`.
 
 ## UX / Benita
 
 - [x] Frontend data contract frozen.
-- [x] `feat/frontend-benita` created and previously synchronized before collaborator work.
+- [x] `feat/frontend-benita` created and synchronized while it had no unique remote commits.
 - [ ] Send brief + PRD PDF if not already sent.
 - [ ] Risk-tier presentation.
 - [ ] Live challenge-progress presentation.
@@ -127,6 +118,8 @@ After every passed/failed major gate:
 
 ## Reconciliation record
 
-Retry 002 was another useful fail-closed discovery: paid responses can still be evidentially empty or irrelevant even when the transport succeeds. PR #1 is no longer treated as clean. The clean fixture has moved to current Lodash `4.18.1`, and v0.3 uses exact external CVE identifiers to demand concrete, machine-checkable Telegraph records. Product intent is unchanged; this is execution/demo-fixture remediation.
+The challenged half of T4 is now closed. Real paid Telegraph evidence produced a deterministic `BLOCK` for PR #1, and the protected merge gate replay proved that the BLOCK cannot reach execution: authorization denied, `CHALLENGE_NOT_PASS`, merge adapter calls exactly zero.
 
-Exact next gate: `SKEPTARA_T2_V0_3_LOCAL_TEST_AND_PR2_LIVE_AUDIT`.
+The clean half is now the only remaining T4 execution proof. PR #2 is still open and unmerged at exact head `d2aa0ea25daf1f84b6cfdd98861d3f05df584b7a`. Obtain a fresh live PASS next. No real merge is authorized until the fresh result is reviewed, the PR head is immediately revalidated, and the human explicitly authorizes that exact bounded merge.
+
+Exact next gate: `SKEPTARA_T4_PR2_FRESH_PASS_PROOF`.

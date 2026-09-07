@@ -9,9 +9,12 @@
   "scripts": {
     "t0": "node scripts/t0-real-telegraph.mjs",
     "t2:live": "node scripts/t2-live-audit.mjs",
+    "t2:replay:003": "node scripts/replay-t2-run003.mjs",
+    "t4:replay:block": "node scripts/replay-t4-pr1-block-denial.mjs",
     "test": "node --test tests/*.test.mjs",
     "test:policy": "node --test tests/policy.test.mjs",
-    "test:auditor": "node --test tests/auditor.test.mjs"
+    "test:auditor": "node --test tests/auditor.test.mjs",
+    "test:merge-gate": "node --test tests/merge-gate.test.mjs"
   },
   "dependencies": {
     "@x402/evm": "^2.11.0",

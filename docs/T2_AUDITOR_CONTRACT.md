@@ -1,7 +1,7 @@
 # Skeptara T2 Independent Auditor Contract
 
-Status: **IMPLEMENTED v0.3 seeded-CVE mode — local validation + live clean PR #2 audit pending**  
-Date: 2026-09-06
+Status: **CLOSED_PASS — v0.4 seeded-CVE auditor**  
+Date: 2026-09-07
 
 ## Purpose
 
@@ -29,7 +29,7 @@ Each paid path is quoted before settlement. A quote outside Base Sepolia or abov
 
 Material `BLOCKING` counter-evidence may stop immediately. PASS still requires all mandatory coverage. Missing capability, invalid/incomplete evidence, irrelevant evidence, payment/runtime failure, exhausted budget before coverage, or critical ambiguity cannot PASS.
 
-## Evidence quality discoveries
+## Evidence-quality discoveries
 
 ### Live run 001
 
@@ -41,66 +41,86 @@ Evidence: `evidence/t2/live-clean-run-001/REVIEW.md`.
 
 Runtime v0.2 again reported PASS, but review found both claimed paths inadequate:
 
-- `FACT_CHECK`: `verdict: unverified`, `confidence: 0.2`, `evidence: null`; absence of a matching Wikipedia article is not completed counter-evidence coverage.
-- requested `WEB_SEARCH` returned actual `NEWS_SEARCH`, whose articles were unrelated to Lodash/package security. Request/query text mentioning Lodash does not make unrelated returned evidence relevant.
+- `FACT_CHECK`: `verdict: unverified`, `confidence: 0.2`, `evidence: null`;
+- requested `WEB_SEARCH` returned actual `NEWS_SEARCH` whose articles were unrelated to Lodash/package security.
 
 Corrected interpretation: `0/2` meaningful coverage at the full `20000` atomic spend ceiling => ESCALATE.
 
 Evidence: `evidence/t2/live-clean-retry-002/REVIEW.md`.
 
-## Clean-fixture correction
+### Live seeded run 003
 
-PR #1 (`lodash 4.17.20 -> 4.17.21`) is retained as a challenged candidate rather than rewritten. Current advisory validation showed `4.17.21` is not a defensible 2026 clean target.
+PR #2 (`lodash 4.17.20 -> 4.18.1`) was audited through two exact paid `CVE_LOOKUP` paths:
 
-A new clean candidate is PR #2 (`lodash 4.17.20 -> 4.18.1`) on `demo/clean-lodash-4.18.1`, exact head `c40c5a3a15d6280005dfe7589ae7e2a960cc199c`.
+- `CVE-2026-4800` returned a concrete record with affected versions before `4.18.0` and normalized to non-blocking `ADVISORY`;
+- `CVE-2026-2950` returned a concrete record from a different miner shape: exact CVE id, Lodash product, CVSS/severity, advisory description, source/reference and `fixed_versions:["4.18.0"]`, but without miner-specific `found/verdict` flags.
 
-This changes the demo fixture, not Skeptara's product mechanism or hero vertical.
+v0.3 therefore reported `1/2` and ESCALATE even though the second live record was substantive and machine-checkable. Review traced this to a normalizer-shape assumption, not missing evidence.
 
-## v0.3 seeded exact-CVE mode
+Evidence: `evidence/t2/live-pr2-seeded-run-003/REVIEW.md`.
 
-`src/seeded-cve-auditor.mjs` adds a controlled reliability mode for the bounded demo. Instead of broad reassurance/search prompts, a deterministic external advisory baseline supplies exact CVE identifiers. The reviewed coding agent does not choose these identifiers.
+## Clean/challenged fixtures
 
-For clean PR #2 the action file supplies:
+- PR #1 is preserved as challenged candidate: `lodash 4.17.20 -> 4.17.21`, exact head `73cf5bdd69163924228e3e21d67fa9f405d99904`.
+- PR #2 is the clean candidate: `lodash 4.17.20 -> 4.18.1`, exact head `d2aa0ea25daf1f84b6cfdd98861d3f05df584b7a`.
 
-- `CVE-2026-4800`
-- `CVE-2026-2950`
+This is demo-fixture selection, not a product-mechanism change.
 
-The auditor requires live `CVE_LOOKUP`, spends at most 10000 atomic USDC per path, and asks Telegraph to return the concrete record for exactly the seeded CVE. A path counts as coverage only when:
+## v0.4 seeded exact-CVE mode
+
+`src/seeded-cve-auditor.mjs` now accepts miner-variable exact-CVE shapes while retaining fail-closed semantics.
+
+A seeded path counts only when:
 
 1. actual returned intent is `CVE_LOOKUP`;
-2. returned `cve_id` exactly matches the seed;
-3. the CVE record is actually found;
-4. the affected version boundary is machine-checkable against the target dependency version.
+2. returned `cve_id` exactly matches the requested seed;
+3. the record contains substantive advisory data, not merely an echoed id;
+4. the affected-version boundary is machine-checkable against the target.
 
-A mismatched route, missing record, substituted CVE, or unparseable range remains incomplete/critical and cannot count toward PASS.
+Machine-checkable boundaries may come from:
 
-For a returned known CVE:
+- `affected_versions` or descriptive text such as `before X.Y.Z` / `X.Y.Z and earlier`;
+- `fixed_versions`, where the lowest fixed version is treated as the exclusive upper bound of affected versions.
+
+A mismatched route, mismatched CVE, empty/echo-only record or unparseable boundary remains incomplete/critical and cannot count toward PASS.
+
+For returned known CVEs:
 
 - target inside affected range => `BLOCKING`;
-- target outside affected range => `ADVISORY` (meaningful non-blocking counter-evidence coverage).
+- target outside affected range => `ADVISORY` meaningful coverage.
 
-MEDIUM still requires two paid evidence paths and remains capped at 20000 atomic USDC. Cross-intent diversity is preferred by T1 but not mandatory for MEDIUM; seeded-CVE mode deliberately favors concrete machine-checkable evidence over broad but irrelevant routing.
+MEDIUM still requires two evidence paths and remains capped at 20000 atomic USDC. Cross-intent diversity is preferred by T1 but not mandatory for MEDIUM; seeded-CVE mode deliberately prioritizes concrete machine-checkable counter-evidence.
 
 ## Runtime boundary
 
 - `src/telegraph-client.mjs`: capability discovery + bounded x402 adapter;
-- `src/auditor.mjs`: generic auditor v0.2 and evidence-quality lessons;
-- `src/seeded-cve-auditor.mjs`: v0.3 controlled exact-CVE path;
-- `scripts/t2-live-audit.mjs`: chooses seeded mode when `evidence_seeds.cve_ids` exists in the action file;
+- `src/auditor.mjs`: generic auditor v0.2 and evidence-quality rules;
+- `src/seeded-cve-auditor.mjs`: v0.4 controlled exact-CVE path;
+- `scripts/t2-live-audit.mjs`: chooses seeded mode when `evidence_seeds.cve_ids` exists;
 - `scripts/t2-from-clipboard.ps1`: clipboard-only secret injection;
+- `scripts/replay-t2-run003.mjs`: zero-spend deterministic replay of sanitized captured live records;
 - `tests/auditor.test.mjs` + `tests/seeded-cve-auditor.test.mjs`: deterministic fail-closed tests.
 
 The private key is never an auditor domain input and must not enter persisted challenge output.
 
-## T2 pass criteria
+## T2 closure evidence
 
-Before `SKEPTARA_T2_INDEPENDENT_AUDITOR_PASS` can close:
+User-machine validation after v0.4 remediation:
 
-1. full repository tests pass after v0.3 seeded-CVE addition;
-2. PR #2 remains open at exact head `c40c5a3a15d6280005dfe7589ae7e2a960cc199c`;
-3. live capability discovery includes `CVE_LOOKUP`;
-4. a bounded PR #2 MEDIUM audit obtains two meaningful exact-CVE records within 20000 atomic USDC;
-5. actual returned records are reviewed and durably persisted;
-6. only then may a real PASS be accepted.
+- full repository suite: **29/29 PASS, 0 fail**;
+- zero-spend replay of captured live run 003: **2/2 coverage**;
+- replay materialities: `[ADVISORY, ADVISORY]`;
+- replay outcome: **PASS**;
+- replay reason: `REQUIRED_COVERAGE_COMPLETE_NO_BLOCKING_EVIDENCE`.
 
-T2 never authorizes GitHub merge. T3 remains the protected execution gate.
+Evidence: `evidence/t2/LOCAL-USER-VALIDATION-V0.4-29-OF-29-AND-RUN003-REPLAY-PASS.md`.
+
+Therefore:
+
+`SKEPTARA_T2_INDEPENDENT_AUDITOR_PASS = CLOSED_PASS`
+
+## Important boundary into T3
+
+T2 closure proves the auditor/gate can truthfully interpret reviewed real Telegraph evidence. It does **not** authorize a GitHub merge.
+
+T3 must require a **fresh and unexpired** PASS bound to the exact repository, PR, head SHA and action fingerprint before a real merge can execute. The run 003 replay is historical evidence and cannot serve as merge authorization.
