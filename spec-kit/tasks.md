@@ -49,20 +49,12 @@ Status: DERIVED READY — subordinate to living PRD v0.1.
 - [x] v0.3 user-machine full suite: **26/26 PASS, 0 fail**.
 - [x] Run live PR #2 seeded-CVE audit; spend `20000/20000` atomic USDC.
 - [x] Review run 003 raw evidence and persist sanitized replay fixture.
-  - `CVE-2026-4800` => concrete non-blocking `ADVISORY`;
-  - `CVE-2026-2950` => concrete exact CVE record with `fixed_versions:["4.18.0"]` but miner shape omitted `found/verdict`;
-  - v0.3 runtime ESCALATE traced to normalizer-shape assumption;
-  - corrected semantic evidence: **2/2 meaningful non-blocking ADVISORY paths**.
-- [x] Implement `skeptara-auditor-v0.4-seeded-cve`.
-  - substantive exact CVE may count without miner-specific `found/verdict`;
-  - exact id with no substantive advisory fields still fails closed;
-  - `fixed_versions` used as exclusive affected-range boundary;
-  - `X.Y.Z and earlier` parsing supported.
+- [x] Implement `skeptara-auditor-v0.4-seeded-cve` semantic record-shape remediation.
 - [x] Persist exact sanitized run 003 replay input.
 - [x] Add zero-spend deterministic replay command: `npm run t2:replay:003`.
-- [x] T2.28 Full user-machine `npm test` after v0.4: **29/29 PASS, 0 fail**.
-- [x] T2.29 Zero-spend `npm run t2:replay:003`: **2/2**, `[ADVISORY, ADVISORY]`, **PASS**.
-- [x] T2.30 Persist closure evidence: `evidence/t2/LOCAL-USER-VALIDATION-V0.4-29-OF-29-AND-RUN003-REPLAY-PASS.md`.
+- [x] Full user-machine `npm test` after v0.4: **29/29 PASS, 0 fail**.
+- [x] Zero-spend `npm run t2:replay:003`: **2/2**, `[ADVISORY, ADVISORY]`, **PASS**.
+- [x] Persist closure evidence: `evidence/t2/LOCAL-USER-VALIDATION-V0.4-29-OF-29-AND-RUN003-REPLAY-PASS.md`.
 - [x] `SKEPTARA_T2_INDEPENDENT_AUDITOR_PASS = CLOSED_PASS`.
 
 ## T3 — Protected merge gate
@@ -84,22 +76,33 @@ Status: DERIVED READY — subordinate to living PRD v0.1.
 - [x] T3 implementation: `src/merge-gate.mjs`.
 - [x] T3 deterministic tests: `tests/merge-gate.test.mjs`.
 
-### Validation remaining
+### Closure
 
-- [ ] T3.12 Pull latest main and run full repository `npm test`; expected total **41 tests** if no unrelated count change.
-- [ ] T3.13 Run focused `npm run test:merge-gate`.
-- [ ] T3.14 Promote `SKEPTARA_T3_FAIL_CLOSED_MERGE_GATE_PASS` only after user-machine tests are green.
-- [x] T3.15 No real merge during T3 local validation.
+- [x] T3.12 Full user-machine repository suite: **41/41 PASS, 0 fail**.
+- [x] T3.13 Focused merge-gate suite: **12/12 PASS, 0 fail**.
+- [x] T3.14 Persist closure evidence: `evidence/t3/LOCAL-USER-VALIDATION-V0.1-41-OF-41-AND-12-OF-12.md`.
+- [x] T3.15 No real merge during T3 validation.
+- [x] `SKEPTARA_T3_FAIL_CLOSED_MERGE_GATE_PASS = CLOSED_PASS`.
 
 ## T4 — Real two-case proof
 
 - [x] Challenged candidate exists: PR #1 (`4.17.21`).
 - [x] Clean candidate exists: PR #2 (`4.18.1`).
-- [ ] T4.1 Obtain a **fresh live PASS** for PR #2 after T3 closes.
-- [ ] T4.2 Obtain a **fresh live BLOCK** for PR #1 after T3 closes.
-- [ ] T4.3 Execute bounded real merge for PR #2 only after explicit human authorization and exact-head revalidation.
-- [ ] T4.4 Prove challenged PR #1 cannot merge through Skeptara gate.
-- [ ] T4.5 Capture replay/demo evidence.
+- [ ] T4.1 Obtain a **fresh live BLOCK** for challenged PR #1 using `demo/actions/challenged-pr.json`.
+  - preferred first T4 action;
+  - expected early stop on first material seeded CVE;
+  - normal expected spend: `10000` atomic USDC;
+  - persist sanitized result and prove merge gate DENY.
+- [ ] T4.2 Obtain a **fresh live PASS** for clean PR #2 using `demo/actions/clean-pr.json`.
+  - require exact current head;
+  - require 2/2 meaningful non-blocking coverage;
+  - maximum spend: `20000` atomic USDC.
+- [ ] T4.3 Immediately revalidate PR #2 live state/head while PASS is fresh.
+- [ ] T4.4 Ask human for explicit bounded authorization to merge exactly PR #2 at the challenged head.
+- [ ] T4.5 If authorized, execute the real merge using exact `expected_head_sha`; otherwise preserve PASS evidence without merge.
+- [ ] T4.6 Prove challenged PR #1 cannot execute through Skeptara gate.
+- [ ] T4.7 Capture durable two-case replay/demo evidence.
+- [ ] `SKEPTARA_T4_TWO_CASE_REAL_DEMO_PASS`.
 
 ## UX / Benita
 
@@ -135,8 +138,8 @@ After every passed/failed major gate:
 
 ## Reconciliation record
 
-T2 is closed on reviewed real Telegraph evidence plus a deterministic zero-spend replay under v0.4: user-machine suite **29/29**, run 003 replay **2/2**, two non-blocking ADVISORY items, outcome PASS. The replay closes the auditor gate but is explicitly not merge authorization.
+T2 is closed on reviewed real Telegraph evidence plus deterministic replay. T3 is now also closed after user-machine validation **41/41** full-suite and **12/12** focused merge-gate tests with zero failures. The protected executor is still deliberately unused on a real PR.
 
-T3 v0.1 is now implemented as a pure fail-closed authorization layer plus injected server-side merge adapter. It requires allow-listing, explicit human bounded authorization, fresh PASS, exact repository/PR/head/fingerprint binding and immediate live PR consistency. The next gate is local validation only; no real GitHub merge is authorized yet.
+T4 now owns the irreversible boundary. The challenged PR #1 proof should run first so Skeptara demonstrates a fresh real BLOCK and denial without consuming the clean PASS freshness window. Only after that should PR #2 obtain a fresh PASS; any real merge remains conditioned on exact-head live revalidation and explicit human bounded authorization.
 
-Exact next gate: `SKEPTARA_T3_V0_1_LOCAL_VALIDATION`.
+Exact next gate: `SKEPTARA_T4_CHALLENGED_PR1_FRESH_BLOCK_PROOF`.
