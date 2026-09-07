@@ -1,12 +1,12 @@
 import type { DemoCase } from "./types";
 
-// Real, closed T4 demo runs — not simulated. Transcribed verbatim from the
-// repository's own evidence records. Do not edit values here without
-// re-verifying against the source file listed on each case.
+// Real, closed T4 demo runs. Values are transcribed from the repository's
+// captured live evidence. Keep proof-time repository names and identifiers
+// intact; GitHub later renamed the repository.
 
 export const challengedCase: DemoCase = {
   id: "pr1",
-  label: "PR #1 — challenged case",
+  label: "PR #1 challenged case",
   sourceEvidencePath: "evidence/t4/pr1-block-run-004/reviewed-challenge.sanitized.json",
   actionSnapshot: {
     repository: "Faadil1/Faadil1-skeptara-telegraph",
@@ -36,9 +36,31 @@ export const challengedCase: DemoCase = {
       intent: "CVE_LOOKUP",
       miner_id: "7336",
       miner_name: "SecWire CVE Lookup",
+      signal_hash: "0x312ae1ef52186aaaf8c4e301b8a6667c6fb4a02ebe3524cf9d03a32007efc7d7",
+      cost_usd: 0.01,
+      duration_ms: 1603,
+      materiality: "AMBIGUOUS",
+      reason_code: "KNOWN_VULNERABILITY_RANGE_NOT_MACHINE_VERIFIABLE",
+      coverage_complete: false,
+      settlement_success: true,
+      settlement_transaction: "0x07ef1d9a4d44409832c99a02c89b26f665fab7fe07040e7573ab2b81a1fa8b57",
+      finding: {
+        cve_id: "CVE-2026-4800",
+        severity: "CRITICAL",
+        cvss_score: 9.8,
+        target_version: "4.17.21",
+        source: "CIRCL cve.circl.lu and NVD services.nvd.nist.gov",
+      },
+      note: "The record was substantive, but the captured shape did not expose a machine-checkable affected range accepted by the auditor. Skeptara paid for the call, recorded it, and did not count it toward required coverage.",
+    },
+    {
+      challenge_id: "113cc2c4-94ff-4c47-bf48-66fabc7c9329",
+      intent: "CVE_LOOKUP",
+      miner_id: "7336",
+      miner_name: "SecWire CVE Lookup",
       signal_hash: "0xf06afb2b945cb17eaee44b32ba9a0228052e537c73ab38efde433c2a173e70f4",
       cost_usd: 0.01,
-      duration_ms: null,
+      duration_ms: 908,
       materiality: "BLOCKING",
       reason_code: "KNOWN_VULNERABILITY_AFFECTS_TARGET_DEPENDENCY_VERSION",
       coverage_complete: true,
@@ -53,24 +75,6 @@ export const challengedCase: DemoCase = {
         target_version: "4.17.21",
         source: "CIRCL cve.circl.lu and NVD services.nvd.nist.gov",
       },
-    },
-    {
-      challenge_id: "113cc2c4-94ff-4c47-bf48-66fabc7c9329",
-      intent: "CVE_LOOKUP",
-      miner_id: null,
-      miner_name: null,
-      signal_hash: null,
-      cost_usd: 0.01,
-      duration_ms: null,
-      materiality: "AMBIGUOUS",
-      reason_code: "KNOWN_VULNERABILITY_RANGE_NOT_MACHINE_VERIFIABLE",
-      coverage_complete: false,
-      settlement_success: null,
-      settlement_transaction: null,
-      finding: {
-        cve_id: "CVE-2026-4800",
-      },
-      note: "Record was substantive but did not expose a machine-checkable affected range in the shapes the auditor accepts. Skeptara continued rather than inferring a block from prose alone.",
     },
   ],
   challengeResult: {
@@ -100,7 +104,7 @@ export const challengedCase: DemoCase = {
 
 export const cleanCase: DemoCase = {
   id: "pr2",
-  label: "PR #2 — clean case",
+  label: "PR #2 clean case",
   sourceEvidencePath: "evidence/t4/pr2-clean-run-005/reviewed-challenge.sanitized.json",
   actionSnapshot: {
     repository: "Faadil1/Faadil1-skeptara-telegraph",
@@ -137,7 +141,7 @@ export const cleanCase: DemoCase = {
       reason_code: "KNOWN_VULNERABILITY_DOES_NOT_MATCH_TARGET_VERSION_RANGE",
       coverage_complete: true,
       settlement_success: true,
-      settlement_transaction: null,
+      settlement_transaction: "0x66bd41892d411b9be502759fc4259d2bec8821fd818385cc5eabb950589ab2a2",
       finding: {
         cve_id: "CVE-2026-4800",
         affected_text: "lodash 4.0.0 through versions before 4.18.0",
@@ -156,7 +160,7 @@ export const cleanCase: DemoCase = {
       reason_code: "KNOWN_VULNERABILITY_DOES_NOT_MATCH_TARGET_VERSION_RANGE",
       coverage_complete: true,
       settlement_success: true,
-      settlement_transaction: null,
+      settlement_transaction: "0x95e44b463cb6cafd4b1c56a9889930c1180d084a5e709ccf410296ca465d1e1b",
       finding: {
         cve_id: "CVE-2026-2950",
         affected_text: "lodash 4.17.23 and earlier; fixed in 4.18.0",
@@ -195,7 +199,6 @@ export function getCase(id: string): DemoCase | undefined {
   return demoCases.find((c) => c.id === id);
 }
 
-// atomic USDC (6 decimals-ish per contract note: 10000 atomic = $0.01)
 export function atomicToUsd(atomic: number): number {
   return (atomic / 10000) * 0.01;
 }
