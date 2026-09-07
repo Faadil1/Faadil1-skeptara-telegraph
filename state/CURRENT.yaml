@@ -1,7 +1,7 @@
 canonical_state:
   protocol_version: 1
   system: SKEPTARA_TELEGRAPH_TRACK3
-  version: 0.9.8-discord-organic-engagement-verified-repo-rename-canonicalized
+  version: 0.9.9-discord-round-reward-and-track3-platform-guidance
   date: 2026-09-07
   source_of_truth: GITHUB
   repository: Faadil1/skeptara-telegraph
@@ -11,7 +11,7 @@ canonical_state:
     note: GitHub repository rename/redirect preserves historical evidence references; do not rewrite old captured evidence bindings.
   branch: main
 
-  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__NINE_SPOT_REMEDIATION_IMPLEMENTED__FAADIL_DISCORD_ACTIVITY_AND_ORGANIC_ENGAGEMENT_VERIFIED__BENITA_X_DISCORD_BRIEF_NOT_SENT__LOCAL_VALIDATION_AND_TRACE_VISUAL_REVIEW_NEXT
+  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__NINE_SPOT_REMEDIATION_IMPLEMENTED__FAADIL_DISCORD_ACTIVITY_AND_ORGANIC_ENGAGEMENT_VERIFIED__ROUND_REWARD_AND_TRACK3_PLATFORM_GUIDANCE_CAPTURED__BENITA_X_DISCORD_BRIEF_NOT_SENT__LOCAL_VALIDATION_AND_TRACE_VISUAL_REVIEW_NEXT
 
   authority:
     product_intent_source: product/PRD.md
@@ -29,14 +29,8 @@ canonical_state:
   closed_gates:
     t0: { status: CLOSED_PASS, evidence: evidence/t0-real-telegraph/attempt-008/ }
     t1: { status: PASS, policy_version: skeptara-risk-v0.1 }
-    t2:
-      status: CLOSED_PASS
-      auditor_version: skeptara-auditor-v0.4-seeded-cve
-      closure_evidence: evidence/t2/LOCAL-USER-VALIDATION-V0.4-29-OF-29-AND-RUN003-REPLAY-PASS.md
-    t3:
-      status: CLOSED_PASS
-      gate_version: skeptara-merge-gate-v0.1
-      closure_evidence: evidence/t3/LOCAL-USER-VALIDATION-V0.1-41-OF-41-AND-12-OF-12.md
+    t2: { status: CLOSED_PASS, auditor_version: skeptara-auditor-v0.4-seeded-cve, closure_evidence: evidence/t2/LOCAL-USER-VALIDATION-V0.4-29-OF-29-AND-RUN003-REPLAY-PASS.md }
+    t3: { status: CLOSED_PASS, gate_version: skeptara-merge-gate-v0.1, closure_evidence: evidence/t3/LOCAL-USER-VALIDATION-V0.1-41-OF-41-AND-12-OF-12.md }
     t4:
       status: CLOSED_PASS
       challenged_case_review: evidence/t4/pr1-block-run-004/REVIEW.md
@@ -70,9 +64,7 @@ canonical_state:
     remediation_003:
       status: IMPLEMENTED_PENDING_VALIDATION
       evidence: evidence/winning-intelligence/WI-HIDDEN-SPOT-REMEDIATION-003.md
-      runnable_assets:
-        judge_replay_command: npm run demo
-        local_judge_surface_command: npm run demo:web
+      runnable_assets: { judge_replay_command: npm run demo, local_judge_surface_command: npm run demo:web }
     discord_signal_004:
       status: ACTIONABLE_NO_PIVOT
       evidence: evidence/winning-intelligence/WI-DISCORD-COMPETITIVE-SIGNAL-004.md
@@ -80,10 +72,7 @@ canonical_state:
 
   claim_boundaries:
     exact_cve_seeded_mode: CONTROLLED_HACKATHON_PROOF_NOT_AUTOMATIC_UNKNOWN_VULNERABILITY_DISCOVERY
-    risk_scaling:
-      low: POLICY_TEST_PROVEN
-      medium: LIVE_FINAL_T4_PROVEN
-      high: POLICY_TEST_PROVEN
+    risk_scaling: { low: POLICY_TEST_PROVEN, medium: LIVE_FINAL_T4_PROVEN, high: POLICY_TEST_PROVEN }
     independence: CHALLENGE_TOPOLOGY_NOT_STATISTICAL_MINER_INDEPENDENCE
     replay: HISTORICAL_REPLAY_NEVER_FRESH_EXECUTION_AUTHORIZATION
     merge_runtime: T3_CONTRACT_TEST_PROVEN_PLUS_T4_REAL_EXACT_HEAD_MERGE__NO_FULLY_DEPLOYED_REPO_ADAPTER_CLAIM
@@ -114,9 +103,7 @@ canonical_state:
     no_telegraph_auto_call_on_public_page_load_refresh_poll_timer_background: true
 
   administrative_compliance:
-    registration:
-      status: VERIFIED
-      evidence: evidence/admin/TELEGRAPH-REGISTRATION-VERIFIED.md
+    registration: { status: VERIFIED, evidence: evidence/admin/TELEGRAPH-REGISTRATION-VERIFIED.md }
     official_discord:
       invite: https://discord.gg/telegraphprotocol
       faadil_join_access: VERIFIED
@@ -125,6 +112,15 @@ canonical_state:
       faadil_organic_engagement: VERIFIED
       faadil_organic_engagement_evidence: evidence/admin/TELEGRAPH-DISCORD-ORGANIC-ENGAGEMENT-VERIFIED.md
       benita_join_activity: HUMAN_VERIFY
+    current_round_guidance:
+      evidence: evidence/admin/TELEGRAPH-DISCORD-ROUND-REWARD-AND-SUBMISSION-STATUS-VERIFIED.md
+      staff_stated_round_reward_pool_usd: 5000
+      separate_participation_reward: NONE_FOR_THIS_ROUND
+      scope_boundary: ROUND_LEVEL_NOT_TRACK3_ONLY_OR_PER_PLACE_BREAKDOWN
+      future_h2_reward_pool_staff_statement_usd: 10000
+      future_h3_rewards: STAFF_STATED_OWN_REWARDS
+      future_nov_dec_opportunities: STAFF_STATED
+      future_mainnet_rewards_once_token_live: STAFF_STATED
     x_showcase:
       timing_context: REGISTERED_WITH_LESS_THAN_24_HOURS_REMAINING
       strategy: TRUTHFUL_COMPRESSED_SEQUENCE__NO_FAKE_HISTORY
@@ -139,7 +135,9 @@ canonical_state:
       demo_submission_post: HUMAN_ACTION_REQUIRED_AFTER_PUBLIC_DEPLOY
     submission_platform:
       official_discord_staff_reference_observed: true
-      exact_url_from_screenshot: TRUNCATED_NOT_CANONICALIZED_FROM_SCREENSHOT_ALONE
+      track3_visibility_issue_staff_acknowledged: true
+      track3_visibility_status: STAFF_SAID_WILL_BE_UPDATED_SOON
+      exact_submission_url_from_screenshot: TRUNCATED_NOT_CANONICALIZED
       final_submission: HUMAN_VERIFY_NOT_SUBMITTED
 
   collaboration:
@@ -164,4 +162,4 @@ canonical_state:
   exact_next_gate: SKEPTARA_HIDDEN_SPOT_REMEDIATION_LOCAL_VALIDATION_AND_TRACE_VISUAL_REVIEW
   exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_TRACE_REVIEW
   exact_next_action: >-
-    Canonical repository is now Faadil1/skeptara-telegraph; historical evidence may still name Faadil1/Faadil1-skeptara-telegraph and must not be rewritten because it records the bound name at proof time. Faadil's Discord join, substantive Skeptara intro, and organic engagement are VERIFIED; the intro had 3 fire reactions and a direct positive Telegraph staff reply. Do not convert that into user/adoption metrics. Benita still has not been sent the X/Discord brief. Next, pull main and run `npm test`, `npm run demo`, then `npm run demo:web`; provide screenshots of http://127.0.0.1:4173 for TRACE. Do not run fresh Telegraph calls for activity/demo volume. Benita Discord/X status, public deployment smoke, X posts and final submission remain HUMAN_VERIFY.
+    Canonical repo is Faadil1/skeptara-telegraph; historical proof bindings using Faadil1/Faadil1-skeptara-telegraph remain untouched. Discord staff guidance now also records a $5K current-round winner-only pool with no separate participation reward, plus a staff-acknowledged Track 3 platform visibility issue that was said to be updated soon. Treat $5K as round-level, not a Track-3-only breakdown. Final submission is still HUMAN_VERIFY. Next, pull main and run `npm test`, `npm run demo`, then `npm run demo:web`; provide screenshots for TRACE. No fresh Telegraph calls for activity/demo volume. Benita Discord/X status, public deployment smoke, X posts and final submission remain HUMAN_VERIFY.
