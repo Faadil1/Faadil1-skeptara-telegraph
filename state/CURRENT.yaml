@@ -1,13 +1,13 @@
 canonical_state:
   protocol_version: 1
   system: SKEPTARA_TELEGRAPH_TRACK3
-  version: 0.8.2-t4-pr1-block-accepted-zero-write-denial-replay-next
+  version: 0.8.3-t4-pr1-challenged-proof-closed-pr2-fresh-pass-next
   date: 2026-09-07
   source_of_truth: GITHUB
   repository: Faadil1/Faadil1-skeptara-telegraph
   branch: main
 
-  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_PR1_FRESH_BLOCK_ACCEPTED__ZERO_WRITE_DENIAL_REPLAY_NEXT
+  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_PR1_CHALLENGED_CASE_CLOSED__PR2_FRESH_PASS_NEXT
 
   authority:
     product_intent_source: product/PRD.md
@@ -46,6 +46,7 @@ canonical_state:
       head_sha: 73cf5bdd69163924228e3e21d67fa9f405d99904
       target: lodash@4.17.21
       action_file: demo/actions/challenged-pr.json
+      status: CHALLENGED_PROOF_CLOSED
       merge_authorized: false
     clean:
       repository: Faadil1/Faadil1-skeptara-telegraph
@@ -54,13 +55,18 @@ canonical_state:
       head_sha: d2aa0ea25daf1f84b6cfdd98861d3f05df584b7a
       target: lodash@4.18.1
       action_file: demo/actions/clean-pr.json
+      current_pr_state:
+        open: true
+        merged: false
+        exact_head_match: true
       merge_authorized: false
 
   t4_contract:
     gate: SKEPTARA_T4_TWO_CASE_REAL_DEMO_PASS
-    status: PR1_FRESH_BLOCK_ACCEPTED__ZERO_WRITE_DENIAL_REPLAY_REQUIRED__PR2_FRESH_PASS_AFTER
+    status: PR1_CHALLENGED_CASE_CLOSED__PR2_FRESH_PASS_REQUIRED
 
     challenged_case:
+      status: CLOSED_PASS
       run_004:
         source_runtime_dir: evidence/t2-runtime/2026-09-07T01-11-00-634Z
         challenge_id: 113cc2c4-94ff-4c47-bf48-66fabc7c9329
@@ -83,39 +89,31 @@ canonical_state:
           coverage_complete: true
           settlement_success: true
           network: eip155:84532
-        first_path:
-          seed: CVE-2026-4800
-          materiality: AMBIGUOUS
-          coverage_complete: false
-          behavior: CORRECTLY_CONTINUED_FAIL_CLOSED
-        timestamps:
-          started_at: 2026-09-07T01:11:02.705Z
-          completed_at: 2026-09-07T01:11:18.944Z
-          expires_at: 2026-09-07T01:26:18.944Z
         accepted_review: evidence/t4/pr1-block-run-004/REVIEW.md
         sanitized_fixture: evidence/t4/pr1-block-run-004/reviewed-challenge.sanitized.json
-        pr_revalidation:
-          state: open
-          merged: false
-          exact_head_match: true
-        merge_authorized: false
       denial_replay:
-        script: scripts/replay-t4-pr1-block-denial.mjs
-        command: npm run t4:replay:block
+        status: PASS
+        evidence: evidence/t4/pr1-block-run-004/MERGE-DENIAL-REPLAY.md
+        authorization: DENIED
+        reason: CHALLENGE_NOT_PASS
+        merge_adapter_calls: 0
+        execution_executed: false
+        execution_merged: false
         new_telegraph_spend: 0
         real_github_write: false
-        required_result:
-          authorization: DENIED
-          reason_contains: CHALLENGE_NOT_PASS
-          merge_adapter_calls: 0
-          execution_executed: false
-          execution_merged: false
+      conclusion: REAL_BLOCK_PLUS_ZERO_WRITE_EXECUTION_DENIAL_PROVEN
 
     clean_case:
-      status: WAITING_UNTIL_PR1_DENIAL_REPLAY_PASSES
+      status: FRESH_PASS_REQUIRED
       action_file: demo/actions/clean-pr.json
-      expected_behavior: FRESH_PASS_THEN_EXACT_HEAD_REVALIDATION
+      repository: Faadil1/Faadil1-skeptara-telegraph
+      pr_number: 2
+      head_sha: d2aa0ea25daf1f84b6cfdd98861d3f05df584b7a
+      target: lodash@4.18.1
+      risk_tier: MEDIUM
+      required_coverage: 2
       maximum_spend_atomic_usdc: 20000
+      expected_behavior: FRESH_PASS_IF_LIVE_EVIDENCE_REMAINS_NON_BLOCKING
       real_merge_requires_explicit_human_authorization: true
 
     real_merge_authorized_now: false
@@ -138,7 +136,7 @@ canonical_state:
     t1_deterministic_risk_scorer: PASS
     t2_independent_auditor: CLOSED_PASS
     t3_fail_closed_merge_gate: CLOSED_PASS
-    t4_two_case_real_demo: PR1_BLOCK_ACCEPTED__DENIAL_REPLAY_NEXT
+    t4_two_case_real_demo: PR1_CHALLENGED_HALF_CLOSED__PR2_FRESH_PASS_NEXT
     trace_design_review: NOT_STARTED
     project_finisher: NOT_STARTED
     final_submission: PROTECTED_NOT_AUTHORIZED
@@ -148,7 +146,7 @@ canonical_state:
     evidence_before_pass_claim: REQUIRED
     repository_truth_outranks_chat_memory: true
 
-  exact_next_gate: SKEPTARA_T4_PR1_ZERO_WRITE_MERGE_DENIAL_REPLAY
+  exact_next_gate: SKEPTARA_T4_PR2_FRESH_PASS_PROOF
   exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_REVIEW
   exact_next_action: >-
-    Pull main and run npm run t4:replay:block. No private key, Telegraph call, payment or GitHub write is needed. The replay uses the reviewed fresh BLOCK challenge from PR #1 and deliberately evaluates inside its original freshness window with allow-list and humanAuthorization=true so CHALLENGE_NOT_PASS is isolated as the denial reason. Require authorization DENIED, merge adapter calls 0, executed=false and merged=false. Return the terminal output. Only after this passes proceed to a fresh live PR #2 clean challenge. Do not merge either PR yet.
+    Pull main if needed. Ensure SKEPTARA_T2_ACTION_FILE is unset or explicitly set to demo/actions/clean-pr.json, then run the hardened clipboard launcher with the fresh bounded Base Sepolia burner. No GitHub merge is authorized. Require real PR #2 exact head d2aa0ea25daf1f84b6cfdd98861d3f05df584b7a, MEDIUM risk, seeded exact-CVE mode, spend <=20000 atomic USDC, 2/2 meaningful non-blocking coverage and outcome PASS. Return the full terminal output plus the new sanitized 02-audit-result.json. After review, immediately revalidate PR #2 head and only then ask the human for explicit bounded merge authorization.
