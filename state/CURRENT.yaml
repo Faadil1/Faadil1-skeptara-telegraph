@@ -1,13 +1,13 @@
 canonical_state:
   protocol_version: 1
   system: SKEPTARA_TELEGRAPH_TRACK3
-  version: 0.8.3-t4-pr1-challenged-proof-closed-pr2-fresh-pass-next
+  version: 0.8.4-t4-pr1-closed-pr2-reconciled-fresh-pass-next
   date: 2026-09-07
   source_of_truth: GITHUB
   repository: Faadil1/Faadil1-skeptara-telegraph
   branch: main
 
-  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_PR1_CHALLENGED_CASE_CLOSED__PR2_FRESH_PASS_NEXT
+  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_PR1_CHALLENGED_CASE_CLOSED__PR2_RECONCILED__FRESH_PASS_NEXT
 
   authority:
     product_intent_source: product/PRD.md
@@ -52,45 +52,28 @@ canonical_state:
       repository: Faadil1/Faadil1-skeptara-telegraph
       pr_number: 2
       branch: demo/clean-lodash-4.18.1
-      head_sha: d2aa0ea25daf1f84b6cfdd98861d3f05df584b7a
+      previous_head_sha: d2aa0ea25daf1f84b6cfdd98861d3f05df584b7a
+      head_sha: 528d730f9ebdcb433e01ba9c79dcc9a5f66ce1c7
       target: lodash@4.18.1
       action_file: demo/actions/clean-pr.json
-      current_pr_state:
-        open: true
-        merged: false
-        exact_head_match: true
+      reconciliation_evidence: evidence/t4/PR2-CLEAN-BRANCH-RECONCILIATION.md
+      status: RECONCILED_AND_REBOUND_FOR_FRESH_T4_PASS
       merge_authorized: false
 
   t4_contract:
     gate: SKEPTARA_T4_TWO_CASE_REAL_DEMO_PASS
-    status: PR1_CHALLENGED_CASE_CLOSED__PR2_FRESH_PASS_REQUIRED
+    status: PR1_CHALLENGED_CASE_CLOSED__PR2_RECONCILED__FRESH_PASS_REQUIRED
 
     challenged_case:
       status: CLOSED_PASS
       run_004:
-        source_runtime_dir: evidence/t2-runtime/2026-09-07T01-11-00-634Z
         challenge_id: 113cc2c4-94ff-4c47-bf48-66fabc7c9329
-        action_fingerprint: sha256:0260dfd07c6e070bb92c341472834052e72923528d9b53c5c72ed333d9a95867
         head_sha: 73cf5bdd69163924228e3e21d67fa9f405d99904
-        risk_tier: MEDIUM
         spend_atomic_usdc: 20000
-        spend_cap_atomic_usdc: 20000
-        completed_coverage: 1_OF_2
         outcome: BLOCK
         reason: MATERIAL_COUNTER_EVIDENCE_FOUND
-        blocking_evidence:
-          seed: CVE-2026-2950
-          actual_intent: CVE_LOOKUP
-          product: lodash
-          affected_text: 4.17.23_AND_EARLIER
-          fixed_version: 4.18.0
-          target_version: 4.17.21
-          materiality: BLOCKING
-          coverage_complete: true
-          settlement_success: true
-          network: eip155:84532
+        blocking_evidence: CVE-2026-2950
         accepted_review: evidence/t4/pr1-block-run-004/REVIEW.md
-        sanitized_fixture: evidence/t4/pr1-block-run-004/reviewed-challenge.sanitized.json
       denial_replay:
         status: PASS
         evidence: evidence/t4/pr1-block-run-004/MERGE-DENIAL-REPLAY.md
@@ -99,8 +82,6 @@ canonical_state:
         merge_adapter_calls: 0
         execution_executed: false
         execution_merged: false
-        new_telegraph_spend: 0
-        real_github_write: false
       conclusion: REAL_BLOCK_PLUS_ZERO_WRITE_EXECUTION_DENIAL_PROVEN
 
     clean_case:
@@ -108,13 +89,20 @@ canonical_state:
       action_file: demo/actions/clean-pr.json
       repository: Faadil1/Faadil1-skeptara-telegraph
       pr_number: 2
-      head_sha: d2aa0ea25daf1f84b6cfdd98861d3f05df584b7a
+      head_sha: 528d730f9ebdcb433e01ba9c79dcc9a5f66ce1c7
       target: lodash@4.18.1
       risk_tier: MEDIUM
       required_coverage: 2
       maximum_spend_atomic_usdc: 20000
+      evidence_seeds: [CVE-2026-4800, CVE-2026-2950]
       expected_behavior: FRESH_PASS_IF_LIVE_EVIDENCE_REMAINS_NON_BLOCKING
       real_merge_requires_explicit_human_authorization: true
+      reconciliation:
+        previous_head: d2aa0ea25daf1f84b6cfdd98861d3f05df584b7a
+        current_head: 528d730f9ebdcb433e01ba9c79dcc9a5f66ce1c7
+        reason: AVOID_SPENDING_ON_STALE_DIVERGED_EXECUTION_TARGET
+        force_update_used: false
+        evidence: evidence/t4/PR2-CLEAN-BRANCH-RECONCILIATION.md
 
     real_merge_authorized_now: false
 
@@ -128,7 +116,7 @@ canonical_state:
     main: CURRENT
     feat_frontend_benita: FAST_FORWARD_ONLY_WHILE_NO_UNIQUE_COMMITS
     demo_clean_lodash_upgrade: FROZEN_CHALLENGED_PR_1
-    demo_clean_lodash_4_18_1: FROZEN_CLEAN_PR_2
+    demo_clean_lodash_4_18_1: RECONCILED_CLEAN_PR_2_HEAD_528D730
 
   build_gates:
     prd_v0_1_human_lock: PASS
@@ -136,7 +124,7 @@ canonical_state:
     t1_deterministic_risk_scorer: PASS
     t2_independent_auditor: CLOSED_PASS
     t3_fail_closed_merge_gate: CLOSED_PASS
-    t4_two_case_real_demo: PR1_CHALLENGED_HALF_CLOSED__PR2_FRESH_PASS_NEXT
+    t4_two_case_real_demo: PR1_CHALLENGED_HALF_CLOSED__PR2_RECONCILED_FRESH_PASS_NEXT
     trace_design_review: NOT_STARTED
     project_finisher: NOT_STARTED
     final_submission: PROTECTED_NOT_AUTHORIZED
@@ -149,4 +137,4 @@ canonical_state:
   exact_next_gate: SKEPTARA_T4_PR2_FRESH_PASS_PROOF
   exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_REVIEW
   exact_next_action: >-
-    Pull main if needed. Ensure SKEPTARA_T2_ACTION_FILE is unset or explicitly set to demo/actions/clean-pr.json, then run the hardened clipboard launcher with the fresh bounded Base Sepolia burner. No GitHub merge is authorized. Require real PR #2 exact head d2aa0ea25daf1f84b6cfdd98861d3f05df584b7a, MEDIUM risk, seeded exact-CVE mode, spend <=20000 atomic USDC, 2/2 meaningful non-blocking coverage and outcome PASS. Return the full terminal output plus the new sanitized 02-audit-result.json. After review, immediately revalidate PR #2 head and only then ask the human for explicit bounded merge authorization.
+    Pull main. Ensure SKEPTARA_T2_ACTION_FILE is unset or explicitly set to demo/actions/clean-pr.json, then run the hardened clipboard launcher with the fresh bounded Base Sepolia burner. Require real PR #2 exact reconciled head 528d730f9ebdcb433e01ba9c79dcc9a5f66ce1c7, MEDIUM risk, seeded exact-CVE mode, spend <=20000 atomic USDC, 2/2 meaningful non-blocking coverage and outcome PASS. Return the full terminal output plus the new sanitized 02-audit-result.json. Do not merge PR #2. After review, immediately revalidate the PR head and only then ask the human for explicit bounded merge authorization.
