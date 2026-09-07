@@ -1,13 +1,13 @@
 canonical_state:
   protocol_version: 1
   system: SKEPTARA_TELEGRAPH_TRACK3
-  version: 0.8.4-t4-pr1-closed-pr2-reconciled-fresh-pass-next
+  version: 0.8.5-t4-pr2-fresh-pass-head-revalidated-human-authorization-next
   date: 2026-09-07
   source_of_truth: GITHUB
   repository: Faadil1/Faadil1-skeptara-telegraph
   branch: main
 
-  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_PR1_CHALLENGED_CASE_CLOSED__PR2_RECONCILED__FRESH_PASS_NEXT
+  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_PR1_CHALLENGED_CASE_CLOSED__PR2_FRESH_PASS_ACCEPTED__HEAD_REVALIDATED__HUMAN_AUTHORIZATION_NEXT
 
   authority:
     product_intent_source: product/PRD.md
@@ -57,12 +57,12 @@ canonical_state:
       target: lodash@4.18.1
       action_file: demo/actions/clean-pr.json
       reconciliation_evidence: evidence/t4/PR2-CLEAN-BRANCH-RECONCILIATION.md
-      status: RECONCILED_AND_REBOUND_FOR_FRESH_T4_PASS
+      status: FRESH_PASS_ACCEPTED__EXACT_HEAD_REVALIDATED__HUMAN_AUTHORIZATION_REQUIRED
       merge_authorized: false
 
   t4_contract:
     gate: SKEPTARA_T4_TWO_CASE_REAL_DEMO_PASS
-    status: PR1_CHALLENGED_CASE_CLOSED__PR2_RECONCILED__FRESH_PASS_REQUIRED
+    status: PR1_CHALLENGED_CASE_CLOSED__PR2_FRESH_PASS_ACCEPTED__HUMAN_BOUNDED_AUTHORIZATION_REQUIRED
 
     challenged_case:
       status: CLOSED_PASS
@@ -85,24 +85,46 @@ canonical_state:
       conclusion: REAL_BLOCK_PLUS_ZERO_WRITE_EXECUTION_DENIAL_PROVEN
 
     clean_case:
-      status: FRESH_PASS_REQUIRED
-      action_file: demo/actions/clean-pr.json
-      repository: Faadil1/Faadil1-skeptara-telegraph
-      pr_number: 2
-      head_sha: 528d730f9ebdcb433e01ba9c79dcc9a5f66ce1c7
-      target: lodash@4.18.1
-      risk_tier: MEDIUM
-      required_coverage: 2
-      maximum_spend_atomic_usdc: 20000
-      evidence_seeds: [CVE-2026-4800, CVE-2026-2950]
-      expected_behavior: FRESH_PASS_IF_LIVE_EVIDENCE_REMAINS_NON_BLOCKING
+      status: FRESH_PASS_ACCEPTED__LIVE_HEAD_REVALIDATED
+      run_005:
+        source_runtime_dir: evidence/t2-runtime/2026-09-07T01-35-34-681Z
+        challenge_id: f4f075f3-1dbc-42ed-9843-dbec43de3430
+        auditor_version: skeptara-auditor-v0.4-seeded-cve
+        mode: SEEDED_CVE_COUNTER_EVIDENCE
+        repository: Faadil1/Faadil1-skeptara-telegraph
+        pr_number: 2
+        head_sha: 528d730f9ebdcb433e01ba9c79dcc9a5f66ce1c7
+        action_fingerprint: sha256:2f5852b5359d3c2d20525ec21904a737f0ee015194e9ea42d14bbca3fc92ad94
+        target: lodash@4.18.1
+        risk_tier: MEDIUM
+        required_coverage: 2
+        completed_coverage: 2
+        spend_atomic_usdc: 20000
+        spend_cap_atomic_usdc: 20000
+        network: eip155:84532
+        runtime_errors: 0
+        evidence:
+          - { seed: CVE-2026-4800, intent: CVE_LOOKUP, materiality: ADVISORY, reason: KNOWN_VULNERABILITY_DOES_NOT_MATCH_TARGET_VERSION_RANGE, coverage_complete: true, settlement_success: true }
+          - { seed: CVE-2026-2950, intent: CVE_LOOKUP, materiality: ADVISORY, reason: KNOWN_VULNERABILITY_DOES_NOT_MATCH_TARGET_VERSION_RANGE, coverage_complete: true, settlement_success: true }
+        outcome: PASS
+        reason: REQUIRED_COVERAGE_COMPLETE_NO_BLOCKING_EVIDENCE
+        started_at: 2026-09-07T01:35:36.716Z
+        completed_at: 2026-09-07T01:35:49.772Z
+        expires_at: 2026-09-07T01:50:49.772Z
+        accepted_review: evidence/t4/pr2-clean-run-005/REVIEW.md
+        sanitized_fixture: evidence/t4/pr2-clean-run-005/reviewed-challenge.sanitized.json
+      live_revalidation:
+        performed_while_challenge_fresh: true
+        pr_state: open
+        merged: false
+        exact_head_match: true
+        head_sha: 528d730f9ebdcb433e01ba9c79dcc9a5f66ce1c7
+        mergeable: true
+        mergeable_state: clean
+        changed_files: 1
       real_merge_requires_explicit_human_authorization: true
-      reconciliation:
-        previous_head: d2aa0ea25daf1f84b6cfdd98861d3f05df584b7a
-        current_head: 528d730f9ebdcb433e01ba9c79dcc9a5f66ce1c7
-        reason: AVOID_SPENDING_ON_STALE_DIVERGED_EXECUTION_TARGET
-        force_update_used: false
-        evidence: evidence/t4/PR2-CLEAN-BRANCH-RECONCILIATION.md
+      expected_head_sha_for_merge: 528d730f9ebdcb433e01ba9c79dcc9a5f66ce1c7
+      merge_authorized: false
 
     real_merge_authorized_now: false
 
@@ -124,17 +146,20 @@ canonical_state:
     t1_deterministic_risk_scorer: PASS
     t2_independent_auditor: CLOSED_PASS
     t3_fail_closed_merge_gate: CLOSED_PASS
-    t4_two_case_real_demo: PR1_CHALLENGED_HALF_CLOSED__PR2_RECONCILED_FRESH_PASS_NEXT
+    t4_two_case_real_demo: PR1_CHALLENGED_HALF_CLOSED__PR2_FRESH_PASS_AND_HEAD_REVALIDATION_PASS__HUMAN_AUTHORIZATION_NEXT
     trace_design_review: NOT_STARTED
     project_finisher: NOT_STARTED
     final_submission: PROTECTED_NOT_AUTHORIZED
 
   state_persistence_rule:
     after_every_major_gate: UPDATE_CURRENT_AND_HANDOVER
+    after_every_execution_boundary: UPDATE_CURRENT_AND_HANDOVER
+    handover_must_contain_exact_next_gate_owner_action: true
+    handover_must_be_sufficient_for_next_conversation_to_take_lead: true
     evidence_before_pass_claim: REQUIRED
     repository_truth_outranks_chat_memory: true
 
-  exact_next_gate: SKEPTARA_T4_PR2_FRESH_PASS_PROOF
-  exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_REVIEW
+  exact_next_gate: SKEPTARA_T4_PR2_HUMAN_BOUNDED_MERGE_AUTHORIZATION
+  exact_next_owner: HUMAN_PROJECT_OWNER
   exact_next_action: >-
-    Pull main. Ensure SKEPTARA_T2_ACTION_FILE is unset or explicitly set to demo/actions/clean-pr.json, then run the hardened clipboard launcher with the fresh bounded Base Sepolia burner. Require real PR #2 exact reconciled head 528d730f9ebdcb433e01ba9c79dcc9a5f66ce1c7, MEDIUM risk, seeded exact-CVE mode, spend <=20000 atomic USDC, 2/2 meaningful non-blocking coverage and outcome PASS. Return the full terminal output plus the new sanitized 02-audit-result.json. Do not merge PR #2. After review, immediately revalidate the PR head and only then ask the human for explicit bounded merge authorization.
+    The fresh reviewed PASS for PR #2 is bound to exact head 528d730f9ebdcb433e01ba9c79dcc9a5f66ce1c7 and expires at 2026-09-07T01:50:49.772Z. GitHub revalidation while fresh confirmed the PR is open, unmerged, mergeable clean and still on that exact head. Do not merge unless the human explicitly authorizes the bounded action: merge exactly PR #2 in Faadil1/Faadil1-skeptara-telegraph at expected_head_sha 528d730f9ebdcb433e01ba9c79dcc9a5f66ce1c7. If authorization arrives after expiry or if the head changes, fail closed and obtain a new fresh challenge before execution.
