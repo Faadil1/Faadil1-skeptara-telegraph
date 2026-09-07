@@ -1,13 +1,13 @@
 canonical_state:
   protocol_version: 1
   system: SKEPTARA_TELEGRAPH_TRACK3
-  version: 0.9.1-t4-closed-winning-intelligence-preflight-pass-trace-next
+  version: 0.9.2-t4-closed-winning-intelligence-blindspot-audit-complete-trace-next
   date: 2026-09-07
   source_of_truth: GITHUB
   repository: Faadil1/Faadil1-skeptara-telegraph
   branch: main
 
-  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__WINNING_INTELLIGENCE_PREFLIGHT_PASS_WITH_PRIORITY_RISKS__TRACE_JUDGE_PATH_REVIEW_NEXT
+  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__WINNING_INTELLIGENCE_PREFLIGHT_PASS__BLIND_SPOT_AUDIT_002_COMPLETE__TRACE_JUDGE_PATH_REVIEW_NEXT
 
   authority:
     product_intent_source: product/PRD.md
@@ -23,12 +23,8 @@ canonical_state:
     fail_closed: true
 
   closed_gates:
-    t0:
-      status: CLOSED_PASS
-      evidence: evidence/t0-real-telegraph/attempt-008/
-    t1:
-      status: PASS
-      policy_version: skeptara-risk-v0.1
+    t0: { status: CLOSED_PASS, evidence: evidence/t0-real-telegraph/attempt-008/ }
+    t1: { status: PASS, policy_version: skeptara-risk-v0.1 }
     t2:
       status: CLOSED_PASS
       seeded_auditor_version: skeptara-auditor-v0.4-seeded-cve
@@ -41,17 +37,14 @@ canonical_state:
       validation: 41_OF_41_FULL__12_OF_12_FOCUSED__0_FAIL
     t4:
       status: CLOSED_PASS
-      closure_evidence:
-        challenged_case_review: evidence/t4/pr1-block-run-004/REVIEW.md
-        challenged_case_denial: evidence/t4/pr1-block-run-004/MERGE-DENIAL-REPLAY.md
-        clean_case_review: evidence/t4/pr2-clean-run-005/REVIEW.md
-        clean_case_merge: evidence/t4/pr2-clean-run-005/REAL-MERGE-EXECUTION.md
+      challenged_case_review: evidence/t4/pr1-block-run-004/REVIEW.md
+      challenged_case_denial: evidence/t4/pr1-block-run-004/MERGE-DENIAL-REPLAY.md
+      clean_case_review: evidence/t4/pr2-clean-run-005/REVIEW.md
+      clean_case_merge: evidence/t4/pr2-clean-run-005/REAL-MERGE-EXECUTION.md
 
   demo_cases:
     challenged:
-      repository: Faadil1/Faadil1-skeptara-telegraph
       pr_number: 1
-      branch: demo/clean-lodash-upgrade
       head_sha: 73cf5bdd69163924228e3e21d67fa9f405d99904
       target: lodash@4.17.21
       outcome: BLOCK
@@ -60,59 +53,61 @@ canonical_state:
       merge_adapter_calls: 0
       merged: false
     clean:
-      repository: Faadil1/Faadil1-skeptara-telegraph
       pr_number: 2
-      branch: demo/clean-lodash-4.18.1
       head_sha: 528d730f9ebdcb433e01ba9c79dcc9a5f66ce1c7
       target: lodash@4.18.1
       outcome: PASS
       challenge_id: f4f075f3-1dbc-42ed-9843-dbec43de3430
-      challenge_expiry: 2026-09-07T01:50:49.772Z
       human_bounded_authorization: EXPLICIT_PASS
       expected_head_sha_enforced: true
       merged: true
       merged_at: 2026-09-07T01:44:54Z
       merge_commit_sha: c76c76e0c02dab28275d8e53d70da3f6f132e648
 
-  t4_contract:
-    gate: SKEPTARA_T4_TWO_CASE_REAL_DEMO_PASS
-    status: CLOSED_PASS
-    challenged_case_conclusion: REAL_BLOCK_PLUS_ZERO_WRITE_EXECUTION_DENIAL_PROVEN
-    clean_case_conclusion: REAL_PASS_PLUS_EXACT_HEAD_PLUS_HUMAN_AUTHORIZED_REAL_MERGE_PROVEN
-    sponsor_native_real_miners: true
-    real_x402_spend_observed: true
-    protected_execution_boundary_proven: true
-
   winning_intelligence:
-    status: PASS_WITH_PRIORITY_RISKS
-    evidence: evidence/winning-intelligence/WI-TRACE-PREFLIGHT-001.md
-    product_pivot_required: false
-    new_core_feature_required: false
+    preflight:
+      status: PASS_WITH_PRIORITY_RISKS
+      evidence: evidence/winning-intelligence/WI-TRACE-PREFLIGHT-001.md
+      product_pivot_required: false
+      new_core_feature_required: false
+    blind_spot_audit_002:
+      status: COMPLETE
+      evidence: evidence/winning-intelligence/WI-BLIND-SPOT-AUDIT-002.md
+      product_pivot_required: false
+      material_hidden_spots_found: true
+      p0:
+        - NO_REAL_FRONTEND_OR_PUBLIC_JUDGE_SURFACE_IN_REPO
+        - LIVE_MERGE_PROOF_NOT_PRODUCTIZED_AS_SINGLE_REPO_RUNTIME_ADAPTER_PATH
+        - CONTROLLED_EXACT_CVE_SEEDS_CAN_LOOK_CHERRY_PICKED
+        - RISK_PROPORTIONAL_THESIS_ONLY_LIVE_PROVEN_AT_MEDIUM_TIER
+        - REGISTRATION_DISCORD_X_AND_FINAL_SUBMISSION_COMPLIANCE_NOT_REPO_VERIFIABLE
+      p1:
+        - TELEGRAPH_QUALITY_FLYWHEEL_AND_ROUTING_STORY_UNDERUSED
+        - REAL_ACTIVITY_EXISTS_BUT_NOT_AGGREGATED
+        - README_AND_EVIDENCE_INDEX_STALE
+        - CAPTURED_LIVE_REPLAY_NEEDS_FRESHNESS_LABELING
+        - HUMAN_AUTHORIZATION_CAN_CONFUSE_AUTONOMY_STORY
+      claim_corrections_applied:
+        independent_miners_wording: REPLACED_WITH_TELEGRAPH_ROUTED_EXTERNAL_EVIDENCE
+        downside_scoring_wording: REPLACED_WITH_EXTERNAL_DETERMINISTIC_RISK_CLASSIFICATION
+      non_negotiable_claim_boundaries:
+        - DO_NOT_CLAIM_STATISTICAL_MINER_INDEPENDENCE
+        - DO_NOT_CLAIM_AUTOMATIC_UNKNOWN_VULNERABILITY_DISCOVERY
+        - DO_NOT_CLAIM_LOW_HIGH_LIVE_ECONOMIC_SCALING_WHEN_ONLY_MEDIUM_IS_LIVE_PROVEN
+        - DO_NOT_PRESENT_HISTORICAL_REPLAY_AS_FRESH_EXECUTABLE_PASS
+        - DO_NOT_CLAIM_FULLY_DEPLOYED_REPO_GITHUB_ADAPTER_IF_NOT_PRESENT
     protected_public_positioning:
-      promise: Before an autonomous agent can merge code, Skeptara pays independent Telegraph miners to try to prove the change unsafe.
-      judge_memory: Skeptara turns Telegraph into a paid objection layer; risky autonomous actions must survive independent counter-evidence before they execute.
+      promise: Before an autonomous agent can merge code, Skeptara buys Telegraph-routed external evidence to try to prove the change unsafe.
+      judge_memory: Skeptara turns Telegraph into a paid objection layer; risky autonomous actions must survive Telegraph-routed counter-evidence before they execute.
       hero: No autonomous merge without an independent challenge.
-    competitive_collision:
-      status: MATERIAL_BUT_NON_BLOCKING
-      observed_pattern: VERIFIED_INTELLIGENCE_TO_GOVERNED_ACTION_WITH_CONFIDENCE_AND_BUDGET_GATING
-      response: LEAD_WITH_ACTION_LEVEL_COUNTER_EVIDENCE__EXTERNAL_RISK_TO_EVIDENCE_DEPTH_AND_SPEND__EXACT_EXECUTION_BINDING
-    strengths:
-      - REAL_MINER_AND_X402_PROOF
-      - RISK_PROPORTIONAL_COUNTER_EVIDENCE
-      - FAIL_CLOSED_PASS_BLOCK_ESCALATE
-      - EXACT_PR_HEAD_FINGERPRINT_FRESHNESS_BINDING
-      - REAL_TWO_CASE_BLOCK_DENY_AND_PASS_MERGE_PROOF
-    priority_risks:
-      - LIMITED_VISIBLE_EXTERNAL_USER_ADOPTION
-      - FRONTEND_JUDGE_PATH_NOT_YET_PROVEN
-      - README_STALE_RELATIVE_TO_T4_CLOSURE
-      - PUBLIC_ENGAGEMENT_AND_SHOWCASE_EVIDENCE_URGENT
-    anti_drift:
-      no_new_core_agent: true
-      no_new_sponsor_integration: true
-      no_fake_usage_counters: true
-      no_generic_verified_intelligence_positioning: true
-      x402_is_infrastructure_not_product_innovation: true
+
+  sponsor_fit:
+    official_quality_flywheel_story_must_be_visible: true
+    engine_auto_route_proven: true
+    clean_run_observed_miners:
+      - { id: 20260828, name: PREFLIGHT Infrastructure Signals }
+      - { id: 7336, name: SecWire CVE Lookup }
+    do_not_claim_miner_statistical_independence: true
 
   security_boundary:
     prior_exposed_burner_status: COMPROMISED_DO_NOT_REUSE_OR_FUND
@@ -135,6 +130,7 @@ canonical_state:
     t3_fail_closed_merge_gate: CLOSED_PASS
     t4_two_case_real_demo: CLOSED_PASS
     winning_intelligence_preflight: PASS_WITH_PRIORITY_RISKS
+    winning_intelligence_blind_spot_audit_002: COMPLETE
     trace_design_review: NOT_STARTED
     frontend_integration_and_deployed_smoke: NOT_STARTED
     project_finisher: NOT_STARTED
@@ -146,9 +142,8 @@ canonical_state:
     handover_must_contain_exact_next_gate_owner_action: true
     handover_must_be_sufficient_for_next_conversation_to_take_lead: true
     evidence_before_pass_claim: REQUIRED
-    repository_truth_outranks_chat_memory: true
 
   exact_next_gate: SKEPTARA_TRACE_JUDGE_PATH_REVIEW
   exact_next_owner: CHATGPT_ORCHESTRATOR_WITH_HUMAN_VISUAL_REVIEW
   exact_next_action: >-
-    Consume evidence/winning-intelligence/WI-TRACE-PREFLIGHT-001.md as the strategic judge packet, then inspect docs/FRONTEND_DATA_CONTRACT.md, the current frontend branch, T4 evidence and README. Run TRACE specifically against the winning distinction: external risk -> risk-proportional paid Telegraph counter-evidence -> PASS/BLOCK/ESCALATE -> exact protected execution. The primary judge moment must make real PR #1 BLOCK/deny and PR #2 PASS/authorized merge immediately legible. Do not add new core features or generic governance framing. Persist TRACE findings and update CURRENT + HANDOVER before advancing to frontend/deployed smoke.
+    Read both Winning Intelligence packets before TRACE: WI-TRACE-PREFLIGHT-001.md and WI-BLIND-SPOT-AUDIT-002.md. TRACE must absorb the P0/P1 findings without expanding the product. The primary judge surface must be a challenge dossier, not a generic dashboard, and must clearly separate controlled exact-CVE seeded proof from open-ended discovery, deterministic policy/test-proven LOW/HIGH behavior from live-proven MEDIUM behavior, and captured-live historical replay from fresh executable state. Make Telegraph auto-routing/real-demand causality visible. Persist TRACE findings and update CURRENT + HANDOVER before advancing to frontend implementation/deployed smoke.
