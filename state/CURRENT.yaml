@@ -1,13 +1,17 @@
 canonical_state:
   protocol_version: 1
   system: SKEPTARA_TELEGRAPH_TRACK3
-  version: 0.9.7-fa-adil-discord-activity-verified-benita-comms-unsent
+  version: 0.9.8-discord-organic-engagement-verified-repo-rename-canonicalized
   date: 2026-09-07
   source_of_truth: GITHUB
-  repository: Faadil1/Faadil1-skeptara-telegraph
+  repository: Faadil1/skeptara-telegraph
+  repository_alias_history:
+    prior_full_name: Faadil1/Faadil1-skeptara-telegraph
+    current_full_name: Faadil1/skeptara-telegraph
+    note: GitHub repository rename/redirect preserves historical evidence references; do not rewrite old captured evidence bindings.
   branch: main
 
-  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__NINE_SPOT_REMEDIATION_IMPLEMENTED__FAADIL_DISCORD_ACTIVITY_VERIFIED__BENITA_X_DISCORD_BRIEF_NOT_SENT__LOCAL_VALIDATION_AND_TRACE_VISUAL_REVIEW_NEXT
+  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__NINE_SPOT_REMEDIATION_IMPLEMENTED__FAADIL_DISCORD_ACTIVITY_AND_ORGANIC_ENGAGEMENT_VERIFIED__BENITA_X_DISCORD_BRIEF_NOT_SENT__LOCAL_VALIDATION_AND_TRACE_VISUAL_REVIEW_NEXT
 
   authority:
     product_intent_source: product/PRD.md
@@ -41,6 +45,8 @@ canonical_state:
       clean_case_merge: evidence/t4/pr2-clean-run-005/REAL-MERGE-EXECUTION.md
 
   t4_two_case_truth:
+    historical_repository_name_at_proof_time: Faadil1/Faadil1-skeptara-telegraph
+    current_repository_name: Faadil1/skeptara-telegraph
     challenged_pr1:
       head_sha: 73cf5bdd69163924228e3e21d67fa9f405d99904
       target: lodash@4.17.21
@@ -94,6 +100,12 @@ canonical_state:
     real_exact_head_merges: 1
     user_count_claim: NONE
     no_volume_inflation: true
+    discord_organic_engagement:
+      status: VERIFIED
+      evidence: evidence/admin/TELEGRAPH-DISCORD-ORGANIC-ENGAGEMENT-VERIFIED.md
+      fire_reactions_observed: 3
+      telegraph_staff_positive_reply_observed: true
+      adoption_claim_allowed: false
 
   network_guidance:
     evidence: evidence/admin/TELEGRAPH-DISCORD-JOIN-AND-NETWORK-GUIDANCE-VERIFIED.md
@@ -110,6 +122,8 @@ canonical_state:
       faadil_join_access: VERIFIED
       faadil_project_activity: VERIFIED
       faadil_project_activity_evidence: evidence/admin/TELEGRAPH-DISCORD-FAADIL-PROJECT-INTRO-VERIFIED.md
+      faadil_organic_engagement: VERIFIED
+      faadil_organic_engagement_evidence: evidence/admin/TELEGRAPH-DISCORD-ORGANIC-ENGAGEMENT-VERIFIED.md
       benita_join_activity: HUMAN_VERIFY
     x_showcase:
       timing_context: REGISTERED_WITH_LESS_THAN_24_HOURS_REMAINING
@@ -123,7 +137,10 @@ canonical_state:
       benita_acceptance_of_primary_x_role: NOT_YET_CONFIRMED
       build_proof_post: HUMAN_ACTION_REQUIRED
       demo_submission_post: HUMAN_ACTION_REQUIRED_AFTER_PUBLIC_DEPLOY
-    final_submission: HUMAN_VERIFY_NOT_SUBMITTED
+    submission_platform:
+      official_discord_staff_reference_observed: true
+      exact_url_from_screenshot: TRUNCATED_NOT_CANONICALIZED_FROM_SCREENSHOT_ALONE
+      final_submission: HUMAN_VERIFY_NOT_SUBMITTED
 
   collaboration:
     frontend_contract: docs/FRONTEND_DATA_CONTRACT.md
@@ -147,4 +164,4 @@ canonical_state:
   exact_next_gate: SKEPTARA_HIDDEN_SPOT_REMEDIATION_LOCAL_VALIDATION_AND_TRACE_VISUAL_REVIEW
   exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_TRACE_REVIEW
   exact_next_action: >-
-    First, do not assume Benita knows the Discord/X requirements or her intended primary-X role: the human owner explicitly clarified that this brief has NOT been sent yet. Faadil's own Discord access and substantive Skeptara project introduction are VERIFIED. Separately, pull main and run `npm test`, `npm run demo`, then `npm run demo:web`; provide screenshots of http://127.0.0.1:4173 for TRACE. Do not run fresh Telegraph calls for activity/demo volume. Benita Discord membership/activity, Benita X handle, X posts, public deployment smoke and final submission remain HUMAN_VERIFY.
+    Canonical repository is now Faadil1/skeptara-telegraph; historical evidence may still name Faadil1/Faadil1-skeptara-telegraph and must not be rewritten because it records the bound name at proof time. Faadil's Discord join, substantive Skeptara intro, and organic engagement are VERIFIED; the intro had 3 fire reactions and a direct positive Telegraph staff reply. Do not convert that into user/adoption metrics. Benita still has not been sent the X/Discord brief. Next, pull main and run `npm test`, `npm run demo`, then `npm run demo:web`; provide screenshots of http://127.0.0.1:4173 for TRACE. Do not run fresh Telegraph calls for activity/demo volume. Benita Discord/X status, public deployment smoke, X posts and final submission remain HUMAN_VERIFY.
