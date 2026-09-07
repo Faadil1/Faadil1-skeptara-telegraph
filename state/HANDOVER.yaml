@@ -11,9 +11,9 @@ handover:
   branch: main
 
   resume_rule: >-
-    Read state/CURRENT.yaml first, then this HANDOVER, product/PRD.md, spec-kit/tasks.md, docs/JUDGE-CLAIM-BOUNDARIES.md, docs/SUBMISSION-COMPLIANCE.md, and Winning Intelligence evidence. Repository truth outranks chat memory. Persist evidence plus CURRENT + HANDOVER after every major gate and execution boundary. Never infer that a collaborator received a brief unless the human explicitly confirms it.
+    Read state/CURRENT.yaml first, then this HANDOVER, product/PRD.md, spec-kit/tasks.md, docs/JUDGE-CLAIM-BOUNDARIES.md, docs/SUBMISSION-COMPLIANCE.md, and Winning Intelligence evidence. Repository truth outranks chat memory. Persist evidence plus CURRENT + HANDOVER after every major gate and execution boundary. Never infer collaborator communication or administrative completion without human evidence.
 
-  current_milestone: T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__NINE_SPOT_REMEDIATION_IMPLEMENTED__FAADIL_DISCORD_ACTIVITY_AND_ORGANIC_ENGAGEMENT_VERIFIED__BENITA_X_DISCORD_BRIEF_NOT_SENT__LOCAL_VALIDATION_AND_TRACE_VISUAL_REVIEW_NEXT
+  current_milestone: T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__NINE_SPOT_REMEDIATION_IMPLEMENTED__FAADIL_DISCORD_ACTIVITY_AND_ORGANIC_ENGAGEMENT_VERIFIED__ROUND_REWARD_AND_TRACK3_PLATFORM_GUIDANCE_CAPTURED__BENITA_X_DISCORD_BRIEF_NOT_SENT__LOCAL_VALIDATION_AND_TRACE_VISUAL_REVIEW_NEXT
 
   project:
     public_name: Skeptara
@@ -95,10 +95,18 @@ handover:
     staff_guidance_evidence: evidence/admin/TELEGRAPH-DISCORD-JOIN-AND-NETWORK-GUIDANCE-VERIFIED.md
     no_automated_metric_traffic: true
     default_judge_demo: CAPTURED_LIVE_HISTORICAL_REPLAY
-    submissions_platform_reference:
-      staff_reference_visible_in_screenshot: true
-      screenshot_url_is_truncated: true
-      do_not_canonicalize_exact_url_from_screenshot_alone: true
+    round_reward_and_platform_guidance:
+      evidence: evidence/admin/TELEGRAPH-DISCORD-ROUND-REWARD-AND-SUBMISSION-STATUS-VERIFIED.md
+      current_round_reward_pool_staff_statement_usd: 5000
+      separate_participation_reward: NONE_FOR_THIS_ROUND
+      scope_boundary: ROUND_LEVEL_NOT_TRACK3_ONLY
+      h2_reward_pool_staff_statement_usd: 10000
+      h3_reward_statement: OWN_REWARDS_EXPECTED
+      nov_dec_bigger_opportunities_statement: OBSERVED
+      mainnet_rewards_once_token_live_statement: OBSERVED
+      track3_platform_visibility_issue: STAFF_ACKNOWLEDGED
+      staff_status: WILL_BE_UPDATED_SOON
+      final_submission_completion: NOT_PROVEN
 
   public_comms:
     intended_primary_x_project_voice: BENITA
@@ -108,7 +116,7 @@ handover:
     benita_x_discord_brief_sent: false
     benita_acceptance_of_primary_x_role: NOT_YET_CONFIRMED
     critical_correction: >-
-      The prior ChatGPT message was only a draft suggestion. The human explicitly clarified that nothing about the Discord/X requirement or primary-X role had actually been sent to Benita yet. Do not describe Benita as informed or committed until the human confirms the message was sent and, ideally, her response/handle is captured.
+      The human explicitly clarified that nothing about the Discord/X requirement or primary-X role has been sent to Benita yet. Do not describe Benita as informed or committed until confirmed.
 
   collaboration:
     frontend_contract: docs/FRONTEND_DATA_CONTRACT.md
@@ -125,10 +133,11 @@ handover:
     benita_discord_join_activity: PENDING_HUMAN
     benita_x_handle_capture: PENDING_HUMAN
     x_showcase_posts: PENDING_HUMAN
+    track3_submission_platform_visibility: HUMAN_VERIFY_AT_SUBMISSION_TIME
     final_submission: PENDING_HUMAN
     project_finisher: NOT_STARTED
 
   exact_next_gate: SKEPTARA_HIDDEN_SPOT_REMEDIATION_LOCAL_VALIDATION_AND_TRACE_VISUAL_REVIEW
   exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_TRACE_REVIEW
   exact_next_action: >-
-    Canonical repo is Faadil1/skeptara-telegraph; old proof artifacts may still name Faadil1/Faadil1-skeptara-telegraph and should remain untouched as historical bindings. Faadil's substantive Skeptara Discord intro now has verified organic engagement: 3 fire reactions plus a direct positive Telegraph staff reply. Treat this as community engagement only, not users/adoption. Benita still has not received the X/Discord brief. Next, run `npm test`, `npm run demo`, then `npm run demo:web` and send screenshots for TRACE. No fresh Telegraph calls for activity/demo volume. Public deployment, Benita Discord/X activity, X posts and final submission remain human-verification gates.
+    Canonical repo is Faadil1/skeptara-telegraph; historical proof bindings using the old repo name remain untouched. Discord staff guidance now includes a $5K current-round winner-only pool with no separate participation reward and a Track 3 platform-visibility issue that staff said would be updated soon. Treat the $5K figure as round-level only, not a Track-3-only or per-place prize breakdown. Final submission remains unproven. Next, run `npm test`, `npm run demo`, then `npm run demo:web` and send screenshots for TRACE. Do not generate fresh Telegraph traffic for activity/demo volume. Before final submission, re-check actual Track 3 visibility on the submission platform.
