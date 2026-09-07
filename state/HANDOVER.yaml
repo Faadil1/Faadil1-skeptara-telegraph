@@ -9,13 +9,14 @@ handover:
   resume_rule: >-
     Read state/CURRENT.yaml first, then this HANDOVER, then product/PRD.md, then spec-kit/tasks.md. Repository truth outranks chat memory. PRD is canonical product intent; Spec Kit is derived execution state. After every major gate and protected execution boundary, persist evidence and update BOTH CURRENT and HANDOVER. This HANDOVER must remain sufficient for a new conversation to take the lead without reconstructing history from chat.
 
-  current_milestone: T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__TRACE_JUDGE_PATH_REVIEW_NEXT
+  current_milestone: T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__WINNING_INTELLIGENCE_PREFLIGHT_PASS_WITH_PRIORITY_RISKS__TRACE_NEXT
 
   project:
     public_name: Skeptara
     hero_vertical: AUTONOMOUS_GITHUB_DEPENDENCY_MERGE
     deadline_utc: 2026-09-07T23:59:00Z
-    one_line: Higher-risk autonomous code changes must survive deeper independent paid Telegraph counter-evidence before merge can execute.
+    canonical_one_line: Independent counter-evidence before autonomous execution.
+    protected_mechanism: EXTERNAL_RISK_TO_RISK_PROPORTIONAL_PAID_COUNTER_EVIDENCE_TO_PASS_BLOCK_ESCALATE_TO_EXACT_PROTECTED_EXECUTION
 
   closed_gates:
     t0:
@@ -92,6 +93,44 @@ handover:
         - evidence/t4/pr2-clean-run-005/reviewed-challenge.sanitized.json
         - evidence/t4/pr2-clean-run-005/REAL-MERGE-EXECUTION.md
 
+  winning_intelligence:
+    status: PASS_WITH_PRIORITY_RISKS
+    packet: evidence/winning-intelligence/WI-TRACE-PREFLIGHT-001.md
+    role: POSITIONING__COMPETITIVE_DISTINCTION__JUDGE_MEMORY__PROOF_ORDER__SUBMISSION_PRIORITY
+    no_product_pivot: true
+    no_new_core_feature: true
+    mandatory_positioning:
+      one_line_promise: Before an autonomous agent can merge code, Skeptara pays independent Telegraph miners to try to prove the change unsafe.
+      judge_memory_sentence: Skeptara turns Telegraph into a paid objection layer; risky autonomous actions must survive independent counter-evidence before they execute.
+      hero_headline: No autonomous merge without an independent challenge.
+      signature_moment: SPLIT_REAL_OUTCOME__PR1_BLOCK_DENY_VS_PR2_PASS_REAL_MERGE
+    competitive_scan:
+      direct_pattern_collision: VERIFIED_INTELLIGENCE_TO_GOVERNED_ACTION
+      material_example: COGNIVERN_CONFIDENCE_GATED_BUDGET_ENFORCED_AUDITED_TELEGRAPH_ACTION
+      public_response: DO_NOT_LEAD_WITH_GENERIC_GOVERNANCE_CONFIDENCE_X402_OR_AUDITABILITY
+      protected_edge:
+        - EXTERNAL_DOWNSIDE_SCORING
+        - RISK_TO_EVIDENCE_DEPTH_AND_SPEND
+        - COUNTER_EVIDENCE_NOT_CONFIRMATION
+        - ASYMMETRIC_BLOCK_AND_FAIL_CLOSED_ESCALATE
+        - EXACT_REPO_PR_HEAD_FINGERPRINT_FRESHNESS_BINDING
+        - REAL_BLOCK_DENY_AND_PASS_MERGE_TWO_CASE_PROOF
+    rubric_view:
+      must_use_real_miners: STRONG
+      creativity_usefulness: STRONG
+      users_activity: WEAK_NEEDS_TRUTHFUL_PACKAGING
+      usage_adoption: WEAK_NEEDS_PUBLIC_RUNNABLE_JUDGE_PATH
+      engagement_showcase: URGENT
+    anti_drift:
+      - NO_NEW_CORE_AGENT
+      - NO_NEW_SPONSOR_INTEGRATION
+      - NO_GENERIC_AI_SECURITY_DASHBOARD
+      - NO_FAKE_USAGE_COUNTERS
+      - NO_UNPROVEN_INDEPENDENCE_CLAIMS
+      - NO_X402_AS_PRODUCT_INNOVATION_CLAIM
+    trace_instruction: >-
+      Treat the UI as a challenge dossier rather than a generic SaaS analytics dashboard. Prioritize proposed PR, risk tier and required scrutiny, paid challenge progress, concrete counter-evidence, PASS/BLOCK/ESCALATE, execution consequence, then protocol proof details. The split PR1 BLOCK/deny versus PR2 PASS/real merge must be the memorable judge moment.
+
   security:
     prior_burner: COMPROMISED_DO_NOT_REUSE_OR_FUND
     fresh_burner: TESTNET_ONLY
@@ -107,6 +146,13 @@ handover:
     once_unique_commits_exist: NEVER_FORCE_MOVE__RECONCILE_NORMALLY
     benita_brief_status: NOT_CONFIRMED_SENT
 
+  known_judge_surface_gaps:
+    - CURRENT_README_STILL_DESCRIBES_EARLY_T0_STATE_AND_NEEDS_POST_TRACE_UPDATE
+    - FRONTEND_IMPLEMENTATION_NOT_YET_PROVEN_IN_REPO
+    - PUBLIC_DEPLOYMENT_SMOKE_NOT_YET_PROVEN
+    - USERS_ACTIVITY_AND_ADOPTION_EVIDENCE_LIMITED
+    - PUBLIC_ENGAGEMENT_UPDATE_STILL_REQUIRED
+
   persistence_contract:
     update_current_after_every_major_gate: true
     update_handover_after_every_major_gate: true
@@ -120,11 +166,11 @@ handover:
   next_gates:
     - SKEPTARA_TRACE_JUDGE_PATH_REVIEW
     - SKEPTARA_FRONTEND_INTEGRATION_AND_DEPLOYED_SMOKE
-    - SKEPTARA_BUILD_CANDIDATE_READY
+    - SKEPTARA_README_AND_SUBMISSION_ALIGNMENT
     - SKEPTARA_PROJECT_FINISHER_TERMINAL_ASSURANCE
     - HUMAN_PROTECTED_FINAL_SUBMISSION
 
   exact_next_gate: SKEPTARA_TRACE_JUDGE_PATH_REVIEW
   exact_next_owner: CHATGPT_ORCHESTRATOR_WITH_HUMAN_VISUAL_REVIEW
   exact_next_action: >-
-    Start from repository state, not chat. Inspect docs/FRONTEND_DATA_CONTRACT.md, current frontend implementation/branch, T4 evidence and README. Perform TRACE judge-path review so a judge can understand in one flow: PR proposed -> deterministic risk -> real paid Telegraph evidence -> PASS/BLOCK/ESCALATE -> protected action. Use the real PR #1 BLOCK/deny and PR #2 PASS/authorized real merge evidence. Do not invent fields. If Benita has unique commits, do not force-move her branch; reconcile normally. Persist TRACE findings, update CURRENT + HANDOVER, and advance to deployed frontend smoke only when the judge path is coherent.
+    Start from repository state, not chat. Read evidence/winning-intelligence/WI-TRACE-PREFLIGHT-001.md first, then docs/FRONTEND_DATA_CONTRACT.md, T4 proof artifacts, current frontend branch and README. Perform TRACE judge-path review against the protected winning distinction. Ensure a judge can understand within five seconds what is prevented, what is unique, why Telegraph is necessary and what was proven. Make the split real PR1 BLOCK/deny and PR2 PASS/authorized merge the primary judge moment. Do not add new core features. Persist TRACE findings and update CURRENT + HANDOVER before advancing.
