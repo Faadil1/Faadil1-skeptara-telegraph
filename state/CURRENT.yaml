@@ -1,36 +1,24 @@
 canonical_state:
   protocol_version: 1
   system: SKEPTARA_TELEGRAPH_TRACK3
-  version: 0.8.1-t4-pr1-fresh-block-json-review-next
+  version: 0.8.2-t4-pr1-block-accepted-zero-write-denial-replay-next
   date: 2026-09-07
   source_of_truth: GITHUB
   repository: Faadil1/Faadil1-skeptara-telegraph
   branch: main
 
-  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_PR1_FRESH_BLOCK_OBSERVED__JSON_AND_GATE_DENIAL_REVIEW_NEXT
+  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_PR1_FRESH_BLOCK_ACCEPTED__ZERO_WRITE_DENIAL_REPLAY_NEXT
 
   authority:
     product_intent_source: product/PRD.md
     product_source_owner: HUMAN_PROJECT_OWNER
-    implementation_owner: CHATGPT_ORCHESTRATED_WITH_COLLABORATOR_HANDOFFS
     protected_external_action: HUMAN_BOUNDED_AUTHORIZATION
-
-  product_source:
-    status: PRD_READY
-    revision: v0.1
-    path: product/PRD.md
-    living: true
-    approval_state: HUMAN_LOCK_PASS
-    product_intent_changed: false
-    discovery_class: execution_detail
 
   product_core:
     public_name: Skeptara
     vertical: AUTONOMOUS_GITHUB_DEPENDENCY_MERGE
     mechanism: RISK_PROPORTIONAL_INDEPENDENT_COUNTER_EVIDENCE_BEFORE_EXECUTION
     fail_closed: true
-    self_risk_scoring_by_reviewed_agent: forbidden
-    self_audit_by_reviewed_agent: forbidden
 
   closed_gates:
     t0:
@@ -39,24 +27,16 @@ canonical_state:
     t1:
       status: PASS
       policy_version: skeptara-risk-v0.1
-      implementation: src/policy.mjs
     t2:
       status: CLOSED_PASS
       seeded_auditor_version: skeptara-auditor-v0.4-seeded-cve
       closure_evidence: evidence/t2/LOCAL-USER-VALIDATION-V0.4-29-OF-29-AND-RUN003-REPLAY-PASS.md
       user_machine_tests: 29_OF_29_PASS__0_FAIL
-      run003_replay: 2_OF_2_ADVISORY__PASS__ZERO_NEW_SPEND
-      replay_is_merge_authorization: false
     t3:
       status: CLOSED_PASS
       version: skeptara-merge-gate-v0.1
-      implementation: src/merge-gate.mjs
-      contract: docs/T3_MERGE_GATE_CONTRACT.md
       closure_evidence: evidence/t3/LOCAL-USER-VALIDATION-V0.1-41-OF-41-AND-12-OF-12.md
-      validation:
-        full_repository: 41_OF_41_PASS__0_FAIL
-        focused_merge_gate: 12_OF_12_PASS__0_FAIL
-      real_merge_performed_during_t3: false
+      validation: 41_OF_41_FULL__12_OF_12_FOCUSED__0_FAIL
 
   demo_cases:
     challenged:
@@ -78,33 +58,66 @@ canonical_state:
 
   t4_contract:
     gate: SKEPTARA_T4_TWO_CASE_REAL_DEMO_PASS
-    status: PR1_FRESH_BLOCK_CAPTURED__SANITIZED_JSON_AND_MERGE_GATE_DENIAL_REVIEW_REQUIRED
+    status: PR1_FRESH_BLOCK_ACCEPTED__ZERO_WRITE_DENIAL_REPLAY_REQUIRED__PR2_FRESH_PASS_AFTER
+
     challenged_case:
-      action_file: demo/actions/challenged-pr.json
       run_004:
-        runtime_dir: evidence/t2-runtime/2026-09-07T01-11-00-634Z
-        auditor_version: skeptara-auditor-v0.4-seeded-cve
+        source_runtime_dir: evidence/t2-runtime/2026-09-07T01-11-00-634Z
+        challenge_id: 113cc2c4-94ff-4c47-bf48-66fabc7c9329
+        action_fingerprint: sha256:0260dfd07c6e070bb92c341472834052e72923528d9b53c5c72ed333d9a95867
+        head_sha: 73cf5bdd69163924228e3e21d67fa9f405d99904
         risk_tier: MEDIUM
         spend_atomic_usdc: 20000
-        runtime_coverage: 1_OF_2
-        evidence_terminal_summary:
-          - { seed: CVE-2026-4800, intent: CVE_LOOKUP, materiality: AMBIGUOUS, reason: KNOWN_VULNERABILITY_RANGE_NOT_MACHINE_VERIFIABLE }
-          - { seed: CVE-2026-2950, intent: CVE_LOOKUP, materiality: BLOCKING, reason: KNOWN_VULNERABILITY_AFFECTS_TARGET_DEPENDENCY_VERSION }
-        runtime_outcome: BLOCK
-        runtime_reason: MATERIAL_COUNTER_EVIDENCE_FOUND
-        pending_review: SANITIZED_JSON_PLUS_T3_DENIAL_PROOF
-        evidence: evidence/t4/PR1-FRESH-BLOCK-RUN-004-PENDING-JSON-REVIEW.md
-      current_pr_revalidation:
-        state: open
-        merged: false
-        head_sha: 73cf5bdd69163924228e3e21d67fa9f405d99904
-      merge_authorized: false
+        spend_cap_atomic_usdc: 20000
+        completed_coverage: 1_OF_2
+        outcome: BLOCK
+        reason: MATERIAL_COUNTER_EVIDENCE_FOUND
+        blocking_evidence:
+          seed: CVE-2026-2950
+          actual_intent: CVE_LOOKUP
+          product: lodash
+          affected_text: 4.17.23_AND_EARLIER
+          fixed_version: 4.18.0
+          target_version: 4.17.21
+          materiality: BLOCKING
+          coverage_complete: true
+          settlement_success: true
+          network: eip155:84532
+        first_path:
+          seed: CVE-2026-4800
+          materiality: AMBIGUOUS
+          coverage_complete: false
+          behavior: CORRECTLY_CONTINUED_FAIL_CLOSED
+        timestamps:
+          started_at: 2026-09-07T01:11:02.705Z
+          completed_at: 2026-09-07T01:11:18.944Z
+          expires_at: 2026-09-07T01:26:18.944Z
+        accepted_review: evidence/t4/pr1-block-run-004/REVIEW.md
+        sanitized_fixture: evidence/t4/pr1-block-run-004/reviewed-challenge.sanitized.json
+        pr_revalidation:
+          state: open
+          merged: false
+          exact_head_match: true
+        merge_authorized: false
+      denial_replay:
+        script: scripts/replay-t4-pr1-block-denial.mjs
+        command: npm run t4:replay:block
+        new_telegraph_spend: 0
+        real_github_write: false
+        required_result:
+          authorization: DENIED
+          reason_contains: CHALLENGE_NOT_PASS
+          merge_adapter_calls: 0
+          execution_executed: false
+          execution_merged: false
+
     clean_case:
-      required: true
+      status: WAITING_UNTIL_PR1_DENIAL_REPLAY_PASSES
       action_file: demo/actions/clean-pr.json
       expected_behavior: FRESH_PASS_THEN_EXACT_HEAD_REVALIDATION
       maximum_spend_atomic_usdc: 20000
       real_merge_requires_explicit_human_authorization: true
+
     real_merge_authorized_now: false
 
   security_boundary:
@@ -125,7 +138,7 @@ canonical_state:
     t1_deterministic_risk_scorer: PASS
     t2_independent_auditor: CLOSED_PASS
     t3_fail_closed_merge_gate: CLOSED_PASS
-    t4_two_case_real_demo: PR1_FRESH_BLOCK_REVIEW_PENDING
+    t4_two_case_real_demo: PR1_BLOCK_ACCEPTED__DENIAL_REPLAY_NEXT
     trace_design_review: NOT_STARTED
     project_finisher: NOT_STARTED
     final_submission: PROTECTED_NOT_AUTHORIZED
@@ -135,7 +148,7 @@ canonical_state:
     evidence_before_pass_claim: REQUIRED
     repository_truth_outranks_chat_memory: true
 
-  exact_next_gate: SKEPTARA_T4_PR1_BLOCK_JSON_AND_MERGE_GATE_DENIAL_REVIEW
+  exact_next_gate: SKEPTARA_T4_PR1_ZERO_WRITE_MERGE_DENIAL_REPLAY
   exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_REVIEW
   exact_next_action: >-
-    Return the sanitized evidence/t2-runtime/2026-09-07T01-11-00-634Z/02-audit-result.json from the already-completed fresh challenged PR #1 run. Do not make another paid Telegraph call. Review exact CVE records, challenge/action binding, timestamps and spend. Then prove skeptara-merge-gate-v0.1 denies this BLOCK result without invoking the merge adapter. Only after this proof is persisted proceed to the clean PR #2 fresh PASS run. Do not merge PR #1 or PR #2 yet.
+    Pull main and run npm run t4:replay:block. No private key, Telegraph call, payment or GitHub write is needed. The replay uses the reviewed fresh BLOCK challenge from PR #1 and deliberately evaluates inside its original freshness window with allow-list and humanAuthorization=true so CHALLENGE_NOT_PASS is isolated as the denial reason. Require authorization DENIED, merge adapter calls 0, executed=false and merged=false. Return the terminal output. Only after this passes proceed to a fresh live PR #2 clean challenge. Do not merge either PR yet.
