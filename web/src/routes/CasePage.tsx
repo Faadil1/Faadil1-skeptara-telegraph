@@ -114,6 +114,7 @@ export function CasePage() {
             <EvidenceLog
               items={evidenceItems}
               result={challengeResult}
+              network={riskAssessment.spend_network}
               revealedCount={verdictReady ? evidenceItems.length : revealedCount}
               awaitingNext={!verdictReady}
             />

@@ -1,5 +1,6 @@
 import type { ChallengeResult, EvidenceItem } from "../data/types";
 import { SkeletonLines } from "./Skeleton";
+import { explorerTxUrl } from "../utils/explorer";
 import "./EvidenceLog.css";
 
 const MATERIALITY_LABEL: Record<EvidenceItem["materiality"], string> = {
@@ -37,11 +38,13 @@ function CoverageNote({ result }: { result: ChallengeResult }) {
 export function EvidenceLog({
   items,
   result,
+  network,
   revealedCount,
   awaitingNext = false,
 }: {
   items: EvidenceItem[];
   result: ChallengeResult;
+  network?: string;
   revealedCount?: number;
   awaitingNext?: boolean;
 }) {
@@ -97,6 +100,19 @@ export function EvidenceLog({
                 signal {item.signal_hash.slice(0, 10)}&hellip;{item.signal_hash.slice(-6)}
               </div>
             )}
+            {(() => {
+              const url = explorerTxUrl(network, item.settlement_transaction);
+              return url ? (
+                <a
+                  className="evidence-row__verify mono"
+                  href={url}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  verify settlement ↗
+                </a>
+              ) : null;
+            })()}
           </li>
         ))}
         {awaitingNext && shown.length < items.length && (

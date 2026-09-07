@@ -1,4 +1,5 @@
 import { Link, Outlet } from "react-router-dom";
+import { Footer } from "./Footer";
 import "./Layout.css";
 
 export function Layout() {
@@ -20,7 +21,7 @@ export function Layout() {
           <Link to="/case/pr1">challenged case</Link>
           <Link to="/case/pr2">clean case</Link>
           <a
-            href="https://github.com/Faadil1/Faadil1-skeptara-telegraph"
+            href="https://github.com/Faadil1/skeptara-telegraph"
             target="_blank"
             rel="noreferrer"
           >
@@ -28,7 +29,7 @@ export function Layout() {
           </a>
         </nav>
         <a
-          href="https://github.com/Faadil1/Faadil1-skeptara-telegraph"
+          href="https://github.com/Faadil1/skeptara-telegraph"
           target="_blank"
           rel="noreferrer"
           className="layout__cta"
@@ -39,9 +40,7 @@ export function Layout() {
       <main className="layout__main">
         <Outlet />
       </main>
-      <footer className="layout__footer">
-        Telegraph Protocol Track 3 &middot; Base Sepolia &middot; real closed T0&ndash;T4 runs, no mocked verdicts
-      </footer>
+      <Footer />
     </div>
   );
 }

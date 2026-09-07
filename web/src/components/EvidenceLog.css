@@ -118,6 +118,19 @@
   margin-top: var(--space-2);
 }
 
+.evidence-row__verify {
+  display: inline-block;
+  font-size: var(--text-xs);
+  color: var(--accent);
+  text-decoration: none;
+  margin-top: var(--space-2);
+  border-bottom: 1px solid transparent;
+}
+
+.evidence-row__verify:hover {
+  border-bottom-color: var(--accent);
+}
+
 .coverage-note--pending {
   color: var(--text-muted);
 }
