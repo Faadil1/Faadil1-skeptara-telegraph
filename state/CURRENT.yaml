@@ -1,7 +1,7 @@
 canonical_state:
   protocol_version: 1
   system: SKEPTARA_TELEGRAPH_TRACK3
-  version: 0.10.0-local-validation-pass-trace-visual-next
+  version: 0.10.1-benita-settlement-clarification-trace-visual-next
   date: 2026-09-07
   source_of_truth: GITHUB
   repository: Faadil1/skeptara-telegraph
@@ -11,7 +11,7 @@ canonical_state:
     note: GitHub repository rename/redirect preserves historical evidence references; do not rewrite old captured evidence bindings.
   branch: main
 
-  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__NINE_SPOT_REMEDIATION_IMPLEMENTED__LOCAL_VALIDATION_PASS__TRACE_VISUAL_REVIEW_NEXT
+  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__NINE_SPOT_REMEDIATION_IMPLEMENTED__LOCAL_VALIDATION_PASS__BENITA_SETTLEMENT_DATA_SHAPING_QUESTION_RESOLVED__TRACE_VISUAL_REVIEW_NEXT
 
   authority:
     product_intent_source: product/PRD.md
@@ -63,6 +63,18 @@ canonical_state:
       bounded_human_authorization: EXPLICIT_PASS
       merged: true
       merge_commit_sha: c76c76e0c02dab28275d8e53d70da3f6f132e648
+
+  frontend_settlement_clarification:
+    status: VERIFIED
+    trigger: BENITA_NOTICED_ONLY_ONE_REDUCED_FIXTURE_SETTLEMENT_TRANSACTION
+    evidence: evidence/trace/FRONTEND-SETTLEMENT-MATRIX-CLARIFICATION.md
+    contract: docs/FRONTEND_DATA_CONTRACT.md
+    final_t4_paid_evidence_items: 4
+    final_t4_distinct_settlement_transactions: 4
+    semantics: ONE_FINAL_T4_EVIDENCE_ITEM_EQUALS_ONE_SEPARATE_PAID_TELEGRAPH_PATH_CALL
+    reduced_fixture_asymmetry: DATA_SHAPING_OMISSION_NOT_PROTOCOL_BEHAVIOR
+    generic_transaction_field: OPTIONAL_NULLABLE
+    final_t4_transaction_display: VERIFIED_FOR_ALL_FOUR_ITEMS
 
   winning_intelligence:
     preflight: { status: PASS_WITH_PRIORITY_RISKS, evidence: evidence/winning-intelligence/WI-TRACE-PREFLIGHT-001.md }
@@ -171,4 +183,4 @@ canonical_state:
   exact_next_gate: SKEPTARA_TRACE_JUDGE_PATH_VISUAL_REVIEW
   exact_next_owner: HUMAN_SCREENSHOT_WITH_CHATGPT_TRACE_REVIEW
   exact_next_action: >-
-    Keep `npm run demo:web` running and open http://127.0.0.1:4173 in the browser. Provide one full-page desktop screenshot and, if practical, one narrower/mobile-width screenshot for TRACE. TRACE must verify 5-second judge comprehension, the primary PR1 BLOCK/deny vs PR2 PASS/real-merge contrast, historical replay labeling, exact-CVE seed disclosure, MEDIUM-live vs LOW/HIGH-test claim boundary, Telegraph routing causality, and that no visual treatment suggests fake fresh authorization. Do not generate any fresh Telegraph calls. After visual PASS or bounded remediation, persist TRACE findings and update CURRENT + HANDOVER before public deployment.
+    Benita's settlement question is resolved: in the final T4 proof, all four evidence items were separate paid Telegraph calls and each has its own distinct x402 settlement transaction; the apparent one-of-four transaction state came from reduced-fixture sanitization/data shaping. Use docs/FRONTEND_DATA_CONTRACT.md plus evidence/trace/FRONTEND-SETTLEMENT-MATRIX-CLARIFICATION.md for the UI. Continue waiting for Benita's frontend/pitch contribution before final TRACE visual review if desired; no core-product changes and no fresh Telegraph calls. When ready, review the local judge surface and collaborator UI for 5-second comprehension and claim correctness, then persist TRACE before public deployment.
