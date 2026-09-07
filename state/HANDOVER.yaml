@@ -3,128 +3,166 @@ handover:
   system: SKEPTARA_TELEGRAPH_TRACK3
   date: 2026-09-07
   source_of_truth: GITHUB
-  repository: Faadil1/Faadil1-skeptara-telegraph
+  repository: Faadil1/skeptara-telegraph
+  repository_alias_history:
+    prior_full_name: Faadil1/Faadil1-skeptara-telegraph
+    current_full_name: Faadil1/skeptara-telegraph
+    historical_evidence_rule: DO_NOT_REWRITE_OLD_BOUND_REPOSITORY_NAMES__GITHUB_RENAME_REDIRECTS_PRESERVE_HISTORY
   branch: main
 
   resume_rule: >-
-    Read state/CURRENT.yaml first, then this HANDOVER, then product/PRD.md, then spec-kit/tasks.md. Repository truth outranks chat memory. PRD is canonical product intent; Spec Kit is derived execution state. After every major gate and protected execution boundary, persist evidence and update BOTH CURRENT and HANDOVER. This HANDOVER must remain sufficient for a new conversation to take the lead without reconstructing history from chat.
+    Read state/CURRENT.yaml first, then this HANDOVER, product/PRD.md, spec-kit/tasks.md, docs/JUDGE-CLAIM-BOUNDARIES.md, docs/SUBMISSION-COMPLIANCE.md, and Winning Intelligence evidence. Repository truth outranks chat memory. Persist evidence plus CURRENT + HANDOVER after every major gate and execution boundary. Never infer collaborator communication or administrative completion without human evidence.
 
-  current_milestone: T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__TRACE_JUDGE_PATH_REVIEW_NEXT
+  current_milestone: T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__NINE_SPOT_REMEDIATION_IMPLEMENTED__LOCAL_VALIDATION_PASS__TRACE_VISUAL_REVIEW_NEXT
 
   project:
     public_name: Skeptara
+    deadline_utc: 2026-09-07T23:59:59Z
     hero_vertical: AUTONOMOUS_GITHUB_DEPENDENCY_MERGE
-    deadline_utc: 2026-09-07T23:59:00Z
-    one_line: Higher-risk autonomous code changes must survive deeper independent paid Telegraph counter-evidence before merge can execute.
+    safe_public_promise: Before an autonomous agent can merge code, Skeptara buys Telegraph-routed external evidence to try to prove the change unsafe.
+    mechanism: EXTERNAL_DETERMINISTIC_RISK_TO_RISK_PROPORTIONAL_PAID_TELEGRAPH_COUNTER_EVIDENCE_TO_PASS_BLOCK_ESCALATE_TO_EXACT_PROTECTED_EXECUTION
 
   closed_gates:
-    t0:
-      status: CLOSED_PASS
-      key_evidence: evidence/t0-real-telegraph/attempt-008/
-    t1:
+    t0: CLOSED_PASS
+    t1: PASS
+    t2: CLOSED_PASS
+    t3: CLOSED_PASS
+    t4: CLOSED_PASS
+    hidden_spot_local_validation: PASS
+
+  local_validation:
+    evidence: evidence/trace/LOCAL-VALIDATION-41-OF-41-AND-JUDGE-REPLAY-PASS.md
+    npm_test:
+      tests: 41
+      pass: 41
+      fail: 0
+      cancelled: 0
+      skipped: 0
+      todo: 0
+    npm_run_demo:
       status: PASS
-      policy_version: skeptara-risk-v0.1
-    t2:
-      status: CLOSED_PASS
-      auditor_version: skeptara-auditor-v0.4-seeded-cve
-      closure_evidence: evidence/t2/LOCAL-USER-VALIDATION-V0.4-29-OF-29-AND-RUN003-REPLAY-PASS.md
-    t3:
-      status: CLOSED_PASS
-      gate_version: skeptara-merge-gate-v0.1
-      closure_evidence: evidence/t3/LOCAL-USER-VALIDATION-V0.1-41-OF-41-AND-12-OF-12.md
-    t4:
-      status: CLOSED_PASS
-      conclusion: TWO_CASE_REAL_DEMO_PROVEN
+      telegraph_payment: NONE
+      external_write: NONE
+      challenged_case: PR1__LODASH_4_17_21__BLOCK__MERGE_DENIED__0_MERGE_CALLS
+      clean_case: PR2__LODASH_4_18_1__PASS__2_OF_2__HISTORICAL_REAL_MERGE
+      risk_boundary: LOW_HIGH_POLICY_TEST_PROVEN__MEDIUM_LIVE_PROVEN
+      seeded_cve_disclosure: VISIBLE
+      historical_pass_fresh_authorization: FALSE
+    npm_run_demo_web:
+      startup: PASS
+      local_url: http://127.0.0.1:4173
+      static_captured_live_evidence_only: true
+      wallet_required: false
+      github_write_credential_required: false
+      visual_review: PENDING
+      browser_network_behavior_verification: PENDING
 
   t4_final:
+    historical_repository_name_at_proof_time: Faadil1/Faadil1-skeptara-telegraph
+    current_repository_name: Faadil1/skeptara-telegraph
     challenged_pr1:
       pr: 1
-      branch: demo/clean-lodash-upgrade
       head_sha: 73cf5bdd69163924228e3e21d67fa9f405d99904
       target: lodash@4.17.21
-      challenge_id: 113cc2c4-94ff-4c47-bf48-66fabc7c9329
       outcome: BLOCK
       blocking_evidence: CVE-2026-2950
-      normalized_reason: KNOWN_VULNERABILITY_AFFECTS_TARGET_DEPENDENCY_VERSION
-      merge_gate_replay:
-        authorization: DENIED
-        reason: CHALLENGE_NOT_PASS
-        merge_adapter_calls: 0
-        executed: false
-        merged: false
-      evidence:
-        - evidence/t4/pr1-block-run-004/REVIEW.md
-        - evidence/t4/pr1-block-run-004/MERGE-DENIAL-REPLAY.md
-
+      merge_gate: { authorization: DENIED, merge_adapter_calls: 0, merged: false }
     clean_pr2:
       pr: 2
-      branch: demo/clean-lodash-4.18.1
       head_sha: 528d730f9ebdcb433e01ba9c79dcc9a5f66ce1c7
       target: lodash@4.18.1
-      challenge_id: f4f075f3-1dbc-42ed-9843-dbec43de3430
-      action_fingerprint: sha256:2f5852b5359d3c2d20525ec21904a737f0ee015194e9ea42d14bbca3fc92ad94
-      risk: MEDIUM
-      coverage: 2_OF_2
-      spend_atomic: 20000
-      actual_intents: [CVE_LOOKUP, CVE_LOOKUP]
-      findings:
-        - CVE-2026-4800__ADVISORY__TARGET_4_18_1_OUTSIDE_AFFECTED_RANGE
-        - CVE-2026-2950__ADVISORY__TARGET_4_18_1_OUTSIDE_AFFECTED_RANGE
       outcome: PASS
-      runtime_errors: 0
-      expires_at: 2026-09-07T01:50:49.772Z
-      pre_merge_revalidation:
-        state: open
-        merged: false
-        exact_head_match: true
-        mergeable: true
-        mergeable_state: clean
-      human_bounded_authorization: EXPLICIT_PASS_FOR_PR2_EXACT_HEAD_ONLY
-      merge_execution:
-        expected_head_sha: 528d730f9ebdcb433e01ba9c79dcc9a5f66ce1c7
-        merged: true
-        merged_at: 2026-09-07T01:44:54Z
-        merge_commit_sha: c76c76e0c02dab28275d8e53d70da3f6f132e648
-        github_message: Pull Request successfully merged
-      evidence:
-        - evidence/t4/PR2-CLEAN-BRANCH-RECONCILIATION.md
-        - evidence/t4/pr2-clean-run-005/REVIEW.md
-        - evidence/t4/pr2-clean-run-005/reviewed-challenge.sanitized.json
-        - evidence/t4/pr2-clean-run-005/REAL-MERGE-EXECUTION.md
+      coverage: 2_OF_2
+      observed_miners:
+        - { id: 20260828, name: PREFLIGHT Infrastructure Signals }
+        - { id: 7336, name: SecWire CVE Lookup }
+      human_bounded_authorization: EXPLICIT_PASS_FOR_EXACT_HEAD_ONLY
+      merge_commit_sha: c76c76e0c02dab28275d8e53d70da3f6f132e648
 
-  security:
-    prior_burner: COMPROMISED_DO_NOT_REUSE_OR_FUND
-    fresh_burner: TESTNET_ONLY
-    private_key_in_repo: false
-    payer_address_in_durable_evidence: false
-    protected_github_write_credential_in_browser_or_repo: false
-    frontend_collaborator_has_wallet_or_protected_write_secret: false
+  winning_intelligence:
+    preflight: { status: PASS_WITH_PRIORITY_RISKS, packet: evidence/winning-intelligence/WI-TRACE-PREFLIGHT-001.md }
+    blind_spot_audit_002: { status: COMPLETE, packet: evidence/winning-intelligence/WI-BLIND-SPOT-AUDIT-002.md }
+    remediation_003: { status: IMPLEMENTED_AND_LOCALLY_VALIDATED, packet: evidence/winning-intelligence/WI-HIDDEN-SPOT-REMEDIATION-003.md }
+    discord_signal_004: { decision: NO_PIVOT__DIFFERENTIATION_REINFORCED__NO_VOLUME_CHASING, packet: evidence/winning-intelligence/WI-DISCORD-COMPETITIVE-SIGNAL-004.md }
+
+  judge_assets:
+    challenge_dossier: public/index.html
+    claim_boundaries: docs/JUDGE-CLAIM-BOUNDARIES.md
+    compliance: docs/SUBMISSION-COMPLIANCE.md
+    activity_ledger: evidence/activity/ACTIVITY-LEDGER-V0.1.md
+    local_validation: evidence/trace/LOCAL-VALIDATION-41-OF-41-AND-JUDGE-REPLAY-PASS.md
+    commands:
+      replay: npm run demo
+      local_web: npm run demo:web
+
+  claim_boundaries:
+    exact_cve_seeded: CONTROLLED_PROOF_NOT_AUTOMATIC_UNKNOWN_VULNERABILITY_DISCOVERY
+    risk_scaling: LOW_HIGH_POLICY_TEST_PROVEN__MEDIUM_LIVE_FINAL_T4_PROVEN
+    independence: CHALLENGE_TOPOLOGY_NOT_STATISTICAL_MINER_INDEPENDENCE
+    replay: CAPTURED_LIVE_HISTORICAL_NEVER_FRESH_AUTHORIZATION
+    github_runtime: T3_CONTRACT_TESTS_PLUS_T4_REAL_EXACT_HEAD_MERGE__NO_FULL_DEPLOYED_ADAPTER_CLAIM
+
+  activity_ledger:
+    real_paid_challenge_runs: 3
+    real_paid_evidence_calls: 5
+    unique_observed_miners: 2
+    observed_testnet_spend_usd: 0.05
+    denied_actions: 1
+    real_exact_head_merges: 1
+    user_count_claim: NONE
+    do_not_inflate_request_volume: true
+    discord_organic_engagement:
+      status: VERIFIED
+      evidence: evidence/admin/TELEGRAPH-DISCORD-ORGANIC-ENGAGEMENT-VERIFIED.md
+      fire_reactions_observed: 3
+      direct_telegraph_staff_positive_reply: true
+      adoption_metric: NO
+
+  discord:
+    official_invite: https://discord.gg/telegraphprotocol
+    faadil_join_access: VERIFIED
+    faadil_project_activity: VERIFIED
+    faadil_organic_engagement: VERIFIED
+    benita_join_activity: HUMAN_VERIFY
+    no_automated_metric_traffic: true
+    default_judge_demo: CAPTURED_LIVE_HISTORICAL_REPLAY
+    round_reward_and_platform_guidance:
+      evidence: evidence/admin/TELEGRAPH-DISCORD-ROUND-REWARD-AND-SUBMISSION-STATUS-VERIFIED.md
+      current_round_reward_pool_staff_statement_usd: 5000
+      separate_participation_reward: NONE_FOR_THIS_ROUND
+      scope_boundary: ROUND_LEVEL_NOT_TRACK3_ONLY
+      h2_reward_pool_staff_statement_usd: 10000
+      track3_platform_visibility_issue: STAFF_ACKNOWLEDGED
+      staff_status: WILL_BE_UPDATED_SOON
+      final_submission_completion: NOT_PROVEN
+
+  public_comms:
+    intended_primary_x_project_voice: BENITA
+    reason: STRONGER_PITCHING_AND_STORYTELLING
+    benita_x_handle: HUMAN_VERIFY_NOT_YET_RECORDED
+    faadil_x_handle: '@roy1919875'
+    benita_x_discord_brief_sent: false
+    benita_acceptance_of_primary_x_role: NOT_YET_CONFIRMED
 
   collaboration:
     frontend_contract: docs/FRONTEND_DATA_CONTRACT.md
     frontend_branch: feat/frontend-benita
-    branch_policy: FAST_FORWARD_ONLY_WHILE_NO_UNIQUE_COLLABORATOR_COMMITS
+    frontend_branch_policy: FAST_FORWARD_ONLY_WHILE_NO_UNIQUE_COLLABORATOR_COMMITS
     once_unique_commits_exist: NEVER_FORCE_MOVE__RECONCILE_NORMALLY
-    benita_brief_status: NOT_CONFIRMED_SENT
 
-  persistence_contract:
-    update_current_after_every_major_gate: true
-    update_handover_after_every_major_gate: true
-    update_both_after_every_execution_boundary: true
-    handover_is_next_conversation_bootstrap: true
-    include_exact_next_gate_owner_action: true
-    include_exact_bindings_and_evidence_paths: true
-    evidence_before_pass_claim: true
-    repository_truth_outranks_chat_memory: true
+  current_remaining_gaps:
+    trace_human_visual_review: PENDING
+    browser_network_behavior_check: PENDING
+    public_deployment_smoke: PENDING
+    benita_x_discord_brief_send: PENDING_HUMAN
+    benita_discord_join_activity: PENDING_HUMAN
+    benita_x_handle_capture: PENDING_HUMAN
+    x_showcase_posts: PENDING_HUMAN
+    track3_submission_platform_visibility: HUMAN_VERIFY_AT_SUBMISSION_TIME
+    final_submission: PENDING_HUMAN
+    project_finisher: NOT_STARTED
 
-  next_gates:
-    - SKEPTARA_TRACE_JUDGE_PATH_REVIEW
-    - SKEPTARA_FRONTEND_INTEGRATION_AND_DEPLOYED_SMOKE
-    - SKEPTARA_BUILD_CANDIDATE_READY
-    - SKEPTARA_PROJECT_FINISHER_TERMINAL_ASSURANCE
-    - HUMAN_PROTECTED_FINAL_SUBMISSION
-
-  exact_next_gate: SKEPTARA_TRACE_JUDGE_PATH_REVIEW
-  exact_next_owner: CHATGPT_ORCHESTRATOR_WITH_HUMAN_VISUAL_REVIEW
+  exact_next_gate: SKEPTARA_TRACE_JUDGE_PATH_VISUAL_REVIEW
+  exact_next_owner: HUMAN_SCREENSHOT_WITH_CHATGPT_TRACE_REVIEW
   exact_next_action: >-
-    Start from repository state, not chat. Inspect docs/FRONTEND_DATA_CONTRACT.md, current frontend implementation/branch, T4 evidence and README. Perform TRACE judge-path review so a judge can understand in one flow: PR proposed -> deterministic risk -> real paid Telegraph evidence -> PASS/BLOCK/ESCALATE -> protected action. Use the real PR #1 BLOCK/deny and PR #2 PASS/authorized real merge evidence. Do not invent fields. If Benita has unique commits, do not force-move her branch; reconcile normally. Persist TRACE findings, update CURRENT + HANDOVER, and advance to deployed frontend smoke only when the judge path is coherent.
+    Keep the local static judge surface running with `npm run demo:web`. Open http://127.0.0.1:4173 and provide a full-page desktop screenshot; if practical also provide a narrow/mobile-width screenshot. TRACE must judge 5-second comprehension, PR1 BLOCK/deny vs PR2 PASS/real merge, proof hierarchy, historical labeling, exact-CVE seed disclosure, MEDIUM-live vs LOW/HIGH-test claim boundary, Telegraph routing causality, and absence of visual cues that imply a fresh executable PASS. Do not generate fresh Telegraph calls. After TRACE PASS or bounded remediation, persist findings plus CURRENT + HANDOVER, then move to public deployment/smoke.
