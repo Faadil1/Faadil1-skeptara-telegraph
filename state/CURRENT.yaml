@@ -1,13 +1,13 @@
 canonical_state:
   protocol_version: 1
   system: SKEPTARA_TELEGRAPH_TRACK3
-  version: 0.10.7-pr3-local-tests-build-pass-lint-fix-rerun-next
+  version: 0.10.8-benita-readme-reconciled-v2-clean-rerun-next
   date: 2026-09-07
   source_of_truth: GITHUB
   repository: Faadil1/skeptara-telegraph
   branch: main
 
-  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__BENITA_FRONTEND_CAPTURED__OWNER_INTEGRATION_PR3__ROOT_41_OF_41_PASS__WEB_BUILD_PASS__LINT_WARNING_REMEDIATED__CLEAN_RERUN_AND_TRACE_NEXT
+  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__BENITA_FRONTEND_CAPTURED__OWNER_INTEGRATION_V2_CURRENT__BENITA_README_RECONCILED__ROOT_41_OF_41_PASS__WEB_BUILD_PASS__LINT_FIX_AND_README_RERUN_NEXT
 
   authority:
     product_intent_source: product/PRD.md
@@ -56,33 +56,46 @@ canonical_state:
   benita_frontend:
     live_url_human_supplied: https://skeptara.vercel.app/
     branch: feat/frontend-benita
-    latest_head_used_for_owner_integration: a7c366f6cd5f4f268ecab958dbaeb0e46a00cc67
+    latest_head_observed: 68dfc2b103dcc88ec821a3cc1f50f4f568074400
+    latest_unique_commit:
+      sha: 68dfc2b103dcc88ec821a3cc1f50f4f568074400
+      scope: README_ONLY
+      web_changed: false
     never_force_move: true
 
   owner_frontend_integration:
-    status: LOCAL_VALIDATION_PARTIAL_PASS__LINT_FIX_RERUN_PENDING
+    status: BENITA_LATEST_README_RECONCILED__LOCAL_CLEAN_RERUN_PENDING
     evidence:
       integration: evidence/trace/OWNER-FRONTEND-INTEGRATION-001.md
       local_validation: evidence/trace/PR3-LOCAL-VALIDATION-001.md
+    stale_branch: integration/frontend-final
+    stale_branch_rule: DO_NOT_USE_OR_MERGE
     candidate_branch: integration/frontend-final-v2
+    candidate_branch_rule: CURRENT_ONLY_INTEGRATION_CANDIDATE
     draft_pr: 3
     pr_url: https://github.com/Faadil1/skeptara-telegraph/pull/3
-    candidate_head: afffa7bb28b556192a25116a18924148b2314590
+    candidate_head: 1244294ee96c747c7220a7159de0652d9b04e019
     merged: false
-    github_mergeable_latest_observation: false
-    mergeability_note: RECHECK_AFTER_HEAD_RECOMPUTE_AND_LATEST_MAIN_RECONCILIATION
-    validated_before_latest_hook_fix:
+    benita_readme_reconciliation:
+      source_commit: 68dfc2b103dcc88ec821a3cc1f50f4f568074400
+      integration_commit: 1244294ee96c747c7220a7159de0652d9b04e019
+      result: CONTENT_RECONCILED_WITH_CANONICAL_CORRECTIONS
+      extra_corrections:
+        - PROOF_TABLE_SHOWS_ALL_FOUR_T4_SETTLEMENTS
+        - PR1_AMBIGUOUS_THEN_BLOCKING_ORDER_EXPLICIT
+        - DISCORD_STATUS_UPDATED_TO_VERIFIED_FOR_FAADIL
+        - COPY_TIGHTENED_TO_AVOID_OVERCLAIMED_INDEPENDENCE_AND_AI_SLOP
+    validated_before_latest_head:
       root_tests: 41_OF_41_PASS__0_FAIL
       web_npm_ci: PASS__0_VULNERABILITIES
       web_build: PASS
       web_lint: 0_ERRORS__1_WARNING_REACT_SET_STATE_IN_EFFECT
       web_dev_server: PASS__HTTP_127_0_0_1_5173
-    latest_hook_fix:
-      commit: afffa7bb28b556192a25116a18924148b2314590
-      file: web/src/hooks/useCaseReplay.ts
+    lint_warning_fix:
+      prior_commit: afffa7bb28b556192a25116a18924148b2314590
       purpose: REMOVE_SYNC_SET_STATE_IN_EFFECT_WARNING_WHILE_PRESERVING_REDUCED_MOTION
-      clean_lint_rerun: PENDING_HUMAN
-      build_rerun: PENDING_HUMAN
+      clean_lint_rerun: PENDING_HUMAN_ON_1244294
+      build_rerun: PENDING_HUMAN_ON_1244294
     bounded_changes:
       - COPY_ANTI_AI_SLOP_CLEANUP
       - ABOVE_FOLD_BLOCK_PASS_SPLIT
@@ -93,6 +106,7 @@ canonical_state:
       - REDUCED_MOTION_REPLAY_AND_HASH_SCROLL
       - SAFE_NOT_FOUND_ROUTE
       - CANONICAL_OG_X_METADATA
+      - BENITA_JUDGE_FIRST_README_RESTRUCTURE
       - REPLAY_ONLY_NO_NETWORK_OR_WRITE_BOUNDARY_PRESERVED
 
   local_workspace_note:
@@ -135,4 +149,4 @@ canonical_state:
   exact_next_gate: SKEPTARA_PR3_CLEAN_LINT_BUILD_RERUN_THEN_TRACE
   exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_REVIEW
   exact_next_action: >-
-    On integration/frontend-final-v2 pull candidate head afffa7bb28b556192a25116a18924148b2314590. In web run npm run lint and require 0 warnings/0 errors, then npm run build. Do not merge PR #3 yet. If clean, keep the dev server running and perform desktop/mobile TRACE plus direct /case/pr1, /case/pr2 and invalid-route checks, verify all four settlement links and the historical real-merge link, and verify DevTools network shows no Telegraph request on page load or replay. Then reconcile PR #3 with latest main if needed, persist final TRACE evidence, and only then merge/smoke/publish/submit. No fresh Telegraph calls for optics.
+    Keep integration/frontend-final-v2 as the only integration candidate; ignore integration/frontend-final. Pull origin so local HEAD becomes 1244294ee96c747c7220a7159de0652d9b04e019, which includes the lint fix plus Benita's README restructuring reconciled with canonical proof corrections. In web run npm run lint and require 0 warnings/0 errors, then npm run build. Do not merge PR #3 yet. If clean, perform desktop/mobile TRACE, direct /case/pr1, /case/pr2 and invalid-route checks, verify all four settlement links and the historical real-merge link, and confirm DevTools network shows no Telegraph request on page load or replay. Then reconcile PR #3 with latest main if needed, persist final TRACE evidence, and only then merge/smoke/publish/submit. No fresh Telegraph calls for optics.
