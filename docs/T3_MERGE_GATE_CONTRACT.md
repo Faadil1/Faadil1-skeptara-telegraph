@@ -1,6 +1,6 @@
 # Skeptara T3 Protected Merge Gate Contract
 
-Status: **IMPLEMENTED v0.1 — local validation required**  
+Status: **CLOSED PASS v0.1 — real execution deferred to T4**  
 Date: 2026-09-07
 
 ## Purpose
@@ -110,29 +110,26 @@ mergePullRequest({
 })
 ```
 
-No real merge is performed during T3 implementation/local validation.
+No real merge was performed during T3 implementation/local validation.
 
-## T3 local pass criteria
+## T3 closure evidence
 
-Before `SKEPTARA_T3_FAIL_CLOSED_MERGE_GATE_PASS` can close:
+User-machine validation on 2026-09-07:
 
-1. full repository tests pass with the merge-gate suite included;
-2. fresh exact PASS fixture authorizes;
-3. BLOCK and ESCALATE deny;
-4. stale/expired challenge denies;
-5. changed live head denies;
-6. challenge head mismatch denies;
-7. action fingerprint mismatch denies;
-8. non-allow-listed target denies;
-9. missing human authorization denies;
-10. denied authorization provably never calls the merge adapter;
-11. authorized execution passes exact `expected_head_sha` to the adapter.
+- full repository `npm test`: **41/41 PASS, 0 fail**;
+- focused `npm run test:merge-gate`: **12/12 PASS, 0 fail**.
+
+Durable evidence: `evidence/t3/LOCAL-USER-VALIDATION-V0.1-41-OF-41-AND-12-OF-12.md`.
+
+Therefore:
+
+`SKEPTARA_T3_FAIL_CLOSED_MERGE_GATE_PASS = CLOSED_PASS`.
 
 ## T4 boundary
 
-After T3 local closure, T4 performs the real two-case proof:
+T3 closure is not merge authorization. T4 must now perform the real two-case proof:
 
-- PR #2 clean candidate: obtain a **fresh live PASS**, then only with explicit human authorization execute the bounded real merge;
-- PR #1 challenged candidate: obtain a **fresh live BLOCK**, then prove the merge gate refuses execution.
+- PR #2 clean candidate: obtain a **fresh live PASS** on the exact current head, revalidate live GitHub facts, then only with explicit human authorization execute the bounded real merge;
+- PR #1 challenged candidate: obtain a **fresh live BLOCK** and prove the Skeptara gate refuses execution.
 
-T3 itself does not merge either PR.
+Any stale challenge, changed head, missing human authorization, BLOCK, or ESCALATE remains denied.
