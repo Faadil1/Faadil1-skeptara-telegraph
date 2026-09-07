@@ -1,9 +1,9 @@
 # Skeptara Frontend Data Contract
 
-Status: **FROZEN v0.1 after T0 real Telegraph evidence review**
-Date: 2026-09-06
+Status: **FROZEN v0.1 + T4 settlement clarification**
+Date: 2026-09-07
 
-This contract is derived from the approved living PRD and the real T0 Telegraph response. It is the UI boundary for the hackathon MVP. It does not authorize changes to product semantics.
+This contract is derived from the approved living PRD and the real Telegraph evidence. It is the UI boundary for the hackathon MVP. It does not authorize changes to product semantics.
 
 ## Judge-path objects
 
@@ -35,7 +35,7 @@ This contract is derived from the approved living PRD and the real T0 Telegraph 
 }
 ```
 
-Observed T0 price unit: `10000` atomic USDC = `$0.01` on Base Sepolia. MVP caps therefore begin at LOW `$0.01`, MEDIUM `$0.02`, HIGH `$0.03` while preserving fail-closed coverage rules.
+Observed proof price unit: `10000` atomic USDC = `$0.01` on Base Sepolia in the captured runs. MVP caps therefore begin at LOW `$0.01`, MEDIUM `$0.02`, HIGH `$0.03` while preserving fail-closed coverage rules. This is an observed testnet result, not a network-wide pricing invariant.
 
 ### EvidenceItem
 ```json
@@ -59,12 +59,33 @@ Observed T0 price unit: `10000` atomic USDC = `$0.01` on Base Sepolia. MVP caps 
   },
   "settlement": {
     "success": true,
+    "transaction": "0x...",
     "network": "eip155:84532"
   }
 }
 ```
 
 Only fields actually exposed by Telegraph or deterministically derived by Skeptara may be displayed as such. `source_provenance` may be null even when the miner result contains a source label; the UI must distinguish protocol-exposed provenance from miner-reported source text.
+
+### Settlement transaction semantics
+
+For the **final T4 two-case proof**, each `EvidenceItem` corresponds to one separate paid Telegraph evidence path/call. There were four paid evidence calls across the two final MEDIUM cases, and all four raw live records contain distinct successful x402 settlement transactions.
+
+The reduced reviewed fixtures are intentionally smaller and became asymmetric:
+
+- PR #1 retained the full transaction hash only on the accepted blocking evidence object while reducing the first paid path to an observation object;
+- PR #2 retained settlement success/network but omitted both transaction hashes from its reduced fixture.
+
+That omission is **presentation/data shaping**, not proof that multiple findings came from one paid call.
+
+Frontend rule:
+
+- never attach one transaction to multiple evidence items;
+- show the evidence item's own transaction when present in the captured source;
+- `settlement.transaction` is optional/nullable at the generic schema boundary because future payloads may omit it;
+- for the four captured final T4 evidence items, transaction hashes are verified and may be displayed.
+
+Canonical settlement matrix: `evidence/trace/FRONTEND-SETTLEMENT-MATRIX-CLARIFICATION.md`.
 
 ### ChallengeResult
 ```json
@@ -96,7 +117,7 @@ The judge should see, in one path:
 2. deterministic risk tier and why;
 3. required evidence depth and spend ceiling;
 4. real Telegraph calls progressing;
-5. miner/intent/cost/signal evidence actually exposed;
+5. miner/intent/cost/signal/settlement evidence actually exposed;
 6. material counter-evidence when present;
 7. final PASS/BLOCK/ESCALATE;
 8. merge unlocked only for fresh PASS.
