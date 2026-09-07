@@ -7,9 +7,9 @@ handover:
   branch: main
 
   resume_rule: >-
-    Read state/CURRENT.yaml first, then this HANDOVER, product/PRD.md, spec-kit/tasks.md, docs/JUDGE-CLAIM-BOUNDARIES.md, docs/SUBMISSION-COMPLIANCE.md, docs/FRONTEND_DATA_CONTRACT.md, evidence/trace/FRONTEND-SETTLEMENT-MATRIX-CLARIFICATION.md, evidence/trace/BENITA-FRONTEND-SOURCE-REVIEW-001.md, evidence/trace/BENITA-FRONTEND-HOLISTIC-REVIEW-002.md, evidence/trace/OWNER-FRONTEND-INTEGRATION-001.md, and evidence/trace/PR3-LOCAL-VALIDATION-001.md. Repository truth outranks chat memory. Never force-move Benita's branch.
+    Read state/CURRENT.yaml first, then this HANDOVER, product/PRD.md, spec-kit/tasks.md, docs/JUDGE-CLAIM-BOUNDARIES.md, docs/SUBMISSION-COMPLIANCE.md, docs/FRONTEND_DATA_CONTRACT.md, evidence/trace/FRONTEND-SETTLEMENT-MATRIX-CLARIFICATION.md, evidence/trace/BENITA-FRONTEND-SOURCE-REVIEW-001.md, evidence/trace/BENITA-FRONTEND-HOLISTIC-REVIEW-002.md, evidence/trace/OWNER-FRONTEND-INTEGRATION-001.md, evidence/trace/PR3-LOCAL-VALIDATION-001.md, and evidence/trace/PR3-CLEAN-LINT-BUILD-RERUN-PASS.md. Repository truth outranks chat memory. Never force-move Benita's branch.
 
-  current_milestone: T0_THRU_T4_CLOSED__BENITA_LATEST_FRONTEND_AND_README_CAPTURED__OWNER_INTEGRATION_V2_CURRENT__ROOT_TESTS_PASS__WEB_BUILD_PASS__CLEAN_LINT_BUILD_RERUN_THEN_TRACE
+  current_milestone: T0_THRU_T4_CLOSED__BENITA_FRONTEND_AND_README_RECONCILED__OWNER_INTEGRATION_V2__CLEAN_LINT_BUILD_PASS__FINAL_TRACE_NEXT
 
   project:
     public_name: Skeptara
@@ -24,6 +24,7 @@ handover:
     t3: CLOSED_PASS
     t4: CLOSED_PASS
     hidden_spot_local_validation: PASS
+    pr3_clean_lint_build: PASS
 
   t4_truth:
     pr1:
@@ -60,39 +61,33 @@ handover:
 
   owner_integration:
     authorization: HUMAN_OWNER_EXPLICITLY_ALLOWED_OWNER_SIDE_FIXES
-    evidence:
-      integration: evidence/trace/OWNER-FRONTEND-INTEGRATION-001.md
-      validation: evidence/trace/PR3-LOCAL-VALIDATION-001.md
     stale_branch: integration/frontend-final
     stale_branch_rule: DO_NOT_USE_OR_MERGE
     candidate_branch: integration/frontend-final-v2
     candidate_branch_rule: ONLY_CURRENT_INTEGRATION_CANDIDATE
     draft_pr: 3
     pr_url: https://github.com/Faadil1/skeptara-telegraph/pull/3
-    current_candidate_head: 1244294ee96c747c7220a7159de0652d9b04e019
+    candidate_head: 1244294ee96c747c7220a7159de0652d9b04e019
     merged: false
-    benita_readme_reconciliation:
-      source_commit: 68dfc2b103dcc88ec821a3cc1f50f4f568074400
-      source_scope: README_ONLY
-      integration_commit: 1244294ee96c747c7220a7159de0652d9b04e019
-      result: RECONCILED_WITH_CANONICAL_CORRECTIONS
-      corrections:
-        - all four final T4 settlement transactions visible in proof table
-        - PR1 ambiguous-first then blocking-second chronology explicit
-        - Faadil Discord status updated to verified
-        - independence wording tightened to avoid statistical-miner implication
-        - copy tightened to reduce AI-slop punctuation/contrast patterns
-    latest_local_results_before_candidate_head:
+    github_mergeable_latest_observation: false
+    mergeability_rule: RECONCILE_WITH_LATEST_MAIN_AFTER_TRACE_BEFORE_MERGE
+    evidence:
+      integration: evidence/trace/OWNER-FRONTEND-INTEGRATION-001.md
+      first_validation: evidence/trace/PR3-LOCAL-VALIDATION-001.md
+      clean_rerun: evidence/trace/PR3-CLEAN-LINT-BUILD-RERUN-PASS.md
+    current_head_validation:
+      web_lint: PASS__0_WARNINGS__0_ERRORS
+      web_build: PASS
+      vite_modules: 48
+      build_duration_ms: 476
+    prior_integration_validation:
       root_npm_test: 41_OF_41_PASS__0_FAIL
       web_npm_ci: PASS__0_VULNERABILITIES
-      web_npm_build: PASS
-      web_npm_lint: 0_ERRORS__1_WARNING
-      warning: REACT_SET_STATE_IN_EFFECT__USE_CASE_REPLAY
       dev_server: PASS__HTTP_127_0_0_1_5173
-    warning_remediation:
-      commit: afffa7bb28b556192a25116a18924148b2314590
-      status: IMPLEMENTED__CLEAN_RERUN_PENDING_ON_1244294
-      behavior_preserved: PREFERS_REDUCED_MOTION_COMPLETES_HISTORICAL_REPLAY_WITHOUT_NETWORK_OR_WRITE
+    benita_readme_reconciliation:
+      source_commit: 68dfc2b103dcc88ec821a3cc1f50f4f568074400
+      integration_commit: 1244294ee96c747c7220a7159de0652d9b04e019
+      result: RECONCILED_WITH_CANONICAL_CORRECTIONS
 
   local_workspace_warning:
     untracked:
@@ -130,7 +125,7 @@ handover:
     no_repeat_live_calls_for_optics: true
     default_judge_demo: CAPTURED_LIVE_HISTORICAL_REPLAY
 
-  exact_next_gate: SKEPTARA_PR3_CLEAN_LINT_BUILD_RERUN_THEN_TRACE
-  exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_REVIEW
+  exact_next_gate: SKEPTARA_PR3_FINAL_TRACE_VISUAL_NETWORK_REVIEW
+  exact_next_owner: HUMAN_BROWSER_WITH_CHATGPT_TRACE_REVIEW
   exact_next_action: >-
-    Tell Benita integration/frontend-final-v2 is the current branch; integration/frontend-final is stale and should be ignored. Her README-only commit 68dfc2b has already been reconciled into v2 with canonical proof corrections, so she does not need to merge either integration branch into her own branch. On the user's local integration/frontend-final-v2 checkout, git pull so HEAD becomes 1244294ee96c747c7220a7159de0652d9b04e019. In web run npm run lint and npm run build. Require lint 0 warnings/0 errors and build PASS. Then run desktop/mobile TRACE, direct route and invalid-route checks, verify all four settlement links and the historical real-merge link, confirm DevTools network contains no Telegraph request on page load or replay, reconcile PR #3 with latest main if needed, persist final TRACE evidence, and only then merge/smoke/X/demo/submission.
+    Do not merge PR #3 yet. On integration/frontend-final-v2 at head 1244294ee96c747c7220a7159de0652d9b04e019, run the Vite dev server and perform final TRACE. Capture desktop and narrow/mobile views of landing, /case/pr1, /case/pr2, plus an invalid route. Verify all four settlement links and the historical merge link. Use DevTools Network to prove page load and Replay make no Telegraph request and no GitHub write request. If TRACE passes, reconcile PR #3 with latest main because GitHub currently reports mergeable=false; if reconciliation modifies web code, rerun lint/build. Persist final TRACE, then merge, smoke-test public deploy, coordinate Benita demo/X, run Project Finisher, and submit.
