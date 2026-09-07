@@ -1,35 +1,23 @@
 # Skeptara T2 Independent Auditor Contract
 
-Status: **IMPLEMENTED v0.2 — live retry required after evidence-quality remediation**
+Status: **IMPLEMENTED v0.3 seeded-CVE mode — local validation + live clean PR #2 audit pending**  
 Date: 2026-09-06
 
 ## Purpose
 
 T2 turns the successful T0 Telegraph spike into a reusable independent counter-evidence auditor. It consumes canonical action facts plus the deterministic T1 risk contract and has no input for constructor persuasion or self-justification.
 
-## Inputs
+The governing rule is stricter than "a paid call returned 200": a paid call contributes spend immediately, but it contributes required coverage only when the returned investigation is concrete, relevant to the canonical target, and machine-checkable enough for deterministic gating.
+
+## Core inputs
 
 - `ActionSnapshot` from `src/policy.mjs`;
 - deterministic `RiskAssessment` from T1;
 - live Telegraph capability discovery;
-- bounded local x402 credential available only in the secure runtime.
+- bounded local x402 credential available only in the secure runtime;
+- optional controlled evidence seeds that are external identifiers, never proposer persuasion.
 
-## Planning
-
-The auditor discovers live intents and selects only supported evidence paths. For generic dependency package/version actions, current preference order is:
-
-1. `FACT_CHECK`
-2. `WEB_SEARCH`
-3. `NEWS_SEARCH`
-4. `URL_SCAN`
-
-Direct `CVE_LOOKUP` is not planned for a generic package/version action without an explicit CVE identifier because live T2 evidence showed the selected `/cve` miner can require a CVE ID. If Telegraph actually returns `CVE_LOOKUP`, Skeptara records that actual intent truthfully.
-
-The plan contains a stable `plan_fingerprint`, required path count, per-path budget and counter-evidence query derived from canonical action facts only.
-
-A desired intent is a planning target, not a truth claim. The final EvidenceItem records the actual intent returned by Telegraph. Cross-intent claims are based only on observed returned intents.
-
-## Budget and coverage
+## Budget and gate
 
 T1 caps remain authoritative:
 
@@ -37,48 +25,82 @@ T1 caps remain authoritative:
 - MEDIUM: 2 paths / 20000 atomic USDC;
 - HIGH: 3 paths / 30000 atomic USDC.
 
-Each live path performs an unsigned x402 quote check before payment. A quote outside Base Sepolia or above the remaining/per-path cap is rejected fail-closed.
+Each paid path is quoted before settlement. A quote outside Base Sepolia or above the remaining/per-path cap is rejected fail-closed.
 
-A successful paid response counts toward spend immediately. It counts toward required evidence coverage only if the investigation itself completed meaningfully. Missing/invalid required input, an endpoint refusing the requested investigation, or equivalent incomplete-path evidence cannot count as clean coverage.
+Material `BLOCKING` counter-evidence may stop immediately. PASS still requires all mandatory coverage. Missing capability, invalid/incomplete evidence, irrelevant evidence, payment/runtime failure, exhausted budget before coverage, or critical ambiguity cannot PASS.
 
-## Stopping rule
+## Evidence quality discoveries
 
-Material `BLOCKING` counter-evidence stops the challenge immediately and returns BLOCK. This is asymmetric: proof against execution does not require spending the remaining budget.
+### Live run 001
 
-A clean PASS candidate must complete all mandatory coverage. Missing capability, invalid/incomplete evidence path, payment/runtime failure, budget exhaustion before required coverage, or critical ambiguity cannot PASS.
+Runtime v0.1 reported PASS, but the `CVE_LOOKUP` miner said the request was invalid because an explicit CVE identifier was required. Evidence review corrected the outcome to ESCALATE. v0.2 therefore stopped treating a successful paid response as automatic completed coverage.
 
-## Evidence normalization
+Evidence: `evidence/t2/live-clean-run-001/REVIEW.md`.
 
-For dependency CVE evidence, Skeptara may classify `BLOCKING` when the returned target version can be machine-checked as inside an explicitly reported affected range. A known CVE with an unparseable/ambiguous range is not silently treated as clean; it remains AMBIGUOUS and critical for MEDIUM/HIGH.
+### Live retry 002
 
-Results that explicitly report missing/invalid required input are normalized as `INCOMPLETE_EVIDENCE_PATH`, `materiality: AMBIGUOUS`, `critical: true`, `coverage_complete: false`.
+Runtime v0.2 again reported PASS, but review found both claimed paths inadequate:
 
-Protocol-exposed provenance remains distinct from miner-reported source labels.
+- `FACT_CHECK`: `verdict: unverified`, `confidence: 0.2`, `evidence: null`; absence of a matching Wikipedia article is not completed counter-evidence coverage.
+- requested `WEB_SEARCH` returned actual `NEWS_SEARCH`, whose articles were unrelated to Lodash/package security. Request/query text mentioning Lodash does not make unrelated returned evidence relevant.
+
+Corrected interpretation: `0/2` meaningful coverage at the full `20000` atomic spend ceiling => ESCALATE.
+
+Evidence: `evidence/t2/live-clean-retry-002/REVIEW.md`.
+
+## Clean-fixture correction
+
+PR #1 (`lodash 4.17.20 -> 4.17.21`) is retained as a challenged candidate rather than rewritten. Current advisory validation showed `4.17.21` is not a defensible 2026 clean target.
+
+A new clean candidate is PR #2 (`lodash 4.17.20 -> 4.18.1`) on `demo/clean-lodash-4.18.1`, exact head `c40c5a3a15d6280005dfe7589ae7e2a960cc199c`.
+
+This changes the demo fixture, not Skeptara's product mechanism or hero vertical.
+
+## v0.3 seeded exact-CVE mode
+
+`src/seeded-cve-auditor.mjs` adds a controlled reliability mode for the bounded demo. Instead of broad reassurance/search prompts, a deterministic external advisory baseline supplies exact CVE identifiers. The reviewed coding agent does not choose these identifiers.
+
+For clean PR #2 the action file supplies:
+
+- `CVE-2026-4800`
+- `CVE-2026-2950`
+
+The auditor requires live `CVE_LOOKUP`, spends at most 10000 atomic USDC per path, and asks Telegraph to return the concrete record for exactly the seeded CVE. A path counts as coverage only when:
+
+1. actual returned intent is `CVE_LOOKUP`;
+2. returned `cve_id` exactly matches the seed;
+3. the CVE record is actually found;
+4. the affected version boundary is machine-checkable against the target dependency version.
+
+A mismatched route, missing record, substituted CVE, or unparseable range remains incomplete/critical and cannot count toward PASS.
+
+For a returned known CVE:
+
+- target inside affected range => `BLOCKING`;
+- target outside affected range => `ADVISORY` (meaningful non-blocking counter-evidence coverage).
+
+MEDIUM still requires two paid evidence paths and remains capped at 20000 atomic USDC. Cross-intent diversity is preferred by T1 but not mandatory for MEDIUM; seeded-CVE mode deliberately favors concrete machine-checkable evidence over broad but irrelevant routing.
 
 ## Runtime boundary
 
 - `src/telegraph-client.mjs`: capability discovery + bounded x402 adapter;
-- `src/auditor.mjs`: pure planning, normalization, spend/coverage accounting, ChallengeResult;
-- `scripts/t2-live-audit.mjs`: local live runner;
+- `src/auditor.mjs`: generic auditor v0.2 and evidence-quality lessons;
+- `src/seeded-cve-auditor.mjs`: v0.3 controlled exact-CVE path;
+- `scripts/t2-live-audit.mjs`: chooses seeded mode when `evidence_seeds.cve_ids` exists in the action file;
 - `scripts/t2-from-clipboard.ps1`: clipboard-only secret injection;
-- `tests/auditor.test.mjs`: deterministic offline tests.
+- `tests/auditor.test.mjs` + `tests/seeded-cve-auditor.test.mjs`: deterministic fail-closed tests.
 
-The private key is never accepted as an auditor domain input and must not enter persisted challenge output.
-
-## Live run 001 review
-
-The first clean MEDIUM live run reported `PASS`, but evidence review rejected that promotion because its `CVE_LOOKUP` path said the request was invalid and the lookup could not be completed. The old normalizer counted that paid response as clean coverage. That defect is fixed in auditor v0.2.
-
-Evidence: `evidence/t2/live-clean-run-001/REVIEW.md`.
+The private key is never an auditor domain input and must not enter persisted challenge output.
 
 ## T2 pass criteria
 
 Before `SKEPTARA_T2_INDEPENDENT_AUDITOR_PASS` can close:
 
-1. all deterministic T1 + T2 tests pass locally after v0.2 remediation;
-2. T0 challenged-case evidence remains compatible with BLOCK semantics;
-3. live capability discovery yields enough supported paths for the selected clean MEDIUM case;
-4. one live clean MEDIUM retry completes meaningful required coverage within 20000 atomic USDC and produces a non-ESCALATE result consistent with the actual evidence;
-5. sanitized challenge record is reviewed and persisted durably.
+1. full repository tests pass after v0.3 seeded-CVE addition;
+2. PR #2 remains open at exact head `c40c5a3a15d6280005dfe7589ae7e2a960cc199c`;
+3. live capability discovery includes `CVE_LOOKUP`;
+4. a bounded PR #2 MEDIUM audit obtains two meaningful exact-CVE records within 20000 atomic USDC;
+5. actual returned records are reviewed and durably persisted;
+6. only then may a real PASS be accepted.
 
-T2 does not authorize GitHub merge. T3 remains the protected execution gate.
+T2 never authorizes GitHub merge. T3 remains the protected execution gate.
