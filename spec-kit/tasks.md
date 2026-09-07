@@ -65,9 +65,13 @@ Status: DERIVED READY — subordinate to living PRD v0.1.
 
 - [x] Persist `WI-TRACE-PREFLIGHT-001.md`.
 - [x] Persist `WI-BLIND-SPOT-AUDIT-002.md`.
+- [x] Persist `WI-HIDDEN-SPOT-REMEDIATION-003.md`.
+- [x] Persist `WI-DISCORD-COMPETITIVE-SIGNAL-004.md`.
 - [x] Freeze winning distinction around external deterministic risk → risk-proportional Telegraph-routed counter-evidence → exact protected execution.
 - [x] Lock claim boundaries: no automatic unknown-vulnerability discovery, no statistical miner-independence claim, no LOW/HIGH live-scaling overclaim.
 - [x] Telegraph registration verified.
+- [x] Discord competitor signal confirms generic verified-intelligence → deterministic-gate category is crowded; **no pivot**, differentiation reinforced.
+- [x] Do not chase competitor call-count volume.
 
 ## Hidden-spot remediation block
 
@@ -87,6 +91,17 @@ Status: DERIVED READY — subordinate to living PRD v0.1.
 - [ ] Human-machine validation: `npm test` + `npm run demo`.
 - [ ] Human visual TRACE review of `npm run demo:web`.
 - [ ] Public deployment + smoke proof.
+
+## Network / anti-gaming guardrail from official Discord
+
+- [x] Official Telegraph Discord access for Faadil verified from screenshots.
+- [x] Persist `evidence/admin/TELEGRAPH-DISCORD-JOIN-AND-NETWORK-GUIDANCE-VERIFIED.md`.
+- [x] Staff/moderator guidance recorded: scripted/automated request volume stressing network dependencies will not count for judging; organic requests are what should count.
+- [x] Default judge demo remains captured-live replay with **zero** new Telegraph requests.
+- [x] Public judge surface must not auto-call Telegraph on load/refresh/poll/timer/background.
+- [x] No re-running live calls just to inflate activity metrics.
+- [ ] Verify Faadil substantive Skeptara Discord project post/activity.
+- [ ] Verify Benita Discord join/activity.
 
 ## TRACE / judge path
 
@@ -112,10 +127,14 @@ Status: DERIVED READY — subordinate to living PRD v0.1.
 
 - [x] Telegraph hackathon registration verified.
 - [x] Official Discord invite identified from Telegraph-owned surfaces: `https://discord.gg/telegraphprotocol`.
+- [x] Faadil official Discord access verified from human screenshots.
 - [x] Late-entry X strategy documented: no fabricated history; publish substantive build proof + demo/submission update with `@Telegraphprotoc`.
-- [ ] Human joins official Discord and provides membership/activity confirmation.
-- [ ] Human publishes X build/proof post.
-- [ ] Human publishes public-demo/submission X update once deployed.
+- [x] Benita designated primary X project voice; Faadil `@roy1919875` technical amplification voice.
+- [ ] Capture Benita X handle.
+- [ ] Verify Faadil substantive Discord project activity.
+- [ ] Verify Benita Discord membership/activity.
+- [ ] Benita publishes X build/proof post.
+- [ ] Benita publishes public-demo/submission X update once deployed.
 - [ ] Verify final submission form requirements and submission state.
 - [x] README aligned to T4 proof and claim boundaries.
 - [x] Evidence index aligned to T4 proof.
