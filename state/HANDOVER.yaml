@@ -7,10 +7,9 @@ handover:
   branch: main
 
   resume_rule: >-
-    Read state/CURRENT.yaml first, then this HANDOVER, then product/PRD.md. The living PRD is canonical product intent; Spec Kit files are derived execution contracts. Repository truth outranks chat/runtime memory. After every major gate persist evidence and update BOTH CURRENT and HANDOVER.
+    Read state/CURRENT.yaml first, then this HANDOVER, then product/PRD.md. Repository truth outranks chat memory. PRD is canonical product intent; Spec Kit is derived execution state. Persist evidence and update CURRENT + HANDOVER after each major gate.
 
-  current_milestone: T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_PR1_FRESH_BLOCK_OBSERVED__JSON_AND_GATE_DENIAL_REVIEW_NEXT
-  lifecycle_status: PRODUCT_CONTRACT_LOCKED__REAL_TELEGRAPH_PROVEN__AUDITOR_CLOSED__PROTECTED_MERGE_GATE_CLOSED__CHALLENGED_CASE_FRESH_BLOCK_CAPTURED
+  current_milestone: T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_PR1_FRESH_BLOCK_ACCEPTED__ZERO_WRITE_DENIAL_REPLAY_NEXT
 
   project:
     public_name: Skeptara
@@ -19,76 +18,82 @@ handover:
     one_line: Higher-risk autonomous code changes must survive deeper independent paid Telegraph counter-evidence before merge can execute.
 
   closed_gates:
-    t0: { status: CLOSED_PASS }
-    t1: { status: PASS }
+    t0: CLOSED_PASS
+    t1: PASS
     t2:
       status: CLOSED_PASS
+      auditor_version: skeptara-auditor-v0.4-seeded-cve
       closure_evidence: evidence/t2/LOCAL-USER-VALIDATION-V0.4-29-OF-29-AND-RUN003-REPLAY-PASS.md
     t3:
       status: CLOSED_PASS
+      gate_version: skeptara-merge-gate-v0.1
       closure_evidence: evidence/t3/LOCAL-USER-VALIDATION-V0.1-41-OF-41-AND-12-OF-12.md
-      guarantees: FRESH_BOUND_PASS_ONLY__BLOCK_ESCALATE_DENIED__EXPECTED_HEAD_SHA__HUMAN_AUTHORIZATION_REQUIRED
-
-  demo_cases:
-    challenged:
-      pr_number: 1
-      branch: demo/clean-lodash-upgrade
-      head_sha: 73cf5bdd69163924228e3e21d67fa9f405d99904
-      target: lodash@4.17.21
-      action_file: demo/actions/challenged-pr.json
-      merge_authorized: false
-    clean:
-      pr_number: 2
-      branch: demo/clean-lodash-4.18.1
-      head_sha: d2aa0ea25daf1f84b6cfdd98861d3f05df584b7a
-      target: lodash@4.18.1
-      action_file: demo/actions/clean-pr.json
-      merge_authorized: false
 
   t4_current:
     gate: SKEPTARA_T4_TWO_CASE_REAL_DEMO_PASS
-    status: PR1_FRESH_BLOCK_CAPTURED__JSON_REVIEW_AND_GATE_DENIAL_PROOF_NEXT
-    challenged_run_004:
-      runtime_dir: evidence/t2-runtime/2026-09-07T01-11-00-634Z
-      auditor: skeptara-auditor-v0.4-seeded-cve
-      risk: MEDIUM
-      spend_atomic: 20000
-      runtime_coverage: 1_OF_2
-      evidence_terminal:
-        - CVE-2026-4800 => CVE_LOOKUP / AMBIGUOUS / KNOWN_VULNERABILITY_RANGE_NOT_MACHINE_VERIFIABLE
-        - CVE-2026-2950 => CVE_LOOKUP / BLOCKING / KNOWN_VULNERABILITY_AFFECTS_TARGET_DEPENDENCY_VERSION
-      outcome: BLOCK
-      reason: MATERIAL_COUNTER_EVIDENCE_FOUND
-      pending: SANITIZED_02_AUDIT_RESULT_JSON_REVIEW
-      evidence_note: evidence/t4/PR1-FRESH-BLOCK-RUN-004-PENDING-JSON-REVIEW.md
-      current_github_revalidation:
-        pr_open: true
-        pr_merged: false
-        head_unchanged: true
-    interpretation:
-      - expected early 10000 spend did not occur because the first path was ambiguous rather than blocking
-      - the auditor correctly continued to the second required path
-      - the second path produced material blocking evidence and the final deterministic outcome is BLOCK
-      - full 20000 spend remains within the MEDIUM cap and is not a contract violation
-    next_after_review:
-      - prove merge gate DENY for captured BLOCK without calling merge adapter
-      - persist challenged-case proof
-      - run clean PR #2 fresh PASS
-      - revalidate exact head immediately
-      - ask human for explicit bounded merge authorization before any real merge
 
-  frontend_parallel:
-    contract: docs/FRONTEND_DATA_CONTRACT.md
-    branch: feat/frontend-benita
-    sync_policy: once Benita has unique commits, never force-move her branch; reconcile normally.
+    challenged_pr1:
+      action_file: demo/actions/challenged-pr.json
+      head_sha: 73cf5bdd69163924228e3e21d67fa9f405d99904
+      target: lodash@4.17.21
+      run_004:
+        runtime_dir: evidence/t2-runtime/2026-09-07T01-11-00-634Z
+        challenge_id: 113cc2c4-94ff-4c47-bf48-66fabc7c9329
+        actual_intents: [CVE_LOOKUP, CVE_LOOKUP]
+        spend_atomic: 20000
+        coverage: 1_OF_2
+        outcome: BLOCK
+        reason: MATERIAL_COUNTER_EVIDENCE_FOUND
+        first_path: CVE-2026-4800__AMBIGUOUS__RANGE_NOT_MACHINE_VERIFIABLE__SAFE_CONTINUE
+        blocking_path: CVE-2026-2950__LODASH_4_17_23_AND_EARLIER__FIXED_4_18_0__TARGET_4_17_21__BLOCKING
+        action_binding_valid: true
+        settlement_network: eip155:84532
+        reviewed: true
+        review: evidence/t4/pr1-block-run-004/REVIEW.md
+        fixture: evidence/t4/pr1-block-run-004/reviewed-challenge.sanitized.json
+      current_pr_state:
+        open: true
+        merged: false
+        exact_head_match: true
+      merge_authorized: false
+      next_proof:
+        command: npm run t4:replay:block
+        script: scripts/replay-t4-pr1-block-denial.mjs
+        purpose: ISOLATE_BLOCK_AS_DENIAL_REASON_AND_PROVE_ZERO_MERGE_ADAPTER_CALLS
+        expected:
+          authorization: DENIED
+          reason: CHALLENGE_NOT_PASS
+          merge_adapter_calls: 0
+          executed: false
+          merged: false
+        new_payment: false
+        github_write: false
+
+    clean_pr2:
+      action_file: demo/actions/clean-pr.json
+      head_sha: d2aa0ea25daf1f84b6cfdd98861d3f05df584b7a
+      target: lodash@4.18.1
+      status: WAITING_FOR_PR1_DENIAL_REPLAY
+      next_after_pr1: FRESH_LIVE_PASS
+      spend_cap_atomic: 20000
+      real_merge_requires_explicit_human_authorization: true
+      merge_authorized: false
 
   security:
     prior_burner: COMPROMISED_DO_NOT_REUSE_OR_FUND
     fresh_burner: ACTIVE_BOUNDED_TESTNET_ONLY
-    repository_secret_recorded: false
+    private_key_in_repo: false
     protected_github_write_credential_in_browser_or_repo: false
 
-  exact_next_gate: SKEPTARA_T4_PR1_BLOCK_JSON_AND_MERGE_GATE_DENIAL_REVIEW
+  next_gates:
+    - SKEPTARA_T4_PR1_ZERO_WRITE_MERGE_DENIAL_REPLAY
+    - SKEPTARA_T4_PR2_FRESH_PASS_PROOF
+    - SKEPTARA_T4_PR2_HUMAN_AUTHORIZATION_AND_OPTIONAL_REAL_MERGE
+    - SKEPTARA_TRACE_JUDGE_PATH_REVIEW
+    - SKEPTARA_BUILD_CANDIDATE_READY
+    - HUMAN_PROTECTED_FINAL_SUBMISSION
+
+  exact_next_gate: SKEPTARA_T4_PR1_ZERO_WRITE_MERGE_DENIAL_REPLAY
   exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_REVIEW
   exact_next_action: >-
-    Do not rerun Telegraph. Return evidence/t2-runtime/2026-09-07T01-11-00-634Z/02-audit-result.json from the completed PR #1 run. Review the exact blocking CVE record, action/challenge binding, timestamps, spend and settlement. Then run a zero-write merge-gate denial proof showing BLOCK cannot invoke the merge adapter. Only then proceed to fresh clean PR #2 PASS evidence. No real merge is authorized yet.
+    Pull main and run npm run t4:replay:block. This is deterministic and zero-write: no private key, no Telegraph spend and no GitHub merge. It replays the accepted PR #1 BLOCK inside the original freshness window with allow-list and humanAuthorization=true, so the expected isolated denial reason is CHALLENGE_NOT_PASS. Require merge-adapter calls 0. Return the terminal output. Then proceed immediately to PR #2 fresh PASS if green.
