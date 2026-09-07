@@ -5,122 +5,128 @@ Status: DERIVED READY — subordinate to living PRD v0.1.
 ## P0 — Product/source setup
 
 - [x] P0.1 Create public repository.
-- [x] P0.2 Replace placeholder README with operating model.
-- [x] P0.3 Create canonical state.
-- [x] P0.4 Draft living PRD v0.1.
-- [x] P0.5 Derive Spec Kit constitution/spec/plan/tasks/convergence.
-- [x] P0.6 Human-lock PRD v0.1.
-- [x] P0.7 Reconcile canonical state after PRD lock.
-- [x] P0.8 Freeze frontend data contract after T0 evidence review. *(`docs/FRONTEND_DATA_CONTRACT.md`)*
-- [ ] P0.9 Send Benita final-product-only brief + PRD PDF + repo/branch details.
+- [x] P0.2 Establish canonical state + living PRD + Spec Kit derivation.
+- [x] P0.3 Human-lock PRD v0.1.
+- [x] P0.4 Freeze frontend data contract.
+- [x] P0.5 Create `feat/frontend-benita`.
+- [ ] P0.6 Send Benita final-product-only brief + PRD PDF + repo/branch details.
 
 ## T0 — Real Telegraph challenge
 
-- [x] T0.1–T0.28 Complete real Telegraph/x402 spike, evidence review and durable persistence.
-- [x] `SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE = CLOSED_PASS`.
+- [x] Real x402/Telegraph path proven on Base Sepolia.
 - [x] Real challenged anchor: `lodash@4.17.20` → `CVE-2020-28500` → `BLOCKING`.
+- [x] `SKEPTARA_T0_REAL_TELEGRAPH_CHALLENGE = CLOSED_PASS`.
 
 ## T1 — Deterministic policy core
 
-- [x] T1.1 ActionSnapshot canonicalization + stable SHA-256 fingerprint.
-- [x] T1.2 Deterministic LOW/MEDIUM/HIGH rubric.
-- [x] T1.3 Risk → evidence-depth/spend contract.
-- [x] T1.4 Deterministic PASS/BLOCK/ESCALATE evaluator.
-- [x] T1.5 Fail-closed tests.
-- [x] Local policy validation: **10/10 PASS**.
+- [x] ActionSnapshot canonicalization + SHA-256 fingerprint.
+- [x] LOW/MEDIUM/HIGH deterministic rubric.
+- [x] Risk → required evidence depth/spend caps.
+- [x] PASS/BLOCK/ESCALATE deterministic evaluator.
+- [x] Policy tests green.
 
 ## T2 — Independent auditor
 
-- [x] T2.1 Implement Telegraph adapter from proven T0 path. *(`src/telegraph-client.mjs`)*
-- [x] T2.2 Define canonical-facts-only auditor input contract. *(`src/auditor.mjs`)*
-- [x] T2.3 Exclude constructor persuasive rationale.
-- [x] T2.4 Implement capability-aware evidence-path planner.
-- [x] T2.5 Implement bounded per-path/total spend tracking.
-- [x] T2.6 Implement evidence normalization including CVE affected-range checks.
-- [x] T2.7 Implement replayable ChallengeResult with coverage/spend/evidence/expiry.
-- [x] T2.8 Implement asymmetric `BLOCKING` early stop; PASS still needs full coverage.
-- [x] T2.9 Add secure live launcher. *(`scripts/t2-from-clipboard.ps1`, `scripts/t2-live-audit.mjs`)*
-- [x] T2.10 Initial deterministic auditor tests: **9/9 PASS**.
-- [x] T2.11 Full repository initial validation: **19/19 PASS**.
-- [x] T2.12 Full repository user-machine validation: **19/19 PASS, 0 fail**.
-- [x] T2.13 Bind live clean run to real GitHub PR #1, head `73cf5bdd69163924228e3e21d67fa9f405d99904`.
-- [x] T2.14 Real clean dependency PR created: isolated `lodash 4.17.20 -> 4.17.21`; merge not authorized.
-- [x] T2.15 Run first live clean MEDIUM audit through hardened launcher.
-- [x] T2.16 Review live run 001 evidence. **Runtime PASS rejected.**
-  - paid `CVE_LOOKUP` path did not perform a valid investigation;
-  - mandatory coverage was therefore incomplete;
-  - correct fail-closed interpretation: `ESCALATE`.
-- [x] T2.17 Implement auditor v0.2 remediation.
-  - paid response is not automatically completed coverage;
-  - invalid/missing required input → `EVIDENCE_PATH_INPUT_INVALID`, `critical:true`, `coverage_complete:false`;
-  - incomplete paths do not increment coverage;
-  - generic dependency planning no longer selects direct `CVE_LOOKUP` without explicit CVE ID;
-  - dependency preference: `FACT_CHECK`, `WEB_SEARCH`, `NEWS_SEARCH`, `URL_SCAN`.
-- [x] T2.18 Add regression tests for invalid paid evidence path and revised planning.
-- [x] T2.19 Pull auditor v0.2 and run full repository `npm test` on user machine: **21/21 PASS, 0 fail**. *(`evidence/t2/LOCAL-USER-VALIDATION-V0.2-21-OF-21.md`)*
-- [x] T2.20 Re-verify PR #1 before retry 002: open, unmerged, mergeable, exact head `73cf5bdd69163924228e3e21d67fa9f405d99904`.
-- [ ] T2.21 Run bounded live clean MEDIUM retry 002 against unchanged PR #1 head; maximum `20000` atomic USDC.
-- [ ] T2.22 Review actual retry intents, meaningful coverage, raw findings, spend and outcome; persist sanitized final record.
-- [ ] T2.23 Promote `SKEPTARA_T2_INDEPENDENT_AUDITOR_PASS` only if retry completes meaningful required coverage and real evidence justifies PASS.
+### Core + first remediation
+
+- [x] Implement generic auditor + Telegraph adapter + secure launcher.
+- [x] Implement bounded spend/coverage tracking and fail-closed negative paths.
+- [x] Full user-machine suite v0.1: **19/19 PASS**.
+- [x] Live run 001 against PR #1.
+- [x] Reject runtime PASS after review: paid CVE path was invalid and could not count as coverage.
+- [x] Implement auditor v0.2: paid response != automatic coverage; invalid path is incomplete/critical.
+- [x] Full user-machine suite v0.2: **21/21 PASS, 0 fail**.
+
+### Retry 002 evidence review
+
+- [x] Run live retry 002 against PR #1 at head `73cf5bdd69163924228e3e21d67fa9f405d99904`.
+  - spend `20000/20000` atomic USDC;
+  - actual intents `FACT_CHECK`, `NEWS_SEARCH`;
+  - runtime reported `PASS`.
+- [x] Review retry 002 and **reject runtime PASS**.
+  - FACT_CHECK returned `unverified`, confidence `0.2`, `evidence:null`;
+  - requested WEB_SEARCH routed to NEWS_SEARCH and returned articles unrelated to Lodash/package security;
+  - corrected meaningful coverage `0/2`;
+  - corrected fail-closed outcome `ESCALATE`;
+  - evidence: `evidence/t2/live-clean-retry-002/REVIEW.md`.
+
+### Demo-fixture correction
+
+- [x] Reclassify PR #1 (`lodash 4.17.20 -> 4.17.21`) as challenged candidate; preserve original head/history.
+- [x] Create clean PR #2: `lodash 4.17.20 -> 4.18.1` on `demo/clean-lodash-4.18.1`.
+- [x] Bind clean action file to PR #2 head `c40c5a3a15d6280005dfe7589ae7e2a960cc199c`.
+- [x] Persist `demo/actions/challenged-pr.json` for PR #1.
+
+### Auditor v0.3 seeded exact-CVE mode
+
+- [x] Add `src/seeded-cve-auditor.mjs`.
+- [x] Seed clean PR #2 with exact advisory IDs `CVE-2026-4800` and `CVE-2026-2950`.
+- [x] Require exact `CVE_LOOKUP` return, exact CVE ID match, found record, and machine-checkable affected-version range before coverage counts.
+- [x] Target inside returned affected range => BLOCKING; target outside range => ADVISORY.
+- [x] Add deterministic seeded-CVE tests including clean PASS, challenged BLOCK, and wrong-route ESCALATE.
+- [x] Update live runner to select seeded-CVE mode when action file contains `evidence_seeds.cve_ids`.
+- [ ] T2.24 Pull latest main and run full repository `npm test` after v0.3 addition. Expected total: **26 tests** if no unrelated count change.
+- [ ] T2.25 Re-verify PR #2 exact head/open state after local tests.
+- [ ] T2.26 Run one bounded live PR #2 MEDIUM seeded-CVE audit through hardened launcher; max `20000` atomic USDC.
+- [ ] T2.27 Review exact returned CVE records/ranges/spend/outcome and persist sanitized evidence.
+- [ ] T2.28 Promote `SKEPTARA_T2_INDEPENDENT_AUDITOR_PASS` only if the reviewed live evidence truly satisfies the gate.
 
 ## T3 — Protected merge gate
 
-- [ ] T3.1 define allow-listed demo repo/PR scope.
-- [ ] T3.2 server-side GitHub write credential boundary.
-- [ ] T3.3 bind PASS to repo + PR + head SHA + fingerprint.
-- [ ] T3.4 challenge freshness/expiry.
-- [ ] T3.5 implement merge executor.
-- [ ] T3.6 changed head => deny.
-- [ ] T3.7 expired challenge => deny.
+- [ ] T3.1 Define allow-listed demo repo/PR scope.
+- [ ] T3.2 Keep GitHub write credential server-side.
+- [ ] T3.3 Bind PASS to repo + PR + exact head SHA + action fingerprint.
+- [ ] T3.4 Enforce freshness/expiry.
+- [ ] T3.5 Implement bounded merge executor.
+- [ ] T3.6 Changed head => deny.
+- [ ] T3.7 Expired challenge => deny.
 - [ ] T3.8 BLOCK/ESCALATE => deny.
-- [ ] T3.9 non-allow-listed target => deny.
+- [ ] T3.9 Non-allow-listed target => deny.
 
 ## T4 — Real two-case proof
 
-- [x] T4.1 create/select clean dependency PR. *(PR #1)*
-- [ ] T4.2 create/select challengeable dependency PR.
-- [ ] T4.3 real clean-case proof remains pending until retry 002 passes evidence review.
-- [x] T4.4 real Telegraph challenged evidence anchor exists from T0 for `lodash@4.17.20`; dedicated challenged PR still required.
-- [ ] T4.5 execute bounded real merge only for fresh PASS case if explicitly authorized.
-- [ ] T4.6 prove challenged case cannot merge.
-- [ ] T4.7 capture evidence/replay instructions.
+- [x] Challenged candidate exists: PR #1 (`4.17.21`).
+- [x] Clean candidate exists: PR #2 (`4.18.1`).
+- [ ] T4.1 Obtain reviewed live PASS evidence for PR #2.
+- [ ] T4.2 Obtain reviewed live BLOCK evidence for PR #1 using controlled seeded CVE path.
+- [ ] T4.3 Execute bounded real merge only for fresh PASS case if explicitly authorized.
+- [ ] T4.4 Prove challenged case cannot merge.
+- [ ] T4.5 Capture replay/demo evidence.
 
 ## UX / Benita
 
-- [x] UX.1 freeze frontend data contract after T0 evidence review.
-- [x] UX.2 create `feat/frontend-benita`.
-- [x] UX.2b synchronize `feat/frontend-benita` to `main` before collaborator work.
-- [ ] UX.3 send concise locked Skeptara brief + PRD PDF + repo/branch.
-- [ ] UX.4 risk-tier presentation.
-- [ ] UX.5 live challenge-progress presentation.
-- [ ] UX.6 counter-evidence/provenance presentation.
-- [ ] UX.7 PASS/BLOCK/ESCALATE presentation.
-- [ ] UX.8 deployed frontend smoke.
-- [ ] UX.9 TRACE judge-path review.
+- [x] Frontend data contract frozen.
+- [x] `feat/frontend-benita` created and previously synchronized before collaborator work.
+- [ ] Send brief + PRD PDF if not already sent.
+- [ ] Risk-tier presentation.
+- [ ] Live challenge-progress presentation.
+- [ ] Evidence/provenance presentation.
+- [ ] PASS/BLOCK/ESCALATE states.
+- [ ] Deployed frontend smoke.
+- [ ] TRACE judge-path review.
 
 ## Submission / finishing
 
-- [ ] F.1 current rules re-check.
-- [ ] F.2 sponsor-native necessity check.
-- [ ] F.3 whole-rubric coverage check.
-- [ ] F.4 activity/usage evidence.
-- [ ] F.5 demo script/video.
-- [ ] F.6 README architecture/evidence links.
-- [ ] F.7 clean-room replay.
-- [ ] F.8 public deployment smoke.
-- [ ] F.9 Project Finisher terminal assurance.
-- [ ] F.10 human-protected final submission.
+- [ ] Re-check current rules/rubric.
+- [ ] Sponsor-native necessity and real-miner proof review.
+- [ ] Activity/usage evidence.
+- [ ] Demo script/video.
+- [ ] README architecture/evidence links.
+- [ ] Clean-room replay.
+- [ ] Public deployment smoke.
+- [ ] Project Finisher terminal assurance.
+- [ ] Human-protected final submission.
 
 ## Operating rule
 
 After every passed/failed major gate:
 1. persist evidence;
-2. update `state/CURRENT.yaml` milestone history + exact next gate;
+2. update `state/CURRENT.yaml` + exact next gate;
 3. update `state/HANDOVER.yaml`;
-4. reconcile PRD/spec/plan/tasks if required.
+4. reconcile PRD/spec/plan/tasks only if discovery class requires it.
 
 ## Reconciliation record
 
-Live run 001 caught a false-positive PASS and triggered auditor v0.2 fail-closed remediation. The user's real clone now passes **21/21** tests with both regression cases green, and PR #1 has been reverified unchanged at the exact bound head SHA. This is still an `execution_detail` change; PRD v0.1 remains product authority and unchanged.
+Retry 002 was another useful fail-closed discovery: paid responses can still be evidentially empty or irrelevant even when the transport succeeds. PR #1 is no longer treated as clean. The clean fixture has moved to current Lodash `4.18.1`, and v0.3 uses exact external CVE identifiers to demand concrete, machine-checkable Telegraph records. Product intent is unchanged; this is execution/demo-fixture remediation.
 
-Exact next gate: `SKEPTARA_T2_V0_2_LIVE_CLEAN_RETRY_002`.
+Exact next gate: `SKEPTARA_T2_V0_3_LOCAL_TEST_AND_PR2_LIVE_AUDIT`.
