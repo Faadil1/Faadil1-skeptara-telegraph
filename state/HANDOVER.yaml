@@ -4,16 +4,12 @@ handover:
   date: 2026-09-07
   source_of_truth: GITHUB
   repository: Faadil1/skeptara-telegraph
-  repository_alias_history:
-    prior_full_name: Faadil1/Faadil1-skeptara-telegraph
-    current_full_name: Faadil1/skeptara-telegraph
-    historical_evidence_rule: DO_NOT_REWRITE_OLD_BOUND_REPOSITORY_NAMES
   branch: main
 
   resume_rule: >-
-    Read state/CURRENT.yaml first, then this HANDOVER, product/PRD.md, spec-kit/tasks.md, docs/JUDGE-CLAIM-BOUNDARIES.md, docs/SUBMISSION-COMPLIANCE.md, docs/FRONTEND_DATA_CONTRACT.md, and evidence/trace/FRONTEND-SETTLEMENT-MATRIX-CLARIFICATION.md. Repository truth outranks chat memory. Never force-move a collaborator branch once unique commits exist.
+    Read state/CURRENT.yaml first, then this HANDOVER, product/PRD.md, spec-kit/tasks.md, docs/JUDGE-CLAIM-BOUNDARIES.md, docs/SUBMISSION-COMPLIANCE.md, docs/FRONTEND_DATA_CONTRACT.md, evidence/trace/FRONTEND-SETTLEMENT-MATRIX-CLARIFICATION.md, and evidence/trace/BENITA-FRONTEND-SOURCE-REVIEW-001.md. Repository truth outranks chat memory. Never force-move Benita's branch now that unique commits exist.
 
-  current_milestone: T0_THRU_T4_CLOSED__HIDDEN_SPOT_LOCAL_VALIDATION_PASS__BENITA_SETTLEMENT_QUESTION_RESOLVED__BENITA_BRANCH_DIVERGED_WITH_9_UNIQUE_COMMITS__RECONCILE_THEN_TRACE
+  current_milestone: T0_THRU_T4_CLOSED__LOCAL_VALIDATION_PASS__BENITA_FRONTEND_SOURCE_REVIEW_HOLD_BOUNDED_FIXES__RECONCILE_THEN_TRACE
 
   project:
     public_name: Skeptara
@@ -33,53 +29,66 @@ handover:
     evidence: evidence/trace/LOCAL-VALIDATION-41-OF-41-AND-JUDGE-REPLAY-PASS.md
     npm_test: 41_OF_41_PASS
     npm_run_demo: PASS__ZERO_PAYMENT__ZERO_EXTERNAL_WRITE
-    npm_run_demo_web: STARTUP_PASS_AT_HTTP_127_0_0_1_4173
 
   t4_final:
     challenged_pr1:
-      historical_repo: Faadil1/Faadil1-skeptara-telegraph
-      pr: 1
       head_sha: 73cf5bdd69163924228e3e21d67fa9f405d99904
       target: lodash@4.17.21
       outcome: BLOCK
-      blocking_evidence: CVE-2026-2950
+      runtime_paid_calls: 2
+      spend_atomic: 20000
+      completed_coverage: 1
+      actual_order:
+        - CVE_2026_4800__AMBIGUOUS__NOT_COVERAGE
+        - CVE_2026_2950__BLOCKING__MATERIAL_COUNTER_EVIDENCE
       merge_gate: DENIED
       merge_adapter_calls: 0
     clean_pr2:
-      historical_repo: Faadil1/Faadil1-skeptara-telegraph
-      pr: 2
       head_sha: 528d730f9ebdcb433e01ba9c79dcc9a5f66ce1c7
       target: lodash@4.18.1
       outcome: PASS
-      coverage: 2_OF_2
-      human_bounded_authorization: EXPLICIT_PASS_FOR_EXACT_HEAD_ONLY
+      completed_coverage: 2
+      runtime_paid_calls: 2
       merge_commit_sha: c76c76e0c02dab28275d8e53d70da3f6f132e648
 
-  benita_settlement_question:
-    status: RESOLVED
+  settlement_matrix:
+    status: VERIFIED
     evidence: evidence/trace/FRONTEND-SETTLEMENT-MATRIX-CLARIFICATION.md
-    frontend_contract: docs/FRONTEND_DATA_CONTRACT.md
-    correct_answer: >-
-      Across the two final T4 cases there were four evidence items and four separate paid Telegraph calls. Each call has its own successful x402 settlement transaction. The apparent single settlement_transaction in the reduced fixtures was caused by sanitization/data shaping, not by one paid call producing multiple findings.
-    transactions:
-      pr1_cve_2026_4800: 0x07ef1d9a4d44409832c99a02c89b26f665fab7fe07040e7573ab2b81a1fa8b57
-      pr1_cve_2026_2950: 0x171e2fc64a0d33b9726a31e3a45654aa47b2ce94b89f83d74d30fe3b327f5020
-      pr2_cve_2026_4800: 0x66bd41892d411b9be502759fc4259d2bec8821fd818385cc5eabb950589ab2a2
-      pr2_cve_2026_2950: 0x95e44b463cb6cafd4b1c56a9889930c1180d084a5e709ccf410296ca465d1e1b
-    generic_schema_rule: settlement.transaction optional/nullable; never infer a missing future tx; all four final T4 txs are verified and displayable.
+    final_t4_calls: 4
+    distinct_txs: 4
+    pr1_cve_2026_4800: 0x07ef1d9a4d44409832c99a02c89b26f665fab7fe07040e7573ab2b81a1fa8b57
+    pr1_cve_2026_2950: 0x171e2fc64a0d33b9726a31e3a45654aa47b2ce94b89f83d74d30fe3b327f5020
+    pr2_cve_2026_4800: 0x66bd41892d411b9be502759fc4259d2bec8821fd818385cc5eabb950589ab2a2
+    pr2_cve_2026_2950: 0x95e44b463cb6cafd4b1c56a9889930c1180d084a5e709ccf410296ca465d1e1b
 
-  collaboration:
-    frontend_branch: feat/frontend-benita
-    latest_compare:
-      status: DIVERGED
-      main_ahead_by: 4
-      benita_unique_commits: 9
-      merge_base: 69dcbd087b974c6443664af7e57fa7c00f39d8da
-    hard_rule: NEVER_FORCE_MOVE_BENITA_BRANCH_NOW
-    reconciliation: NORMAL_MERGE_OR_CHERRY_PICK_AFTER_REVIEW_PRESERVING_SEMANTICS
-    benita_x_discord_brief_sent: false
-    intended_primary_x_voice: BENITA_PENDING_HUMAN_CONFIRMATION
-    faadil_x_handle: '@roy1919875'
+  benita_frontend:
+    deployed_url_human_supplied: https://skeptara.vercel.app/
+    branch: feat/frontend-benita
+    branch_status: DIVERGED
+    unique_commits_observed: 11
+    never_force_move: true
+    source_review: HOLD_BOUNDED_FIXES
+    review_evidence: evidence/trace/BENITA-FRONTEND-SOURCE-REVIEW-001.md
+    strengths:
+      - clear judge path
+      - real identifiers and proof links
+      - historical replay framing exists
+      - PASS/BLOCK/ESCALATE represented
+      - exact-head and real merge proof represented
+    p0_required_fixes:
+      - >-
+        PR1 chronology: actual order was ambiguous CVE-2026-4800 first, blocking CVE-2026-2950 second; full $0.02 was spent. Do not say blocking was first or that budget remained unspent.
+      - >-
+        Restore all four final T4 settlement transactions and real PR1 evidence order in web/src/data/cases.ts.
+      - >-
+        Replace 'No real Skeptara run has hit ESCALATE yet' with 'Neither final T4 case resolved to ESCALATE'; earlier development runs did exercise ESCALATE.
+      - >-
+        Tighten independence language: topology/component separation and Telegraph-routed external evidence, not statistical/miner independence.
+    p1_recommended:
+      - label $0.04 and 4 calls as final T4 two-case proof scope
+      - mark hero CVE-2950 as triggering evidence or show both PR1 paths
+      - keep MEDIUM live vs LOW/HIGH test boundary visible
+      - persistent CAPTURED LIVE / HISTORICAL REPLAY label on case routes
 
   admin:
     registration: VERIFIED
@@ -87,8 +96,10 @@ handover:
     faadil_discord_project_activity: VERIFIED
     faadil_discord_organic_engagement: VERIFIED
     benita_discord: HUMAN_VERIFY
+    benita_x_handle: HUMAN_VERIFY
+    intended_primary_x_voice: BENITA_PENDING_HUMAN_CONFIRMATION
+    faadil_x_handle: '@roy1919875'
     x_posts: HUMAN_ACTION_REQUIRED
-    public_deployment: NOT_YET_PROVEN
     final_submission: NOT_SUBMITTED
 
   anti_gaming:
@@ -96,7 +107,7 @@ handover:
     no_repeat_live_calls_for_optics: true
     default_judge_demo: CAPTURED_LIVE_HISTORICAL_REPLAY
 
-  exact_next_gate: SKEPTARA_BENITA_FRONTEND_RECONCILIATION_THEN_TRACE_VISUAL_REVIEW
-  exact_next_owner: CHATGPT_ORCHESTRATOR_WITH_BENITA_BRANCH_REVIEW_AND_HUMAN_VISUAL_REVIEW
+  exact_next_gate: SKEPTARA_BENITA_P0_FRONTEND_FIXES_AND_NORMAL_RECONCILIATION
+  exact_next_owner: BENITA_FRONTEND_WITH_CHATGPT_ORCHESTRATOR_REVIEW
   exact_next_action: >-
-    Wait for Benita to indicate her frontend work is ready. Do not force-update her branch; it now contains 9 unique commits. When ready, inspect those commits and reconcile normally with current main, including the settlement clarification contract. Then run TRACE visual review on the combined judge-facing surface, verify no fresh Telegraph traffic, persist TRACE, deploy publicly, smoke test, publish X showcase, run Project Finisher, and submit.
+    Share the bounded review with Benita. She should make the four P0 claim/data corrections on her branch. Do not force-move or overwrite her unique commits. After she pushes, compare/review the branch, reconcile normally with current main, then perform final visual TRACE on desktop and mobile before deploy/submission.
