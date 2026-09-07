@@ -1,13 +1,13 @@
 canonical_state:
   protocol_version: 1
   system: SKEPTARA_TELEGRAPH_TRACK3
-  version: 0.10.6-owner-frontend-integration-pr3-validation-next
+  version: 0.10.7-pr3-local-tests-build-pass-lint-fix-rerun-next
   date: 2026-09-07
   source_of_truth: GITHUB
   repository: Faadil1/skeptara-telegraph
   branch: main
 
-  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__LOCAL_VALIDATION_PASS__BENITA_LATEST_FRONTEND_FIXES_CAPTURED__OWNER_INTEGRATION_PR3_OPEN_DRAFT__VALIDATION_THEN_TRACE
+  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__BENITA_FRONTEND_CAPTURED__OWNER_INTEGRATION_PR3__ROOT_41_OF_41_PASS__WEB_BUILD_PASS__LINT_WARNING_REMEDIATED__CLEAN_RERUN_AND_TRACE_NEXT
 
   authority:
     product_intent_source: product/PRD.md
@@ -27,11 +27,7 @@ canonical_state:
     t2: CLOSED_PASS
     t3: CLOSED_PASS
     t4: CLOSED_PASS
-    hidden_spot_local_validation:
-      status: PASS
-      evidence: evidence/trace/LOCAL-VALIDATION-41-OF-41-AND-JUDGE-REPLAY-PASS.md
-      tests: 41_OF_41_PASS__0_FAIL
-      judge_replay: PASS__ZERO_PAYMENT__ZERO_EXTERNAL_WRITE
+    hidden_spot_local_validation: PASS
 
   t4_truth:
     pr1:
@@ -62,34 +58,49 @@ canonical_state:
     branch: feat/frontend-benita
     latest_head_used_for_owner_integration: a7c366f6cd5f4f268ecab958dbaeb0e46a00cc67
     never_force_move: true
-    latest_branch_already_fixed:
-      - PR1_CHRONOLOGY
-      - PR1_FULL_0_02_SPEND_WORDING
-      - ALL_FOUR_FINAL_T4_SETTLEMENT_TRANSACTIONS
-      - FINAL_T4_ESCALATE_WORDING
 
   owner_frontend_integration:
-    status: IMPLEMENTED_PENDING_VALIDATION
-    evidence: evidence/trace/OWNER-FRONTEND-INTEGRATION-001.md
-    stale_branch_not_candidate: integration/frontend-final
+    status: LOCAL_VALIDATION_PARTIAL_PASS__LINT_FIX_RERUN_PENDING
+    evidence:
+      integration: evidence/trace/OWNER-FRONTEND-INTEGRATION-001.md
+      local_validation: evidence/trace/PR3-LOCAL-VALIDATION-001.md
     candidate_branch: integration/frontend-final-v2
     draft_pr: 3
     pr_url: https://github.com/Faadil1/skeptara-telegraph/pull/3
-    candidate_head: 88fcb4570b713745084efc405a4149c4f69fd110
-    mergeable_after_github_recompute: true
+    candidate_head: afffa7bb28b556192a25116a18924148b2314590
     merged: false
-    changes:
+    github_mergeable_latest_observation: false
+    mergeability_note: RECHECK_AFTER_HEAD_RECOMPUTE_AND_LATEST_MAIN_RECONCILIATION
+    validated_before_latest_hook_fix:
+      root_tests: 41_OF_41_PASS__0_FAIL
+      web_npm_ci: PASS__0_VULNERABILITIES
+      web_build: PASS
+      web_lint: 0_ERRORS__1_WARNING_REACT_SET_STATE_IN_EFFECT
+      web_dev_server: PASS__HTTP_127_0_0_1_5173
+    latest_hook_fix:
+      commit: afffa7bb28b556192a25116a18924148b2314590
+      file: web/src/hooks/useCaseReplay.ts
+      purpose: REMOVE_SYNC_SET_STATE_IN_EFFECT_WARNING_WHILE_PRESERVING_REDUCED_MOTION
+      clean_lint_rerun: PENDING_HUMAN
+      build_rerun: PENDING_HUMAN
+    bounded_changes:
       - COPY_ANTI_AI_SLOP_CLEANUP
       - ABOVE_FOLD_BLOCK_PASS_SPLIT
       - FINAL_T4_SCOPE_LABELS
       - PAID_CALL_NUMBERING_AND_COVERAGE_LABELS
       - PERSISTENT_HISTORICAL_REPLAY_NOTICE
-      - HISTORICAL_EXPIRY_AND_PROOF_TIME_REPO_LABELS
       - SIMPLIFIED_REPLAY_TIMERS
       - REDUCED_MOTION_REPLAY_AND_HASH_SCROLL
       - SAFE_NOT_FOUND_ROUTE
       - CANONICAL_OG_X_METADATA
       - REPLAY_ONLY_NO_NETWORK_OR_WRITE_BOUNDARY_PRESERVED
+
+  local_workspace_note:
+    observed_untracked_paths:
+      - evidence/t0-real-telegraph/runtime/
+      - evidence/t2-runtime/
+      - package-lock.json
+    rule: DO_NOT_GIT_ADD_ALL__DO_NOT_COMMIT_RUNTIME_SECRET_BEARING_OR_UNREVIEWED_FILES
 
   claim_boundaries:
     exact_cve_seeded_mode: CONTROLLED_HACKATHON_PROOF_NOT_AUTOMATIC_UNKNOWN_VULNERABILITY_DISCOVERY
@@ -104,16 +115,6 @@ canonical_state:
     public_page_mode: HISTORICAL_PROOF_REPLAY_ONLY
     automatic_telegraph_request_on_load_or_replay: MUST_REMAIN_NONE
     live_merge_button_with_browser_credentials: PROHIBITED
-
-  activity:
-    real_paid_challenge_runs: 3
-    real_paid_evidence_calls: 5
-    observed_unique_miners: 2
-    observed_testnet_spend_usd: 0.05
-    protected_denials: 1
-    real_exact_head_merges: 1
-    user_count_claim: NONE
-    no_volume_inflation: true
 
   administrative_compliance:
     registration: VERIFIED
@@ -131,7 +132,7 @@ canonical_state:
     handover_must_be_sufficient_for_next_conversation_to_take_lead: true
     evidence_before_pass_claim: REQUIRED
 
-  exact_next_gate: SKEPTARA_PR3_LOCAL_VALIDATION_AND_TRACE
+  exact_next_gate: SKEPTARA_PR3_CLEAN_LINT_BUILD_RERUN_THEN_TRACE
   exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_REVIEW
   exact_next_action: >-
-    Validate draft PR #3 from integration/frontend-final-v2. Do not merge yet. On the user machine, fetch the branch, run root npm test, then cd web and run npm ci, npm run build, and npm run lint. Start the frontend and inspect desktop/mobile. Verify direct /case/pr1 and /case/pr2 routes, all four settlement links, the real merge link, reduced-motion behavior, not-found route, and DevTools network showing no Telegraph request on page load or replay. If all pass, persist TRACE evidence, merge PR #3 normally into main, smoke the deployment, then proceed to X/demo/submission. No fresh Telegraph calls for optics.
+    On integration/frontend-final-v2 pull candidate head afffa7bb28b556192a25116a18924148b2314590. In web run npm run lint and require 0 warnings/0 errors, then npm run build. Do not merge PR #3 yet. If clean, keep the dev server running and perform desktop/mobile TRACE plus direct /case/pr1, /case/pr2 and invalid-route checks, verify all four settlement links and the historical real-merge link, and verify DevTools network shows no Telegraph request on page load or replay. Then reconcile PR #3 with latest main if needed, persist final TRACE evidence, and only then merge/smoke/publish/submit. No fresh Telegraph calls for optics.
