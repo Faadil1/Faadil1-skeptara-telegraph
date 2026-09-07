@@ -9,8 +9,8 @@ handover:
   resume_rule: >-
     Read state/CURRENT.yaml first, then this HANDOVER, then product/PRD.md. The living PRD is canonical product intent; Spec Kit files are derived execution contracts. Repository truth outranks chat/runtime memory. After every major gate persist evidence and update BOTH CURRENT and HANDOVER.
 
-  current_milestone: T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_V0_1_IMPLEMENTED__LOCAL_VALIDATION_NEXT
-  lifecycle_status: PRODUCT_CONTRACT_LOCKED__REAL_TELEGRAPH_PROVEN__AUDITOR_CLOSED_PASS__PROTECTED_MERGE_GATE_IMPLEMENTED
+  current_milestone: T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_FRESH_TWO_CASE_REAL_PROOF_NEXT
+  lifecycle_status: PRODUCT_CONTRACT_LOCKED__REAL_TELEGRAPH_PROVEN__INDEPENDENT_AUDITOR_CLOSED__PROTECTED_MERGE_GATE_CLOSED__REAL_TWO_CASE_EXECUTION_PROOF_NEXT
 
   project:
     public_name: Skeptara
@@ -36,38 +36,33 @@ handover:
     t2:
       status: CLOSED_PASS
       auditor_version: skeptara-auditor-v0.4-seeded-cve
-      contract: docs/T2_AUDITOR_CONTRACT.md
       closure_evidence: evidence/t2/LOCAL-USER-VALIDATION-V0.4-29-OF-29-AND-RUN003-REPLAY-PASS.md
       user_machine_full_repo: 29_OF_29_PASS__0_FAIL
-      replay_command: npm run t2:replay:003
-      replay_result:
-        coverage: 2_OF_2
-        materialities: [ADVISORY, ADVISORY]
-        outcome: PASS
-        new_payment: false
+      replay_result: 2_OF_2_ADVISORY__PASS__ZERO_NEW_SPEND
       replay_is_merge_authorization: false
+    t3:
+      status: CLOSED_PASS
+      version: skeptara-merge-gate-v0.1
+      implementation: src/merge-gate.mjs
+      contract: docs/T3_MERGE_GATE_CONTRACT.md
+      closure_evidence: evidence/t3/LOCAL-USER-VALIDATION-V0.1-41-OF-41-AND-12-OF-12.md
+      user_machine_full_repo: 41_OF_41_PASS__0_FAIL
+      focused_merge_gate: 12_OF_12_PASS__0_FAIL
+      real_merge_performed: false
 
-  t2_evidence_history:
-    run_001:
-      runtime_reported: PASS
-      reviewed: ESCALATE
-      evidence: evidence/t2/live-clean-run-001/REVIEW.md
-    run_002:
-      runtime_reported: PASS
-      reviewed: ESCALATE
-      corrected_coverage: 0_OF_2
-      evidence: evidence/t2/live-clean-retry-002/REVIEW.md
-    run_003:
-      runtime_reported: ESCALATE
-      actual_intents: [CVE_LOOKUP, CVE_LOOKUP]
-      spend_atomic: 20000
-      reviewed_live_truth:
-        - CVE-2026-4800 exact record => target 4.18.1 outside affected range => ADVISORY
-        - CVE-2026-2950 exact substantive record, fixed in 4.18.0 => target 4.18.1 outside affected range => ADVISORY
-      corrected_coverage: 2_OF_2
-      root_cause: V03_MINER_SHAPE_SPECIFIC_NORMALIZER
-      v04_remediation: SEMANTIC_EXACT_CVE_NORMALIZATION
-      review: evidence/t2/live-pr2-seeded-run-003/REVIEW.md
+  t3_guarantees:
+    - allow-listed repository and PR required
+    - explicit human bounded authorization required
+    - challenge outcome must be PASS
+    - repository PR head SHA and action fingerprint must match challenge
+    - completed_at and expires_at must be valid and unexpired
+    - live PR must remain open unmerged and on exact challenged head
+    - BLOCK and ESCALATE denied
+    - changed head denied
+    - non-allow-listed target denied
+    - denied authorization never invokes merge adapter
+    - authorized executor forwards exact expected_head_sha to server-side adapter
+    - browser/domain objects never carry protected GitHub write credential
 
   demo_cases:
     challenged:
@@ -76,6 +71,7 @@ handover:
       head_sha: 73cf5bdd69163924228e3e21d67fa9f405d99904
       target: lodash@4.17.21
       action_file: demo/actions/challenged-pr.json
+      expected_t4: FRESH_BLOCK_THEN_GATE_DENY
       merge_authorized: false
     clean:
       pr_number: 2
@@ -83,44 +79,20 @@ handover:
       head_sha: d2aa0ea25daf1f84b6cfdd98861d3f05df584b7a
       target: lodash@4.18.1
       action_file: demo/actions/clean-pr.json
+      expected_t4: FRESH_PASS_IF_LIVE_EVIDENCE_REMAINS_NON_BLOCKING
       merge_authorized: false
 
-  t3_current:
-    gate: SKEPTARA_T3_FAIL_CLOSED_MERGE_GATE_PASS
-    status: V0_1_IMPLEMENTED__USER_LOCAL_VALIDATION_REQUIRED
-    version: skeptara-merge-gate-v0.1
-    implementation: src/merge-gate.mjs
-    tests: tests/merge-gate.test.mjs
-    contract: docs/T3_MERGE_GATE_CONTRACT.md
-    implemented_rules:
-      - allow-listed repository and PR required
-      - explicit human bounded authorization required
-      - challenge outcome must be PASS
-      - repository PR head SHA and action fingerprint must match challenge
-      - completed_at and expires_at must be valid; expired challenge denied
-      - live PR must still be open unmerged and on exact challenged head
-      - BLOCK and ESCALATE denied
-      - changed head denied
-      - non-allow-listed target denied
-      - denied authorization never invokes merge adapter
-      - authorized executor forwards exact expected_head_sha to server-side adapter
-    credential_boundary:
-      merge_gate_accepts_token: false
-      browser_write_credential: forbidden
-      protected_write_adapter: server_side_injected_only
-    next_validation:
-      full_repo_command: npm test
-      expected_full_test_count: 41
-      focused_command: npm run test:merge-gate
-      new_telegraph_payment_required: false
-      real_merge_required: false
-    real_merge_authorized: false
-
-  t4_after_t3:
-    clean_case: fresh live PASS required for PR #2
-    challenged_case: fresh live BLOCK required for PR #1
-    real_clean_merge: requires explicit human bounded authorization plus fresh unexpired exact-head PASS
-    challenged_merge: must be denied
+  t4_current:
+    gate: SKEPTARA_T4_TWO_CASE_REAL_DEMO_PASS
+    status: FRESH_LIVE_PROOFS_REQUIRED
+    preferred_order:
+      first: PR1_CHALLENGED_BLOCK
+      second: PR2_CLEAN_PASS_AND_OPTIONAL_REAL_MERGE
+    challenged_case_budget_expectation_atomic: 10000
+    clean_case_budget_cap_atomic: 20000
+    fresh_unexpired_challenge_required_for_real_execution: true
+    clean_real_merge_requires_explicit_human_authorization: true
+    no_merge_authorized_yet: true
 
   frontend_parallel:
     contract: docs/FRONTEND_DATA_CONTRACT.md
@@ -134,13 +106,12 @@ handover:
     protected_github_write_credential_in_browser_or_repo: false
 
   next_gates:
-    - SKEPTARA_T3_FAIL_CLOSED_MERGE_GATE_PASS
     - SKEPTARA_T4_TWO_CASE_REAL_DEMO_PASS
     - SKEPTARA_TRACE_JUDGE_PATH_REVIEW
     - SKEPTARA_BUILD_CANDIDATE_READY
     - HUMAN_PROTECTED_FINAL_SUBMISSION
 
-  exact_next_gate: SKEPTARA_T3_V0_1_LOCAL_VALIDATION
+  exact_next_gate: SKEPTARA_T4_CHALLENGED_PR1_FRESH_BLOCK_PROOF
   exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_REVIEW
   exact_next_action: >-
-    Pull main, run npm test, then npm run test:merge-gate. No private key, Telegraph payment, or GitHub merge is needed. Expected full test count is 41 if no unrelated count change. Return both terminal outputs. Do not merge PR #1 or PR #2. T4 can begin only after T3 local validation closes, and any real merge must use a fresh unexpired exact-head PASS plus explicit human authorization.
+    Run a fresh live Telegraph challenge against demo/actions/challenged-pr.json using the hardened clipboard launcher and a bounded Base Sepolia burner. Set SKEPTARA_T2_ACTION_FILE to the challenged action file before launching. Expected behavior is MEDIUM seeded-CVE mode and early BLOCK on the first material affected-range match, normally costing 10000 atomic USDC. Return terminal output plus sanitized 02-audit-result.json. Do not merge either PR. After the BLOCK proof is reviewed and persisted, run the clean PR #2 fresh PASS proof; only then may the human explicitly authorize a bounded real merge of PR #2.
