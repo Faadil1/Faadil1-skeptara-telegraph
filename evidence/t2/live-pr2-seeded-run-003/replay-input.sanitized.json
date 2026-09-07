@@ -1,0 +1,92 @@
+{
+  "source_run": "2026-09-07T00-43-44-168Z",
+  "challenge_id": "5773ce67-dac4-48ba-a9b8-dc98c76df56e",
+  "action_input": {
+    "repository": "Faadil1/Faadil1-skeptara-telegraph",
+    "pr_number": 2,
+    "head_sha": "d2aa0ea25daf1f84b6cfdd98861d3f05df584b7a",
+    "base_branch": "main",
+    "changed_files": ["demo/controlled-clean/package.json"],
+    "dependency_changes": [
+      {
+        "name": "lodash",
+        "from": "4.17.20",
+        "to": "4.18.1",
+        "type": "runtime",
+        "security_sensitive": false
+      }
+    ],
+    "security_sensitive_surfaces": []
+  },
+  "cve_seeds": ["CVE-2026-4800", "CVE-2026-2950"],
+  "available_intents": ["CVE_LOOKUP"],
+  "paid_calls": [
+    {
+      "quote_amount_atomic": 10000,
+      "started_at": "2026-09-07T00:43:47.038Z",
+      "completed_at": "2026-09-07T00:43:51.934Z",
+      "payment_response": {
+        "success": true,
+        "transaction": "0x75fe2a6245cb71599ee5451cf7484fe4e3dbb103de704804d86fe2c39d126364",
+        "network": "eip155:84532"
+      },
+      "response": {
+        "miner_id": "20260828",
+        "miner_name": "PREFLIGHT Infrastructure Signals",
+        "endpoint": "/cve",
+        "intent": "CVE_LOOKUP",
+        "signal_hash": "0xc7439a207b10728241c7e13e916636a6a7a5b2c4d24aaab4fab9940207640af8",
+        "cost_usd": 0.01,
+        "duration_ms": 1084,
+        "result": {
+          "affected_versions": [
+            "lodash 4.0.0 through versions before 4.18.0",
+            "lodash lodash-es 4.0.0 through versions before 4.18.0",
+            "lodash lodash-amd 4.0.0 through versions before 4.18.0",
+            "lodash lodash.template 4.0.0 through versions before 4.18.0"
+          ],
+          "confidence": 1,
+          "cve_id": "CVE-2026-4800",
+          "cvss_score": 9.8,
+          "found": true,
+          "severity": "CRITICAL",
+          "source": "CVE.org and NVD",
+          "verdict": "found"
+        }
+      }
+    },
+    {
+      "quote_amount_atomic": 10000,
+      "started_at": "2026-09-07T00:43:55.355Z",
+      "completed_at": "2026-09-07T00:43:59.330Z",
+      "payment_response": {
+        "success": true,
+        "transaction": "0x1cdc3258d4769e0082127bcff14b6c0f4ccaa9857ee63a95cff7e83673112750",
+        "network": "eip155:84532"
+      },
+      "response": {
+        "miner_id": "7336",
+        "miner_name": "SecWire CVE Lookup",
+        "endpoint": "/cve",
+        "intent": "CVE_LOOKUP",
+        "signal_hash": "0x388cd226bcf16de8537ab04ead0dbf8e8855e1771d79aaa52e616702913a486a",
+        "cost_usd": 0.01,
+        "duration_ms": 986,
+        "result": {
+          "confidence": 0.97,
+          "cve_id": "CVE-2026-2950",
+          "cvss_score": 5.3,
+          "description": "Lodash versions 4.17.23 and earlier are vulnerable to prototype pollution in the _.unset and _.omit functions. This issue is patched in 4.18.0. Workarounds: None. Upgrade to the patched version.",
+          "earliest_affected_version": "4.17.23",
+          "fix_available": true,
+          "fixed_versions": ["4.18.0"],
+          "product": "lodash",
+          "references": ["https://github.com/lodash/lodash/security/advisories/GHSA-xxjr-mmjv-4gpg"],
+          "severity": "MEDIUM",
+          "source": "CIRCL cve.circl.lu and NVD services.nvd.nist.gov",
+          "summary": "CVE-2026-2950 is MEDIUM in lodash. Prototype pollution."
+        }
+      }
+    }
+  ]
+}
