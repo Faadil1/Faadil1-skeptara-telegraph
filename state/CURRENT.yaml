@@ -1,13 +1,13 @@
 canonical_state:
   protocol_version: 1
   system: SKEPTARA_TELEGRAPH_TRACK3
-  version: 0.7.0-t2-closed-pass-t3-v0-1-local-validation-next
+  version: 0.8.0-t3-closed-pass-t4-fresh-two-case-proof-next
   date: 2026-09-07
   source_of_truth: GITHUB
   repository: Faadil1/Faadil1-skeptara-telegraph
   branch: main
 
-  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_V0_1_IMPLEMENTED_LOCAL_VALIDATION_REQUIRED
+  lifecycle_status: PRD_V0_1_LOCKED__T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_FRESH_TWO_CASE_REAL_PROOF_NEXT
 
   authority:
     product_intent_source: product/PRD.md
@@ -56,8 +56,31 @@ canonical_state:
           - { cve_id: CVE-2026-4800, materiality: ADVISORY, coverage_complete: true }
           - { cve_id: CVE-2026-2950, materiality: ADVISORY, coverage_complete: true }
         outcome: PASS
-        reason: REQUIRED_COVERAGE_COMPLETE_NO_BLOCKING_EVIDENCE
       replay_is_merge_authorization: false
+    t3:
+      status: CLOSED_PASS
+      version: skeptara-merge-gate-v0.1
+      implementation: src/merge-gate.mjs
+      contract: docs/T3_MERGE_GATE_CONTRACT.md
+      closure_evidence: evidence/t3/LOCAL-USER-VALIDATION-V0.1-41-OF-41-AND-12-OF-12.md
+      validation:
+        full_repository: 41_OF_41_PASS__0_FAIL
+        focused_merge_gate: 12_OF_12_PASS__0_FAIL
+      guarantees:
+        allowlist_required: true
+        human_bounded_authorization_required: true
+        challenge_outcome_must_be_pass: true
+        exact_repository_binding: true
+        exact_pr_binding: true
+        exact_head_sha_binding: true
+        exact_action_fingerprint_binding: true
+        challenge_freshness_required: true
+        live_pr_revalidation_required: true
+        changed_head_denied: true
+        block_or_escalate_denied: true
+        denied_path_never_calls_merge_adapter: true
+        expected_head_sha_forwarded_to_server_adapter: true
+      real_merge_performed_during_t3: false
 
   evidence_quality_history:
     run_001:
@@ -86,6 +109,7 @@ canonical_state:
       head_sha: 73cf5bdd69163924228e3e21d67fa9f405d99904
       target: lodash@4.17.21
       action_file: demo/actions/challenged-pr.json
+      expected_fresh_t4_result: BLOCK
       merge_authorized: false
     clean:
       repository: Faadil1/Faadil1-skeptara-telegraph
@@ -94,40 +118,30 @@ canonical_state:
       head_sha: d2aa0ea25daf1f84b6cfdd98861d3f05df584b7a
       target: lodash@4.18.1
       action_file: demo/actions/clean-pr.json
+      expected_fresh_t4_result: PASS_IF_LIVE_RECORDS_REMAIN_NON_BLOCKING
       merge_authorized: false
 
-  t3_contract:
-    gate: SKEPTARA_T3_FAIL_CLOSED_MERGE_GATE_PASS
-    status: V0_1_IMPLEMENTED_LOCAL_VALIDATION_REQUIRED
-    version: skeptara-merge-gate-v0.1
-    implementation: src/merge-gate.mjs
-    tests: tests/merge-gate.test.mjs
-    contract: docs/T3_MERGE_GATE_CONTRACT.md
-    requirements_implemented:
-      allowlist_required: true
-      human_bounded_authorization_required: true
-      challenge_outcome_must_be_pass: true
-      exact_repository_binding: true
-      exact_pr_binding: true
-      exact_head_sha_binding: true
-      exact_action_fingerprint_binding: true
-      challenge_freshness_required: true
-      live_pr_revalidation_required: true
-      changed_head_denied: true
-      block_or_escalate_denied: true
-      denied_path_never_calls_merge_adapter: true
-      expected_head_sha_forwarded_to_server_adapter: true
-    credential_boundary:
-      browser_write_credential: forbidden
-      domain_object_write_credential: forbidden
-      server_side_injected_adapter_only: true
-    validation_remaining:
-      - user git pull
-      - full repository npm test
-      - expected total 41 tests if no unrelated count change
-      - npm run test:merge-gate
-      - close T3 only after both user-machine gates are green
-    real_merge_authorized: false
+  t4_contract:
+    gate: SKEPTARA_T4_TWO_CASE_REAL_DEMO_PASS
+    status: FRESH_LIVE_PROOFS_REQUIRED
+    challenged_case:
+      required: true
+      action_file: demo/actions/challenged-pr.json
+      expected_behavior: FRESH_BLOCK_THEN_MERGE_GATE_DENY
+      maximum_expected_spend_atomic_usdc: 10000
+    clean_case:
+      required: true
+      action_file: demo/actions/clean-pr.json
+      expected_behavior: FRESH_PASS_THEN_EXACT_HEAD_REVALIDATION
+      maximum_expected_spend_atomic_usdc: 20000
+      real_merge_requires_explicit_human_authorization: true
+    ordering:
+      preferred_first: CHALLENGED_PR_1
+      reason: PROVE_DENIAL_FIRST_WITHOUT_RISKING_CLEAN_CASE_FRESHNESS_WINDOW
+    freshness:
+      fresh_unexpired_challenge_required_for_execution: true
+      t2_replay_not_sufficient_for_merge: true
+    real_merge_authorized_now: false
 
   security_boundary:
     prior_exposed_burner_status: COMPROMISED_DO_NOT_REUSE_OR_FUND
@@ -146,8 +160,8 @@ canonical_state:
     t0_real_telegraph_challenge: CLOSED_PASS
     t1_deterministic_risk_scorer: PASS
     t2_independent_auditor: CLOSED_PASS
-    t3_fail_closed_merge_gate: V0_1_LOCAL_VALIDATION_REQUIRED
-    t4_two_case_real_demo: BOTH_REAL_PRS_EXIST__FRESH_PASS_BLOCK_EXECUTION_PROOFS_PENDING
+    t3_fail_closed_merge_gate: CLOSED_PASS
+    t4_two_case_real_demo: FRESH_LIVE_PROOFS_REQUIRED
     trace_design_review: NOT_STARTED
     project_finisher: NOT_STARTED
     final_submission: PROTECTED_NOT_AUTHORIZED
@@ -157,7 +171,7 @@ canonical_state:
     evidence_before_pass_claim: REQUIRED
     repository_truth_outranks_chat_memory: true
 
-  exact_next_gate: SKEPTARA_T3_V0_1_LOCAL_VALIDATION
+  exact_next_gate: SKEPTARA_T4_CHALLENGED_PR1_FRESH_BLOCK_PROOF
   exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_REVIEW
   exact_next_action: >-
-    Pull main, run npm test, then npm run test:merge-gate. No private key, Telegraph payment, or GitHub merge is required for this gate. Expected full test count is 41 if no unrelated test-count change. Return both terminal outputs. Do not merge PR #1 or PR #2. After T3 closes, T4 must obtain a fresh unexpired live challenge before any real merge, and PR #2 merge still requires explicit human bounded authorization.
+    Pull main if needed, then run the hardened T2 launcher against demo/actions/challenged-pr.json using SKEPTARA_T2_ACTION_FILE in the current PowerShell session. Use the fresh bounded Base Sepolia burner and never paste or print its private key. Expected risk is MEDIUM, seeded CVE mode is active, and a material affected-range match should BLOCK early after the first paid path (normally 10000 atomic USDC). Return the full terminal output and sanitized 02-audit-result.json. Do not merge PR #1 or PR #2. After the challenged denial proof is reviewed, obtain a fresh live PASS for PR #2 and ask for explicit human bounded authorization before any real merge.
