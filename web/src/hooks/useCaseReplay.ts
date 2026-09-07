@@ -22,20 +22,33 @@ export function useCaseReplay(caseId: string, evidenceCount: number) {
     timers.current.forEach((id) => window.clearTimeout(id));
     timers.current = [];
 
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reducedMotion) {
-      setPhase("done");
-      setRevealedCount(evidenceCount);
-      return;
-    }
-
-    setPhase("action");
-    setRevealedCount(0);
-
     const later = (delay: number, fn: () => void) => {
       const id = window.setTimeout(fn, delay);
       timers.current.push(id);
     };
+
+    const cleanup = () => {
+      timers.current.forEach((id) => window.clearTimeout(id));
+      timers.current = [];
+    };
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reducedMotion) {
+      // Defer the state transition so the effect only synchronizes with the
+      // browser preference and never performs synchronous state writes.
+      later(0, () => {
+        setPhase("done");
+        setRevealedCount(evidenceCount);
+      });
+      return cleanup;
+    }
+
+    // Reset on route change or an explicit replay request without making a
+    // synchronous state update inside the effect.
+    later(0, () => {
+      setPhase("action");
+      setRevealedCount(0);
+    });
 
     let elapsed = ACTION_DELAY_MS;
     later(elapsed, () => setPhase("risk"));
@@ -52,10 +65,7 @@ export function useCaseReplay(caseId: string, evidenceCount: number) {
     elapsed += VERDICT_DELAY_MS;
     later(elapsed, () => setPhase("done"));
 
-    return () => {
-      timers.current.forEach((id) => window.clearTimeout(id));
-      timers.current = [];
-    };
+    return cleanup;
   }, [caseId, evidenceCount, runToken]);
 
   const replay = () => setRunToken((n) => n + 1);
