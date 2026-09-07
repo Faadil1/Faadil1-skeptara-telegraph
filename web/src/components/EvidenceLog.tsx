@@ -6,31 +6,30 @@ import "./EvidenceLog.css";
 const MATERIALITY_LABEL: Record<EvidenceItem["materiality"], string> = {
   BLOCKING: "blocking",
   ADVISORY: "advisory",
-  AMBIGUOUS: "ambiguous — not counted",
+  AMBIGUOUS: "ambiguous, not counted",
 };
 
-function CoverageNote({ result }: { result: ChallengeResult }) {
-  const short = result.completed_coverage < result.required_coverage;
-  if (!short) {
+function CoverageNote({ result, paidCalls }: { result: ChallengeResult; paidCalls: number }) {
+  if (result.completed_coverage >= result.required_coverage) {
     return (
       <p className="coverage-note coverage-note--complete">
-        {result.completed_coverage} of {result.required_coverage} required evidence paths completed.
+        {result.completed_coverage} of {result.required_coverage} required evidence paths qualified from {paidCalls} paid calls.
       </p>
     );
   }
+
   if (result.outcome === "BLOCK") {
     return (
       <p className="coverage-note coverage-note--halted">
-        {result.completed_coverage} of {result.required_coverage} required evidence paths completed
-        — the challenge stopped early. It found blocking evidence before spending the rest of the
-        budget on the remaining path, so it never needed to complete coverage.
+        {paidCalls} paid calls completed. {result.completed_coverage} of {result.required_coverage} paths qualified for coverage.
+        The second call returned material blocking evidence, so the final outcome is BLOCK even though qualifying coverage is 1 of 2.
       </p>
     );
   }
+
   return (
     <p className="coverage-note coverage-note--incomplete">
-      {result.completed_coverage} of {result.required_coverage} required evidence paths completed
-      before the budget or window ran out. Incomplete required coverage cannot produce PASS.
+      {result.completed_coverage} of {result.required_coverage} required evidence paths qualified. Incomplete required coverage cannot produce PASS.
     </p>
   );
 }
@@ -54,17 +53,17 @@ export function EvidenceLog({
   return (
     <div className="evidence-log">
       {showCoverageNote ? (
-        <CoverageNote result={result} />
+        <CoverageNote result={result} paidCalls={items.length} />
       ) : (
         <p className="coverage-note coverage-note--pending" role="status">
-          Replaying real evidence calls from this closed run&hellip;
+          Replaying captured evidence calls from this closed run&hellip;
         </p>
       )}
       <ol className="evidence-log__list">
         {shown.map((item, i) => (
           <li key={i} className={`evidence-row evidence-row--${item.materiality.toLowerCase()}`}>
             <div className="evidence-row__top">
-              <span className="evidence-row__intent mono">{item.intent}</span>
+              <span className="evidence-row__intent mono">call {String(i + 1).padStart(2, "0")} · {item.intent}</span>
               <span className={`evidence-row__materiality mono evidence-row__materiality--${item.materiality.toLowerCase()}`}>
                 {MATERIALITY_LABEL[item.materiality]}
               </span>
@@ -81,6 +80,8 @@ export function EvidenceLog({
                     ? "settled"
                     : "settlement failed"}
               </span>
+              <span>·</span>
+              <span>{item.coverage_complete ? "counts toward coverage" : "does not count toward coverage"}</span>
             </div>
             {item.finding?.cve_id && (
               <div className="evidence-row__finding">
@@ -109,7 +110,7 @@ export function EvidenceLog({
                   target="_blank"
                   rel="noreferrer"
                 >
-                  verify settlement ↗
+                  verify this settlement ↗
                 </a>
               ) : null;
             })()}
@@ -117,7 +118,7 @@ export function EvidenceLog({
         ))}
         {awaitingNext && shown.length < items.length && (
           <li className="evidence-row evidence-row--pending" role="status" aria-label="Loading next evidence path">
-            <div className="evidence-row__pending-label mono">awaiting next evidence path&hellip;</div>
+            <div className="evidence-row__pending-label mono">next captured evidence call&hellip;</div>
             <SkeletonLines count={2} />
           </li>
         )}
