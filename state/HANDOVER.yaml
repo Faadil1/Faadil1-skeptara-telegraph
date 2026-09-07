@@ -7,20 +7,19 @@ handover:
   repository_alias_history:
     prior_full_name: Faadil1/Faadil1-skeptara-telegraph
     current_full_name: Faadil1/skeptara-telegraph
-    historical_evidence_rule: DO_NOT_REWRITE_OLD_BOUND_REPOSITORY_NAMES__GITHUB_RENAME_REDIRECTS_PRESERVE_HISTORY
+    historical_evidence_rule: DO_NOT_REWRITE_OLD_BOUND_REPOSITORY_NAMES
   branch: main
 
   resume_rule: >-
-    Read state/CURRENT.yaml first, then this HANDOVER, product/PRD.md, spec-kit/tasks.md, docs/JUDGE-CLAIM-BOUNDARIES.md, docs/SUBMISSION-COMPLIANCE.md, docs/FRONTEND_DATA_CONTRACT.md, and Winning Intelligence evidence. Repository truth outranks chat memory. Persist evidence plus CURRENT + HANDOVER after every major gate and execution boundary. Never infer collaborator communication or administrative completion without human evidence.
+    Read state/CURRENT.yaml first, then this HANDOVER, product/PRD.md, spec-kit/tasks.md, docs/JUDGE-CLAIM-BOUNDARIES.md, docs/SUBMISSION-COMPLIANCE.md, docs/FRONTEND_DATA_CONTRACT.md, and evidence/trace/FRONTEND-SETTLEMENT-MATRIX-CLARIFICATION.md. Repository truth outranks chat memory. Never force-move a collaborator branch once unique commits exist.
 
-  current_milestone: T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__NINE_SPOT_REMEDIATION_IMPLEMENTED__LOCAL_VALIDATION_PASS__BENITA_SETTLEMENT_DATA_SHAPING_QUESTION_RESOLVED__TRACE_VISUAL_REVIEW_NEXT
+  current_milestone: T0_THRU_T4_CLOSED__HIDDEN_SPOT_LOCAL_VALIDATION_PASS__BENITA_SETTLEMENT_QUESTION_RESOLVED__BENITA_BRANCH_DIVERGED_WITH_9_UNIQUE_COMMITS__RECONCILE_THEN_TRACE
 
   project:
     public_name: Skeptara
     deadline_utc: 2026-09-07T23:59:59Z
     hero_vertical: AUTONOMOUS_GITHUB_DEPENDENCY_MERGE
     safe_public_promise: Before an autonomous agent can merge code, Skeptara buys Telegraph-routed external evidence to try to prove the change unsafe.
-    mechanism: EXTERNAL_DETERMINISTIC_RISK_TO_RISK_PROPORTIONAL_PAID_TELEGRAPH_COUNTER_EVIDENCE_TO_PASS_BLOCK_ESCALATE_TO_EXACT_PROTECTED_EXECUTION
 
   closed_gates:
     t0: CLOSED_PASS
@@ -32,127 +31,72 @@ handover:
 
   local_validation:
     evidence: evidence/trace/LOCAL-VALIDATION-41-OF-41-AND-JUDGE-REPLAY-PASS.md
-    npm_test: { tests: 41, pass: 41, fail: 0 }
-    npm_run_demo:
-      status: PASS
-      telegraph_payment: NONE
-      external_write: NONE
-      challenged_case: PR1__LODASH_4_17_21__BLOCK__MERGE_DENIED__0_MERGE_CALLS
-      clean_case: PR2__LODASH_4_18_1__PASS__2_OF_2__HISTORICAL_REAL_MERGE
-    npm_run_demo_web:
-      startup: PASS
-      local_url: http://127.0.0.1:4173
-      static_captured_live_evidence_only: true
-      visual_review: PENDING
+    npm_test: 41_OF_41_PASS
+    npm_run_demo: PASS__ZERO_PAYMENT__ZERO_EXTERNAL_WRITE
+    npm_run_demo_web: STARTUP_PASS_AT_HTTP_127_0_0_1_4173
 
   t4_final:
-    historical_repository_name_at_proof_time: Faadil1/Faadil1-skeptara-telegraph
-    current_repository_name: Faadil1/skeptara-telegraph
     challenged_pr1:
+      historical_repo: Faadil1/Faadil1-skeptara-telegraph
       pr: 1
       head_sha: 73cf5bdd69163924228e3e21d67fa9f405d99904
       target: lodash@4.17.21
       outcome: BLOCK
       blocking_evidence: CVE-2026-2950
-      merge_gate: { authorization: DENIED, merge_adapter_calls: 0, merged: false }
+      merge_gate: DENIED
+      merge_adapter_calls: 0
     clean_pr2:
+      historical_repo: Faadil1/Faadil1-skeptara-telegraph
       pr: 2
       head_sha: 528d730f9ebdcb433e01ba9c79dcc9a5f66ce1c7
       target: lodash@4.18.1
       outcome: PASS
       coverage: 2_OF_2
-      observed_miners:
-        - { id: 20260828, name: PREFLIGHT Infrastructure Signals }
-        - { id: 7336, name: SecWire CVE Lookup }
       human_bounded_authorization: EXPLICIT_PASS_FOR_EXACT_HEAD_ONLY
       merge_commit_sha: c76c76e0c02dab28275d8e53d70da3f6f132e648
 
-  frontend_settlement_clarification:
-    status: VERIFIED
-    trigger: BENITA_QUESTION_ON_ONE_VISIBLE_SETTLEMENT_TRANSACTION_ACROSS_FOUR_ITEMS
+  benita_settlement_question:
+    status: RESOLVED
     evidence: evidence/trace/FRONTEND-SETTLEMENT-MATRIX-CLARIFICATION.md
-    contract: docs/FRONTEND_DATA_CONTRACT.md
-    answer: >-
-      In the final T4 proof there were four separate paid evidence calls, not one paid call producing four findings. Each of the four captured evidence items has its own successful x402 settlement transaction. The reduced reviewed fixtures omitted three transaction hashes during sanitization/data shaping. This is not Telegraph protocol behavior.
-    matrix:
+    frontend_contract: docs/FRONTEND_DATA_CONTRACT.md
+    correct_answer: >-
+      Across the two final T4 cases there were four evidence items and four separate paid Telegraph calls. Each call has its own successful x402 settlement transaction. The apparent single settlement_transaction in the reduced fixtures was caused by sanitization/data shaping, not by one paid call producing multiple findings.
+    transactions:
       pr1_cve_2026_4800: 0x07ef1d9a4d44409832c99a02c89b26f665fab7fe07040e7573ab2b81a1fa8b57
       pr1_cve_2026_2950: 0x171e2fc64a0d33b9726a31e3a45654aa47b2ce94b89f83d74d30fe3b327f5020
       pr2_cve_2026_4800: 0x66bd41892d411b9be502759fc4259d2bec8821fd818385cc5eabb950589ab2a2
       pr2_cve_2026_2950: 0x95e44b463cb6cafd4b1c56a9889930c1180d084a5e709ccf410296ca465d1e1b
-    frontend_rule:
-      generic_transaction_field: OPTIONAL_NULLABLE
-      final_t4_display: MAY_SHOW_ALL_FOUR_VERIFIED_TX_HASHES
-      never_attach_one_tx_to_multiple_items: true
-      never_infer_missing_future_tx: true
-
-  winning_intelligence:
-    preflight: { status: PASS_WITH_PRIORITY_RISKS, packet: evidence/winning-intelligence/WI-TRACE-PREFLIGHT-001.md }
-    blind_spot_audit_002: { status: COMPLETE, packet: evidence/winning-intelligence/WI-BLIND-SPOT-AUDIT-002.md }
-    remediation_003: { status: IMPLEMENTED_AND_LOCALLY_VALIDATED, packet: evidence/winning-intelligence/WI-HIDDEN-SPOT-REMEDIATION-003.md }
-    discord_signal_004: { decision: NO_PIVOT__DIFFERENTIATION_REINFORCED__NO_VOLUME_CHASING, packet: evidence/winning-intelligence/WI-DISCORD-COMPETITIVE-SIGNAL-004.md }
-
-  judge_assets:
-    challenge_dossier: public/index.html
-    claim_boundaries: docs/JUDGE-CLAIM-BOUNDARIES.md
-    frontend_contract: docs/FRONTEND_DATA_CONTRACT.md
-    settlement_matrix: evidence/trace/FRONTEND-SETTLEMENT-MATRIX-CLARIFICATION.md
-    compliance: docs/SUBMISSION-COMPLIANCE.md
-    activity_ledger: evidence/activity/ACTIVITY-LEDGER-V0.1.md
-    local_validation: evidence/trace/LOCAL-VALIDATION-41-OF-41-AND-JUDGE-REPLAY-PASS.md
-
-  claim_boundaries:
-    exact_cve_seeded: CONTROLLED_PROOF_NOT_AUTOMATIC_UNKNOWN_VULNERABILITY_DISCOVERY
-    risk_scaling: LOW_HIGH_POLICY_TEST_PROVEN__MEDIUM_LIVE_FINAL_T4_PROVEN
-    independence: CHALLENGE_TOPOLOGY_NOT_STATISTICAL_MINER_INDEPENDENCE
-    replay: CAPTURED_LIVE_HISTORICAL_NEVER_FRESH_AUTHORIZATION
-    github_runtime: T3_CONTRACT_TESTS_PLUS_T4_REAL_EXACT_HEAD_MERGE__NO_FULL_DEPLOYED_ADAPTER_CLAIM
-
-  activity_ledger:
-    real_paid_challenge_runs: 3
-    real_paid_evidence_calls: 5
-    unique_observed_miners: 2
-    observed_testnet_spend_usd: 0.05
-    denied_actions: 1
-    real_exact_head_merges: 1
-    user_count_claim: NONE
-    do_not_inflate_request_volume: true
-
-  discord:
-    official_invite: https://discord.gg/telegraphprotocol
-    faadil_join_access: VERIFIED
-    faadil_project_activity: VERIFIED
-    faadil_organic_engagement: VERIFIED
-    benita_join_activity: HUMAN_VERIFY
-    no_automated_metric_traffic: true
-    default_judge_demo: CAPTURED_LIVE_HISTORICAL_REPLAY
-
-  public_comms:
-    intended_primary_x_project_voice: BENITA
-    reason: STRONGER_PITCHING_AND_STORYTELLING
-    benita_x_handle: HUMAN_VERIFY_NOT_YET_RECORDED
-    faadil_x_handle: '@roy1919875'
-    benita_x_discord_brief_sent: false
-    benita_acceptance_of_primary_x_role: NOT_YET_CONFIRMED
+    generic_schema_rule: settlement.transaction optional/nullable; never infer a missing future tx; all four final T4 txs are verified and displayable.
 
   collaboration:
-    frontend_contract: docs/FRONTEND_DATA_CONTRACT.md
     frontend_branch: feat/frontend-benita
-    frontend_branch_policy: FAST_FORWARD_ONLY_WHILE_NO_UNIQUE_COLLABORATOR_COMMITS
-    once_unique_commits_exist: NEVER_FORCE_MOVE__RECONCILE_NORMALLY
+    latest_compare:
+      status: DIVERGED
+      main_ahead_by: 4
+      benita_unique_commits: 9
+      merge_base: 69dcbd087b974c6443664af7e57fa7c00f39d8da
+    hard_rule: NEVER_FORCE_MOVE_BENITA_BRANCH_NOW
+    reconciliation: NORMAL_MERGE_OR_CHERRY_PICK_AFTER_REVIEW_PRESERVING_SEMANTICS
+    benita_x_discord_brief_sent: false
+    intended_primary_x_voice: BENITA_PENDING_HUMAN_CONFIRMATION
+    faadil_x_handle: '@roy1919875'
 
-  current_remaining_gaps:
-    trace_human_visual_review: PENDING
-    browser_network_behavior_check: PENDING
-    public_deployment_smoke: PENDING
-    benita_x_discord_brief_send: PENDING_HUMAN
-    benita_discord_join_activity: PENDING_HUMAN
-    benita_x_handle_capture: PENDING_HUMAN
-    x_showcase_posts: PENDING_HUMAN
-    track3_submission_platform_visibility: HUMAN_VERIFY_AT_SUBMISSION_TIME
-    final_submission: PENDING_HUMAN
-    project_finisher: NOT_STARTED
+  admin:
+    registration: VERIFIED
+    faadil_discord_join: VERIFIED
+    faadil_discord_project_activity: VERIFIED
+    faadil_discord_organic_engagement: VERIFIED
+    benita_discord: HUMAN_VERIFY
+    x_posts: HUMAN_ACTION_REQUIRED
+    public_deployment: NOT_YET_PROVEN
+    final_submission: NOT_SUBMITTED
 
-  exact_next_gate: SKEPTARA_TRACE_JUDGE_PATH_VISUAL_REVIEW
-  exact_next_owner: HUMAN_SCREENSHOT_WITH_CHATGPT_TRACE_REVIEW
+  anti_gaming:
+    no_automated_request_volume_for_metrics: true
+    no_repeat_live_calls_for_optics: true
+    default_judge_demo: CAPTURED_LIVE_HISTORICAL_REPLAY
+
+  exact_next_gate: SKEPTARA_BENITA_FRONTEND_RECONCILIATION_THEN_TRACE_VISUAL_REVIEW
+  exact_next_owner: CHATGPT_ORCHESTRATOR_WITH_BENITA_BRANCH_REVIEW_AND_HUMAN_VISUAL_REVIEW
   exact_next_action: >-
-    Benita's settlement question is resolved and should not block frontend work. For final T4, each evidence item was a distinct paid Telegraph call with its own successful settlement transaction; use the settlement matrix evidence and updated frontend contract. Do not infer the reduced fixture omission as one-call-multiple-findings semantics. Continue waiting for Benita's frontend/pitch contribution if desired, then perform final TRACE visual review and public deployment without fresh Telegraph activity calls.
+    Wait for Benita to indicate her frontend work is ready. Do not force-update her branch; it now contains 9 unique commits. When ready, inspect those commits and reconcile normally with current main, including the settlement clarification contract. Then run TRACE visual review on the combined judge-facing surface, verify no fresh Telegraph traffic, persist TRACE, deploy publicly, smoke test, publish X showcase, run Project Finisher, and submit.
