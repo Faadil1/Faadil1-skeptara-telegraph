@@ -51,41 +51,54 @@ Status: DERIVED READY — subordinate to living PRD v0.1.
 
 ## T4 — Real two-case proof
 
-- [x] Challenged candidate exists: PR #1 (`lodash@4.17.21`).
-- [x] Clean candidate exists: PR #2 (`lodash@4.18.1`).
-- [x] Fresh live challenged PR #1 run with real Telegraph/x402 => `BLOCK`.
-- [x] Review run 004 exact evidence: `CVE-2026-2950` affects Lodash `4.17.23 and earlier`, fixed `4.18.0`; target `4.17.21` => `BLOCKING`.
-- [x] Zero-write `npm run t4:replay:block` PASS.
-  - authorization `DENIED`;
-  - reason `CHALLENGE_NOT_PASS`;
-  - merge-adapter calls `0`;
-  - execution `executed=false`, `merged=false`.
-- [x] Challenged half conclusion: **REAL BLOCK + ZERO-WRITE EXECUTION DENIAL PROVEN**.
-- [x] Reconcile clean PR #2 branch with current main before final paid PASS proof.
-  - old head `d2aa0ea25daf1f84b6cfdd98861d3f05df584b7a`;
-  - reconciled head `528d730f9ebdcb433e01ba9c79dcc9a5f66ce1c7`;
-  - no force update used;
-  - evidence: `evidence/t4/PR2-CLEAN-BRANCH-RECONCILIATION.md`.
-- [x] T4.4 Fresh live PASS for clean PR #2.
-  - exact head `528d730f9ebdcb433e01ba9c79dcc9a5f66ce1c7`;
-  - MEDIUM risk;
-  - `2/2` meaningful non-blocking exact-CVE coverage;
-  - spend `20000/20000` atomic USDC;
-  - outcome `PASS`;
-  - challenge `f4f075f3-1dbc-42ed-9843-dbec43de3430`.
-- [x] T4.5 Review and persist fresh PR #2 result.
-  - `evidence/t4/pr2-clean-run-005/REVIEW.md`;
-  - `evidence/t4/pr2-clean-run-005/reviewed-challenge.sanitized.json`.
-- [x] T4.6 Revalidate PR #2 while PASS fresh.
-  - open, unmerged, exact-head match;
-  - `mergeable:true`, `mergeable_state:clean`.
-- [x] T4.7 Human explicitly authorized exactly PR #2 at head `528d730f9ebdcb433e01ba9c79dcc9a5f66ce1c7`.
-- [x] T4.8 Execute real protected merge with exact `expected_head_sha`.
-  - merged at `2026-09-07T01:44:54Z`;
-  - merge commit `c76c76e0c02dab28275d8e53d70da3f6f132e648`;
-  - evidence: `evidence/t4/pr2-clean-run-005/REAL-MERGE-EXECUTION.md`.
-- [x] T4.9 Durable two-case proof captured.
+- [x] Challenged candidate PR #1: `lodash@4.17.21`.
+- [x] Clean candidate PR #2: `lodash@4.18.1`.
+- [x] Fresh real PR #1 Telegraph challenge => `BLOCK`.
+- [x] `CVE-2026-2950` machine-verifiable as blocking for PR #1.
+- [x] Zero-write merge replay => `DENIED`, `CHALLENGE_NOT_PASS`, merge-adapter calls `0`.
+- [x] Reconcile clean PR #2 branch with current main without force.
+- [x] Fresh real PR #2 Telegraph challenge => `PASS`, 2/2 meaningful non-blocking coverage, 20000/20000 atomic USDC.
+- [x] Review and persist fresh PR #2 result.
+- [x] Revalidate PR #2 live while challenge fresh: open, unmerged, exact-head match, mergeable clean.
+- [x] Obtain explicit human bounded authorization for PR #2 exact head `528d730f9ebdcb433e01ba9c79dcc9a5f66ce1c7`.
+- [x] Execute real GitHub merge with exact `expected_head_sha`.
+  - merge commit `c76c76e0c02dab28275d8e53d70da3f6f132e648`.
+  - merged at `2026-09-07T01:44:54Z`.
+- [x] Persist real merge execution evidence.
 - [x] `SKEPTARA_T4_TWO_CASE_REAL_DEMO_PASS = CLOSED_PASS`.
+
+## Winning Intelligence preflight
+
+- [x] Apply judge-winning / Winning Intelligence layer after T4 and before TRACE.
+- [x] Persist `evidence/winning-intelligence/WI-TRACE-PREFLIGHT-001.md`.
+- [x] Run bounded collision scan.
+  - material collision pattern: generic `verified intelligence -> governed action` / confidence gating / x402 budget / auditability;
+  - response: do **not** lead with generic governance, confidence gating, x402, or auditability.
+- [x] Freeze winning distinction:
+  - external downside scoring;
+  - risk -> evidence depth + spend;
+  - paid counter-evidence rather than confirmation;
+  - asymmetric BLOCK + fail-closed ESCALATE;
+  - exact repo/PR/head/fingerprint/freshness binding;
+  - real PR1 BLOCK/deny vs PR2 PASS/merge proof.
+- [x] Lock judge memory sentence and hero direction.
+- [x] Identify priority weaknesses: users/activity, public runnable judge path, stale README, engagement/showcase.
+- [x] `WINNING_INTELLIGENCE_PREFLIGHT = PASS_WITH_PRIORITY_RISKS`.
+
+## TRACE / judge path
+
+- [ ] Read Winning Intelligence packet before any visual changes.
+- [ ] Make the split real outcome the primary judge moment:
+  - PR #1 `BLOCK` + merge denied + 0 merge-adapter calls;
+  - PR #2 `PASS` + exact-head revalidation + human-authorized real merge.
+- [ ] Ensure 5-second comprehension: what is prevented, what is unique, why Telegraph is necessary, what was proven.
+- [ ] Present proposed PR → external risk → required scrutiny → challenge progress → evidence → PASS/BLOCK/ESCALATE → execution consequence.
+- [ ] Treat UI as challenge dossier, not generic SaaS analytics dashboard.
+- [ ] Keep proof labels readable and limitations near evidence.
+- [ ] Do not invent confidence fields, users, adoption, provenance, or independence claims.
+- [ ] Human visual review.
+- [ ] Persist TRACE findings and update CURRENT + HANDOVER.
+- [ ] `SKEPTARA_TRACE_JUDGE_PATH_REVIEW = PASS`.
 
 ## UX / Benita
 
@@ -97,30 +110,30 @@ Status: DERIVED READY — subordinate to living PRD v0.1.
 - [ ] Evidence/provenance presentation.
 - [ ] PASS/BLOCK/ESCALATE states.
 - [ ] Deployed frontend smoke.
-- [ ] TRACE judge-path review.
 
-## Submission / finishing
+## README / showcase / submission
 
+- [ ] Replace stale early-T0 README framing only after TRACE judge-path lock.
+- [ ] Put one-line promise + real two-case proof near top of README.
+- [ ] Map every strong claim to real evidence paths.
+- [ ] Prepare hero screenshot showing result + evidence state.
+- [ ] Public demo smoke.
+- [ ] Truthful users/activity/usage evidence; never fabricate counters.
+- [ ] X update tagged for Telegraph judging with direct proof/demo links.
+- [ ] Discord/community showcase.
 - [ ] Re-check current rules/rubric.
 - [ ] Sponsor-native necessity and real-miner proof review.
-- [ ] Activity/usage evidence.
 - [ ] Demo script/video.
-- [ ] README architecture/evidence links.
 - [ ] Clean-room replay.
-- [ ] Public deployment smoke.
 - [ ] Project Finisher terminal assurance.
 - [ ] Human-protected final submission.
 
 ## Operating rule
 
-After every passed/failed major gate or protected execution boundary:
+After every passed/failed major gate and every protected execution boundary:
 1. persist evidence;
 2. update `state/CURRENT.yaml` + exact next gate;
 3. update `state/HANDOVER.yaml` so a new conversation can take the lead;
 4. reconcile PRD/spec/plan/tasks only if discovery class requires it.
 
-## Reconciliation record
-
-T0 through T4 are now closed. T4 proves both sides of the core Skeptara claim with real artifacts: PR #1 produced paid Telegraph counter-evidence and a deterministic BLOCK that could not reach execution; PR #2 produced a fresh real PASS, was revalidated at the exact challenged head, received explicit human bounded authorization, and merged successfully with `expected_head_sha` enforced.
-
-The next execution gate is no longer backend correctness. It is `SKEPTARA_TRACE_JUDGE_PATH_REVIEW`: make the real proof legible in the UI/demo without inventing runtime fields, then proceed to deployed smoke and Project Finisher.
+Exact next gate: `SKEPTARA_TRACE_JUDGE_PATH_REVIEW`.
