@@ -9,7 +9,7 @@ handover:
   resume_rule: >-
     Read state/CURRENT.yaml first, then this HANDOVER, product/PRD.md, spec-kit/tasks.md, docs/JUDGE-CLAIM-BOUNDARIES.md, docs/SUBMISSION-COMPLIANCE.md, docs/FRONTEND_DATA_CONTRACT.md, evidence/trace/FRONTEND-SETTLEMENT-MATRIX-CLARIFICATION.md, evidence/trace/BENITA-FRONTEND-SOURCE-REVIEW-001.md, evidence/trace/BENITA-FRONTEND-HOLISTIC-REVIEW-002.md, evidence/trace/OWNER-FRONTEND-INTEGRATION-001.md, and evidence/trace/PR3-LOCAL-VALIDATION-001.md. Repository truth outranks chat memory. Never force-move Benita's branch.
 
-  current_milestone: T0_THRU_T4_CLOSED__BENITA_FRONTEND_CAPTURED__OWNER_PR3_ROOT_TESTS_PASS__WEB_BUILD_PASS__ONE_LINT_WARNING_REMEDIATED__CLEAN_RERUN_THEN_TRACE
+  current_milestone: T0_THRU_T4_CLOSED__BENITA_LATEST_FRONTEND_AND_README_CAPTURED__OWNER_INTEGRATION_V2_CURRENT__ROOT_TESTS_PASS__WEB_BUILD_PASS__CLEAN_LINT_BUILD_RERUN_THEN_TRACE
 
   project:
     public_name: Skeptara
@@ -51,7 +51,11 @@ handover:
   benita_frontend:
     live_url_human_supplied: https://skeptara.vercel.app/
     branch: feat/frontend-benita
-    latest_head_used: a7c366f6cd5f4f268ecab958dbaeb0e46a00cc67
+    latest_head: 68dfc2b103dcc88ec821a3cc1f50f4f568074400
+    latest_unique_commit:
+      sha: 68dfc2b103dcc88ec821a3cc1f50f4f568074400
+      scope: README_ONLY
+      web_changed: false
     never_force_move: true
 
   owner_integration:
@@ -59,12 +63,26 @@ handover:
     evidence:
       integration: evidence/trace/OWNER-FRONTEND-INTEGRATION-001.md
       validation: evidence/trace/PR3-LOCAL-VALIDATION-001.md
+    stale_branch: integration/frontend-final
+    stale_branch_rule: DO_NOT_USE_OR_MERGE
     candidate_branch: integration/frontend-final-v2
+    candidate_branch_rule: ONLY_CURRENT_INTEGRATION_CANDIDATE
     draft_pr: 3
     pr_url: https://github.com/Faadil1/skeptara-telegraph/pull/3
-    current_candidate_head: afffa7bb28b556192a25116a18924148b2314590
+    current_candidate_head: 1244294ee96c747c7220a7159de0652d9b04e019
     merged: false
-    latest_local_results_before_hook_fix:
+    benita_readme_reconciliation:
+      source_commit: 68dfc2b103dcc88ec821a3cc1f50f4f568074400
+      source_scope: README_ONLY
+      integration_commit: 1244294ee96c747c7220a7159de0652d9b04e019
+      result: RECONCILED_WITH_CANONICAL_CORRECTIONS
+      corrections:
+        - all four final T4 settlement transactions visible in proof table
+        - PR1 ambiguous-first then blocking-second chronology explicit
+        - Faadil Discord status updated to verified
+        - independence wording tightened to avoid statistical-miner implication
+        - copy tightened to reduce AI-slop punctuation/contrast patterns
+    latest_local_results_before_candidate_head:
       root_npm_test: 41_OF_41_PASS__0_FAIL
       web_npm_ci: PASS__0_VULNERABILITIES
       web_npm_build: PASS
@@ -73,10 +91,8 @@ handover:
       dev_server: PASS__HTTP_127_0_0_1_5173
     warning_remediation:
       commit: afffa7bb28b556192a25116a18924148b2314590
-      status: IMPLEMENTED__CLEAN_RERUN_PENDING
+      status: IMPLEMENTED__CLEAN_RERUN_PENDING_ON_1244294
       behavior_preserved: PREFERS_REDUCED_MOTION_COMPLETES_HISTORICAL_REPLAY_WITHOUT_NETWORK_OR_WRITE
-    pr_mergeability_latest_observation: false
-    mergeability_rule: RECHECK_AFTER_GITHUB_RECOMPUTE_AND_RECONCILE_WITH_LATEST_MAIN_BEFORE_MERGE
 
   local_workspace_warning:
     untracked:
@@ -117,4 +133,4 @@ handover:
   exact_next_gate: SKEPTARA_PR3_CLEAN_LINT_BUILD_RERUN_THEN_TRACE
   exact_next_owner: HUMAN_LOCAL_RUNTIME_WITH_CHATGPT_REVIEW
   exact_next_action: >-
-    On the user's current integration/frontend-final-v2 checkout, pull latest origin so HEAD becomes afffa7bb28b556192a25116a18924148b2314590. Then in web run npm run lint and npm run build. Require lint 0 warnings/0 errors and build PASS. Do not merge PR #3 yet. If clean, run final desktop/mobile TRACE, direct route and invalid-route checks, verify all four settlement links and the historical real-merge link, and confirm DevTools network contains no Telegraph request on page load or replay. Reconcile PR #3 with latest main if mergeability still false, persist final TRACE evidence, then merge/smoke/X/demo/submission.
+    Tell Benita integration/frontend-final-v2 is the current branch; integration/frontend-final is stale and should be ignored. Her README-only commit 68dfc2b has already been reconciled into v2 with canonical proof corrections, so she does not need to merge either integration branch into her own branch. On the user's local integration/frontend-final-v2 checkout, git pull so HEAD becomes 1244294ee96c747c7220a7159de0652d9b04e019. In web run npm run lint and npm run build. Require lint 0 warnings/0 errors and build PASS. Then run desktop/mobile TRACE, direct route and invalid-route checks, verify all four settlement links and the historical real-merge link, confirm DevTools network contains no Telegraph request on page load or replay, reconcile PR #3 with latest main if needed, persist final TRACE evidence, and only then merge/smoke/X/demo/submission.
