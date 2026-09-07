@@ -94,6 +94,21 @@ export function Landing() {
           />
         </div>
       </section>
+
+      <section className="landing__escalate">
+        <div className="landing__escalate-top">
+          <VerdictBadge outcome="ESCALATE" />
+          <h2 className="landing__section-title landing__escalate-title">A third outcome exists — it just hasn't fired yet</h2>
+        </div>
+        <p className="landing__section-note">
+          <span className="mono">ESCALATE</span> fires when required coverage can't be completed — budget
+          exhausted, a source unavailable, or a critical finding too ambiguous to resolve automatically.
+          Both demo runs happened to resolve cleanly into a real <span className="mono">BLOCK</span> or{" "}
+          <span className="mono">PASS</span>. No real Skeptara run has hit <span className="mono">ESCALATE</span>{" "}
+          yet, so there is no case card for it here — showing one would mean inventing a run that never
+          happened.
+        </p>
+      </section>
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import type { ChallengeResult, EvidenceItem } from "../data/types";
+import { SkeletonLines } from "./Skeleton";
 import "./EvidenceLog.css";
 
 const MATERIALITY_LABEL: Record<EvidenceItem["materiality"], string> = {
@@ -36,15 +37,28 @@ function CoverageNote({ result }: { result: ChallengeResult }) {
 export function EvidenceLog({
   items,
   result,
+  revealedCount,
+  awaitingNext = false,
 }: {
   items: EvidenceItem[];
   result: ChallengeResult;
+  revealedCount?: number;
+  awaitingNext?: boolean;
 }) {
+  const shown = revealedCount == null ? items : items.slice(0, revealedCount);
+  const showCoverageNote = revealedCount == null || revealedCount >= items.length;
+
   return (
     <div className="evidence-log">
-      <CoverageNote result={result} />
+      {showCoverageNote ? (
+        <CoverageNote result={result} />
+      ) : (
+        <p className="coverage-note coverage-note--pending" role="status">
+          Replaying real evidence calls from this closed run&hellip;
+        </p>
+      )}
       <ol className="evidence-log__list">
-        {items.map((item, i) => (
+        {shown.map((item, i) => (
           <li key={i} className={`evidence-row evidence-row--${item.materiality.toLowerCase()}`}>
             <div className="evidence-row__top">
               <span className="evidence-row__intent mono">{item.intent}</span>
@@ -85,6 +99,12 @@ export function EvidenceLog({
             )}
           </li>
         ))}
+        {awaitingNext && shown.length < items.length && (
+          <li className="evidence-row evidence-row--pending" role="status" aria-label="Loading next evidence path">
+            <div className="evidence-row__pending-label mono">awaiting next evidence path&hellip;</div>
+            <SkeletonLines count={2} />
+          </li>
+        )}
       </ol>
     </div>
   );

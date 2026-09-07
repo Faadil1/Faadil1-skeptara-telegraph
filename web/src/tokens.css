@@ -14,7 +14,7 @@
   /* Text */
   --text-primary: #e9e8e4;
   --text-secondary: #a3a5b0;
-  --text-muted: #6c6f7c;
+  --text-muted: #82858f;
 
   /* Brand accent — copper/amber. Not BitSentry's green, not purple. */
   --accent: #d98a4a;
@@ -28,7 +28,7 @@
   --block-bg: rgba(224, 104, 90, 0.1);
   --escalate: #d9b34a;
   --escalate-bg: rgba(217, 179, 74, 0.1);
-  --pending: #6c7280;
+  --pending: #888c99;
   --pending-bg: rgba(108, 114, 128, 0.1);
 
   /* Type */

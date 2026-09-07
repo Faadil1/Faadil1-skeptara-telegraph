@@ -19,6 +19,33 @@
   font-weight: 700;
 }
 
+.case-page__header-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.case-page__phase-label {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+.case-page__replay {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-1) var(--space-3);
+  cursor: pointer;
+}
+
+.case-page__replay:hover {
+  color: var(--text-primary);
+  border-color: var(--accent-dim);
+}
+
 .case-page__deps {
   display: flex;
   flex-direction: column;

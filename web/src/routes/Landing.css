@@ -116,3 +116,27 @@
   color: var(--text-secondary);
   margin: 0;
 }
+
+.landing__escalate {
+  margin-top: var(--space-7);
+  padding: var(--space-5);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+}
+
+.landing__escalate-top {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.landing__escalate-title {
+  margin: 0;
+}
+
+.landing__escalate .landing__section-note {
+  margin: 0;
+  max-width: none;
+}

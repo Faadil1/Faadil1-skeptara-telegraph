@@ -117,3 +117,18 @@
   color: var(--text-muted);
   margin-top: var(--space-2);
 }
+
+.coverage-note--pending {
+  color: var(--text-muted);
+}
+
+.evidence-row--pending {
+  border-left-color: var(--pending);
+  opacity: 0.8;
+}
+
+.evidence-row__pending-label {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  margin-bottom: var(--space-2);
+}
