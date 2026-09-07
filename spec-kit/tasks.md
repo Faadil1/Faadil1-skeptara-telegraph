@@ -65,8 +65,8 @@ Status: DERIVED READY — subordinate to living PRD v0.1.
 - [x] Target inside returned affected range => BLOCKING; target outside range => ADVISORY.
 - [x] Add deterministic seeded-CVE tests including clean PASS, challenged BLOCK, and wrong-route ESCALATE.
 - [x] Update live runner to select seeded-CVE mode when action file contains `evidence_seeds.cve_ids`.
-- [ ] T2.24 Pull latest main and run full repository `npm test` after v0.3 addition. Expected total: **26 tests** if no unrelated count change.
-- [ ] T2.25 Re-verify PR #2 exact head/open state after local tests.
+- [x] T2.24 Full user-machine `npm test` after v0.3 addition: **26/26 PASS, 0 fail**. *(`evidence/t2/LOCAL-USER-VALIDATION-V0.3-26-OF-26.md`)*
+- [x] T2.25 Re-verify PR #2 after local tests: open, unmerged, mergeable, exact head `d2aa0ea25daf1f84b6cfdd98861d3f05df584b7a`.
 - [ ] T2.26 Run one bounded live PR #2 MEDIUM seeded-CVE audit through hardened launcher; max `20000` atomic USDC.
 - [ ] T2.27 Review exact returned CVE records/ranges/spend/outcome and persist sanitized evidence.
 - [ ] T2.28 Promote `SKEPTARA_T2_INDEPENDENT_AUDITOR_PASS` only if the reviewed live evidence truly satisfies the gate.
@@ -127,6 +127,6 @@ After every passed/failed major gate:
 
 ## Reconciliation record
 
-Retry 002 was another useful fail-closed discovery: paid responses can still be evidentially empty or irrelevant even when the transport succeeds. PR #1 is no longer treated as clean. The clean fixture has moved to current Lodash `4.18.1`, and v0.3 uses exact external CVE identifiers to demand concrete, machine-checkable Telegraph records. Product intent is unchanged; this is execution/demo-fixture remediation.
+Retry 002 was another useful fail-closed discovery: paid responses can still be evidentially empty or irrelevant even when the transport succeeds. PR #1 is no longer treated as clean. The clean fixture is PR #2 at Lodash `4.18.1`; v0.3 now uses exact external CVE identifiers to demand concrete, machine-checkable Telegraph records. The full v0.3 suite is now green **26/26** on the user's machine and PR #2 has been reverified unchanged. Product intent remains unchanged; this is execution/demo-fixture remediation.
 
-Exact next gate: `SKEPTARA_T2_V0_3_LOCAL_TEST_AND_PR2_LIVE_AUDIT`.
+Exact next gate: `SKEPTARA_T2_V0_3_PR2_LIVE_SEEDED_CVE_AUDIT`.
