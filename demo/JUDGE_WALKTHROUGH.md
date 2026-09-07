@@ -1,81 +1,74 @@
 # Skeptara — Judge Walkthrough
 
-Two real, closed Telegraph challenge runs. No step below is simulated to fit the story.
+Two real, closed Telegraph challenge runs. The web surface replays captured evidence from those runs; it does not generate fresh Telegraph activity.
 
 ## The one-sentence claim
 
-Higher-risk autonomous code changes must survive deeper, independently paid counter-evidence
-— acquired from real Telegraph miners on Base Sepolia — before a merge can execute.
+Higher-risk autonomous code changes must survive deeper Telegraph-routed counter-evidence before a protected merge can execute.
 
 ## Start here
 
-Live: **https://skeptara.vercel.app** — or run locally with `npm install && npm run dev` from `web/`. Landing page:
+Live: **https://skeptara.vercel.app**. For the current integration candidate, run locally from `web/` with:
+
+```bash
+npm ci
+npm run dev
+```
+
+Landing page:
 
 ![Landing](screenshots/01-landing.png)
 
-The hero shows a real command resolving to a real verdict. The stat row underneath is not
-decorative — `$0.04` real spend, `4` real Telegraph calls, `1 block · 1 pass` are computed
-live from the two closed runs below, not hardcoded.
+The hero resolves a captured challenged case to its real verdict. The `$0.04`, `4 paid calls`, and `1 block · 1 pass` figures are computed in the browser from the two final T4 captured fixtures. They are scoped to those two final cases, not to the broader activity ledger.
 
-## Case 1 — the challenged PR (real BLOCK)
+## Case 1: challenged PR, real BLOCK
 
-**[Faadil1/Faadil1-skeptara-telegraph#1](https://github.com/Faadil1/Faadil1-skeptara-telegraph/pull/1)**
-proposes `lodash 4.17.20 → 4.17.21`.
+**[Faadil1/Faadil1-skeptara-telegraph#1](https://github.com/Faadil1/Faadil1-skeptara-telegraph/pull/1)** proposed `lodash 4.17.20 → 4.17.21`.
 
-1. **Action snapshot** — the exact PR, head SHA, and dependency change Skeptara reviewed.
-2. **Risk assessment** — the deterministic rubric assigns `MEDIUM` (dependency change),
-   requiring 2 independent evidence paths, capped at `$0.02`.
-3. **Challenge** — the independent auditor makes two paid calls to Telegraph's `CVE_LOOKUP`
-   intent, spending the full `$0.02` cap. The first (`CVE-2026-4800`, SecWire CVE Lookup) comes
-   back real but ambiguous — the auditor can't derive a machine-checkable version range from it,
-   so it doesn't count toward coverage. The second (`CVE-2026-2950`, same miner) returns an
-   exact match: affects `lodash <4.18.0`, and the proposed target `4.17.21` falls inside that
-   range — **blocking** materiality. `1 of 2` required paths completed means one of the two paid
-   calls produced material coverage, not that only one call happened.
-4. **Verdict** — `BLOCK`, reason `MATERIAL_COUNTER_EVIDENCE_FOUND`. Merge: **denied**,
-   0 merge-adapter calls made — the merge executor never ran.
+1. **Action snapshot.** Skeptara bound the review to the exact PR, head SHA, base branch, changed file, and dependency change.
+2. **Risk assessment.** The deterministic rubric assigned `MEDIUM`, requiring 2 evidence paths under a `$0.02` cap.
+3. **Challenge.** A separate auditor made two paid Telegraph `CVE_LOOKUP` calls. The first (`CVE-2026-4800`, SecWire CVE Lookup) returned a substantive record, but the returned shape did not expose a machine-checkable affected range accepted by the auditor, so it did not count toward coverage. The second (`CVE-2026-2950`, SecWire CVE Lookup) showed the target `4.17.21` inside the affected range and normalized to **BLOCKING**.
+4. **Verdict.** `BLOCK`, reason `MATERIAL_COUNTER_EVIDENCE_FOUND`. Merge authorization was denied and the merge adapter was called `0` times.
+
+`completed_coverage: 1/2` means one qualifying evidence path from two paid calls. Both paid calls ran and the full `$0.02` cap was spent.
 
 ![PR #1 — BLOCK](screenshots/02-case-pr1-block.png)
 
-Source: `evidence/t4/pr1-block-run-004/reviewed-challenge.sanitized.json`
+Source:
+- `evidence/t4/pr1-block-run-004/REVIEW.md`
+- `evidence/t4/pr1-block-run-004/reviewed-challenge.sanitized.json`
+- `evidence/trace/FRONTEND-SETTLEMENT-MATRIX-CLARIFICATION.md`
 
-## Case 2 — the clean PR (real PASS, real merge)
+## Case 2: clean PR, real PASS and real merge
 
-**[Faadil1/Faadil1-skeptara-telegraph#2](https://github.com/Faadil1/Faadil1-skeptara-telegraph/pull/2)**
-proposes `lodash 4.17.20 → 4.18.1` — past the vulnerable range.
+**[Faadil1/Faadil1-skeptara-telegraph#2](https://github.com/Faadil1/Faadil1-skeptara-telegraph/pull/2)** proposed `lodash 4.17.20 → 4.18.1`.
 
-1. Same rubric, same `MEDIUM` tier, same `$0.02` cap, same 2 required paths.
-2. Both real Telegraph lookups return real records (`PREFLIGHT Infrastructure Signals` and
-   `SecWire CVE Lookup`, real signal hashes, real $0.01 settlements each), but neither's
-   affected range covers `4.18.1` — both are `ADVISORY`, not blocking. Coverage completes
-   2 of 2.
-3. **Verdict**: `PASS`, reason `REQUIRED_COVERAGE_COMPLETE_NO_BLOCKING_EVIDENCE`.
-4. **Merge**: a real merge was executed under explicit human-bounded authorization, bound to
-   the exact reviewed head SHA. Commit
-   [`c76c76e`](https://github.com/Faadil1/Faadil1-skeptara-telegraph/commit/c76c76e0c02dab28275d8e53d70da3f6f132e648)
-   is real and inspectable.
+1. The same deterministic rubric assigned `MEDIUM`, with the same 2 required paths and `$0.02` cap.
+2. Two paid Telegraph lookups returned concrete records from the routed miners observed in the run. Neither affected range covered `4.18.1`, so both normalized to `ADVISORY` and coverage completed `2/2`.
+3. **Verdict:** `PASS`, reason `REQUIRED_COVERAGE_COMPLETE_NO_BLOCKING_EVIDENCE`.
+4. **Merge:** the exact reviewed head was revalidated and a real merge was executed under explicit bounded human authorization. Commit [`c76c76e`](https://github.com/Faadil1/skeptara-telegraph/commit/c76c76e0c02dab28275d8e53d70da3f6f132e648) is inspectable on GitHub.
 
 ![PR #2 — PASS](screenshots/03-case-pr2-pass.png)
 
-Source: `evidence/t4/pr2-clean-run-005/reviewed-challenge.sanitized.json`
+Source:
+- `evidence/t4/pr2-clean-run-005/REVIEW.md`
+- `evidence/t4/pr2-clean-run-005/reviewed-challenge.sanitized.json`
+- `evidence/t4/pr2-clean-run-005/REAL-MERGE-EXECUTION.md`
 
-## The third state, honestly
+## ESCALATE
 
-A real Skeptara run can also resolve to `ESCALATE` — required coverage incomplete, a source
-unavailable, or a critical finding too ambiguous to resolve. Neither of these two final T4
-cases hit it, though earlier development runs did exercise it. The landing page says so
-directly rather than fabricating a third case card to look complete.
+`ESCALATE` is the fail-closed third outcome for incomplete required coverage, unavailable evidence sources, budget exhaustion before enough qualifying evidence is collected, or critical ambiguity. Earlier development runs exercised this path. Neither of the two final T4 cases ended in `ESCALATE`, so the judge surface does not fabricate a third final case.
 
-## What to check as a skeptical judge
+## What to verify as a judge
 
-- Every number on screen traces to a file in `evidence/t4/` — open them next to the UI.
-- PR #1 made both required paid calls (full `$0.02` spent, confirmed in
-  `evidence/t4/pr1-block-run-004/REVIEW.md`) — `completed_coverage: 1` means one of the two
-  counted as material, not that the second call never happened.
-- Every evidence row across both cases links to its own real Base Sepolia settlement
-  transaction — four separate paid calls, four separate transactions
-  (`evidence/trace/FRONTEND-SETTLEMENT-MATRIX-CLARIFICATION.md`), never one hash reused
-  across rows.
-- The merge on PR #2 is a real GitHub commit, not a UI claim — click through to it.
-- `git diff main..feat/frontend-benita -- src/ state/` is empty: nothing in this frontend
-  branch touched the risk rubric, the auditor, or the merge gate.
+- The landing page presents the two final T4 outcomes immediately: PR #1 `BLOCK`, PR #2 `PASS`.
+- PR #1 shows the actual call order: `CVE-2026-4800 → AMBIGUOUS`, then `CVE-2026-2950 → BLOCKING`.
+- Four final T4 evidence rows correspond to four separate paid calls and four distinct Base Sepolia settlement transactions.
+- Coverage is shown separately from payment count.
+- The case pages are labeled **CAPTURED LIVE · HISTORICAL REPLAY** and Replay changes presentation state only.
+- The PR #2 merge link points to the real historical merge commit.
+- The web candidate contains presentation/replay code only. Risk policy, auditor, Telegraph payment runtime, and merge-gate authority remain in the root product implementation and canonical evidence chain.
+
+## Claim boundary
+
+"Independent challenge" refers to the separation between proposer, deterministic risk authority, auditor, and protected merge gate. Skeptara does not claim statistical or model-level independence between Telegraph miners.
