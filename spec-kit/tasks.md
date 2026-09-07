@@ -9,7 +9,8 @@ Status: DERIVED READY — subordinate to living PRD v0.1.
 - [x] P0.3 Human-lock PRD v0.1.
 - [x] P0.4 Freeze frontend data contract.
 - [x] P0.5 Create `feat/frontend-benita`.
-- [ ] P0.6 Send Benita final-product-only brief + PRD PDF + repo/branch details if not already done.
+- [ ] P0.6 Confirm Benita final-product brief / PRD delivery if needed.
+- [ ] P0.7 Send Benita X/Discord participation brief; human explicitly confirmed this has **not yet been sent**.
 
 ## T0 — Real Telegraph challenge
 
@@ -31,7 +32,6 @@ Status: DERIVED READY — subordinate to living PRD v0.1.
 - [x] Evidence-quality hardening through v0.4 semantic exact-CVE normalization.
 - [x] User-machine v0.4 suite: **29/29 PASS, 0 fail**.
 - [x] Zero-spend run003 replay: **2/2**, `[ADVISORY, ADVISORY]`, **PASS**.
-- [x] Closure evidence persisted.
 - [x] `SKEPTARA_T2_INDEPENDENT_AUDITOR_PASS = CLOSED_PASS`.
 
 ## T3 — Protected merge gate
@@ -68,77 +68,67 @@ Status: DERIVED READY — subordinate to living PRD v0.1.
 - [x] Persist `WI-HIDDEN-SPOT-REMEDIATION-003.md`.
 - [x] Persist `WI-DISCORD-COMPETITIVE-SIGNAL-004.md`.
 - [x] Freeze winning distinction around external deterministic risk → risk-proportional Telegraph-routed counter-evidence → exact protected execution.
-- [x] Lock claim boundaries: no automatic unknown-vulnerability discovery, no statistical miner-independence claim, no LOW/HIGH live-scaling overclaim.
-- [x] Telegraph registration verified.
-- [x] Discord competitor signal confirms generic verified-intelligence → deterministic-gate category is crowded; **no pivot**, differentiation reinforced.
 - [x] Do not chase competitor call-count volume.
 
 ## Hidden-spot remediation block
 
-- [x] HS-01 Add minimum judge-facing challenge dossier in `public/index.html`.
-- [x] HS-02 Document real merge/runtime boundary precisely; no fully deployed GitHub adapter overclaim.
-- [x] HS-03 Make controlled exact-CVE seeded mode explicit in judge copy/demo.
-- [x] HS-04 Show LOW/MEDIUM/HIGH policy matrix with MEDIUM clearly labeled live-proven and LOW/HIGH test-proven.
-- [x] HS-05 Convert admin compliance into explicit checklist; registration verified, official Discord URL captured, X/final submission remain human actions.
-- [x] HS-06 Surface Telegraph routing / quality-flywheel causality in README and judge dossier.
-- [x] HS-07 Add conservative verified activity ledger: `evidence/activity/ACTIVITY-LEDGER-V0.1.md`.
-- [x] HS-08 Refresh stale README and evidence index through T4.
-- [x] HS-09 Add explicit historical/freshness labeling + human-authorization explanation + one-command secret-free judge replay.
-- [x] Add `docs/JUDGE-CLAIM-BOUNDARIES.md`.
-- [x] Add `docs/SUBMISSION-COMPLIANCE.md`.
-- [x] Add `npm run demo` captured-live two-case replay.
-- [x] Add `npm run demo:web` local static judge surface.
+- [x] HS-01 judge-facing challenge dossier in `public/index.html`.
+- [x] HS-02 merge/runtime claim boundary documented.
+- [x] HS-03 controlled exact-CVE seeded mode disclosed.
+- [x] HS-04 MEDIUM live vs LOW/HIGH test distinction visible.
+- [x] HS-05 admin compliance checklist + Discord/X plan.
+- [x] HS-06 Telegraph routing / quality-flywheel story surfaced.
+- [x] HS-07 conservative activity ledger.
+- [x] HS-08 README + evidence index refreshed.
+- [x] HS-09 historical/freshness labeling + human-auth explanation + one-command replay.
 - [ ] Human-machine validation: `npm test` + `npm run demo`.
 - [ ] Human visual TRACE review of `npm run demo:web`.
 - [ ] Public deployment + smoke proof.
 
 ## Network / anti-gaming guardrail from official Discord
 
-- [x] Official Telegraph Discord access for Faadil verified from screenshots.
-- [x] Persist `evidence/admin/TELEGRAPH-DISCORD-JOIN-AND-NETWORK-GUIDANCE-VERIFIED.md`.
-- [x] Staff/moderator guidance recorded: scripted/automated request volume stressing network dependencies will not count for judging; organic requests are what should count.
-- [x] Default judge demo remains captured-live replay with **zero** new Telegraph requests.
-- [x] Public judge surface must not auto-call Telegraph on load/refresh/poll/timer/background.
-- [x] No re-running live calls just to inflate activity metrics.
-- [ ] Verify Faadil substantive Skeptara Discord project post/activity.
+- [x] Faadil official Telegraph Discord access verified from screenshots.
+- [x] Faadil substantive Skeptara project introduction verified from screenshot.
+  - evidence: `evidence/admin/TELEGRAPH-DISCORD-FAADIL-PROJECT-INTRO-VERIFIED.md`.
+- [x] Staff/moderator anti-automation guidance recorded.
+- [x] Default judge demo = captured-live replay with zero new Telegraph requests.
+- [x] Public judge surface must not auto-call Telegraph.
 - [ ] Verify Benita Discord join/activity.
 
 ## TRACE / judge path
 
-- [x] Winning Intelligence and hidden spots have been incorporated into the draft judge surface.
-- [x] Split real outcome is primary moment: PR #1 BLOCK/deny vs PR #2 PASS/real merge.
+- [x] Winning Intelligence and hidden spots incorporated into draft judge surface.
+- [x] Split real outcome primary: PR #1 BLOCK/deny vs PR #2 PASS/real merge.
 - [x] Exact-CVE seeded proof labeled honestly.
 - [x] MEDIUM live proof distinguished from LOW/HIGH policy/test proof.
-- [x] Historical captured-live replay distinguished from fresh executable state.
-- [x] Telegraph auto-routing / real-demand causality included.
+- [x] Historical replay distinguished from fresh executable state.
+- [x] Telegraph routing / real-demand causality included.
 - [ ] Run local validation and visual review.
-- [ ] Persist TRACE findings / screenshots and update CURRENT + HANDOVER.
+- [ ] Persist TRACE findings/screenshots and update CURRENT + HANDOVER.
 - [ ] `SKEPTARA_TRACE_JUDGE_PATH_REVIEW = PASS`.
 
 ## UX / Benita
 
 - [x] Frontend data contract frozen.
 - [x] `feat/frontend-benita` maintained without force while no unique collaborator commits exist.
-- [ ] Confirm Benita brief/PRD delivery.
+- [ ] Confirm any outstanding product/PRD brief delivery.
+- [ ] Send Benita X/Discord requirements and intended primary-X-voice role.
+- [ ] Capture Benita X handle and Discord status.
 - [ ] Reconcile any unique Benita UI commits normally if they appear.
 - [ ] Deployed frontend smoke.
 
 ## README / showcase / submission
 
 - [x] Telegraph hackathon registration verified.
-- [x] Official Discord invite identified from Telegraph-owned surfaces: `https://discord.gg/telegraphprotocol`.
-- [x] Faadil official Discord access verified from human screenshots.
-- [x] Late-entry X strategy documented: no fabricated history; publish substantive build proof + demo/submission update with `@Telegraphprotoc`.
-- [x] Benita designated primary X project voice; Faadil `@roy1919875` technical amplification voice.
+- [x] Official Discord invite identified.
+- [x] Faadil Discord join + substantive Skeptara activity verified.
+- [x] Late-entry X strategy documented: no fabricated history.
+- [ ] Benita brief sent and primary-X role confirmed.
 - [ ] Capture Benita X handle.
-- [ ] Verify Faadil substantive Discord project activity.
 - [ ] Verify Benita Discord membership/activity.
 - [ ] Benita publishes X build/proof post.
 - [ ] Benita publishes public-demo/submission X update once deployed.
 - [ ] Verify final submission form requirements and submission state.
-- [x] README aligned to T4 proof and claim boundaries.
-- [x] Evidence index aligned to T4 proof.
-- [x] Truthful final-proof activity ledger created.
 - [ ] Public demo smoke.
 - [ ] Hero screenshot / demo video.
 - [ ] Clean-room replay.
@@ -151,6 +141,6 @@ After every passed/failed major gate and every protected execution boundary:
 1. persist evidence;
 2. update `state/CURRENT.yaml` + exact next gate;
 3. update `state/HANDOVER.yaml` so a new conversation can take the lead;
-4. reconcile PRD/spec/plan/tasks only if discovery class requires it.
+4. never infer collaborator communication or acceptance without human confirmation.
 
 Exact next gate: `SKEPTARA_HIDDEN_SPOT_REMEDIATION_LOCAL_VALIDATION_AND_TRACE_VISUAL_REVIEW`.
