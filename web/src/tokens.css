@@ -1,0 +1,84 @@
+/* Skeptara design tokens — single source of truth for color, type, spacing, radii.
+   Visual system matched to BitSentry's terminal-green identity per explicit
+   direction: green accent, soft radial-glow ground (no dot-grid), italic
+   display wordmark. Content, copy and data stay entirely Skeptara's own. */
+
+:root {
+  /* Surfaces */
+  --bg: #070b09;
+  --bg-raised: #0d130f;
+  --surface: #101711;
+  --surface-hover: #141c16;
+  --border: #1e2b21;
+  --border-strong: #2c4032;
+
+  /* Text */
+  --text-primary: #eef1ec;
+  --text-secondary: #a7b3ac;
+  --text-muted: #7d8a82;
+
+  /* Brand accent — matched to BitSentry's green identity, per direction. */
+  --accent: #35d07a;
+  --accent-dim: #1f7a49;
+  --accent-on: #06120a;
+  --accent-glow: rgba(53, 208, 122, 0.28);
+
+  /* Site-wide ambient background glow — the base "dark fading into soft
+     glow" ground used everywhere, replacing the old dot-grid texture.
+     Much fainter than --accent-glow, which stays reserved for the
+     concentrated hero-wordmark glow. */
+  --ambient-glow: rgba(53, 208, 122, 0.10);
+  --ambient-glow-dim: rgba(53, 208, 122, 0.05);
+
+  /* Cursor-reactive ambient spotlight — deliberately restrained per the
+     no-glowing-hovers rule: low opacity, large soft radius. */
+  --cursor-glow: rgba(53, 208, 122, 0.07);
+
+  /* Semantic verdict colors */
+  --pass: #35d07a;
+  --pass-bg: rgba(53, 208, 122, 0.12);
+  --block: #e0685a;
+  --block-bg: rgba(224, 104, 90, 0.1);
+  --escalate: #d9b34a;
+  --escalate-bg: rgba(217, 179, 74, 0.1);
+  --pending: #888c99;
+  --pending-bg: rgba(108, 114, 128, 0.1);
+
+  /* Type — mono carries the terminal/data identity, display carries authority
+     on the hero and page titles, sans stays for comfortable body reading. */
+  --font-mono: ui-monospace, "SF Mono", "IBM Plex Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-display: "Playfair Display", ui-serif, Georgia, "Times New Roman", serif;
+  --font-headline: "Space Grotesk", var(--font-sans);
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.8125rem;
+  --text-base: 0.9375rem;
+  --text-md: 1.0625rem;
+  --text-lg: 1.375rem;
+  --text-xl: 1.875rem;
+  --text-2xl: 2.5rem;
+  --text-3xl: 3.25rem;
+
+  --leading-tight: 1.2;
+  --leading-normal: 1.5;
+
+  /* Spacing scale (4px base) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+
+  /* Radii — exactly 3 used across the whole UI */
+  --radius-sm: 3px;   /* chips, badges, inline tags */
+  --radius-md: 6px;   /* cards, buttons, panels */
+  --radius-full: 999px; /* pills only (status dot wrappers) */
+
+  /* Card shadow stays flat; the glow is reserved for the hero mark only. */
+  --shadow-card: 0 1px 0 rgba(0, 0, 0, 0.4);
+  --shadow-glow: 0 0 120px 40px var(--accent-glow);
+}

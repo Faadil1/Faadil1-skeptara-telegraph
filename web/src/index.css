@@ -1,0 +1,48 @@
+@import "./tokens.css";
+@import "./routes/ReleasePolish.css";
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background:
+    radial-gradient(ellipse 900px 560px at 50% -8%, var(--ambient-glow) 0%, transparent 62%),
+    radial-gradient(ellipse 700px 500px at 100% 60%, var(--ambient-glow-dim) 0%, transparent 60%),
+    radial-gradient(ellipse 700px 500px at 0% 100%, var(--ambient-glow-dim) 0%, transparent 60%),
+    var(--bg);
+  background-attachment: fixed;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+}
+
+code, .mono {
+  font-family: var(--font-mono);
+}
+
+::selection {
+  background: var(--accent-dim);
+  color: var(--text-primary);
+}
