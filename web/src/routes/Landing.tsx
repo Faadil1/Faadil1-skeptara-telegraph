@@ -8,8 +8,8 @@ import "./Landing.css";
 const HERO_LINES = [
   { cmd: true, text: "skeptara check --pr 1 --repo Faadil1/Faadil1-skeptara-telegraph" },
   { cmd: false, text: "risk_tier: MEDIUM  required_evidence_paths: 2" },
-  { cmd: false, text: "telegraph: CVE_LOOKUP → SecWire CVE Lookup ($0.01, settled)" },
-  { cmd: false, text: "finding: CVE-2026-2950 · lodash <4.18.0 · BLOCKING" },
+  { cmd: false, text: "path 1: CVE_LOOKUP → SecWire CVE Lookup ($0.01, settled) → CVE-2026-4800 · AMBIGUOUS" },
+  { cmd: false, text: "path 2: CVE_LOOKUP → SecWire CVE Lookup ($0.01, settled) → CVE-2026-2950 · lodash <4.18.0 · BLOCKING" },
   { cmd: false, text: "verdict: BLOCK · merge denied · 0 write calls", verdict: "block" as const },
 ];
 
@@ -91,7 +91,7 @@ const HOW_IT_WORKS_STEPS = [
   {
     n: 3,
     title: "Independent challenge",
-    body: "A separate auditor pays real Telegraph miners for counter-evidence. Required coverage scales with risk tier — the riskier the change, the more independent evidence it has to survive.",
+    body: "A separate auditor pays real Telegraph miners for counter-evidence. Required coverage scales with risk tier — the riskier the change, the deeper the evidence it has to survive.",
   },
   {
     n: 4,
@@ -130,7 +130,7 @@ const FAQ_ITEMS = [
   },
   {
     q: "Why does the PR #1 evidence log stop at 1 of 2 coverage?",
-    a: "It hit blocking evidence on the first completed path and stopped — not because anything failed. Once material counter-evidence is found, spending the rest of the budget to complete coverage wouldn't change the outcome, so the challenge ends early.",
+    a: "It made both required calls and spent the full $0.02 cap. The first (CVE-2026-4800) came back ambiguous and didn't count toward coverage; the second (CVE-2026-2950) found blocking evidence. \"1 of 2\" means one path counted as material — not that only one call was made.",
   },
   {
     q: "What happens on ESCALATE, and has it actually been triggered in this demo?",
@@ -276,7 +276,7 @@ export function Landing() {
             title="lodash upgrade with a known vulnerability"
             target="4.17.20 → 4.17.21"
             outcome={challengedCase.challengeResult.outcome as "BLOCK"}
-            summary="Independent challenge found blocking counter-evidence on the first completed path and stopped — merge stayed denied."
+            summary="Both required evidence calls ran; the second found blocking counter-evidence — merge stayed denied."
           />
           <CaseCard
             to="/case/pr2"
@@ -298,9 +298,10 @@ export function Landing() {
           <span className="mono">ESCALATE</span> fires when required coverage can't be completed — budget
           exhausted, a source unavailable, or a critical finding too ambiguous to resolve automatically.
           Both demo runs happened to resolve cleanly into a real <span className="mono">BLOCK</span> or{" "}
-          <span className="mono">PASS</span>. No real Skeptara run has hit <span className="mono">ESCALATE</span>{" "}
-          yet, so there is no case card for it here — showing one would mean inventing a run that never
-          happened.
+          <span className="mono">PASS</span>. Neither of the two final T4 cases resolved to{" "}
+          <span className="mono">ESCALATE</span> — earlier development runs did exercise it, but they
+          aren't part of this two-case demo, so there is no ESCALATE case card here. Showing one from
+          the final proof would mean inventing a run that never happened.
         </p>
       </section>
 

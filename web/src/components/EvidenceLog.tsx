@@ -9,7 +9,7 @@ const MATERIALITY_LABEL: Record<EvidenceItem["materiality"], string> = {
   AMBIGUOUS: "ambiguous — not counted",
 };
 
-function CoverageNote({ result }: { result: ChallengeResult }) {
+function CoverageNote({ items, result }: { items: EvidenceItem[]; result: ChallengeResult }) {
   const short = result.completed_coverage < result.required_coverage;
   if (!short) {
     return (
@@ -21,9 +21,10 @@ function CoverageNote({ result }: { result: ChallengeResult }) {
   if (result.outcome === "BLOCK") {
     return (
       <p className="coverage-note coverage-note--halted">
-        {result.completed_coverage} of {result.required_coverage} required evidence paths completed
-        — the challenge stopped early. It found blocking evidence before spending the rest of the
-        budget on the remaining path, so it never needed to complete coverage.
+        {items.length} of {result.required_coverage} required evidence paths were attempted — the
+        full budget was spent. {result.completed_coverage} of them produced material coverage; the
+        challenge found blocking evidence among them, so it resolved to BLOCK without every path
+        needing to count.
       </p>
     );
   }
@@ -54,7 +55,7 @@ export function EvidenceLog({
   return (
     <div className="evidence-log">
       {showCoverageNote ? (
-        <CoverageNote result={result} />
+        <CoverageNote items={items} result={result} />
       ) : (
         <p className="coverage-note coverage-note--pending" role="status">
           Replaying real evidence calls from this closed run&hellip;

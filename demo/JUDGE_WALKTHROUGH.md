@@ -25,13 +25,13 @@ proposes `lodash 4.17.20 → 4.17.21`.
 1. **Action snapshot** — the exact PR, head SHA, and dependency change Skeptara reviewed.
 2. **Risk assessment** — the deterministic rubric assigns `MEDIUM` (dependency change),
    requiring 2 independent evidence paths, capped at `$0.02`.
-3. **Challenge** — the independent auditor calls Telegraph's `CVE_LOOKUP` intent. The first
-   completed lookup (SecWire CVE Lookup, real signal hash, real $0.01 settlement) returns
-   `CVE-2026-2950`, affecting `lodash <4.18.0` — the proposed target `4.17.21` falls inside
-   that range. That's **blocking** materiality. The challenge stops there: 1 of 2 required
-   paths completed, not because anything failed, but because it already found what it needed.
-   A second, separately-run lookup (`CVE-2026-4800`) came back ambiguous and wasn't counted —
-   shown so the "not counted" path is visible too, not hidden.
+3. **Challenge** — the independent auditor makes two paid calls to Telegraph's `CVE_LOOKUP`
+   intent, spending the full `$0.02` cap. The first (`CVE-2026-4800`, SecWire CVE Lookup) comes
+   back real but ambiguous — the auditor can't derive a machine-checkable version range from it,
+   so it doesn't count toward coverage. The second (`CVE-2026-2950`, same miner) returns an
+   exact match: affects `lodash <4.18.0`, and the proposed target `4.17.21` falls inside that
+   range — **blocking** materiality. `1 of 2` required paths completed means one of the two paid
+   calls produced material coverage, not that only one call happened.
 4. **Verdict** — `BLOCK`, reason `MATERIAL_COUNTER_EVIDENCE_FOUND`. Merge: **denied**,
    0 merge-adapter calls made — the merge executor never ran.
 
@@ -62,15 +62,20 @@ Source: `evidence/t4/pr2-clean-run-005/reviewed-challenge.sanitized.json`
 ## The third state, honestly
 
 A real Skeptara run can also resolve to `ESCALATE` — required coverage incomplete, a source
-unavailable, or a critical finding too ambiguous to resolve. Neither closed run hit it. The
-landing page says so directly rather than fabricating a third case card to look complete.
+unavailable, or a critical finding too ambiguous to resolve. Neither of these two final T4
+cases hit it, though earlier development runs did exercise it. The landing page says so
+directly rather than fabricating a third case card to look complete.
 
 ## What to check as a skeptical judge
 
 - Every number on screen traces to a file in `evidence/t4/` — open them next to the UI.
-- The "stopped early" framing on PR #1 is not spin: `completed_coverage: 1` with
-  `outcome: BLOCK` in the source JSON is exactly why — material evidence found before the
-  second path was needed.
+- PR #1 made both required paid calls (full `$0.02` spent, confirmed in
+  `evidence/t4/pr1-block-run-004/REVIEW.md`) — `completed_coverage: 1` means one of the two
+  counted as material, not that the second call never happened.
+- Every evidence row across both cases links to its own real Base Sepolia settlement
+  transaction — four separate paid calls, four separate transactions
+  (`evidence/trace/FRONTEND-SETTLEMENT-MATRIX-CLARIFICATION.md`), never one hash reused
+  across rows.
 - The merge on PR #2 is a real GitHub commit, not a UI claim — click through to it.
 - `git diff main..feat/frontend-benita -- src/ state/` is empty: nothing in this frontend
   branch touched the risk rubric, the auditor, or the merge gate.

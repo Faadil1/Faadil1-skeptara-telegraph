@@ -192,4 +192,4 @@ The `web/` frontend replays these two closed runs with paced loading states for 
 
 Per the PRD (`product/PRD.md` §"No placeholders"), no submission intelligence is mocked in `web/`: no fabricated hash, cost, miner, or finding appears anywhere in the UI. When a contract field is null or missing, the UI shows an explicit fallback (e.g. "not exposed", "none flagged") rather than inventing a value. The only synthetic case ever created — a null/edge-field stress fixture used during frontend quality testing — was local-only and removed before this build; the repository history and this README are the record of that.
 
-No real Skeptara run has produced an `ESCALATE` verdict yet. The `web/` landing page states this directly instead of fabricating a third case to look complete.
+Neither of the two final T4 cases resolved to `ESCALATE` — earlier development runs did exercise it, but they aren't part of this two-case demo. The `web/` landing page states this directly instead of fabricating a third ESCALATE case to look complete.
