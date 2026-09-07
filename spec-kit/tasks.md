@@ -81,15 +81,18 @@ Status: DERIVED READY — subordinate to living PRD v0.1.
 - [x] HS-07 conservative activity ledger.
 - [x] HS-08 README + evidence index refreshed.
 - [x] HS-09 historical/freshness labeling + human-auth explanation + one-command replay.
-- [ ] Human-machine validation: `npm test` + `npm run demo`.
-- [ ] Human visual TRACE review of `npm run demo:web`.
+- [x] Human-machine validation: `npm test` → **41/41 PASS**, `npm run demo` → **PASS** with zero payment/write.
+  - evidence: `evidence/trace/LOCAL-VALIDATION-41-OF-41-AND-JUDGE-REPLAY-PASS.md`.
+- [x] `npm run demo:web` local startup at `http://127.0.0.1:4173`.
+- [ ] Human visual TRACE review of local judge surface.
+- [ ] Browser/network behavior check: no Telegraph request on page load/refresh.
 - [ ] Public deployment + smoke proof.
 
 ## Network / anti-gaming guardrail from official Discord
 
 - [x] Faadil official Telegraph Discord access verified from screenshots.
-- [x] Faadil substantive Skeptara project introduction verified from screenshot.
-  - evidence: `evidence/admin/TELEGRAPH-DISCORD-FAADIL-PROJECT-INTRO-VERIFIED.md`.
+- [x] Faadil substantive Skeptara project introduction verified.
+- [x] Organic engagement on Skeptara intro verified: 3 fire reactions + direct positive Telegraph staff reply.
 - [x] Staff/moderator anti-automation guidance recorded.
 - [x] Default judge demo = captured-live replay with zero new Telegraph requests.
 - [x] Public judge surface must not auto-call Telegraph.
@@ -103,7 +106,9 @@ Status: DERIVED READY — subordinate to living PRD v0.1.
 - [x] MEDIUM live proof distinguished from LOW/HIGH policy/test proof.
 - [x] Historical replay distinguished from fresh executable state.
 - [x] Telegraph routing / real-demand causality included.
-- [ ] Run local validation and visual review.
+- [x] Local test/replay validation passed.
+- [ ] Visual review at desktop width.
+- [ ] Narrow/mobile-width review if practical.
 - [ ] Persist TRACE findings/screenshots and update CURRENT + HANDOVER.
 - [ ] `SKEPTARA_TRACE_JUDGE_PATH_REVIEW = PASS`.
 
@@ -121,13 +126,15 @@ Status: DERIVED READY — subordinate to living PRD v0.1.
 
 - [x] Telegraph hackathon registration verified.
 - [x] Official Discord invite identified.
-- [x] Faadil Discord join + substantive Skeptara activity verified.
+- [x] Faadil Discord join + substantive Skeptara activity + organic engagement verified.
+- [x] Current-round reward/platform guidance captured from staff Discord posts.
 - [x] Late-entry X strategy documented: no fabricated history.
 - [ ] Benita brief sent and primary-X role confirmed.
 - [ ] Capture Benita X handle.
 - [ ] Verify Benita Discord membership/activity.
 - [ ] Benita publishes X build/proof post.
 - [ ] Benita publishes public-demo/submission X update once deployed.
+- [ ] Re-check Track 3 visibility on submission platform before final submit.
 - [ ] Verify final submission form requirements and submission state.
 - [ ] Public demo smoke.
 - [ ] Hero screenshot / demo video.
@@ -143,4 +150,4 @@ After every passed/failed major gate and every protected execution boundary:
 3. update `state/HANDOVER.yaml` so a new conversation can take the lead;
 4. never infer collaborator communication or acceptance without human confirmation.
 
-Exact next gate: `SKEPTARA_HIDDEN_SPOT_REMEDIATION_LOCAL_VALIDATION_AND_TRACE_VISUAL_REVIEW`.
+Exact next gate: `SKEPTARA_TRACE_JUDGE_PATH_VISUAL_REVIEW`.
