@@ -53,27 +53,23 @@ Status: DERIVED READY — subordinate to living PRD v0.1.
 
 - [x] Challenged candidate exists: PR #1 (`lodash@4.17.21`).
 - [x] Clean candidate exists: PR #2 (`lodash@4.18.1`).
-- [x] T4.1 Execute fresh live challenged PR #1 run with real Telegraph/x402.
-  - runtime directory: `evidence/t2-runtime/2026-09-07T01-11-00-634Z`;
-  - risk `MEDIUM`;
-  - spend `20000/20000` atomic USDC;
-  - first path `CVE-2026-4800` => `AMBIGUOUS`, range not machine-verifiable;
-  - second path `CVE-2026-2950` => `BLOCKING`;
-  - final runtime outcome `BLOCK`, reason `MATERIAL_COUNTER_EVIDENCE_FOUND`.
-- [x] T4.2 Review challenged run 004 sanitized JSON and persist exact binding/evidence.
-  - challenge `113cc2c4-94ff-4c47-bf48-66fabc7c9329` bound to PR #1 exact head `73cf5bdd69163924228e3e21d67fa9f405d99904`;
-  - `CVE-2026-2950`: Lodash `4.17.23 and earlier` affected, fixed `4.18.0`; target `4.17.21` => `BLOCKING`;
-  - review: `evidence/t4/pr1-block-run-004/REVIEW.md`.
-- [x] T4.3 Zero-write `npm run t4:replay:block` PASS.
+- [x] Fresh live challenged PR #1 run with real Telegraph/x402 => `BLOCK`.
+- [x] Review run 004 exact evidence: `CVE-2026-2950` affects Lodash `4.17.23 and earlier`, fixed `4.18.0`; target `4.17.21` => `BLOCKING`.
+- [x] Zero-write `npm run t4:replay:block` PASS.
   - authorization `DENIED`;
-  - isolated reason `CHALLENGE_NOT_PASS`;
+  - reason `CHALLENGE_NOT_PASS`;
   - merge-adapter calls `0`;
-  - execution `executed=false`, `merged=false`;
-  - no private key, Telegraph spend or GitHub write;
-  - evidence: `evidence/t4/pr1-block-run-004/MERGE-DENIAL-REPLAY.md`.
+  - execution `executed=false`, `merged=false`.
 - [x] Challenged half conclusion: **REAL BLOCK + ZERO-WRITE EXECUTION DENIAL PROVEN**.
+- [x] Reconcile clean PR #2 branch with current main before final paid PASS proof.
+  - old head `d2aa0ea25daf1f84b6cfdd98861d3f05df584b7a`;
+  - reconciled head `528d730f9ebdcb433e01ba9c79dcc9a5f66ce1c7`;
+  - diff remains only `demo/controlled-clean/package.json`, `lodash 4.17.20 -> 4.18.1`;
+  - no force update used;
+  - `demo/actions/clean-pr.json` rebound to reconciled exact head;
+  - evidence: `evidence/t4/PR2-CLEAN-BRANCH-RECONCILIATION.md`.
 - [ ] T4.4 Obtain fresh live PASS for clean PR #2 using `demo/actions/clean-pr.json`.
-  - require exact current head `d2aa0ea25daf1f84b6cfdd98861d3f05df584b7a`;
+  - require exact current head `528d730f9ebdcb433e01ba9c79dcc9a5f66ce1c7`;
   - require MEDIUM risk;
   - require `2/2` meaningful non-blocking coverage;
   - max spend `20000` atomic USDC.
@@ -118,8 +114,8 @@ After every passed/failed major gate:
 
 ## Reconciliation record
 
-The challenged half of T4 is now closed. Real paid Telegraph evidence produced a deterministic `BLOCK` for PR #1, and the protected merge gate replay proved that the BLOCK cannot reach execution: authorization denied, `CHALLENGE_NOT_PASS`, merge adapter calls exactly zero.
+The challenged half of T4 is closed. Before spending on the clean half, PR #2 was reconciled with current `main` because its branch had diverged materially. The historical clean head is preserved in evidence, while the final T4 challenge must bind to the new exact head `528d730f9ebdcb433e01ba9c79dcc9a5f66ce1c7`.
 
-The clean half is now the only remaining T4 execution proof. PR #2 is still open and unmerged at exact head `d2aa0ea25daf1f84b6cfdd98861d3f05df584b7a`. Obtain a fresh live PASS next. No real merge is authorized until the fresh result is reviewed, the PR head is immediately revalidated, and the human explicitly authorizes that exact bounded merge.
+No paid call or merge occurred during this reconciliation. The exact next gate is now the fresh PR #2 PASS proof. Any real merge remains prohibited until that fresh result is reviewed, the exact head is revalidated, and the human explicitly authorizes the bounded action.
 
 Exact next gate: `SKEPTARA_T4_PR2_FRESH_PASS_PROOF`.
