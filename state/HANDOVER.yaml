@@ -9,7 +9,7 @@ handover:
   resume_rule: >-
     Read state/CURRENT.yaml first, then this HANDOVER, then product/PRD.md, then spec-kit/tasks.md. Repository truth outranks chat memory. PRD is canonical product intent; Spec Kit is derived execution state. After every major gate and protected execution boundary, persist evidence and update BOTH CURRENT and HANDOVER. This HANDOVER must remain sufficient for a new conversation to take the lead without reconstructing history from chat.
 
-  current_milestone: T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__WINNING_INTELLIGENCE_PREFLIGHT_PASS__BLIND_SPOT_AUDIT_002_COMPLETE__TRACE_NEXT
+  current_milestone: T0_CLOSED_PASS__T1_PASS__T2_CLOSED_PASS__T3_CLOSED_PASS__T4_CLOSED_PASS__WINNING_INTELLIGENCE_PREFLIGHT_PASS__BLIND_SPOT_AUDIT_002_COMPLETE__REGISTRATION_VERIFIED__TRACE_NEXT
 
   project:
     public_name: Skeptara
@@ -77,7 +77,7 @@ handover:
         - LIVE_MERGE_PROOF_NOT_PRODUCTIZED_AS_SINGLE_REPO_RUNTIME_ADAPTER_PATH
         - CONTROLLED_EXACT_CVE_SEEDS_CAN_LOOK_CHERRY_PICKED
         - RISK_PROPORTIONAL_THESIS_ONLY_LIVE_PROVEN_AT_MEDIUM_TIER
-        - REGISTRATION_DISCORD_X_AND_FINAL_SUBMISSION_COMPLIANCE_NOT_REPO_VERIFIABLE
+        - ADMIN_COMPLIANCE_REMAINS_PARTIALLY_HUMAN_VERIFIED
       p1:
         - TELEGRAPH_QUALITY_FLYWHEEL_AND_ROUTING_STORY_UNDERUSED
         - REAL_ACTIVITY_EXISTS_BUT_NOT_AGGREGATED
@@ -100,13 +100,15 @@ handover:
       merge_runtime_boundary: >-
         T3 proves the protected merge contract and expected-head forwarding in code/tests; T4 proves a real exact-head bounded GitHub merge under the same constraints. Do not overstate this as a fully deployed repository GitHub adapter runtime unless one is added.
 
-  official_hackathon_guardrails_to_verify:
-    real_telegraph_miners: PROVEN
-    no_mocked_submission_intelligence: PROVEN_FOR_LIVE_T4_EVIDENCE
+  administrative_compliance:
+    registration:
+      status: VERIFIED
+      evidence: evidence/admin/TELEGRAPH-REGISTRATION-VERIFIED.md
+      source: HUMAN_PROVIDED_OFFICIAL_SITE_CONFIRMATION_SCREENSHOT
     public_x_updates_tagged: HUMAN_VERIFY
     official_discord_joined_and_active: HUMAN_VERIFY
-    registration_status: HUMAN_VERIFY
     final_submission_form_requirements: HUMAN_VERIFY
+    final_submission_completed: false
     metric_gaming_forbidden: ACKNOWLEDGED
 
   current_surface_gaps:
@@ -151,4 +153,4 @@ handover:
   exact_next_gate: SKEPTARA_TRACE_JUDGE_PATH_REVIEW
   exact_next_owner: CHATGPT_ORCHESTRATOR_WITH_HUMAN_VISUAL_REVIEW
   exact_next_action: >-
-    Read evidence/winning-intelligence/WI-TRACE-PREFLIGHT-001.md and WI-BLIND-SPOT-AUDIT-002.md first. TRACE must incorporate the claim boundaries and P0/P1 findings without creating a product pivot. Judge surface: challenge dossier, split PR1 BLOCK/deny vs PR2 PASS/real merge, Telegraph auto-routing and real-demand causality visible, exact-CVE seeded mode labeled honestly, MEDIUM live proof distinguished from LOW/HIGH policy/test proof, and historical captured-live replay distinguished from fresh executable state. Persist TRACE findings and update CURRENT + HANDOVER before frontend/deployed smoke.
+    Read evidence/winning-intelligence/WI-TRACE-PREFLIGHT-001.md and WI-BLIND-SPOT-AUDIT-002.md first. TRACE must incorporate the claim boundaries and P0/P1 findings without creating a product pivot. Judge surface: challenge dossier, split PR1 BLOCK/deny vs PR2 PASS/real merge, Telegraph auto-routing and real-demand causality visible, exact-CVE seeded mode labeled honestly, MEDIUM live proof distinguished from LOW/HIGH policy/test proof, and historical captured-live replay distinguished from fresh executable state. Registration is VERIFIED; Discord participation, X showcase/tagging and final submission remain human-verification gates. Persist TRACE findings and update CURRENT + HANDOVER before frontend/deployed smoke.
